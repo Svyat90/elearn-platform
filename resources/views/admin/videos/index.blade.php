@@ -28,6 +28,15 @@
                         {{ trans('cruds.video.fields.name') }}
                     </th>
                     <th>
+                        {{ trans('cruds.video.fields.file') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.video.fields.user') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.video.fields.status') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -85,10 +94,13 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'name', name: 'name' },
+{ data: 'file', name: 'file', sortable: false, searchable: false },
+{ data: 'user_name', name: 'user.name' },
+{ data: 'status', name: 'status' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    pageLength: 25,
   };
   $('.datatable-Video').DataTable(dtOverrideGlobals);
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){

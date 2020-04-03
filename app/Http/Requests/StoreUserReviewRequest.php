@@ -20,8 +20,13 @@ class StoreUserReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'text' => [
+            'text'  => [
                 'required'],
+            'stars' => [
+                'nullable',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647'],
         ];
 
     }

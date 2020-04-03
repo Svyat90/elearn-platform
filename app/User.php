@@ -10,16 +10,34 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\Models\Media;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use Notifiable, HasApiTokens, Auditable;
+    use Notifiable, HasApiTokens, HasMediaTrait, Auditable;
 
     public $table = 'users';
+
+    protected $appends = [
+        'image',
+    ];
 
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    const REGISTRATION_PLATFORM_SELECT = [
+        '1' => 'Web',
+        '2' => 'App',
+    ];
+
+    const STATUS_SELECT = [
+        '0' => 'NotActive',
+        '1' => 'Active',
+        '2' => 'Banned',
     ];
 
     protected $dates = [
@@ -35,17 +53,22 @@ class User extends Authenticatable
         'dob',
         'name',
         'email',
+        'status',
         'password',
+        'gender_id',
         'last_name',
-        'first_name',
-        'country_id',
-        'created_at',
         'updated_at',
+        'created_at',
+        'country_id',
         'deleted_at',
+        'first_name',
+        'referred_by',
         'subscribers',
+        'referral_code',
         'remember_token',
         'email_verified_at',
         'position_occupation',
+        'registration_platform',
     ];
 
     public function getIsAdminAttribute()
@@ -54,9 +77,33 @@ class User extends Authenticatable
 
     }
 
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('thumb')->width(50)->height(50);
+
+    }
+
     public function userUserReviews()
     {
         return $this->hasMany(UserReview::class, 'user_id', 'id');
+
+    }
+
+    public function userOrders()
+    {
+        return $this->hasMany(Order::class, 'user_id', 'id');
+
+    }
+
+    public function userVideos()
+    {
+        return $this->hasMany(Video::class, 'user_id', 'id');
+
+    }
+
+    public function userOrderHistories()
+    {
+        return $this->hasMany(OrderHistory::class, 'user_id', 'id');
 
     }
 
@@ -125,6 +172,25 @@ class User extends Authenticatable
     public function categories()
     {
         return $this->belongsToMany(Category::class);
+
+    }
+
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class, 'gender_id');
+
+    }
+
+    public function getImageAttribute()
+    {
+        $file = $this->getMedia('image')->last();
+
+        if ($file) {
+            $file->url       = $file->getUrl();
+            $file->thumbnail = $file->getUrl('thumb');
+        }
+
+        return $file;
 
     }
 

@@ -64,6 +64,24 @@
                                 {{ trans('cruds.user.fields.category') }}
                             </th>
                             <th>
+                                {{ trans('cruds.user.fields.gender') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.user.fields.referral_code') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.user.fields.referred_by') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.user.fields.registration_platform') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.user.fields.image') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.user.fields.status') }}
+                            </th>
+                            <th>
                                 &nbsp;
                             </th>
                         </tr>
@@ -123,6 +141,28 @@
                                     @foreach($user->categories as $key => $item)
                                         <span class="badge badge-info">{{ $item->name }}</span>
                                     @endforeach
+                                </td>
+                                <td>
+                                    {{ $user->gender->name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $user->referral_code ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $user->referred_by ?? '' }}
+                                </td>
+                                <td>
+                                    {{ App\User::REGISTRATION_PLATFORM_SELECT[$user->registration_platform] ?? '' }}
+                                </td>
+                                <td>
+                                    @if($user->image)
+                                        <a href="{{ $user->image->getUrl() }}" target="_blank">
+                                            <img src="{{ $user->image->getUrl('thumb') }}" width="50px" height="50px">
+                                        </a>
+                                    @endif
+                                </td>
+                                <td>
+                                    {{ App\User::STATUS_SELECT[$user->status] ?? '' }}
                                 </td>
                                 <td>
                                     @can('user_show')

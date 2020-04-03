@@ -25,10 +25,16 @@
                                 {{ trans('cruds.userReview.fields.id') }}
                             </th>
                             <th>
-                                {{ trans('cruds.userReview.fields.user') }}
+                                {{ trans('cruds.userReview.fields.text') }}
                             </th>
                             <th>
-                                {{ trans('cruds.userReview.fields.text') }}
+                                {{ trans('cruds.userReview.fields.stars') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.userReview.fields.video') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.userReview.fields.user') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -45,10 +51,16 @@
                                     {{ $userReview->id ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $userReview->user->name ?? '' }}
+                                    {{ $userReview->text ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $userReview->text ?? '' }}
+                                    {{ $userReview->stars ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $userReview->video->name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $userReview->user->name ?? '' }}
                                 </td>
                                 <td>
                                     @can('user_review_show')

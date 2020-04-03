@@ -25,10 +25,16 @@
                         {{ trans('cruds.userReview.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.userReview.fields.user') }}
+                        {{ trans('cruds.userReview.fields.text') }}
                     </th>
                     <th>
-                        {{ trans('cruds.userReview.fields.text') }}
+                        {{ trans('cruds.userReview.fields.stars') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.userReview.fields.video') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.userReview.fields.user') }}
                     </th>
                     <th>
                         &nbsp;
@@ -87,8 +93,10 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'user_name', name: 'user.name' },
 { data: 'text', name: 'text' },
+{ data: 'stars', name: 'stars' },
+{ data: 'video_name', name: 'video.name' },
+{ data: 'user_name', name: 'user.name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

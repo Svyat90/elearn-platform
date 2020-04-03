@@ -11,14 +11,6 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="video">{{ trans('cruds.order.fields.video') }}</label>
-                <input class="form-control {{ $errors->has('video') ? 'is-invalid' : '' }}" type="number" name="video" id="video" value="{{ old('video', $order->video) }}" step="1">
-                @if($errors->has('video'))
-                    <span class="text-danger">{{ $errors->first('video') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.order.fields.video_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label for="user_id">{{ trans('cruds.order.fields.user') }}</label>
                 <select class="form-control select2 {{ $errors->has('user') ? 'is-invalid' : '' }}" name="user_id" id="user_id">
                     @foreach($users as $id => $user)
@@ -29,6 +21,18 @@
                     <span class="text-danger">{{ $errors->first('user') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.order.fields.user_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="video_id">{{ trans('cruds.order.fields.video') }}</label>
+                <select class="form-control select2 {{ $errors->has('video') ? 'is-invalid' : '' }}" name="video_id" id="video_id">
+                    @foreach($videos as $id => $video)
+                        <option value="{{ $id }}" {{ ($order->video ? $order->video->id : old('video_id')) == $id ? 'selected' : '' }}>{{ $video }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('video'))
+                    <span class="text-danger">{{ $errors->first('video') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.video_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="message">{{ trans('cruds.order.fields.message') }}</label>

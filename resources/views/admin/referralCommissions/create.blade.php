@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label for="artist_commission">{{ trans('cruds.referralCommission.fields.artist_commission') }}</label>
-                <input class="form-control {{ $errors->has('artist_commission') ? 'is-invalid' : '' }}" type="number" name="artist_commission" id="artist_commission" value="{{ old('artist_commission', '') }}" step="1">
+                <input class="form-control {{ $errors->has('artist_commission') ? 'is-invalid' : '' }}" type="number" name="artist_commission" id="artist_commission" value="{{ old('artist_commission', '0') }}" step="1">
                 @if($errors->has('artist_commission'))
                     <span class="text-danger">{{ $errors->first('artist_commission') }}</span>
                 @endif

@@ -25,10 +25,10 @@
                                 {{ trans('cruds.order.fields.id') }}
                             </th>
                             <th>
-                                {{ trans('cruds.order.fields.video') }}
+                                {{ trans('cruds.order.fields.user') }}
                             </th>
                             <th>
-                                {{ trans('cruds.order.fields.user') }}
+                                {{ trans('cruds.order.fields.video') }}
                             </th>
                             <th>
                                 {{ trans('cruds.order.fields.message') }}
@@ -60,10 +60,10 @@
                                     {{ $order->id ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $order->video ?? '' }}
+                                    {{ $order->user->name ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $order->user->name ?? '' }}
+                                    {{ $order->video->name ?? '' }}
                                 </td>
                                 <td>
                                     {{ $order->message ?? '' }}

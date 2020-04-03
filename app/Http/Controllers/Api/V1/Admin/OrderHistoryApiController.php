@@ -17,7 +17,7 @@ class OrderHistoryApiController extends Controller
     {
         abort_if(Gate::denies('order_history_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new OrderHistoryResource(OrderHistory::with(['user', 'videos'])->get());
+        return new OrderHistoryResource(OrderHistory::with(['user', 'videos', 'order'])->get());
 
     }
 
@@ -36,7 +36,7 @@ class OrderHistoryApiController extends Controller
     {
         abort_if(Gate::denies('order_history_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new OrderHistoryResource($orderHistory->load(['user', 'videos']));
+        return new OrderHistoryResource($orderHistory->load(['user', 'videos', 'order']));
 
     }
 

@@ -17,9 +17,16 @@ class OrderHistory extends Model
         'deleted_at',
     ];
 
+    const STATUS_SELECT = [
+        '1' => 'Approved',
+        '2' => 'Declined',
+    ];
+
     protected $fillable = [
+        'status',
         'user_id',
         'comment',
+        'order_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -34,6 +41,12 @@ class OrderHistory extends Model
     public function videos()
     {
         return $this->belongsToMany(Video::class);
+
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
 
     }
 }

@@ -10,7 +10,6 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('video')->nullable();
             $table->string('payment_status')->nullable();
             $table->string('order_status')->nullable();
             $table->string('message')->nullable();

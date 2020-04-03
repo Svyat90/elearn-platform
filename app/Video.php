@@ -4,13 +4,12 @@ namespace App;
 
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Permission extends Model
+class Video extends Model
 {
-    use SoftDeletes, Auditable;
+    use Auditable;
 
-    public $table = 'permissions';
+    public $table = 'videos';
 
     protected $dates = [
         'created_at',
@@ -19,7 +18,7 @@ class Permission extends Model
     ];
 
     protected $fillable = [
-        'title',
+        'name',
         'created_at',
         'updated_at',
         'deleted_at',

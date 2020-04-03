@@ -21,4 +21,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::post('pages/media', 'PageApiController@storeMedia')->name('pages.storeMedia');
     Route::apiResource('pages', 'PageApiController');
 
+    // Videos
+    Route::apiResource('videos', 'VideoApiController');
+
 });

@@ -2,18 +2,18 @@
 
 namespace App;
 
+use App\Traits\Auditable;
 use Carbon\Carbon;
 use Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens, Auditable;
 
     public $table = 'users';
 
@@ -23,26 +23,39 @@ class User extends Authenticatable
     ];
 
     protected $dates = [
-        'updated_at',
+        'dob',
         'created_at',
+        'updated_at',
         'deleted_at',
         'email_verified_at',
     ];
 
     protected $fillable = [
+        'bio',
+        'dob',
         'name',
         'email',
         'password',
+        'last_name',
+        'first_name',
         'created_at',
         'updated_at',
         'deleted_at',
+        'subscribers',
         'remember_token',
         'email_verified_at',
+        'position_occupation',
     ];
 
     public function getIsAdminAttribute()
     {
         return $this->roles()->where('id', 1)->exists();
+
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
 
     }
 
@@ -72,9 +85,15 @@ class User extends Authenticatable
 
     }
 
-    public function roles()
+    public function getDobAttribute($value)
     {
-        return $this->belongsToMany(Role::class);
+        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+
+    }
+
+    public function setDobAttribute($value)
+    {
+        $this->attributes['dob'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
 
     }
 

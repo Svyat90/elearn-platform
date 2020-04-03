@@ -2,15 +2,11 @@
 
 namespace App;
 
-use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Permission extends Model
+class UserLanguage extends Model
 {
-    use SoftDeletes, Auditable;
-
-    public $table = 'permissions';
+    public $table = 'user_languages';
 
     protected $dates = [
         'created_at',
@@ -19,9 +15,20 @@ class Permission extends Model
     ];
 
     protected $fillable = [
-        'title',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+
+    }
+
+    public function languages()
+    {
+        return $this->belongsToMany(Language::class);
+
+    }
 }

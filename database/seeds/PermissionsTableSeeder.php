@@ -246,6 +246,50 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => '60',
+                'title' => 'user_language_access',
+            ],
+            [
+                'id'    => '61',
+                'title' => 'order_create',
+            ],
+            [
+                'id'    => '62',
+                'title' => 'order_edit',
+            ],
+            [
+                'id'    => '63',
+                'title' => 'order_show',
+            ],
+            [
+                'id'    => '64',
+                'title' => 'order_delete',
+            ],
+            [
+                'id'    => '65',
+                'title' => 'order_access',
+            ],
+            [
+                'id'    => '66',
+                'title' => 'video_create',
+            ],
+            [
+                'id'    => '67',
+                'title' => 'video_edit',
+            ],
+            [
+                'id'    => '68',
+                'title' => 'video_show',
+            ],
+            [
+                'id'    => '69',
+                'title' => 'video_delete',
+            ],
+            [
+                'id'    => '70',
+                'title' => 'video_access',
+            ],
+            [
+                'id'    => '71',
                 'title' => 'profile_password_edit',
             ],
         ];

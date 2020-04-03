@@ -28,6 +28,9 @@
                                 {{ trans('cruds.userReview.fields.user') }}
                             </th>
                             <th>
+                                {{ trans('cruds.userReview.fields.text') }}
+                            </th>
+                            <th>
                                 &nbsp;
                             </th>
                         </tr>
@@ -43,6 +46,9 @@
                                 </td>
                                 <td>
                                     {{ $userReview->user->name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $userReview->text ?? '' }}
                                 </td>
                                 <td>
                                     @can('user_review_show')

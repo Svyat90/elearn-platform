@@ -20,6 +20,8 @@ class UpdateUserReviewRequest extends FormRequest
     public function rules()
     {
         return [
+            'text' => [
+                'required'],
         ];
 
     }

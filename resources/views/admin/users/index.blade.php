@@ -52,6 +52,18 @@
                         {{ trans('cruds.user.fields.bio') }}
                     </th>
                     <th>
+                        {{ trans('cruds.user.fields.language') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.country') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.social_meidia') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.category') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -117,6 +129,10 @@
 { data: 'position_occupation', name: 'position_occupation' },
 { data: 'subscribers', name: 'subscribers' },
 { data: 'bio', name: 'bio' },
+{ data: 'language', name: 'languages.name' },
+{ data: 'country_name', name: 'country.name' },
+{ data: 'social_meidia', name: 'social_meidias.name' },
+{ data: 'category', name: 'categories.name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

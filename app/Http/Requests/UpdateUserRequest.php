@@ -47,6 +47,18 @@ class UpdateUserRequest extends FormRequest
                 'max:2147483647'],
             'bio'                 => [
                 'max:256'],
+            'languages.*'         => [
+                'integer'],
+            'languages'           => [
+                'array'],
+            'social_meidias.*'    => [
+                'integer'],
+            'social_meidias'      => [
+                'array'],
+            'categories.*'        => [
+                'integer'],
+            'categories'          => [
+                'array'],
         ];
 
     }

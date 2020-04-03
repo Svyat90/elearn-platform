@@ -246,70 +246,66 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => '60',
-                'title' => 'user_language_access',
-            ],
-            [
-                'id'    => '61',
                 'title' => 'order_create',
             ],
             [
-                'id'    => '62',
+                'id'    => '61',
                 'title' => 'order_edit',
             ],
             [
-                'id'    => '63',
+                'id'    => '62',
                 'title' => 'order_show',
             ],
             [
-                'id'    => '64',
+                'id'    => '63',
                 'title' => 'order_delete',
             ],
             [
-                'id'    => '65',
+                'id'    => '64',
                 'title' => 'order_access',
             ],
             [
-                'id'    => '66',
+                'id'    => '65',
                 'title' => 'video_create',
             ],
             [
-                'id'    => '67',
+                'id'    => '66',
                 'title' => 'video_edit',
             ],
             [
-                'id'    => '68',
+                'id'    => '67',
                 'title' => 'video_show',
             ],
             [
-                'id'    => '69',
+                'id'    => '68',
                 'title' => 'video_delete',
             ],
             [
-                'id'    => '70',
+                'id'    => '69',
                 'title' => 'video_access',
             ],
             [
-                'id'    => '71',
+                'id'    => '70',
                 'title' => 'user_review_create',
             ],
             [
-                'id'    => '72',
+                'id'    => '71',
                 'title' => 'user_review_edit',
             ],
             [
-                'id'    => '73',
+                'id'    => '72',
                 'title' => 'user_review_show',
             ],
             [
-                'id'    => '74',
+                'id'    => '73',
                 'title' => 'user_review_delete',
             ],
             [
-                'id'    => '75',
+                'id'    => '74',
                 'title' => 'user_review_access',
             ],
             [
-                'id'    => '76',
+                'id'    => '75',
                 'title' => 'profile_password_edit',
             ],
         ];

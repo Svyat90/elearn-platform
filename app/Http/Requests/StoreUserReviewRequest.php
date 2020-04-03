@@ -20,6 +20,8 @@ class StoreUserReviewRequest extends FormRequest
     public function rules()
     {
         return [
+            'text' => [
+                'required'],
         ];
 
     }

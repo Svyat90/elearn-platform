@@ -99,6 +99,66 @@
                 <span class="help-block">{{ trans('cruds.user.fields.bio_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="languages">{{ trans('cruds.user.fields.language') }}</label>
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                </div>
+                <select class="form-control select2 {{ $errors->has('languages') ? 'is-invalid' : '' }}" name="languages[]" id="languages" multiple>
+                    @foreach($languages as $id => $language)
+                        <option value="{{ $id }}" {{ (in_array($id, old('languages', [])) || $user->languages->contains($id)) ? 'selected' : '' }}>{{ $language }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('languages'))
+                    <span class="text-danger">{{ $errors->first('languages') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.language_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="country_id">{{ trans('cruds.user.fields.country') }}</label>
+                <select class="form-control select2 {{ $errors->has('country') ? 'is-invalid' : '' }}" name="country_id" id="country_id">
+                    @foreach($countries as $id => $country)
+                        <option value="{{ $id }}" {{ ($user->country ? $user->country->id : old('country_id')) == $id ? 'selected' : '' }}>{{ $country }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('country'))
+                    <span class="text-danger">{{ $errors->first('country') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.country_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="social_meidias">{{ trans('cruds.user.fields.social_meidia') }}</label>
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                </div>
+                <select class="form-control select2 {{ $errors->has('social_meidias') ? 'is-invalid' : '' }}" name="social_meidias[]" id="social_meidias" multiple>
+                    @foreach($social_meidias as $id => $social_meidia)
+                        <option value="{{ $id }}" {{ (in_array($id, old('social_meidias', [])) || $user->social_meidias->contains($id)) ? 'selected' : '' }}>{{ $social_meidia }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('social_meidias'))
+                    <span class="text-danger">{{ $errors->first('social_meidias') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.social_meidia_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="categories">{{ trans('cruds.user.fields.category') }}</label>
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                </div>
+                <select class="form-control select2 {{ $errors->has('categories') ? 'is-invalid' : '' }}" name="categories[]" id="categories" multiple>
+                    @foreach($categories as $id => $category)
+                        <option value="{{ $id }}" {{ (in_array($id, old('categories', [])) || $user->categories->contains($id)) ? 'selected' : '' }}>{{ $category }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('categories'))
+                    <span class="text-danger">{{ $errors->first('categories') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.category_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

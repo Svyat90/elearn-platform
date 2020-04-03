@@ -290,6 +290,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => '71',
+                'title' => 'user_review_create',
+            ],
+            [
+                'id'    => '72',
+                'title' => 'user_review_edit',
+            ],
+            [
+                'id'    => '73',
+                'title' => 'user_review_show',
+            ],
+            [
+                'id'    => '74',
+                'title' => 'user_review_delete',
+            ],
+            [
+                'id'    => '75',
+                'title' => 'user_review_access',
+            ],
+            [
+                'id'    => '76',
                 'title' => 'profile_password_edit',
             ],
         ];

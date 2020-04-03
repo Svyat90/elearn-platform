@@ -25,10 +25,36 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.user.fields.roles') }}
+                        </th>
+                        <td>
+                            @foreach($user->roles as $key => $roles)
+                                <span class="label label-info">{{ $roles->title }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.user.fields.name') }}
                         </th>
                         <td>
                             {{ $user->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.first_name') }}
+                        </th>
+                        <td>
+                            {{ $user->first_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.last_name') }}
+                        </th>
+                        <td>
+                            {{ $user->last_name }}
                         </td>
                     </tr>
                     <tr>
@@ -49,12 +75,34 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.roles') }}
+                            {{ trans('cruds.user.fields.dob') }}
                         </th>
                         <td>
-                            @foreach($user->roles as $key => $roles)
-                                <span class="label label-info">{{ $roles->title }}</span>
-                            @endforeach
+                            {{ $user->dob }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.position_occupation') }}
+                        </th>
+                        <td>
+                            {{ $user->position_occupation }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.subscribers') }}
+                        </th>
+                        <td>
+                            {{ $user->subscribers }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.bio') }}
+                        </th>
+                        <td>
+                            {{ $user->bio }}
                         </td>
                     </tr>
                 </tbody>

@@ -17,7 +17,7 @@ class UsersApiController extends Controller
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new UserResource(User::with(['roles'])->get());
+        return new UserResource(User::with(['roles', 'languages', 'country', 'social_meidias', 'categories'])->get());
 
     }
 
@@ -25,6 +25,9 @@ class UsersApiController extends Controller
     {
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
+        $user->languages()->sync($request->input('languages', []));
+        $user->social_meidias()->sync($request->input('social_meidias', []));
+        $user->categories()->sync($request->input('categories', []));
 
         return (new UserResource($user))
             ->response()
@@ -36,7 +39,7 @@ class UsersApiController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new UserResource($user->load(['roles']));
+        return new UserResource($user->load(['roles', 'languages', 'country', 'social_meidias', 'categories']));
 
     }
 
@@ -44,6 +47,9 @@ class UsersApiController extends Controller
     {
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
+        $user->languages()->sync($request->input('languages', []));
+        $user->social_meidias()->sync($request->input('social_meidias', []));
+        $user->categories()->sync($request->input('categories', []));
 
         return (new UserResource($user))
             ->response()

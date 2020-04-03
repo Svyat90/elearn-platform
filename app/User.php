@@ -38,6 +38,7 @@ class User extends Authenticatable
         'password',
         'last_name',
         'first_name',
+        'country_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -100,6 +101,30 @@ class User extends Authenticatable
     public function setDobAttribute($value)
     {
         $this->attributes['dob'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+
+    }
+
+    public function languages()
+    {
+        return $this->belongsToMany(Language::class);
+
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'country_id');
+
+    }
+
+    public function social_meidias()
+    {
+        return $this->belongsToMany(SocialMedium::class);
+
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
 
     }
 

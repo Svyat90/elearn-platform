@@ -36,6 +36,12 @@ class Category extends Model implements HasMedia
 
     }
 
+    public function categoryUsers()
+    {
+        return $this->belongsToMany(User::class);
+
+    }
+
     public function getImageAttribute()
     {
         $file = $this->getMedia('image')->last();

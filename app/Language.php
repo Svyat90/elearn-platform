@@ -20,4 +20,10 @@ class Language extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public function languageUsers()
+    {
+        return $this->belongsToMany(User::class);
+
+    }
 }

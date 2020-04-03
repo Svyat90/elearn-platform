@@ -23,6 +23,14 @@
                 <span class="help-block">{{ trans('cruds.userReview.fields.user_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="text">{{ trans('cruds.userReview.fields.text') }}</label>
+                <input class="form-control {{ $errors->has('text') ? 'is-invalid' : '' }}" type="text" name="text" id="text" value="{{ old('text', $userReview->text) }}" required>
+                @if($errors->has('text'))
+                    <span class="text-danger">{{ $errors->first('text') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.userReview.fields.text_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
+use App\Country;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Language;
 use App\Role;
+use App\SocialMedium;
 use App\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -20,7 +24,7 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = User::with(['roles'])->select(sprintf('%s.*', (new User)->table));
+            $query = User::with(['roles', 'languages', 'country', 'social_meidias', 'categories'])->select(sprintf('%s.*', (new User)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -72,8 +76,39 @@ class UsersController extends Controller
             $table->editColumn('bio', function ($row) {
                 return $row->bio ? $row->bio : "";
             });
+            $table->editColumn('language', function ($row) {
+                $labels = [];
 
-            $table->rawColumns(['actions', 'placeholder', 'roles']);
+                foreach ($row->languages as $language) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $language->name);
+                }
+
+                return implode(' ', $labels);
+            });
+            $table->addColumn('country_name', function ($row) {
+                return $row->country ? $row->country->name : '';
+            });
+
+            $table->editColumn('social_meidia', function ($row) {
+                $labels = [];
+
+                foreach ($row->social_meidias as $social_meidium) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $social_meidium->name);
+                }
+
+                return implode(' ', $labels);
+            });
+            $table->editColumn('category', function ($row) {
+                $labels = [];
+
+                foreach ($row->categories as $category) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $category->name);
+                }
+
+                return implode(' ', $labels);
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'roles', 'language', 'country', 'social_meidia', 'category']);
 
             return $table->make(true);
         }
@@ -87,13 +122,24 @@ class UsersController extends Controller
 
         $roles = Role::all()->pluck('title', 'id');
 
-        return view('admin.users.create', compact('roles'));
+        $languages = Language::all()->pluck('name', 'id');
+
+        $countries = Country::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $social_meidias = SocialMedium::all()->pluck('name', 'id');
+
+        $categories = Category::all()->pluck('name', 'id');
+
+        return view('admin.users.create', compact('roles', 'languages', 'countries', 'social_meidias', 'categories'));
     }
 
     public function store(StoreUserRequest $request)
     {
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
+        $user->languages()->sync($request->input('languages', []));
+        $user->social_meidias()->sync($request->input('social_meidias', []));
+        $user->categories()->sync($request->input('categories', []));
 
         return redirect()->route('admin.users.index');
 
@@ -105,15 +151,26 @@ class UsersController extends Controller
 
         $roles = Role::all()->pluck('title', 'id');
 
-        $user->load('roles');
+        $languages = Language::all()->pluck('name', 'id');
 
-        return view('admin.users.edit', compact('roles', 'user'));
+        $countries = Country::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $social_meidias = SocialMedium::all()->pluck('name', 'id');
+
+        $categories = Category::all()->pluck('name', 'id');
+
+        $user->load('roles', 'languages', 'country', 'social_meidias', 'categories');
+
+        return view('admin.users.edit', compact('roles', 'languages', 'countries', 'social_meidias', 'categories', 'user'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
+        $user->languages()->sync($request->input('languages', []));
+        $user->social_meidias()->sync($request->input('social_meidias', []));
+        $user->categories()->sync($request->input('categories', []));
 
         return redirect()->route('admin.users.index');
 
@@ -123,7 +180,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->load('roles', 'userUserReviews');
+        $user->load('roles', 'languages', 'country', 'social_meidias', 'categories', 'userUserReviews');
 
         return view('admin.users.show', compact('user'));
     }

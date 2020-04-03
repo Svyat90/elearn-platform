@@ -306,6 +306,70 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => '75',
+                'title' => 'gender_create',
+            ],
+            [
+                'id'    => '76',
+                'title' => 'gender_edit',
+            ],
+            [
+                'id'    => '77',
+                'title' => 'gender_show',
+            ],
+            [
+                'id'    => '78',
+                'title' => 'gender_delete',
+            ],
+            [
+                'id'    => '79',
+                'title' => 'gender_access',
+            ],
+            [
+                'id'    => '80',
+                'title' => 'order_history_create',
+            ],
+            [
+                'id'    => '81',
+                'title' => 'order_history_edit',
+            ],
+            [
+                'id'    => '82',
+                'title' => 'order_history_show',
+            ],
+            [
+                'id'    => '83',
+                'title' => 'order_history_delete',
+            ],
+            [
+                'id'    => '84',
+                'title' => 'order_history_access',
+            ],
+            [
+                'id'    => '85',
+                'title' => 'order_payment_create',
+            ],
+            [
+                'id'    => '86',
+                'title' => 'order_payment_edit',
+            ],
+            [
+                'id'    => '87',
+                'title' => 'order_payment_show',
+            ],
+            [
+                'id'    => '88',
+                'title' => 'order_payment_delete',
+            ],
+            [
+                'id'    => '89',
+                'title' => 'order_payment_access',
+            ],
+            [
+                'id'    => '90',
+                'title' => 'orders_list_access',
+            ],
+            [
+                'id'    => '91',
                 'title' => 'profile_password_edit',
             ],
         ];

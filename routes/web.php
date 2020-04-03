@@ -24,6 +24,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Users
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
+    Route::post('users/media', 'UsersController@storeMedia')->name('users.storeMedia');
+    Route::post('users/ckmedia', 'UsersController@storeCKEditorImages')->name('users.storeCKEditorImages');
     Route::resource('users', 'UsersController');
 
     // Categories
@@ -71,11 +73,25 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Videos
     Route::delete('videos/destroy', 'VideoController@massDestroy')->name('videos.massDestroy');
+    Route::post('videos/media', 'VideoController@storeMedia')->name('videos.storeMedia');
+    Route::post('videos/ckmedia', 'VideoController@storeCKEditorImages')->name('videos.storeCKEditorImages');
     Route::resource('videos', 'VideoController');
 
     // User Reviews
     Route::delete('user-reviews/destroy', 'UserReviewController@massDestroy')->name('user-reviews.massDestroy');
     Route::resource('user-reviews', 'UserReviewController');
+
+    // Genders
+    Route::delete('genders/destroy', 'GenderController@massDestroy')->name('genders.massDestroy');
+    Route::resource('genders', 'GenderController');
+
+    // Order Histories
+    Route::delete('order-histories/destroy', 'OrderHistoryController@massDestroy')->name('order-histories.massDestroy');
+    Route::resource('order-histories', 'OrderHistoryController');
+
+    // Order Payments
+    Route::delete('order-payments/destroy', 'OrderPaymentController@massDestroy')->name('order-payments.massDestroy');
+    Route::resource('order-payments', 'OrderPaymentController');
 
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

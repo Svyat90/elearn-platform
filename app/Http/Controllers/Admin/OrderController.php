@@ -7,6 +7,7 @@ use App\Http\Requests\MassDestroyOrderRequest;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Order;
+use App\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,7 @@ class OrderController extends Controller
         abort_if(Gate::denies('order_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Order::query()->select(sprintf('%s.*', (new Order)->table));
+            $query = Order::with(['user'])->select(sprintf('%s.*', (new Order)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -46,8 +47,27 @@ class OrderController extends Controller
             $table->editColumn('video', function ($row) {
                 return $row->video ? $row->video : "";
             });
+            $table->addColumn('user_name', function ($row) {
+                return $row->user ? $row->user->name : '';
+            });
 
-            $table->rawColumns(['actions', 'placeholder']);
+            $table->editColumn('message', function ($row) {
+                return $row->message ? $row->message : "";
+            });
+            $table->editColumn('payment_info', function ($row) {
+                return $row->payment_info ? $row->payment_info : "";
+            });
+            $table->editColumn('total', function ($row) {
+                return $row->total ? $row->total : "";
+            });
+            $table->editColumn('order_status', function ($row) {
+                return $row->order_status ? Order::ORDER_STATUS_SELECT[$row->order_status] : '';
+            });
+            $table->editColumn('payment_status', function ($row) {
+                return $row->payment_status ? Order::PAYMENT_STATUS_SELECT[$row->payment_status] : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'user']);
 
             return $table->make(true);
         }
@@ -59,7 +79,9 @@ class OrderController extends Controller
     {
         abort_if(Gate::denies('order_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.orders.create');
+        $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.orders.create', compact('users'));
     }
 
     public function store(StoreOrderRequest $request)
@@ -74,7 +96,11 @@ class OrderController extends Controller
     {
         abort_if(Gate::denies('order_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.orders.edit', compact('order'));
+        $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $order->load('user');
+
+        return view('admin.orders.edit', compact('users', 'order'));
     }
 
     public function update(UpdateOrderRequest $request, Order $order)
@@ -88,6 +114,8 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         abort_if(Gate::denies('order_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $order->load('user', 'orderOrderPayments');
 
         return view('admin.orders.show', compact('order'));
     }

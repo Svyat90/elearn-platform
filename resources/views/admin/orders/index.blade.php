@@ -28,6 +28,24 @@
                         {{ trans('cruds.order.fields.video') }}
                     </th>
                     <th>
+                        {{ trans('cruds.order.fields.user') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.message') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.payment_info') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.total') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.order_status') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.payment_status') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -85,10 +103,16 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'video', name: 'video' },
+{ data: 'user_name', name: 'user.name' },
+{ data: 'message', name: 'message' },
+{ data: 'payment_info', name: 'payment_info' },
+{ data: 'total', name: 'total' },
+{ data: 'order_status', name: 'order_status' },
+{ data: 'payment_status', name: 'payment_status' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    pageLength: 25,
   };
   $('.datatable-Order').DataTable(dtOverrideGlobals);
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){

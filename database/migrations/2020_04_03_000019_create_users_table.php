@@ -21,6 +21,10 @@ class CreateUsersTable extends Migration
             $table->string('position_occupation')->nullable();
             $table->integer('subscribers')->nullable();
             $table->string('bio')->nullable();
+            $table->string('referral_code')->nullable();
+            $table->string('referred_by')->nullable();
+            $table->string('registration_platform')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
 

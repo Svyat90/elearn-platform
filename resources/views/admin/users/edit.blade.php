@@ -159,6 +159,69 @@
                 <span class="help-block">{{ trans('cruds.user.fields.category_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="gender_id">{{ trans('cruds.user.fields.gender') }}</label>
+                <select class="form-control select2 {{ $errors->has('gender') ? 'is-invalid' : '' }}" name="gender_id" id="gender_id">
+                    @foreach($genders as $id => $gender)
+                        <option value="{{ $id }}" {{ ($user->gender ? $user->gender->id : old('gender_id')) == $id ? 'selected' : '' }}>{{ $gender }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('gender'))
+                    <span class="text-danger">{{ $errors->first('gender') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.gender_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="referral_code">{{ trans('cruds.user.fields.referral_code') }}</label>
+                <input class="form-control {{ $errors->has('referral_code') ? 'is-invalid' : '' }}" type="text" name="referral_code" id="referral_code" value="{{ old('referral_code', $user->referral_code) }}">
+                @if($errors->has('referral_code'))
+                    <span class="text-danger">{{ $errors->first('referral_code') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.referral_code_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="referred_by">{{ trans('cruds.user.fields.referred_by') }}</label>
+                <input class="form-control {{ $errors->has('referred_by') ? 'is-invalid' : '' }}" type="text" name="referred_by" id="referred_by" value="{{ old('referred_by', $user->referred_by) }}">
+                @if($errors->has('referred_by'))
+                    <span class="text-danger">{{ $errors->first('referred_by') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.referred_by_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label>{{ trans('cruds.user.fields.registration_platform') }}</label>
+                <select class="form-control {{ $errors->has('registration_platform') ? 'is-invalid' : '' }}" name="registration_platform" id="registration_platform">
+                    <option value disabled {{ old('registration_platform', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\User::REGISTRATION_PLATFORM_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('registration_platform', $user->registration_platform) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('registration_platform'))
+                    <span class="text-danger">{{ $errors->first('registration_platform') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.registration_platform_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="image">{{ trans('cruds.user.fields.image') }}</label>
+                <div class="needsclick dropzone {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image-dropzone">
+                </div>
+                @if($errors->has('image'))
+                    <span class="text-danger">{{ $errors->first('image') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.image_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label>{{ trans('cruds.user.fields.status') }}</label>
+                <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" id="status">
+                    <option value disabled {{ old('status', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\User::STATUS_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('status', $user->status) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('status'))
+                    <span class="text-danger">{{ $errors->first('status') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.status_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>
@@ -169,4 +232,61 @@
 
 
 
+@endsection
+
+@section('scripts')
+<script>
+    Dropzone.options.imageDropzone = {
+    url: '{{ route('admin.users.storeMedia') }}',
+    maxFilesize: 12, // MB
+    acceptedFiles: '.jpeg,.jpg,.png,.gif',
+    maxFiles: 1,
+    addRemoveLinks: true,
+    headers: {
+      'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    },
+    params: {
+      size: 12,
+      width: 4096,
+      height: 4096
+    },
+    success: function (file, response) {
+      $('form').find('input[name="image"]').remove()
+      $('form').append('<input type="hidden" name="image" value="' + response.name + '">')
+    },
+    removedfile: function (file) {
+      file.previewElement.remove()
+      if (file.status !== 'error') {
+        $('form').find('input[name="image"]').remove()
+        this.options.maxFiles = this.options.maxFiles + 1
+      }
+    },
+    init: function () {
+@if(isset($user) && $user->image)
+      var file = {!! json_encode($user->image) !!}
+          this.options.addedfile.call(this, file)
+      this.options.thumbnail.call(this, file, '{{ $user->image->getUrl('thumb') }}')
+      file.previewElement.classList.add('dz-complete')
+      $('form').append('<input type="hidden" name="image" value="' + file.file_name + '">')
+      this.options.maxFiles = this.options.maxFiles - 1
+@endif
+    },
+    error: function (file, response) {
+        if ($.type(response) === 'string') {
+            var message = response //dropzone sends it's own error messages in string
+        } else {
+            var message = response.errors.file
+        }
+        file.previewElement.classList.add('dz-error')
+        _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+        _results = []
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            node = _ref[_i]
+            _results.push(node.textContent = message)
+        }
+
+        return _results
+    }
+}
+</script>
 @endsection

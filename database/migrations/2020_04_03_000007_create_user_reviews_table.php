@@ -4,13 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdersTable extends Migration
+class CreateUserReviewsTable extends Migration
 {
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('user_reviews', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('video')->nullable();
+            $table->string('text');
+            $table->integer('stars')->nullable();
             $table->timestamps();
         });
 

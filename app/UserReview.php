@@ -19,11 +19,19 @@ class UserReview extends Model
 
     protected $fillable = [
         'text',
+        'stars',
         'user_id',
+        'video_id',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
+
+    public function video()
+    {
+        return $this->belongsTo(Video::class, 'video_id');
+
+    }
 
     public function user()
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\Admin\UserResource;
@@ -13,11 +14,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UsersApiController extends Controller
 {
+    use MediaUploadingTrait;
+
     public function index()
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new UserResource(User::with(['roles', 'languages', 'country', 'social_meidias', 'categories'])->get());
+        return new UserResource(User::with(['roles', 'languages', 'country', 'social_meidias', 'categories', 'gender'])->get());
 
     }
 
@@ -29,6 +32,10 @@ class UsersApiController extends Controller
         $user->social_meidias()->sync($request->input('social_meidias', []));
         $user->categories()->sync($request->input('categories', []));
 
+        if ($request->input('image', false)) {
+            $user->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
+        }
+
         return (new UserResource($user))
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);
@@ -39,7 +46,7 @@ class UsersApiController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new UserResource($user->load(['roles', 'languages', 'country', 'social_meidias', 'categories']));
+        return new UserResource($user->load(['roles', 'languages', 'country', 'social_meidias', 'categories', 'gender']));
 
     }
 
@@ -50,6 +57,15 @@ class UsersApiController extends Controller
         $user->languages()->sync($request->input('languages', []));
         $user->social_meidias()->sync($request->input('social_meidias', []));
         $user->categories()->sync($request->input('categories', []));
+
+        if ($request->input('image', false)) {
+            if (!$user->image || $request->input('image') !== $user->image->file_name) {
+                $user->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
+            }
+
+        } elseif ($user->image) {
+            $user->image->delete();
+        }
 
         return (new UserResource($user))
             ->response()
@@ -66,4 +82,5 @@ class UsersApiController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
 
     }
+
 }

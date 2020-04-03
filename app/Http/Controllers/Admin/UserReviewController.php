@@ -8,6 +8,7 @@ use App\Http\Requests\StoreUserReviewRequest;
 use App\Http\Requests\UpdateUserReviewRequest;
 use App\User;
 use App\UserReview;
+use App\Video;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,7 @@ class UserReviewController extends Controller
         abort_if(Gate::denies('user_review_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = UserReview::with(['user'])->select(sprintf('%s.*', (new UserReview)->table));
+            $query = UserReview::with(['video', 'user'])->select(sprintf('%s.*', (new UserReview)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -44,15 +45,21 @@ class UserReviewController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : "";
             });
+            $table->editColumn('text', function ($row) {
+                return $row->text ? $row->text : "";
+            });
+            $table->editColumn('stars', function ($row) {
+                return $row->stars ? $row->stars : "";
+            });
+            $table->addColumn('video_name', function ($row) {
+                return $row->video ? $row->video->name : '';
+            });
+
             $table->addColumn('user_name', function ($row) {
                 return $row->user ? $row->user->name : '';
             });
 
-            $table->editColumn('text', function ($row) {
-                return $row->text ? $row->text : "";
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'user']);
+            $table->rawColumns(['actions', 'placeholder', 'video', 'user']);
 
             return $table->make(true);
         }
@@ -64,9 +71,11 @@ class UserReviewController extends Controller
     {
         abort_if(Gate::denies('user_review_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $videos = Video::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.userReviews.create', compact('users'));
+        return view('admin.userReviews.create', compact('videos', 'users'));
     }
 
     public function store(StoreUserReviewRequest $request)
@@ -81,11 +90,13 @@ class UserReviewController extends Controller
     {
         abort_if(Gate::denies('user_review_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $videos = Video::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $userReview->load('user');
+        $userReview->load('video', 'user');
 
-        return view('admin.userReviews.edit', compact('users', 'userReview'));
+        return view('admin.userReviews.edit', compact('videos', 'users', 'userReview'));
     }
 
     public function update(UpdateUserReviewRequest $request, UserReview $userReview)
@@ -100,7 +111,7 @@ class UserReviewController extends Controller
     {
         abort_if(Gate::denies('user_review_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $userReview->load('user');
+        $userReview->load('video', 'user');
 
         return view('admin.userReviews.show', compact('userReview'));
     }

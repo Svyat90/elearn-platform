@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Country;
+use App\Gender;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -14,17 +16,20 @@ use App\SocialMedium;
 use App\User;
 use Gate;
 use Illuminate\Http\Request;
+use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
 
 class UsersController extends Controller
 {
+    use MediaUploadingTrait;
+
     public function index(Request $request)
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = User::with(['roles', 'languages', 'country', 'social_meidias', 'categories'])->select(sprintf('%s.*', (new User)->table));
+            $query = User::with(['roles', 'languages', 'country', 'social_meidias', 'categories', 'gender'])->select(sprintf('%s.*', (new User)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -107,8 +112,36 @@ class UsersController extends Controller
 
                 return implode(' ', $labels);
             });
+            $table->addColumn('gender_name', function ($row) {
+                return $row->gender ? $row->gender->name : '';
+            });
 
-            $table->rawColumns(['actions', 'placeholder', 'roles', 'language', 'country', 'social_meidia', 'category']);
+            $table->editColumn('referral_code', function ($row) {
+                return $row->referral_code ? $row->referral_code : "";
+            });
+            $table->editColumn('referred_by', function ($row) {
+                return $row->referred_by ? $row->referred_by : "";
+            });
+            $table->editColumn('registration_platform', function ($row) {
+                return $row->registration_platform ? User::REGISTRATION_PLATFORM_SELECT[$row->registration_platform] : '';
+            });
+            $table->editColumn('image', function ($row) {
+                if ($photo = $row->image) {
+                    return sprintf(
+                        '<a href="%s" target="_blank"><img src="%s" width="50px" height="50px"></a>',
+                        $photo->url,
+                        $photo->thumbnail
+                    );
+                }
+
+                return '';
+
+            });
+            $table->editColumn('status', function ($row) {
+                return $row->status ? User::STATUS_SELECT[$row->status] : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'roles', 'language', 'country', 'social_meidia', 'category', 'gender', 'image']);
 
             return $table->make(true);
         }
@@ -130,7 +163,9 @@ class UsersController extends Controller
 
         $categories = Category::all()->pluck('name', 'id');
 
-        return view('admin.users.create', compact('roles', 'languages', 'countries', 'social_meidias', 'categories'));
+        $genders = Gender::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.users.create', compact('roles', 'languages', 'countries', 'social_meidias', 'categories', 'genders'));
     }
 
     public function store(StoreUserRequest $request)
@@ -140,6 +175,14 @@ class UsersController extends Controller
         $user->languages()->sync($request->input('languages', []));
         $user->social_meidias()->sync($request->input('social_meidias', []));
         $user->categories()->sync($request->input('categories', []));
+
+        if ($request->input('image', false)) {
+            $user->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
+        }
+
+        if ($media = $request->input('ck-media', false)) {
+            Media::whereIn('id', $media)->update(['model_id' => $user->id]);
+        }
 
         return redirect()->route('admin.users.index');
 
@@ -159,9 +202,11 @@ class UsersController extends Controller
 
         $categories = Category::all()->pluck('name', 'id');
 
-        $user->load('roles', 'languages', 'country', 'social_meidias', 'categories');
+        $genders = Gender::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.users.edit', compact('roles', 'languages', 'countries', 'social_meidias', 'categories', 'user'));
+        $user->load('roles', 'languages', 'country', 'social_meidias', 'categories', 'gender');
+
+        return view('admin.users.edit', compact('roles', 'languages', 'countries', 'social_meidias', 'categories', 'genders', 'user'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
@@ -172,6 +217,15 @@ class UsersController extends Controller
         $user->social_meidias()->sync($request->input('social_meidias', []));
         $user->categories()->sync($request->input('categories', []));
 
+        if ($request->input('image', false)) {
+            if (!$user->image || $request->input('image') !== $user->image->file_name) {
+                $user->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
+            }
+
+        } elseif ($user->image) {
+            $user->image->delete();
+        }
+
         return redirect()->route('admin.users.index');
 
     }
@@ -180,7 +234,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->load('roles', 'languages', 'country', 'social_meidias', 'categories', 'userUserReviews');
+        $user->load('roles', 'languages', 'country', 'social_meidias', 'categories', 'gender', 'userUserReviews', 'userOrders', 'userVideos', 'userOrderHistories');
 
         return view('admin.users.show', compact('user'));
     }
@@ -200,6 +254,19 @@ class UsersController extends Controller
         User::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+
+    }
+
+    public function storeCKEditorImages(Request $request)
+    {
+        abort_if(Gate::denies('user_create') && Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $model         = new User();
+        $model->id     = $request->input('crud_id', 0);
+        $model->exists = true;
+        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media', 'public');
+
+        return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
 
     }
 

@@ -25,18 +25,34 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.userReview.fields.user') }}
-                        </th>
-                        <td>
-                            {{ $userReview->user->name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.userReview.fields.text') }}
                         </th>
                         <td>
                             {{ $userReview->text }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.userReview.fields.stars') }}
+                        </th>
+                        <td>
+                            {{ $userReview->stars }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.userReview.fields.video') }}
+                        </th>
+                        <td>
+                            {{ $userReview->video->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.userReview.fields.user') }}
+                        </th>
+                        <td>
+                            {{ $userReview->user->name ?? '' }}
                         </td>
                     </tr>
                 </tbody>

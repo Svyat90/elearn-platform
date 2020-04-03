@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 @can('user_management_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/permissions*') ? 'menu-open' : '' }} {{ request()->is('admin/roles*') ? 'menu-open' : '' }} {{ request()->is('admin/users*') ? 'menu-open' : '' }} {{ request()->is('admin/audit-logs*') ? 'menu-open' : '' }} {{ request()->is('admin/user-reviews*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/permissions*') ? 'menu-open' : '' }} {{ request()->is('admin/roles*') ? 'menu-open' : '' }} {{ request()->is('admin/users*') ? 'menu-open' : '' }} {{ request()->is('admin/audit-logs*') ? 'menu-open' : '' }} {{ request()->is('admin/user-reviews*') ? 'menu-open' : '' }} {{ request()->is('admin/genders*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
                             <i class="fa-fw nav-icon fas fa-users">
 
@@ -83,11 +83,86 @@
                             @can('user_review_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.user-reviews.index") }}" class="nav-link {{ request()->is('admin/user-reviews') || request()->is('admin/user-reviews/*') ? 'active' : '' }}">
-                                        <i class="fa-fw nav-icon fas fa-cogs">
+                                        <i class="fa-fw nav-icon far fa-comment-alt">
 
                                         </i>
                                         <p>
                                             {{ trans('cruds.userReview.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('gender_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.genders.index") }}" class="nav-link {{ request()->is('admin/genders') || request()->is('admin/genders/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-users">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.gender.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+                @can('video_access')
+                    <li class="nav-item">
+                        <a href="{{ route("admin.videos.index") }}" class="nav-link {{ request()->is('admin/videos') || request()->is('admin/videos/*') ? 'active' : '' }}">
+                            <i class="fa-fw nav-icon fas fa-video">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.video.title') }}
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('orders_list_access')
+                    <li class="nav-item has-treeview {{ request()->is('admin/orders*') ? 'menu-open' : '' }} {{ request()->is('admin/order-histories*') ? 'menu-open' : '' }} {{ request()->is('admin/order-payments*') ? 'menu-open' : '' }}">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="fa-fw nav-icon fas fa-hand-holding-usd">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.ordersList.title') }}
+                                <i class="right fa fa-fw fa-angle-left nav-icon"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('order_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.orders.index") }}" class="nav-link {{ request()->is('admin/orders') || request()->is('admin/orders/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-money-bill-alt">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.order.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('order_history_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.order-histories.index") }}" class="nav-link {{ request()->is('admin/order-histories') || request()->is('admin/order-histories/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-history">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.orderHistory.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('order_payment_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.order-payments.index") }}" class="nav-link {{ request()->is('admin/order-payments') || request()->is('admin/order-payments/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-cogs">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.orderPayment.title') }}
                                         </p>
                                     </a>
                                 </li>
@@ -202,30 +277,6 @@
                             </i>
                             <p>
                                 {{ trans('cruds.referralCommission.title') }}
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-                @can('order_access')
-                    <li class="nav-item">
-                        <a href="{{ route("admin.orders.index") }}" class="nav-link {{ request()->is('admin/orders') || request()->is('admin/orders/*') ? 'active' : '' }}">
-                            <i class="fa-fw nav-icon fas fa-money-bill-alt">
-
-                            </i>
-                            <p>
-                                {{ trans('cruds.order.title') }}
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-                @can('video_access')
-                    <li class="nav-item">
-                        <a href="{{ route("admin.videos.index") }}" class="nav-link {{ request()->is('admin/videos') || request()->is('admin/videos/*') ? 'active' : '' }}">
-                            <i class="fa-fw nav-icon fas fa-cogs">
-
-                            </i>
-                            <p>
-                                {{ trans('cruds.video.title') }}
                             </p>
                         </a>
                     </li>

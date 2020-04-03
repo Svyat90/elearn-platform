@@ -64,6 +64,24 @@
                         {{ trans('cruds.user.fields.category') }}
                     </th>
                     <th>
+                        {{ trans('cruds.user.fields.gender') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.referral_code') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.referred_by') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.registration_platform') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.image') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.status') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -133,6 +151,12 @@
 { data: 'country_name', name: 'country.name' },
 { data: 'social_meidia', name: 'social_meidias.name' },
 { data: 'category', name: 'categories.name' },
+{ data: 'gender_name', name: 'gender.name' },
+{ data: 'referral_code', name: 'referral_code' },
+{ data: 'referred_by', name: 'referred_by' },
+{ data: 'registration_platform', name: 'registration_platform' },
+{ data: 'image', name: 'image', sortable: false, searchable: false },
+{ data: 'status', name: 'status' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

@@ -31,6 +31,54 @@
                             {{ $order->video }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.user') }}
+                        </th>
+                        <td>
+                            {{ $order->user->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.message') }}
+                        </th>
+                        <td>
+                            {{ $order->message }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.payment_info') }}
+                        </th>
+                        <td>
+                            {{ $order->payment_info }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.total') }}
+                        </th>
+                        <td>
+                            {{ $order->total }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.order_status') }}
+                        </th>
+                        <td>
+                            {{ App\Order::ORDER_STATUS_SELECT[$order->order_status] ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.payment_status') }}
+                        </th>
+                        <td>
+                            {{ App\Order::PAYMENT_STATUS_SELECT[$order->payment_status] ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -42,6 +90,22 @@
     </div>
 </div>
 
-
+<div class="card">
+    <div class="card-header">
+        {{ trans('global.relatedData') }}
+    </div>
+    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="#order_order_payments" role="tab" data-toggle="tab">
+                {{ trans('cruds.orderPayment.title') }}
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" role="tabpanel" id="order_order_payments">
+            @includeIf('admin.orders.relationships.orderOrderPayments', ['orderPayments' => $order->orderOrderPayments])
+        </div>
+    </div>
+</div>
 
 @endsection

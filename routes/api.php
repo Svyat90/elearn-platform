@@ -8,6 +8,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::apiResource('roles', 'RolesApiController');
 
     // Users
+    Route::post('users/media', 'UsersApiController@storeMedia')->name('users.storeMedia');
     Route::apiResource('users', 'UsersApiController');
 
     // Categories
@@ -22,6 +23,13 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::apiResource('pages', 'PageApiController');
 
     // Videos
+    Route::post('videos/media', 'VideoApiController@storeMedia')->name('videos.storeMedia');
     Route::apiResource('videos', 'VideoApiController');
+
+    // Order Histories
+    Route::apiResource('order-histories', 'OrderHistoryApiController');
+
+    // Order Payments
+    Route::apiResource('order-payments', 'OrderPaymentApiController');
 
 });

@@ -31,6 +31,14 @@
                             {{ $userReview->user->name ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.userReview.fields.text') }}
+                        </th>
+                        <td>
+                            {{ $userReview->text }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

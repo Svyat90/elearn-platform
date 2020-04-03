@@ -28,6 +28,9 @@
                         {{ trans('cruds.userReview.fields.user') }}
                     </th>
                     <th>
+                        {{ trans('cruds.userReview.fields.text') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -85,6 +88,7 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'user_name', name: 'user.name' },
+{ data: 'text', name: 'text' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

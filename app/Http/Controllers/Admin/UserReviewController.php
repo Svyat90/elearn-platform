@@ -48,6 +48,10 @@ class UserReviewController extends Controller
                 return $row->user ? $row->user->name : '';
             });
 
+            $table->editColumn('text', function ($row) {
+                return $row->text ? $row->text : "";
+            });
+
             $table->rawColumns(['actions', 'placeholder', 'user']);
 
             return $table->make(true);

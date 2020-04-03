@@ -65,9 +65,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Audit Logs
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
-    // User Languages
-    Route::resource('user-languages', 'UserLanguageController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
-
     // Orders
     Route::delete('orders/destroy', 'OrderController@massDestroy')->name('orders.massDestroy');
     Route::resource('orders', 'OrderController');

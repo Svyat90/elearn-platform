@@ -56,6 +56,8 @@ class SocialMediaController extends Controller
     {
         abort_if(Gate::denies('social_medium_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $socialMedium->load('socialMeidiaUsers');
+
         return view('admin.socialMedia.show', compact('socialMedium'));
     }
 

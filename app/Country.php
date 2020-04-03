@@ -24,4 +24,10 @@ class Country extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public function countryUsers()
+    {
+        return $this->hasMany(User::class, 'country_id', 'id');
+
+    }
 }

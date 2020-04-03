@@ -105,6 +105,44 @@
                             {{ $user->bio }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.language') }}
+                        </th>
+                        <td>
+                            @foreach($user->languages as $key => $language)
+                                <span class="label label-info">{{ $language->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.country') }}
+                        </th>
+                        <td>
+                            {{ $user->country->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.social_meidia') }}
+                        </th>
+                        <td>
+                            @foreach($user->social_meidias as $key => $social_meidia)
+                                <span class="label label-info">{{ $social_meidia->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.category') }}
+                        </th>
+                        <td>
+                            @foreach($user->categories as $key => $category)
+                                <span class="label label-info">{{ $category->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

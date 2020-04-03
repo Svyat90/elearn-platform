@@ -1,5 +1,4 @@
 1. Extract the archive and put it in the folder you want
-
 2. Run cp .env.example .env file to copy example file to .env
 Then edit your .env file with DB credentials and other settings.
 

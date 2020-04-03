@@ -43,10 +43,26 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.orderHistory.fields.order') }}
+                        </th>
+                        <td>
+                            {{ $orderHistory->order->message ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.orderHistory.fields.comment') }}
                         </th>
                         <td>
                             {{ $orderHistory->comment }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.orderHistory.fields.status') }}
+                        </th>
+                        <td>
+                            {{ App\OrderHistory::STATUS_SELECT[$orderHistory->status] ?? '' }}
                         </td>
                     </tr>
                 </tbody>

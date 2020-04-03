@@ -25,18 +25,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.order.fields.video') }}
-                        </th>
-                        <td>
-                            {{ $order->video }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.order.fields.user') }}
                         </th>
                         <td>
                             {{ $order->user->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.video') }}
+                        </th>
+                        <td>
+                            {{ $order->video->name ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -100,10 +100,18 @@
                 {{ trans('cruds.orderPayment.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#order_order_histories" role="tab" data-toggle="tab">
+                {{ trans('cruds.orderHistory.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="order_order_payments">
             @includeIf('admin.orders.relationships.orderOrderPayments', ['orderPayments' => $order->orderOrderPayments])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="order_order_histories">
+            @includeIf('admin.orders.relationships.orderOrderHistories', ['orderHistories' => $order->orderOrderHistories])
         </div>
     </div>
 </div>

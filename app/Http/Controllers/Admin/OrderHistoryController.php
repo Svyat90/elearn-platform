@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyOrderHistoryRequest;
 use App\Http\Requests\StoreOrderHistoryRequest;
 use App\Http\Requests\UpdateOrderHistoryRequest;
+use App\Order;
 use App\OrderHistory;
 use App\User;
 use App\Video;
@@ -21,7 +22,7 @@ class OrderHistoryController extends Controller
         abort_if(Gate::denies('order_history_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = OrderHistory::with(['user', 'videos'])->select(sprintf('%s.*', (new OrderHistory)->table));
+            $query = OrderHistory::with(['user', 'videos', 'order'])->select(sprintf('%s.*', (new OrderHistory)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -58,11 +59,21 @@ class OrderHistoryController extends Controller
 
                 return implode(' ', $labels);
             });
+            $table->addColumn('order_message', function ($row) {
+                return $row->order ? $row->order->message : '';
+            });
+
+            $table->editColumn('order.message', function ($row) {
+                return $row->order ? (is_string($row->order) ? $row->order : $row->order->message) : '';
+            });
             $table->editColumn('comment', function ($row) {
                 return $row->comment ? $row->comment : "";
             });
+            $table->editColumn('status', function ($row) {
+                return $row->status ? OrderHistory::STATUS_SELECT[$row->status] : '';
+            });
 
-            $table->rawColumns(['actions', 'placeholder', 'user', 'video']);
+            $table->rawColumns(['actions', 'placeholder', 'user', 'video', 'order']);
 
             return $table->make(true);
         }
@@ -78,7 +89,9 @@ class OrderHistoryController extends Controller
 
         $videos = Video::all()->pluck('name', 'id');
 
-        return view('admin.orderHistories.create', compact('users', 'videos'));
+        $orders = Order::all()->pluck('message', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.orderHistories.create', compact('users', 'videos', 'orders'));
     }
 
     public function store(StoreOrderHistoryRequest $request)
@@ -98,9 +111,11 @@ class OrderHistoryController extends Controller
 
         $videos = Video::all()->pluck('name', 'id');
 
-        $orderHistory->load('user', 'videos');
+        $orders = Order::all()->pluck('message', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.orderHistories.edit', compact('users', 'videos', 'orderHistory'));
+        $orderHistory->load('user', 'videos', 'order');
+
+        return view('admin.orderHistories.edit', compact('users', 'videos', 'orders', 'orderHistory'));
     }
 
     public function update(UpdateOrderHistoryRequest $request, OrderHistory $orderHistory)
@@ -116,7 +131,7 @@ class OrderHistoryController extends Controller
     {
         abort_if(Gate::denies('order_history_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $orderHistory->load('user', 'videos');
+        $orderHistory->load('user', 'videos', 'order');
 
         return view('admin.orderHistories.show', compact('orderHistory'));
     }

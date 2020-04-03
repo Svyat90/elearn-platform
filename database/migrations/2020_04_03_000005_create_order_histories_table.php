@@ -11,6 +11,7 @@ class CreateOrderHistoriesTable extends Migration
         Schema::create('order_histories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('comment')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
 

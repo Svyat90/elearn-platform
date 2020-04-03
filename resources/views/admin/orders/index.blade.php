@@ -25,10 +25,10 @@
                         {{ trans('cruds.order.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.order.fields.video') }}
+                        {{ trans('cruds.order.fields.user') }}
                     </th>
                     <th>
-                        {{ trans('cruds.order.fields.user') }}
+                        {{ trans('cruds.order.fields.video') }}
                     </th>
                     <th>
                         {{ trans('cruds.order.fields.message') }}
@@ -102,8 +102,8 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'video', name: 'video' },
 { data: 'user_name', name: 'user.name' },
+{ data: 'video_name', name: 'video.name' },
 { data: 'message', name: 'message' },
 { data: 'payment_info', name: 'payment_info' },
 { data: 'total', name: 'total' },

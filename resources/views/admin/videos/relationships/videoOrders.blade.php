@@ -1,46 +1,49 @@
 <div class="m-3">
-    @can('order_history_create')
+    @can('order_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route("admin.order-histories.create") }}">
-                    {{ trans('global.add') }} {{ trans('cruds.orderHistory.title_singular') }}
+                <a class="btn btn-success" href="{{ route("admin.orders.create") }}">
+                    {{ trans('global.add') }} {{ trans('cruds.order.title_singular') }}
                 </a>
             </div>
         </div>
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('cruds.orderHistory.title_singular') }} {{ trans('global.list') }}
+            {{ trans('cruds.order.title_singular') }} {{ trans('global.list') }}
         </div>
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class=" table table-bordered table-striped table-hover datatable datatable-userOrderHistories">
+                <table class=" table table-bordered table-striped table-hover datatable datatable-videoOrders">
                     <thead>
                         <tr>
                             <th width="10">
 
                             </th>
                             <th>
-                                {{ trans('cruds.orderHistory.fields.id') }}
+                                {{ trans('cruds.order.fields.id') }}
                             </th>
                             <th>
-                                {{ trans('cruds.orderHistory.fields.user') }}
+                                {{ trans('cruds.order.fields.user') }}
                             </th>
                             <th>
-                                {{ trans('cruds.orderHistory.fields.video') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.orderHistory.fields.order') }}
+                                {{ trans('cruds.order.fields.video') }}
                             </th>
                             <th>
                                 {{ trans('cruds.order.fields.message') }}
                             </th>
                             <th>
-                                {{ trans('cruds.orderHistory.fields.comment') }}
+                                {{ trans('cruds.order.fields.payment_info') }}
                             </th>
                             <th>
-                                {{ trans('cruds.orderHistory.fields.status') }}
+                                {{ trans('cruds.order.fields.total') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.order_status') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.payment_status') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -48,49 +51,50 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($orderHistories as $key => $orderHistory)
-                            <tr data-entry-id="{{ $orderHistory->id }}">
+                        @foreach($orders as $key => $order)
+                            <tr data-entry-id="{{ $order->id }}">
                                 <td>
 
                                 </td>
                                 <td>
-                                    {{ $orderHistory->id ?? '' }}
+                                    {{ $order->id ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $orderHistory->user->name ?? '' }}
+                                    {{ $order->user->name ?? '' }}
                                 </td>
                                 <td>
-                                    @foreach($orderHistory->videos as $key => $item)
-                                        <span class="badge badge-info">{{ $item->name }}</span>
-                                    @endforeach
+                                    {{ $order->video->name ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $orderHistory->order->message ?? '' }}
+                                    {{ $order->message ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $orderHistory->order->message ?? '' }}
+                                    {{ $order->payment_info ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $orderHistory->comment ?? '' }}
+                                    {{ $order->total ?? '' }}
                                 </td>
                                 <td>
-                                    {{ App\OrderHistory::STATUS_SELECT[$orderHistory->status] ?? '' }}
+                                    {{ App\Order::ORDER_STATUS_SELECT[$order->order_status] ?? '' }}
                                 </td>
                                 <td>
-                                    @can('order_history_show')
-                                        <a class="btn btn-xs btn-primary" href="{{ route('admin.order-histories.show', $orderHistory->id) }}">
+                                    {{ App\Order::PAYMENT_STATUS_SELECT[$order->payment_status] ?? '' }}
+                                </td>
+                                <td>
+                                    @can('order_show')
+                                        <a class="btn btn-xs btn-primary" href="{{ route('admin.orders.show', $order->id) }}">
                                             {{ trans('global.view') }}
                                         </a>
                                     @endcan
 
-                                    @can('order_history_edit')
-                                        <a class="btn btn-xs btn-info" href="{{ route('admin.order-histories.edit', $orderHistory->id) }}">
+                                    @can('order_edit')
+                                        <a class="btn btn-xs btn-info" href="{{ route('admin.orders.edit', $order->id) }}">
                                             {{ trans('global.edit') }}
                                         </a>
                                     @endcan
 
-                                    @can('order_history_delete')
-                                        <form action="{{ route('admin.order-histories.destroy', $orderHistory->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    @can('order_delete')
+                                        <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -112,11 +116,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('order_history_delete')
+@can('order_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.order-histories.massDestroy') }}",
+    url: "{{ route('admin.orders.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -146,7 +150,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 25,
   });
-  $('.datatable-userOrderHistories:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  $('.datatable-videoOrders:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();

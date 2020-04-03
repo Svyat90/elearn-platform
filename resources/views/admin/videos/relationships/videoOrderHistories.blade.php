@@ -31,7 +31,16 @@
                                 {{ trans('cruds.orderHistory.fields.video') }}
                             </th>
                             <th>
+                                {{ trans('cruds.orderHistory.fields.order') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.message') }}
+                            </th>
+                            <th>
                                 {{ trans('cruds.orderHistory.fields.comment') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.orderHistory.fields.status') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -56,7 +65,16 @@
                                     @endforeach
                                 </td>
                                 <td>
+                                    {{ $orderHistory->order->message ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $orderHistory->order->message ?? '' }}
+                                </td>
+                                <td>
                                     {{ $orderHistory->comment ?? '' }}
+                                </td>
+                                <td>
+                                    {{ App\OrderHistory::STATUS_SELECT[$orderHistory->status] ?? '' }}
                                 </td>
                                 <td>
                                     @can('order_history_show')

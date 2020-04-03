@@ -35,9 +35,9 @@ class User extends Authenticatable implements HasMedia
     ];
 
     const STATUS_SELECT = [
-        '0' => 'NotActive',
         '1' => 'Active',
-        '2' => 'Banned',
+        '2' => 'NotActive',
+        '3' => 'Banned',
     ];
 
     protected $dates = [

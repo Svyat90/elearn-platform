@@ -20,11 +20,6 @@ class StoreOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'video' => [
-                'nullable',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647'],
         ];
 
     }

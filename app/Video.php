@@ -52,6 +52,12 @@ class Video extends Model implements HasMedia
 
     }
 
+    public function videoOrders()
+    {
+        return $this->hasMany(Order::class, 'video_id', 'id');
+
+    }
+
     public function videoOrderHistories()
     {
         return $this->belongsToMany(OrderHistory::class);

@@ -8,6 +8,7 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Order;
 use App\User;
+use App\Video;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,7 @@ class OrderController extends Controller
         abort_if(Gate::denies('order_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Order::with(['user'])->select(sprintf('%s.*', (new Order)->table));
+            $query = Order::with(['user', 'video'])->select(sprintf('%s.*', (new Order)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -44,11 +45,12 @@ class OrderController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : "";
             });
-            $table->editColumn('video', function ($row) {
-                return $row->video ? $row->video : "";
-            });
             $table->addColumn('user_name', function ($row) {
                 return $row->user ? $row->user->name : '';
+            });
+
+            $table->addColumn('video_name', function ($row) {
+                return $row->video ? $row->video->name : '';
             });
 
             $table->editColumn('message', function ($row) {
@@ -67,7 +69,7 @@ class OrderController extends Controller
                 return $row->payment_status ? Order::PAYMENT_STATUS_SELECT[$row->payment_status] : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'user']);
+            $table->rawColumns(['actions', 'placeholder', 'user', 'video']);
 
             return $table->make(true);
         }
@@ -81,7 +83,9 @@ class OrderController extends Controller
 
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.orders.create', compact('users'));
+        $videos = Video::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.orders.create', compact('users', 'videos'));
     }
 
     public function store(StoreOrderRequest $request)
@@ -98,9 +102,11 @@ class OrderController extends Controller
 
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $order->load('user');
+        $videos = Video::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.orders.edit', compact('users', 'order'));
+        $order->load('user', 'video');
+
+        return view('admin.orders.edit', compact('users', 'videos', 'order'));
     }
 
     public function update(UpdateOrderRequest $request, Order $order)
@@ -115,7 +121,7 @@ class OrderController extends Controller
     {
         abort_if(Gate::denies('order_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $order->load('user', 'orderOrderPayments');
+        $order->load('user', 'video', 'orderOrderPayments', 'orderOrderHistories');
 
         return view('admin.orders.show', compact('order'));
     }

@@ -11,6 +11,8 @@ class AddRelationshipFieldsToOrdersTable extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id', 'user_fk_1252433')->references('id')->on('users');
+            $table->unsignedInteger('video_id')->nullable();
+            $table->foreign('video_id', 'video_fk_1253238')->references('id')->on('videos');
         });
 
     }

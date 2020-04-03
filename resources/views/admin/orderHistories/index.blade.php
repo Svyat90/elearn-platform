@@ -31,7 +31,16 @@
                         {{ trans('cruds.orderHistory.fields.video') }}
                     </th>
                     <th>
+                        {{ trans('cruds.orderHistory.fields.order') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.message') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.orderHistory.fields.comment') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.orderHistory.fields.status') }}
                     </th>
                     <th>
                         &nbsp;
@@ -92,7 +101,10 @@
 { data: 'id', name: 'id' },
 { data: 'user_name', name: 'user.name' },
 { data: 'video', name: 'videos.name' },
+{ data: 'order_message', name: 'order.message' },
+{ data: 'order.message', name: 'order.message' },
 { data: 'comment', name: 'comment' },
+{ data: 'status', name: 'status' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

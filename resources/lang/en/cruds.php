@@ -273,8 +273,6 @@ return [
         'fields'         => [
             'id'                    => 'ID',
             'id_helper'             => '',
-            'video'                 => 'Video',
-            'video_helper'          => '',
             'created_at'            => 'Created at',
             'created_at_helper'     => '',
             'updated_at'            => 'Updated at',
@@ -293,6 +291,8 @@ return [
             'payment_info_helper'   => '',
             'total'                 => 'Total',
             'total_helper'          => '',
+            'video'                 => 'Video',
+            'video_helper'          => '',
         ],
     ],
     'video'              => [
@@ -375,6 +375,10 @@ return [
             'updated_at_helper' => '',
             'deleted_at'        => 'Deleted at',
             'deleted_at_helper' => '',
+            'order'             => 'Order',
+            'order_helper'      => '',
+            'status'            => 'Status',
+            'status_helper'     => '',
         ],
     ],
     'orderPayment'       => [

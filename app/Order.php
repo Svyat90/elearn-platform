@@ -18,23 +18,23 @@ class Order extends Model
     ];
 
     const PAYMENT_STATUS_SELECT = [
-        '0' => 'Unpaid',
-        '1' => 'Paid',
-        '2' => 'Rjected',
+        '1' => 'Unpaid',
+        '2' => 'Paid',
+        '3' => 'Rjected',
     ];
 
     const ORDER_STATUS_SELECT = [
-        '0' => 'New',
-        '1' => 'Done',
+        '1' => 'New',
         '2' => 'Processing',
         '3' => 'Approved',
+        '4' => 'Done',
     ];
 
     protected $fillable = [
-        'video',
         'total',
         'user_id',
         'message',
+        'video_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -49,9 +49,21 @@ class Order extends Model
 
     }
 
+    public function orderOrderHistories()
+    {
+        return $this->hasMany(OrderHistory::class, 'order_id', 'id');
+
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+
+    }
+
+    public function video()
+    {
+        return $this->belongsTo(Video::class, 'video_id');
 
     }
 }

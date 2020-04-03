@@ -158,7 +158,7 @@
                             @can('order_payment_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.order-payments.index") }}" class="nav-link {{ request()->is('admin/order-payments') || request()->is('admin/order-payments/*') ? 'active' : '' }}">
-                                        <i class="fa-fw nav-icon fas fa-cogs">
+                                        <i class="fa-fw nav-icon fas fa-file-invoice-dollar">
 
                                         </i>
                                         <p>

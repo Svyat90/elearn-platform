@@ -89,6 +89,11 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#video_orders" role="tab" data-toggle="tab">
+                {{ trans('cruds.order.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#video_order_histories" role="tab" data-toggle="tab">
                 {{ trans('cruds.orderHistory.title') }}
             </a>
@@ -97,6 +102,9 @@
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="video_user_reviews">
             @includeIf('admin.videos.relationships.videoUserReviews', ['userReviews' => $video->videoUserReviews])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="video_orders">
+            @includeIf('admin.videos.relationships.videoOrders', ['orders' => $video->videoOrders])
         </div>
         <div class="tab-pane" role="tabpanel" id="video_order_histories">
             @includeIf('admin.videos.relationships.videoOrderHistories', ['orderHistories' => $video->videoOrderHistories])

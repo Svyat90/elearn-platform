@@ -297,4 +297,20 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
+    'userReview'         => [
+        'title'          => 'User Reviews',
+        'title_singular' => 'User Review',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => '',
+            'user'              => 'User',
+            'user_helper'       => '',
+            'created_at'        => 'Created at',
+            'created_at_helper' => '',
+            'updated_at'        => 'Updated at',
+            'updated_at_helper' => '',
+            'deleted_at'        => 'Deleted at',
+            'deleted_at_helper' => '',
+        ],
+    ],
 ];

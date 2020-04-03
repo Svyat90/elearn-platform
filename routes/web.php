@@ -76,6 +76,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('videos/destroy', 'VideoController@massDestroy')->name('videos.massDestroy');
     Route::resource('videos', 'VideoController');
 
+    // User Reviews
+    Route::delete('user-reviews/destroy', 'UserReviewController@massDestroy')->name('user-reviews.massDestroy');
+    Route::resource('user-reviews', 'UserReviewController');
+
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
 // Change password

@@ -23,3 +23,7 @@ And that's it, go to your domain and login:
 
 Username:	admin@admin.com
 Password:	password
+
+
+admin@ctech.com
+12345678

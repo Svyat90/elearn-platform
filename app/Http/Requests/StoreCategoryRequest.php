@@ -20,7 +20,9 @@ class StoreCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
+            'color' => [
+                'max:256'],
+            'name'  => [
                 'max:256',
                 'required',
                 'unique:categories'],

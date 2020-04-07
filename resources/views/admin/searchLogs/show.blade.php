@@ -25,18 +25,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.searchLog.fields.term') }}
+                            {{ trans('cruds.searchLog.fields.search_term') }}
                         </th>
                         <td>
-                            {{ $searchLog->term }}
+                            {{ $searchLog->search_term }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.searchLog.fields.page') }}
+                            {{ trans('cruds.searchLog.fields.search_from') }}
                         </th>
                         <td>
-                            {{ $searchLog->page }}
+                            {{ App\SearchLog::SEARCH_FROM_SELECT[$searchLog->search_from] ?? '' }}
                         </td>
                     </tr>
                 </tbody>

@@ -26,6 +26,14 @@
                 <span class="help-block">{{ trans('cruds.socialMedium.fields.short_code_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="website">{{ trans('cruds.socialMedium.fields.website') }}</label>
+                <input class="form-control {{ $errors->has('website') ? 'is-invalid' : '' }}" type="text" name="website" id="website" value="{{ old('website', '') }}">
+                @if($errors->has('website'))
+                    <span class="text-danger">{{ $errors->first('website') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.socialMedium.fields.website_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

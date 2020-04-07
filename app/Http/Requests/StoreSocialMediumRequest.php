@@ -26,6 +26,8 @@ class StoreSocialMediumRequest extends FormRequest
                 'unique:social_media'],
             'short_code' => [
                 'max:256'],
+            'website'    => [
+                'max:256'],
         ];
 
     }

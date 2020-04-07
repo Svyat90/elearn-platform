@@ -10,20 +10,25 @@
         <form method="POST" action="{{ route("admin.search-logs.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="term">{{ trans('cruds.searchLog.fields.term') }}</label>
-                <input class="form-control {{ $errors->has('term') ? 'is-invalid' : '' }}" type="text" name="term" id="term" value="{{ old('term', '') }}">
-                @if($errors->has('term'))
-                    <span class="text-danger">{{ $errors->first('term') }}</span>
+                <label for="search_term">{{ trans('cruds.searchLog.fields.search_term') }}</label>
+                <input class="form-control {{ $errors->has('search_term') ? 'is-invalid' : '' }}" type="text" name="search_term" id="search_term" value="{{ old('search_term', '') }}">
+                @if($errors->has('search_term'))
+                    <span class="text-danger">{{ $errors->first('search_term') }}</span>
                 @endif
-                <span class="help-block">{{ trans('cruds.searchLog.fields.term_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.searchLog.fields.search_term_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="page">{{ trans('cruds.searchLog.fields.page') }}</label>
-                <input class="form-control {{ $errors->has('page') ? 'is-invalid' : '' }}" type="text" name="page" id="page" value="{{ old('page', '') }}">
-                @if($errors->has('page'))
-                    <span class="text-danger">{{ $errors->first('page') }}</span>
+                <label>{{ trans('cruds.searchLog.fields.search_from') }}</label>
+                <select class="form-control {{ $errors->has('search_from') ? 'is-invalid' : '' }}" name="search_from" id="search_from">
+                    <option value disabled {{ old('search_from', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\SearchLog::SEARCH_FROM_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('search_from', '1') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('search_from'))
+                    <span class="text-danger">{{ $errors->first('search_from') }}</span>
                 @endif
-                <span class="help-block">{{ trans('cruds.searchLog.fields.page_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.searchLog.fields.search_from_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

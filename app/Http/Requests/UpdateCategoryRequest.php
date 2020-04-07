@@ -20,7 +20,9 @@ class UpdateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
+            'color' => [
+                'max:256'],
+            'name'  => [
                 'max:256',
                 'required',
                 'unique:categories,name,' . request()->route('category')->id],

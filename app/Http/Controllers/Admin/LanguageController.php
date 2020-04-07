@@ -10,16 +10,52 @@ use App\Language;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class LanguageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('language_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $languages = Language::all();
+        if ($request->ajax()) {
+            $query = Language::query()->select(sprintf('%s.*', (new Language)->table));
+            $table = Datatables::of($query);
 
-        return view('admin.languages.index', compact('languages'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'language_show';
+                $editGate      = 'language_edit';
+                $deleteGate    = 'language_delete';
+                $crudRoutePart = 'languages';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : "";
+            });
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : "";
+            });
+            $table->editColumn('iso_code', function ($row) {
+                return $row->iso_code ? $row->iso_code : "";
+            });
+
+            $table->rawColumns(['actions', 'placeholder']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.languages.index');
     }
 
     public function create()
@@ -78,4 +114,5 @@ class LanguageController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
 
     }
+
 }

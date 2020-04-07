@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 @can('user_management_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/permissions*') ? 'menu-open' : '' }} {{ request()->is('admin/roles*') ? 'menu-open' : '' }} {{ request()->is('admin/users*') ? 'menu-open' : '' }} {{ request()->is('admin/audit-logs*') ? 'menu-open' : '' }} {{ request()->is('admin/user-reviews*') ? 'menu-open' : '' }} {{ request()->is('admin/genders*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/permissions*') ? 'menu-open' : '' }} {{ request()->is('admin/roles*') ? 'menu-open' : '' }} {{ request()->is('admin/users*') ? 'menu-open' : '' }} {{ request()->is('admin/audit-logs*') ? 'menu-open' : '' }} {{ request()->is('admin/amin-users*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
                             <i class="fa-fw nav-icon fas fa-users">
 
@@ -80,26 +80,14 @@
                                     </a>
                                 </li>
                             @endcan
-                            @can('user_review_access')
+                            @can('amin_user_access')
                                 <li class="nav-item">
-                                    <a href="{{ route("admin.user-reviews.index") }}" class="nav-link {{ request()->is('admin/user-reviews') || request()->is('admin/user-reviews/*') ? 'active' : '' }}">
-                                        <i class="fa-fw nav-icon far fa-comment-alt">
+                                    <a href="{{ route("admin.amin-users.index") }}" class="nav-link {{ request()->is('admin/amin-users') || request()->is('admin/amin-users/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-users-cog">
 
                                         </i>
                                         <p>
-                                            {{ trans('cruds.userReview.title') }}
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('gender_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.genders.index") }}" class="nav-link {{ request()->is('admin/genders') || request()->is('admin/genders/*') ? 'active' : '' }}">
-                                        <i class="fa-fw nav-icon fas fa-users">
-
-                                        </i>
-                                        <p>
-                                            {{ trans('cruds.gender.title') }}
+                                            {{ trans('cruds.aminUser.title') }}
                                         </p>
                                     </a>
                                 </li>
@@ -171,7 +159,7 @@
                     </li>
                 @endcan
                 @can('content_management_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/pages*') ? 'menu-open' : '' }} {{ request()->is('admin/categories*') ? 'menu-open' : '' }} {{ request()->is('admin/countries*') ? 'menu-open' : '' }} {{ request()->is('admin/languages*') ? 'menu-open' : '' }} {{ request()->is('admin/social-media*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/genders*') ? 'menu-open' : '' }} {{ request()->is('admin/pages*') ? 'menu-open' : '' }} {{ request()->is('admin/categories*') ? 'menu-open' : '' }} {{ request()->is('admin/countries*') ? 'menu-open' : '' }} {{ request()->is('admin/languages*') ? 'menu-open' : '' }} {{ request()->is('admin/social-media*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
                             <i class="fa-fw nav-icon fas fa-book">
 
@@ -182,6 +170,18 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            @can('gender_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.genders.index") }}" class="nav-link {{ request()->is('admin/genders') || request()->is('admin/genders/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-users">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.gender.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
                             @can('page_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.pages.index") }}" class="nav-link {{ request()->is('admin/pages') || request()->is('admin/pages/*') ? 'active' : '' }}">
@@ -279,6 +279,84 @@
                                 {{ trans('cruds.referralCommission.title') }}
                             </p>
                         </a>
+                    </li>
+                @endcan
+                @can('product_management_access')
+                    <li class="nav-item has-treeview {{ request()->is('admin/product-categories*') ? 'menu-open' : '' }} {{ request()->is('admin/product-tags*') ? 'menu-open' : '' }} {{ request()->is('admin/products*') ? 'menu-open' : '' }}">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="fa-fw nav-icon fas fa-shopping-cart">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.productManagement.title') }}
+                                <i class="right fa fa-fw fa-angle-left nav-icon"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('product_category_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.product-categories.index") }}" class="nav-link {{ request()->is('admin/product-categories') || request()->is('admin/product-categories/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-folder">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.productCategory.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('product_tag_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.product-tags.index") }}" class="nav-link {{ request()->is('admin/product-tags') || request()->is('admin/product-tags/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-folder">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.productTag.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('product_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.products.index") }}" class="nav-link {{ request()->is('admin/products') || request()->is('admin/products/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-shopping-cart">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.product.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+                @can('customer_management_access')
+                    <li class="nav-item has-treeview {{ request()->is('admin/user-reviews*') ? 'menu-open' : '' }}">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="fa-fw nav-icon fas fa-book">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.customerManagement.title') }}
+                                <i class="right fa fa-fw fa-angle-left nav-icon"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('user_review_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.user-reviews.index") }}" class="nav-link {{ request()->is('admin/user-reviews') || request()->is('admin/user-reviews/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon far fa-comment-alt">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.userReview.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
                     </li>
                 @endcan
                 @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))

@@ -370,6 +370,94 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => '91',
+                'title' => 'product_management_access',
+            ],
+            [
+                'id'    => '92',
+                'title' => 'product_category_create',
+            ],
+            [
+                'id'    => '93',
+                'title' => 'product_category_edit',
+            ],
+            [
+                'id'    => '94',
+                'title' => 'product_category_show',
+            ],
+            [
+                'id'    => '95',
+                'title' => 'product_category_delete',
+            ],
+            [
+                'id'    => '96',
+                'title' => 'product_category_access',
+            ],
+            [
+                'id'    => '97',
+                'title' => 'product_tag_create',
+            ],
+            [
+                'id'    => '98',
+                'title' => 'product_tag_edit',
+            ],
+            [
+                'id'    => '99',
+                'title' => 'product_tag_show',
+            ],
+            [
+                'id'    => '100',
+                'title' => 'product_tag_delete',
+            ],
+            [
+                'id'    => '101',
+                'title' => 'product_tag_access',
+            ],
+            [
+                'id'    => '102',
+                'title' => 'product_create',
+            ],
+            [
+                'id'    => '103',
+                'title' => 'product_edit',
+            ],
+            [
+                'id'    => '104',
+                'title' => 'product_show',
+            ],
+            [
+                'id'    => '105',
+                'title' => 'product_delete',
+            ],
+            [
+                'id'    => '106',
+                'title' => 'product_access',
+            ],
+            [
+                'id'    => '107',
+                'title' => 'customer_management_access',
+            ],
+            [
+                'id'    => '108',
+                'title' => 'amin_user_create',
+            ],
+            [
+                'id'    => '109',
+                'title' => 'amin_user_edit',
+            ],
+            [
+                'id'    => '110',
+                'title' => 'amin_user_show',
+            ],
+            [
+                'id'    => '111',
+                'title' => 'amin_user_delete',
+            ],
+            [
+                'id'    => '112',
+                'title' => 'amin_user_access',
+            ],
+            [
+                'id'    => '113',
                 'title' => 'profile_password_edit',
             ],
         ];

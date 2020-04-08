@@ -60,7 +60,7 @@
                             {{ trans('cruds.userWalletHistory.fields.user') }}
                         </th>
                         <td>
-                            {{ $userWalletHistory->user->referred_by ?? '' }}
+                            {{ $userWalletHistory->user->first_name ?? '' }}
                         </td>
                     </tr>
                     <tr>

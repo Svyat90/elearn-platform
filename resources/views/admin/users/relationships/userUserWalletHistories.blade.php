@@ -32,6 +32,9 @@
                                 {{ trans('cruds.userWalletHistory.fields.user') }}
                             </th>
                             <th>
+                                {{ trans('cruds.user.fields.first_name') }}
+                            </th>
+                            <th>
                                 {{ trans('cruds.userWalletHistory.fields.earn_from') }}
                             </th>
                             <th>
@@ -61,7 +64,10 @@
                                     {{ App\UserWalletHistory::STATUS_SELECT[$userWalletHistory->status] ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $userWalletHistory->user->referred_by ?? '' }}
+                                    {{ $userWalletHistory->user->first_name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $userWalletHistory->user->first_name ?? '' }}
                                 </td>
                                 <td>
                                     {{ $userWalletHistory->earn_from->first_name ?? '' }}

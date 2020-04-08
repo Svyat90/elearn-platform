@@ -32,6 +32,9 @@
                         {{ trans('cruds.userWalletHistory.fields.user') }}
                     </th>
                     <th>
+                        {{ trans('cruds.user.fields.first_name') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.userWalletHistory.fields.earn_from') }}
                     </th>
                     <th>
@@ -95,7 +98,8 @@
 { data: 'amount', name: 'amount' },
 { data: 'txn_info', name: 'txn_info' },
 { data: 'status', name: 'status' },
-{ data: 'user_referred_by', name: 'user.referred_by' },
+{ data: 'user_first_name', name: 'user.first_name' },
+{ data: 'user.first_name', name: 'user.first_name' },
 { data: 'earn_from_first_name', name: 'earn_from.first_name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],

@@ -43,14 +43,23 @@ class AdminSettingsController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : "";
             });
-            $table->editColumn('user_commission', function ($row) {
-                return $row->user_commission ? $row->user_commission : "";
+            $table->editColumn('company_commission', function ($row) {
+                return $row->company_commission ? $row->company_commission : "";
             });
-            $table->editColumn('artist_commission', function ($row) {
-                return $row->artist_commission ? $row->artist_commission : "";
+            $table->editColumn('referral_user_commision', function ($row) {
+                return $row->referral_user_commision ? $row->referral_user_commision : "";
             });
-            $table->editColumn('agent_commission', function ($row) {
-                return $row->agent_commission ? $row->agent_commission : "";
+            $table->editColumn('referal_artist_commision', function ($row) {
+                return $row->referal_artist_commision ? $row->referal_artist_commision : "";
+            });
+            $table->editColumn('referal_agent_commision', function ($row) {
+                return $row->referal_agent_commision ? $row->referal_agent_commision : "";
+            });
+            $table->editColumn('artist_video_show_count_web', function ($row) {
+                return $row->artist_video_show_count_web ? $row->artist_video_show_count_web : "";
+            });
+            $table->editColumn('artist_video_show_count_app', function ($row) {
+                return $row->artist_video_show_count_app ? $row->artist_video_show_count_app : "";
             });
 
             $table->rawColumns(['actions', 'placeholder']);

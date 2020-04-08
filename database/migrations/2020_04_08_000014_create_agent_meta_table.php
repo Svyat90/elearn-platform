@@ -10,6 +10,11 @@ class CreateAgentMetaTable extends Migration
     {
         Schema::create('agent_meta', function (Blueprint $table) {
             $table->increments('id');
+            $table->float('agent_commission', 15, 2)->nullable();
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->string('agent_status')->nullable();
+            $table->date('registered_on')->nullable();
             $table->timestamps();
         });
 

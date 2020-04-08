@@ -20,6 +20,15 @@ class StoreAgentMetumRequest extends FormRequest
     public function rules()
     {
         return [
+            'state'         => [
+                'max:256'],
+            'city'          => [
+                'max:256'],
+            'agent_status'  => [
+                'max:256'],
+            'registered_on' => [
+                'date_format:' . config('panel.date_format'),
+                'nullable'],
         ];
 
     }

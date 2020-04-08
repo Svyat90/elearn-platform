@@ -230,6 +230,30 @@
     </div>
 </div>
 
-
+<div class="card">
+    <div class="card-header">
+        {{ trans('global.relatedData') }}
+    </div>
+    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="#artist_orders" role="tab" data-toggle="tab">
+                {{ trans('cruds.order.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#artist_artist_responses" role="tab" data-toggle="tab">
+                {{ trans('cruds.artistResponse.title') }}
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" role="tabpanel" id="artist_orders">
+            @includeIf('admin.artistMeta.relationships.artistOrders', ['orders' => $artistMetum->artistOrders])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="artist_artist_responses">
+            @includeIf('admin.artistMeta.relationships.artistArtistResponses', ['artistResponses' => $artistMetum->artistArtistResponses])
+        </div>
+    </div>
+</div>
 
 @endsection

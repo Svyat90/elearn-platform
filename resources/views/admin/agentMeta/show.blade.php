@@ -31,6 +31,54 @@
                             {{ $agentMetum->user->email ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.agentMetum.fields.agent_commission') }}
+                        </th>
+                        <td>
+                            {{ $agentMetum->agent_commission }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.agentMetum.fields.state') }}
+                        </th>
+                        <td>
+                            {{ $agentMetum->state }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.agentMetum.fields.city') }}
+                        </th>
+                        <td>
+                            {{ $agentMetum->city }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.agentMetum.fields.agent_status') }}
+                        </th>
+                        <td>
+                            {{ $agentMetum->agent_status }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.agentMetum.fields.registered_on') }}
+                        </th>
+                        <td>
+                            {{ $agentMetum->registered_on }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.agentMetum.fields.agent') }}
+                        </th>
+                        <td>
+                            {{ $agentMetum->agent->first_name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

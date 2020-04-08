@@ -46,6 +46,9 @@
                                 {{ trans('cruds.artistResponse.fields.completion_update') }}
                             </th>
                             <th>
+                                {{ trans('cruds.artistResponse.fields.artist') }}
+                            </th>
+                            <th>
                                 &nbsp;
                             </th>
                         </tr>
@@ -79,6 +82,9 @@
                                 </td>
                                 <td>
                                     {{ $artistResponse->completion_update ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $artistResponse->artist->display_name ?? '' }}
                                 </td>
                                 <td>
                                     @can('artist_response_show')
@@ -148,7 +154,7 @@
 
   $.extend(true, $.fn.dataTable.defaults, {
     order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    pageLength: 25,
   });
   $('.datatable-orderArtistResponses:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){

@@ -13,6 +13,8 @@ class AddRelationshipFieldsToArtistResponsesTable extends Migration
             $table->foreign('order_id', 'order_fk_1273588')->references('id')->on('orders');
             $table->unsignedInteger('video_id')->nullable();
             $table->foreign('video_id', 'video_fk_1273591')->references('id')->on('videos');
+            $table->unsignedInteger('artist_id')->nullable();
+            $table->foreign('artist_id', 'artist_fk_1275822')->references('id')->on('artist_meta');
         });
 
     }

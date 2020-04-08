@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ArtistMetum;
 use App\ArtistResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyArtistResponseRequest;
@@ -21,7 +22,7 @@ class ArtistResponseController extends Controller
         abort_if(Gate::denies('artist_response_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = ArtistResponse::with(['order', 'video'])->select(sprintf('%s.*', (new ArtistResponse)->table));
+            $query = ArtistResponse::with(['order', 'video', 'artist'])->select(sprintf('%s.*', (new ArtistResponse)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -63,7 +64,11 @@ class ArtistResponseController extends Controller
                 return $row->artist_note ? $row->artist_note : "";
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'order', 'video']);
+            $table->addColumn('artist_display_name', function ($row) {
+                return $row->artist ? $row->artist->display_name : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'order', 'video', 'artist']);
 
             return $table->make(true);
         }
@@ -79,7 +84,9 @@ class ArtistResponseController extends Controller
 
         $videos = Video::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.artistResponses.create', compact('orders', 'videos'));
+        $artists = ArtistMetum::all()->pluck('display_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.artistResponses.create', compact('orders', 'videos', 'artists'));
     }
 
     public function store(StoreArtistResponseRequest $request)
@@ -98,9 +105,11 @@ class ArtistResponseController extends Controller
 
         $videos = Video::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $artistResponse->load('order', 'video');
+        $artists = ArtistMetum::all()->pluck('display_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.artistResponses.edit', compact('orders', 'videos', 'artistResponse'));
+        $artistResponse->load('order', 'video', 'artist');
+
+        return view('admin.artistResponses.edit', compact('orders', 'videos', 'artists', 'artistResponse'));
     }
 
     public function update(UpdateArtistResponseRequest $request, ArtistResponse $artistResponse)
@@ -115,7 +124,7 @@ class ArtistResponseController extends Controller
     {
         abort_if(Gate::denies('artist_response_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $artistResponse->load('order', 'video');
+        $artistResponse->load('order', 'video', 'artist');
 
         return view('admin.artistResponses.show', compact('artistResponse'));
     }

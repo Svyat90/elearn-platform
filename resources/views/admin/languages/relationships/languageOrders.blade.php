@@ -85,6 +85,9 @@
                                 {{ trans('cruds.order.fields.order_status') }}
                             </th>
                             <th>
+                                {{ trans('cruds.order.fields.artist') }}
+                            </th>
+                            <th>
                                 &nbsp;
                             </th>
                         </tr>
@@ -157,6 +160,9 @@
                                 </td>
                                 <td>
                                     {{ App\Order::ORDER_STATUS_SELECT[$order->order_status] ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->artist->display_name ?? '' }}
                                 </td>
                                 <td>
                                     @can('order_show')

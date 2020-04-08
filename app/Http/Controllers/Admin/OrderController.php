@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ArtistMetum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyOrderRequest;
 use App\Http\Requests\StoreOrderRequest;
@@ -22,7 +23,7 @@ class OrderController extends Controller
         abort_if(Gate::denies('order_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Order::with(['user', 'language', 'occasion_type'])->select(sprintf('%s.*', (new Order)->table));
+            $query = Order::with(['user', 'language', 'occasion_type', 'artist'])->select(sprintf('%s.*', (new Order)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -107,8 +108,11 @@ class OrderController extends Controller
             $table->editColumn('order_status', function ($row) {
                 return $row->order_status ? Order::ORDER_STATUS_SELECT[$row->order_status] : '';
             });
+            $table->addColumn('artist_display_name', function ($row) {
+                return $row->artist ? $row->artist->display_name : '';
+            });
 
-            $table->rawColumns(['actions', 'placeholder', 'user', 'language', 'occasion_type']);
+            $table->rawColumns(['actions', 'placeholder', 'user', 'language', 'occasion_type', 'artist']);
 
             return $table->make(true);
         }
@@ -126,7 +130,9 @@ class OrderController extends Controller
 
         $occasion_types = Occasion::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.orders.create', compact('users', 'languages', 'occasion_types'));
+        $artists = ArtistMetum::all()->pluck('display_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.orders.create', compact('users', 'languages', 'occasion_types', 'artists'));
     }
 
     public function store(StoreOrderRequest $request)
@@ -147,9 +153,11 @@ class OrderController extends Controller
 
         $occasion_types = Occasion::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $order->load('user', 'language', 'occasion_type');
+        $artists = ArtistMetum::all()->pluck('display_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.orders.edit', compact('users', 'languages', 'occasion_types', 'order'));
+        $order->load('user', 'language', 'occasion_type', 'artist');
+
+        return view('admin.orders.edit', compact('users', 'languages', 'occasion_types', 'artists', 'order'));
     }
 
     public function update(UpdateOrderRequest $request, Order $order)
@@ -164,7 +172,7 @@ class OrderController extends Controller
     {
         abort_if(Gate::denies('order_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $order->load('user', 'language', 'occasion_type', 'orderOrderPayments', 'orderPaymentLogs', 'orderArtistResponses');
+        $order->load('user', 'language', 'occasion_type', 'artist', 'orderOrderPayments', 'orderPaymentLogs', 'orderArtistResponses');
 
         return view('admin.orders.show', compact('order'));
     }

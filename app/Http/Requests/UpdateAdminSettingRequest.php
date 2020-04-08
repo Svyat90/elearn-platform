@@ -20,17 +20,12 @@ class UpdateAdminSettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_commission'   => [
+            'artist_video_show_count_web' => [
                 'nullable',
                 'integer',
                 'min:-2147483648',
                 'max:2147483647'],
-            'artist_commission' => [
-                'nullable',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647'],
-            'agent_commission'  => [
+            'artist_video_show_count_app' => [
                 'nullable',
                 'integer',
                 'min:-2147483648',

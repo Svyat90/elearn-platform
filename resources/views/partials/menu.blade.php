@@ -326,6 +326,45 @@
                         </ul>
                     </li>
                 @endcan
+                @can('payment_management_access')
+                    <li class="nav-item has-treeview {{ request()->is('admin/artist-payment-histories*') ? 'menu-open' : '' }} {{ request()->is('admin/agent-payment-histories*') ? 'menu-open' : '' }}">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="fa-fw nav-icon fas fa-credit-card">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.paymentManagement.title') }}
+                                <i class="right fa fa-fw fa-angle-left nav-icon"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('artist_payment_history_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.artist-payment-histories.index") }}" class="nav-link {{ request()->is('admin/artist-payment-histories') || request()->is('admin/artist-payment-histories/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon far fa-money-bill-alt">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.artistPaymentHistory.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('agent_payment_history_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.agent-payment-histories.index") }}" class="nav-link {{ request()->is('admin/agent-payment-histories') || request()->is('admin/agent-payment-histories/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon far fa-money-bill-alt">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.agentPaymentHistory.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 @can('content_management_access')
                     <li class="nav-item has-treeview {{ request()->is('admin/categories*') ? 'menu-open' : '' }} {{ request()->is('admin/sub-categories*') ? 'menu-open' : '' }} {{ request()->is('admin/tags*') ? 'menu-open' : '' }} {{ request()->is('admin/countries*') ? 'menu-open' : '' }} {{ request()->is('admin/languages*') ? 'menu-open' : '' }} {{ request()->is('admin/social-media*') ? 'menu-open' : '' }} {{ request()->is('admin/genders*') ? 'menu-open' : '' }} {{ request()->is('admin/occasions*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
@@ -464,7 +503,7 @@
                             @can('login_log_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.login-logs.index") }}" class="nav-link {{ request()->is('admin/login-logs') || request()->is('admin/login-logs/*') ? 'active' : '' }}">
-                                        <i class="fa-fw nav-icon fas fa-cogs">
+                                        <i class="fa-fw nav-icon fas fa-sign-in-alt">
 
                                         </i>
                                         <p>
@@ -476,7 +515,7 @@
                             @can('payment_log_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.payment-logs.index") }}" class="nav-link {{ request()->is('admin/payment-logs') || request()->is('admin/payment-logs/*') ? 'active' : '' }}">
-                                        <i class="fa-fw nav-icon fas fa-cogs">
+                                        <i class="fa-fw nav-icon fas fa-money-check-alt">
 
                                         </i>
                                         <p>
@@ -489,7 +528,7 @@
                     </li>
                 @endcan
                 @can('site_management_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/pages*') ? 'menu-open' : '' }} {{ request()->is('admin/admin-settings*') ? 'menu-open' : '' }} {{ request()->is('admin/email-subscriptions*') ? 'menu-open' : '' }} {{ request()->is('admin/promo-codes*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/admin-settings*') ? 'menu-open' : '' }} {{ request()->is('admin/pages*') ? 'menu-open' : '' }} {{ request()->is('admin/email-subscriptions*') ? 'menu-open' : '' }} {{ request()->is('admin/promo-codes*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
                             <i class="fa-fw nav-icon fas fa-align-justify">
 
@@ -500,18 +539,6 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            @can('page_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.pages.index") }}" class="nav-link {{ request()->is('admin/pages') || request()->is('admin/pages/*') ? 'active' : '' }}">
-                                        <i class="fa-fw nav-icon fas fa-book-open">
-
-                                        </i>
-                                        <p>
-                                            {{ trans('cruds.page.title') }}
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
                             @can('admin_setting_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.admin-settings.index") }}" class="nav-link {{ request()->is('admin/admin-settings') || request()->is('admin/admin-settings/*') ? 'active' : '' }}">
@@ -520,6 +547,18 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.adminSetting.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('page_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.pages.index") }}" class="nav-link {{ request()->is('admin/pages') || request()->is('admin/pages/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-book-open">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.page.title') }}
                                         </p>
                                     </a>
                                 </li>
@@ -544,45 +583,6 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.promoCode.title') }}
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </li>
-                @endcan
-                @can('payment_management_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/artist-payment-histories*') ? 'menu-open' : '' }} {{ request()->is('admin/agent-payment-histories*') ? 'menu-open' : '' }}">
-                        <a class="nav-link nav-dropdown-toggle" href="#">
-                            <i class="fa-fw nav-icon fas fa-credit-card">
-
-                            </i>
-                            <p>
-                                {{ trans('cruds.paymentManagement.title') }}
-                                <i class="right fa fa-fw fa-angle-left nav-icon"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            @can('artist_payment_history_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.artist-payment-histories.index") }}" class="nav-link {{ request()->is('admin/artist-payment-histories') || request()->is('admin/artist-payment-histories/*') ? 'active' : '' }}">
-                                        <i class="fa-fw nav-icon far fa-money-bill-alt">
-
-                                        </i>
-                                        <p>
-                                            {{ trans('cruds.artistPaymentHistory.title') }}
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('agent_payment_history_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.agent-payment-histories.index") }}" class="nav-link {{ request()->is('admin/agent-payment-histories') || request()->is('admin/agent-payment-histories/*') ? 'active' : '' }}">
-                                        <i class="fa-fw nav-icon far fa-money-bill-alt">
-
-                                        </i>
-                                        <p>
-                                            {{ trans('cruds.agentPaymentHistory.title') }}
                                         </p>
                                     </a>
                                 </li>

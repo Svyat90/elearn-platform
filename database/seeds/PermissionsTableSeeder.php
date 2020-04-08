@@ -646,6 +646,18 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => '160',
+                'title' => 'user_profile_avatar_image_access',
+            ],
+            [
+                'id'    => '161',
+                'title' => 'talent_profile_image_access',
+            ],
+            [
+                'id'    => '162',
+                'title' => 'talent_profile_intro_video_access',
+            ],
+            [
+                'id'    => '163',
                 'title' => 'profile_password_edit',
             ],
         ];

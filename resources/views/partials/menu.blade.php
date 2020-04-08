@@ -212,7 +212,7 @@
                 @can('agent_mangement_access')
                     <li class="nav-item has-treeview {{ request()->is('admin/agent-lists*') ? 'menu-open' : '' }} {{ request()->is('admin/agent-meta*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
-                            <i class="fa-fw nav-icon fas fa-cogs">
+                            <i class="fa-fw nav-icon fas fa-user-tie">
 
                             </i>
                             <p>
@@ -236,7 +236,7 @@
                             @can('agent_metum_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.agent-meta.index") }}" class="nav-link {{ request()->is('admin/agent-meta') || request()->is('admin/agent-meta/*') ? 'active' : '' }}">
-                                        <i class="fa-fw nav-icon fas fa-user-secret">
+                                        <i class="fa-fw nav-icon fas fa-users-cog">
 
                                         </i>
                                         <p>
@@ -249,7 +249,7 @@
                     </li>
                 @endcan
                 @can('media_management_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/videos*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/videos*') ? 'menu-open' : '' }} {{ request()->is('admin/user-profile-avatar-images*') ? 'menu-open' : '' }} {{ request()->is('admin/talent-profile-images*') ? 'menu-open' : '' }} {{ request()->is('admin/talent-profile-intro-videos*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
                             <i class="fa-fw nav-icon fas fa-video">
 
@@ -268,6 +268,42 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.video.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('user_profile_avatar_image_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.user-profile-avatar-images.index") }}" class="nav-link {{ request()->is('admin/user-profile-avatar-images') || request()->is('admin/user-profile-avatar-images/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-image">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.userProfileAvatarImage.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('talent_profile_image_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.talent-profile-images.index") }}" class="nav-link {{ request()->is('admin/talent-profile-images') || request()->is('admin/talent-profile-images/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-image">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.talentProfileImage.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('talent_profile_intro_video_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.talent-profile-intro-videos.index") }}" class="nav-link {{ request()->is('admin/talent-profile-intro-videos') || request()->is('admin/talent-profile-intro-videos/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-file-video">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.talentProfileIntroVideo.title') }}
                                         </p>
                                     </a>
                                 </li>

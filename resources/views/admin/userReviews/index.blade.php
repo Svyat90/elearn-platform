@@ -25,9 +25,6 @@
                         {{ trans('cruds.userReview.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.userReview.fields.text') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.userReview.fields.stars') }}
                     </th>
                     <th>
@@ -96,7 +93,6 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'text', name: 'text' },
 { data: 'stars', name: 'stars' },
 { data: 'show_video', name: 'show_video' },
 { data: 'review_apporval', name: 'review_apporval' },

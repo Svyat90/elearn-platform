@@ -25,14 +25,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.userReview.fields.text') }}
-                        </th>
-                        <td>
-                            {{ $userReview->text }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.userReview.fields.review_text') }}
                         </th>
                         <td>

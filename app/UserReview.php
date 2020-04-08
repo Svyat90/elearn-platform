@@ -32,7 +32,6 @@ class UserReview extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'text',
         'stars',
         'video_id',
         'show_video',

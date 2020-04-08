@@ -48,9 +48,6 @@ class UserReviewController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : "";
             });
-            $table->editColumn('text', function ($row) {
-                return $row->text ? $row->text : "";
-            });
             $table->editColumn('stars', function ($row) {
                 return $row->stars ? $row->stars : "";
             });

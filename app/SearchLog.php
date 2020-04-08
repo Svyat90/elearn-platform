@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 
 class SearchLog extends Model
 {
+    use Auditable;
+
     public $table = 'search_logs';
 
     const SEARCH_FROM_SELECT = [

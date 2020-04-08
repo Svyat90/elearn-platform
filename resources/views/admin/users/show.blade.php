@@ -272,6 +272,11 @@
                 {{ trans('cruds.agentMetum.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#user_user_wishlists" role="tab" data-toggle="tab">
+                {{ trans('cruds.userWishlist.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="user_orders">
@@ -318,6 +323,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="agent_agent_meta">
             @includeIf('admin.users.relationships.agentAgentMeta', ['agentMeta' => $user->agentAgentMeta])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="user_user_wishlists">
+            @includeIf('admin.users.relationships.userUserWishlists', ['userWishlists' => $user->userUserWishlists])
         </div>
     </div>
 </div>

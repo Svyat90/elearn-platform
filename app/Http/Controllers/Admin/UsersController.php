@@ -190,7 +190,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->load('roles', 'country', 'gender', 'userOrders', 'userVideos', 'userLoginLogs', 'userPaymentLogs', 'userArtistPaymentHistories', 'earnFromArtistPaymentHistories', 'userAgentPaymentHistories', 'earnFromAgentPaymentHistories', 'userAgentMeta', 'artistArtistMeta', 'userUserMeta', 'userUserWalletHistories', 'earnFromUserWalletHistories', 'artistArtistEnquiries', 'agentAgentMeta');
+        $user->load('roles', 'country', 'gender', 'userOrders', 'userVideos', 'userLoginLogs', 'userPaymentLogs', 'userArtistPaymentHistories', 'earnFromArtistPaymentHistories', 'userAgentPaymentHistories', 'earnFromAgentPaymentHistories', 'userAgentMeta', 'artistArtistMeta', 'userUserMeta', 'userUserWalletHistories', 'earnFromUserWalletHistories', 'artistArtistEnquiries', 'agentAgentMeta', 'userUserWishlists');
 
         return view('admin.users.show', compact('user'));
     }

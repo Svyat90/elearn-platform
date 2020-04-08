@@ -901,4 +901,22 @@ return [
         'title'          => 'Talent Profile Intro Videos',
         'title_singular' => 'Talent Profile Intro Video',
     ],
+    'userWishlist'            => [
+        'title'          => 'User Wishlist',
+        'title_singular' => 'User Wishlist',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => '',
+            'user'              => 'User',
+            'user_helper'       => '',
+            'artist'            => 'Artist',
+            'artist_helper'     => '',
+            'created_at'        => 'Created at',
+            'created_at_helper' => '',
+            'updated_at'        => 'Updated at',
+            'updated_at_helper' => '',
+            'deleted_at'        => 'Deleted at',
+            'deleted_at_helper' => '',
+        ],
+    ],
 ];

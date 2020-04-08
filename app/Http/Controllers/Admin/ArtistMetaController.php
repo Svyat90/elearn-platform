@@ -241,7 +241,7 @@ class ArtistMetaController extends Controller
     {
         abort_if(Gate::denies('artist_metum_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $artistMetum->load('artist', 'languages', 'main_catogery', 'sub_category', 'tags', 'artistOrders', 'artistArtistResponses');
+        $artistMetum->load('artist', 'languages', 'main_catogery', 'sub_category', 'tags', 'artistOrders', 'artistArtistResponses', 'artistUserWishlists');
 
         return view('admin.artistMeta.show', compact('artistMetum'));
     }

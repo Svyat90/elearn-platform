@@ -54,7 +54,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Search Logs
     Route::delete('search-logs/destroy', 'SearchLogController@massDestroy')->name('search-logs.massDestroy');
-    Route::resource('search-logs', 'SearchLogController');
+    Route::resource('search-logs', 'SearchLogController', ['except' => ['create', 'store', 'edit', 'update']]);
 
     // Social Media
     Route::delete('social-media/destroy', 'SocialMediaController@massDestroy')->name('social-media.massDestroy');
@@ -98,8 +98,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('sub-categories', 'SubCategoryController');
 
     // Admin Settings
-    Route::delete('admin-settings/destroy', 'AdminSettingsController@massDestroy')->name('admin-settings.massDestroy');
-    Route::resource('admin-settings', 'AdminSettingsController');
+    Route::resource('admin-settings', 'AdminSettingsController', ['except' => ['create', 'store', 'destroy']]);
 
     // Occasions
     Route::delete('occasions/destroy', 'OccasionController@massDestroy')->name('occasions.massDestroy');
@@ -117,7 +116,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Login Logs
     Route::delete('login-logs/destroy', 'LoginLogController@massDestroy')->name('login-logs.massDestroy');
-    Route::resource('login-logs', 'LoginLogController');
+    Route::resource('login-logs', 'LoginLogController', ['except' => ['create', 'store', 'edit', 'update']]);
 
     // Payment Logs
     Route::post('payment-logs/media', 'PaymentLogController@storeMedia')->name('payment-logs.storeMedia');
@@ -179,6 +178,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Talent Profile Intro Videos
     Route::resource('talent-profile-intro-videos', 'TalentProfileIntroVideosController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // User Wishlists
+    Route::delete('user-wishlists/destroy', 'UserWishlistController@massDestroy')->name('user-wishlists.massDestroy');
+    Route::resource('user-wishlists', 'UserWishlistController');
 
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

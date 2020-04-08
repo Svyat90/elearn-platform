@@ -49,6 +49,9 @@
                                 {{ trans('cruds.artistEnquiry.fields.country') }}
                             </th>
                             <th>
+                                {{ trans('cruds.country.fields.name') }}
+                            </th>
+                            <th>
                                 {{ trans('cruds.artistEnquiry.fields.status') }}
                             </th>
                             <th>
@@ -87,7 +90,10 @@
                                     {{ $artistEnquiry->social_media_followrs ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $artistEnquiry->country->short_code ?? '' }}
+                                    {{ $artistEnquiry->country->name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $artistEnquiry->country->name ?? '' }}
                                 </td>
                                 <td>
                                     {{ App\ArtistEnquiry::STATUS_SELECT[$artistEnquiry->status] ?? '' }}

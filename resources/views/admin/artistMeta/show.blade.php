@@ -245,6 +245,11 @@
                 {{ trans('cruds.artistResponse.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#artist_user_wishlists" role="tab" data-toggle="tab">
+                {{ trans('cruds.userWishlist.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="artist_orders">
@@ -252,6 +257,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="artist_artist_responses">
             @includeIf('admin.artistMeta.relationships.artistArtistResponses', ['artistResponses' => $artistMetum->artistArtistResponses])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="artist_user_wishlists">
+            @includeIf('admin.artistMeta.relationships.artistUserWishlists', ['userWishlists' => $artistMetum->artistUserWishlists])
         </div>
     </div>
 </div>

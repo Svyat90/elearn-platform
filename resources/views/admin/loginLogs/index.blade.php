@@ -1,14 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-@can('login_log_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.login-logs.create") }}">
-                {{ trans('global.add') }} {{ trans('cruds.loginLog.title_singular') }}
-            </a>
-        </div>
-    </div>
-@endcan
+
 <div class="card">
     <div class="card-header">
         {{ trans('cruds.loginLog.title_singular') }} {{ trans('global.list') }}

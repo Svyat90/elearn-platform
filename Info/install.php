@@ -19,6 +19,11 @@ command.
 php artisan storage:link
 command.
 
+7. After update
+
+php artisan migrate:fresh --seed
+
+
 And that's it, go to your domain and login:
 
 Username:	admin@admin.com

@@ -6,5 +6,7 @@ Password: jyebc{v#upzZ
 /*
  * https://dbdiagram.io/d/5e759ff24495b02c3b888c8c
  *
+ * https://github.com/pascalbaljetmedia/laravel-ffmpeg
+ *
 */
 ?>

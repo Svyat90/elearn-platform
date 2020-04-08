@@ -10,8 +10,7 @@ class CreateUserReviewsTable extends Migration
     {
         Schema::create('user_reviews', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('text');
-            $table->longText('review_text')->nullable();
+            $table->longText('review_text');
             $table->integer('stars')->nullable();
             $table->string('show_video')->nullable();
             $table->string('review_apporval')->nullable();

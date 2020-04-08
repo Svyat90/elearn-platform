@@ -345,8 +345,6 @@ return [
             'updated_at_helper'      => '',
             'deleted_at'             => 'Deleted at',
             'deleted_at_helper'      => '',
-            'text'                   => 'Content',
-            'text_helper'            => '',
             'review_text'            => 'Review Text',
             'review_text_helper'     => 'Video Review Text',
             'stars'                  => 'Stars',

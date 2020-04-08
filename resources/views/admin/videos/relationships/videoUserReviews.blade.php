@@ -25,9 +25,6 @@
                                 {{ trans('cruds.userReview.fields.id') }}
                             </th>
                             <th>
-                                {{ trans('cruds.userReview.fields.text') }}
-                            </th>
-                            <th>
                                 {{ trans('cruds.userReview.fields.stars') }}
                             </th>
                             <th>
@@ -52,9 +49,6 @@
                                 </td>
                                 <td>
                                     {{ $userReview->id ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $userReview->text ?? '' }}
                                 </td>
                                 <td>
                                     {{ $userReview->stars ?? '' }}

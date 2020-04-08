@@ -20,9 +20,9 @@ class StoreUserReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'text'  => [
+            'review_text' => [
                 'required'],
-            'stars' => [
+            'stars'       => [
                 'nullable',
                 'integer',
                 'min:-2147483648',

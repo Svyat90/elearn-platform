@@ -25,10 +25,10 @@
                         {{ trans('cruds.category.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.category.fields.color') }}
+                        {{ trans('cruds.category.fields.name') }}
                     </th>
                     <th>
-                        {{ trans('cruds.category.fields.name') }}
+                        {{ trans('cruds.category.fields.color') }}
                     </th>
                     <th>
                         {{ trans('cruds.category.fields.image') }}
@@ -90,8 +90,8 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'color', name: 'color' },
 { data: 'name', name: 'name' },
+{ data: 'color', name: 'color' },
 { data: 'image', name: 'image', sortable: false, searchable: false },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],

@@ -2,13 +2,7 @@
 /public/hot
 /public/storage
 /storage/*.key
-/Info
-.idea
-/.idea
-.idea .workspace
-.idea
 /vendor
-/storage
 .env
 .env.backup
 .phpunit.result.cache

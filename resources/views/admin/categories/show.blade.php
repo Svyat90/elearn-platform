@@ -25,18 +25,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.category.fields.color') }}
-                        </th>
-                        <td>
-                            {{ $category->color }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.category.fields.name') }}
                         </th>
                         <td>
                             {{ $category->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.category.fields.color') }}
+                        </th>
+                        <td>
+                            {{ $category->color }}
                         </td>
                     </tr>
                     <tr>

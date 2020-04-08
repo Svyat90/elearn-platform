@@ -39,12 +39,6 @@ class User extends Authenticatable implements HasMedia
         '2' => 'Instagram',
     ];
 
-    const STATUS_SELECT = [
-        '1' => 'Active',
-        '2' => 'NotActive',
-        '3' => 'Banned',
-    ];
-
     const USER_STATUS_SELECT = [
         '1' => 'Active',
         '2' => 'Not Active',
@@ -64,9 +58,8 @@ class User extends Authenticatable implements HasMedia
     protected $fillable = [
         'name',
         'email',
-        'status',
-        'password',
         'ig_token',
+        'password',
         'last_name',
         'mobile_no',
         'gender_id',

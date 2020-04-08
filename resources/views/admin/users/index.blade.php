@@ -58,9 +58,6 @@
                         {{ trans('cruds.user.fields.registration_platform') }}
                     </th>
                     <th>
-                        {{ trans('cruds.user.fields.status') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.user.fields.ig_token') }}
                     </th>
                     <th>
@@ -149,7 +146,6 @@
 { data: 'referral_code', name: 'referral_code' },
 { data: 'referred_by', name: 'referred_by' },
 { data: 'registration_platform', name: 'registration_platform' },
-{ data: 'status', name: 'status' },
 { data: 'ig_token', name: 'ig_token' },
 { data: 'ig_username', name: 'ig_username' },
 { data: 'user_status', name: 'user_status' },

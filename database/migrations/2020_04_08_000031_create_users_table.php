@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('referral_code')->nullable();
             $table->string('referred_by')->nullable();
             $table->string('registration_platform')->nullable();
-            $table->string('status')->nullable();
             $table->string('mobile_no')->nullable();
             $table->string('ig_token')->nullable();
             $table->string('ig_username')->nullable();

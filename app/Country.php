@@ -28,4 +28,10 @@ class Country extends Model
         return $this->hasMany(User::class, 'country_id', 'id');
 
     }
+
+    public function countryArtistEnquiries()
+    {
+        return $this->hasMany(ArtistEnquiry::class, 'country_id', 'id');
+
+    }
 }

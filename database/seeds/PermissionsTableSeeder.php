@@ -370,180 +370,6 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => '91',
-<<<<<<< HEAD
-                'title' => 'customer_management_access',
-            ],
-            [
-                'id'    => '92',
-                'title' => 'admin_user_create',
-            ],
-            [
-                'id'    => '93',
-                'title' => 'admin_user_edit',
-            ],
-            [
-                'id'    => '94',
-                'title' => 'admin_user_show',
-            ],
-            [
-                'id'    => '95',
-                'title' => 'admin_user_delete',
-            ],
-            [
-                'id'    => '96',
-                'title' => 'admin_user_access',
-            ],
-            [
-                'id'    => '97',
-                'title' => 'media_management_access',
-            ],
-            [
-                'id'    => '98',
-                'title' => 'site_log_access',
-            ],
-            [
-                'id'    => '99',
-                'title' => 'site_management_access',
-            ],
-            [
-                'id'    => '100',
-                'title' => 'sub_category_create',
-            ],
-            [
-                'id'    => '101',
-                'title' => 'sub_category_edit',
-            ],
-            [
-                'id'    => '102',
-                'title' => 'sub_category_show',
-            ],
-            [
-                'id'    => '103',
-                'title' => 'sub_category_delete',
-            ],
-            [
-                'id'    => '104',
-                'title' => 'sub_category_access',
-            ],
-            [
-                'id'    => '105',
-                'title' => 'admin_setting_create',
-            ],
-            [
-                'id'    => '106',
-                'title' => 'admin_setting_edit',
-            ],
-            [
-                'id'    => '107',
-                'title' => 'admin_setting_show',
-            ],
-            [
-                'id'    => '108',
-                'title' => 'admin_setting_delete',
-            ],
-            [
-                'id'    => '109',
-                'title' => 'admin_setting_access',
-            ],
-            [
-                'id'    => '110',
-                'title' => 'un_used_access',
-            ],
-            [
-                'id'    => '111',
-                'title' => 'occasion_create',
-            ],
-            [
-                'id'    => '112',
-                'title' => 'occasion_edit',
-            ],
-            [
-                'id'    => '113',
-                'title' => 'occasion_show',
-            ],
-            [
-                'id'    => '114',
-                'title' => 'occasion_delete',
-            ],
-            [
-                'id'    => '115',
-                'title' => 'occasion_access',
-            ],
-            [
-                'id'    => '116',
-                'title' => 'email_subscription_create',
-            ],
-            [
-                'id'    => '117',
-                'title' => 'email_subscription_edit',
-            ],
-            [
-                'id'    => '118',
-                'title' => 'email_subscription_show',
-            ],
-            [
-                'id'    => '119',
-                'title' => 'email_subscription_delete',
-            ],
-            [
-                'id'    => '120',
-                'title' => 'email_subscription_access',
-            ],
-            [
-                'id'    => '121',
-                'title' => 'promo_code_create',
-            ],
-            [
-                'id'    => '122',
-                'title' => 'promo_code_edit',
-            ],
-            [
-                'id'    => '123',
-                'title' => 'promo_code_show',
-            ],
-            [
-                'id'    => '124',
-                'title' => 'promo_code_delete',
-            ],
-            [
-                'id'    => '125',
-                'title' => 'promo_code_access',
-            ],
-            [
-                'id'    => '126',
-                'title' => 'login_log_create',
-            ],
-            [
-                'id'    => '127',
-                'title' => 'login_log_edit',
-            ],
-            [
-                'id'    => '128',
-                'title' => 'login_log_show',
-            ],
-            [
-                'id'    => '129',
-                'title' => 'login_log_delete',
-            ],
-            [
-                'id'    => '130',
-                'title' => 'login_log_access',
-            ],
-            [
-                'id'    => '131',
-                'title' => 'payment_log_show',
-            ],
-            [
-                'id'    => '132',
-                'title' => 'payment_log_access',
-            ],
-            [
-                'id'    => '133',
-                'title' => 'payment_management_access',
-            ],
-            [
-                'id'    => '134',
-=======
                 'title' => 'sub_category_delete',
             ],
             [
@@ -800,7 +626,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => '155',
->>>>>>> quickadminpanel_2020_04_08_10_05_50
+                'title' => 'artist_enquiry_create',
+            ],
+            [
+                'id'    => '156',
+                'title' => 'artist_enquiry_edit',
+            ],
+            [
+                'id'    => '157',
+                'title' => 'artist_enquiry_show',
+            ],
+            [
+                'id'    => '158',
+                'title' => 'artist_enquiry_delete',
+            ],
+            [
+                'id'    => '159',
+                'title' => 'artist_enquiry_access',
+            ],
+            [
+                'id'    => '160',
                 'title' => 'profile_password_edit',
             ],
         ];

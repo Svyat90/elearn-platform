@@ -271,13 +271,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#user_login_logs" role="tab" data-toggle="tab">
-                {{ trans('cruds.loginLog.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#user_payment_logs" role="tab" data-toggle="tab">
-                {{ trans('cruds.paymentLog.title') }}
+            <a class="nav-link" href="#artist_artist_enquiries" role="tab" data-toggle="tab">
+                {{ trans('cruds.artistEnquiry.title') }}
             </a>
         </li>
     </ul>
@@ -321,11 +316,8 @@
         <div class="tab-pane" role="tabpanel" id="earn_from_user_wallet_histories">
             @includeIf('admin.users.relationships.earnFromUserWalletHistories', ['userWalletHistories' => $user->earnFromUserWalletHistories])
         </div>
-        <div class="tab-pane" role="tabpanel" id="user_login_logs">
-            @includeIf('admin.users.relationships.userLoginLogs', ['loginLogs' => $user->userLoginLogs])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="user_payment_logs">
-            @includeIf('admin.users.relationships.userPaymentLogs', ['paymentLogs' => $user->userPaymentLogs])
+        <div class="tab-pane" role="tabpanel" id="artist_artist_enquiries">
+            @includeIf('admin.users.relationships.artistArtistEnquiries', ['artistEnquiries' => $user->artistArtistEnquiries])
         </div>
     </div>
 </div>

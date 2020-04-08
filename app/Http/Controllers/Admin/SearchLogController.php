@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroySearchLogRequest;
-use App\Http\Requests\StoreSearchLogRequest;
-use App\Http\Requests\UpdateSearchLogRequest;
 use App\SearchLog;
 use Gate;
 use Illuminate\Http\Request;
@@ -56,36 +54,6 @@ class SearchLogController extends Controller
         }
 
         return view('admin.searchLogs.index');
-    }
-
-    public function create()
-    {
-        abort_if(Gate::denies('search_log_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin.searchLogs.create');
-    }
-
-    public function store(StoreSearchLogRequest $request)
-    {
-        $searchLog = SearchLog::create($request->all());
-
-        return redirect()->route('admin.search-logs.index');
-
-    }
-
-    public function edit(SearchLog $searchLog)
-    {
-        abort_if(Gate::denies('search_log_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin.searchLogs.edit', compact('searchLog'));
-    }
-
-    public function update(UpdateSearchLogRequest $request, SearchLog $searchLog)
-    {
-        $searchLog->update($request->all());
-
-        return redirect()->route('admin.search-logs.index');
-
     }
 
     public function show(SearchLog $searchLog)

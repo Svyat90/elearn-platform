@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreLoginLogRequest;
-use App\Http\Requests\UpdateLoginLogRequest;
 use App\Http\Resources\Admin\LoginLogResource;
 use App\LoginLog;
 use Gate;
@@ -21,31 +19,11 @@ class LoginLogApiController extends Controller
 
     }
 
-    public function store(StoreLoginLogRequest $request)
-    {
-        $loginLog = LoginLog::create($request->all());
-
-        return (new LoginLogResource($loginLog))
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
-
-    }
-
     public function show(LoginLog $loginLog)
     {
         abort_if(Gate::denies('login_log_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return new LoginLogResource($loginLog->load(['user']));
-
-    }
-
-    public function update(UpdateLoginLogRequest $request, LoginLog $loginLog)
-    {
-        $loginLog->update($request->all());
-
-        return (new LoginLogResource($loginLog))
-            ->response()
-            ->setStatusCode(Response::HTTP_ACCEPTED);
 
     }
 

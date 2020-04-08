@@ -96,7 +96,7 @@
                     </li>
                 @endcan
                 @can('customer_management_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/customers-lists*') ? 'menu-open' : '' }} {{ request()->is('admin/user-meta*') ? 'menu-open' : '' }} {{ request()->is('admin/user-wallet-histories*') ? 'menu-open' : '' }} {{ request()->is('admin/user-reviews*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/customers-lists*') ? 'menu-open' : '' }} {{ request()->is('admin/user-meta*') ? 'menu-open' : '' }} {{ request()->is('admin/user-wallet-histories*') ? 'menu-open' : '' }} {{ request()->is('admin/user-reviews*') ? 'menu-open' : '' }} {{ request()->is('admin/user-wishlists*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
                             <i class="fa-fw nav-icon fas fa-users-cog">
 
@@ -151,6 +151,18 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.userReview.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('user_wishlist_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.user-wishlists.index") }}" class="nav-link {{ request()->is('admin/user-wishlists') || request()->is('admin/user-wishlists/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon far fa-list-alt">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.userWishlist.title') }}
                                         </p>
                                     </a>
                                 </li>
@@ -249,7 +261,7 @@
                     </li>
                 @endcan
                 @can('media_management_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/videos*') ? 'menu-open' : '' }} {{ request()->is('admin/user-profile-avatar-images*') ? 'menu-open' : '' }} {{ request()->is('admin/talent-profile-images*') ? 'menu-open' : '' }} {{ request()->is('admin/talent-profile-intro-videos*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/user-profile-avatar-images*') ? 'menu-open' : '' }} {{ request()->is('admin/talent-profile-images*') ? 'menu-open' : '' }} {{ request()->is('admin/talent-profile-intro-videos*') ? 'menu-open' : '' }} {{ request()->is('admin/videos*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
                             <i class="fa-fw nav-icon fas fa-video">
 
@@ -260,18 +272,6 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            @can('video_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.videos.index") }}" class="nav-link {{ request()->is('admin/videos') || request()->is('admin/videos/*') ? 'active' : '' }}">
-                                        <i class="fa-fw nav-icon far fa-file-video">
-
-                                        </i>
-                                        <p>
-                                            {{ trans('cruds.video.title') }}
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
                             @can('user_profile_avatar_image_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.user-profile-avatar-images.index") }}" class="nav-link {{ request()->is('admin/user-profile-avatar-images') || request()->is('admin/user-profile-avatar-images/*') ? 'active' : '' }}">
@@ -304,6 +304,18 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.talentProfileIntroVideo.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('video_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.videos.index") }}" class="nav-link {{ request()->is('admin/videos') || request()->is('admin/videos/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon far fa-file-video">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.video.title') }}
                                         </p>
                                     </a>
                                 </li>

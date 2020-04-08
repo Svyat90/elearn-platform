@@ -49,6 +49,9 @@
                         {{ trans('cruds.artistEnquiry.fields.country') }}
                     </th>
                     <th>
+                        {{ trans('cruds.country.fields.name') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.artistEnquiry.fields.status') }}
                     </th>
                     <th>
@@ -115,7 +118,8 @@
 { data: 'social_media_type', name: 'social_media_type' },
 { data: 'social_media', name: 'social_media' },
 { data: 'social_media_followrs', name: 'social_media_followrs' },
-{ data: 'country_short_code', name: 'country.short_code' },
+{ data: 'country_name', name: 'country.name' },
+{ data: 'country.name', name: 'country.name' },
 { data: 'status', name: 'status' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],

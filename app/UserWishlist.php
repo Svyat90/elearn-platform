@@ -5,16 +5,11 @@ namespace App;
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 
-class LoginLog extends Model
+class UserWishlist extends Model
 {
     use Auditable;
 
-    public $table = 'login_logs';
-
-    const LOGIN_FROM_SELECT = [
-        '1' => 'Web',
-        '2' => 'App',
-    ];
+    public $table = 'user_wishlists';
 
     protected $dates = [
         'created_at',
@@ -23,10 +18,8 @@ class LoginLog extends Model
     ];
 
     protected $fillable = [
-        'device',
         'user_id',
-        'ip_address',
-        'login_from',
+        'artist_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -35,6 +28,12 @@ class LoginLog extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+
+    }
+
+    public function artist()
+    {
+        return $this->belongsTo(ArtistMetum::class, 'artist_id');
 
     }
 }

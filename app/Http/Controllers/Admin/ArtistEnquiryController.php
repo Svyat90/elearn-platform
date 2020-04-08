@@ -71,10 +71,13 @@ class ArtistEnquiryController extends Controller
             $table->editColumn('social_media_followrs', function ($row) {
                 return $row->social_media_followrs ? $row->social_media_followrs : "";
             });
-            $table->addColumn('country_short_code', function ($row) {
-                return $row->country ? $row->country->short_code : '';
+            $table->addColumn('country_name', function ($row) {
+                return $row->country ? $row->country->name : '';
             });
 
+            $table->editColumn('country.name', function ($row) {
+                return $row->country ? (is_string($row->country) ? $row->country : $row->country->name) : '';
+            });
             $table->editColumn('status', function ($row) {
                 return $row->status ? ArtistEnquiry::STATUS_SELECT[$row->status] : '';
             });
@@ -93,7 +96,7 @@ class ArtistEnquiryController extends Controller
 
         $artists = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $countries = Country::all()->pluck('short_code', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $countries = Country::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.artistEnquiries.create', compact('artists', 'countries'));
     }
@@ -116,7 +119,7 @@ class ArtistEnquiryController extends Controller
 
         $artists = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $countries = Country::all()->pluck('short_code', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $countries = Country::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $artistEnquiry->load('artist', 'country');
 

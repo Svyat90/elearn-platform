@@ -15,7 +15,7 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class=" table table-bordered table-striped table-hover datatable datatable-userOrders">
+                <table class=" table table-bordered table-striped table-hover datatable datatable-artistOrders">
                     <thead>
                         <tr>
                             <th width="10">
@@ -234,7 +234,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 25,
   });
-  $('.datatable-userOrders:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  $('.datatable-artistOrders:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();

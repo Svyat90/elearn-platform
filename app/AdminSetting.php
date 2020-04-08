@@ -21,8 +21,11 @@ class AdminSetting extends Model
         'created_at',
         'updated_at',
         'deleted_at',
-        'user_commission',
-        'agent_commission',
-        'artist_commission',
+        'company_commission',
+        'referral_user_commision',
+        'referal_agent_commision',
+        'referal_artist_commision',
+        'artist_video_show_count_web',
+        'artist_video_show_count_app',
     ];
 }

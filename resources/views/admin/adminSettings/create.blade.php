@@ -10,28 +10,52 @@
         <form method="POST" action="{{ route("admin.admin-settings.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="user_commission">{{ trans('cruds.adminSetting.fields.user_commission') }}</label>
-                <input class="form-control {{ $errors->has('user_commission') ? 'is-invalid' : '' }}" type="number" name="user_commission" id="user_commission" value="{{ old('user_commission', '0') }}" step="1">
-                @if($errors->has('user_commission'))
-                    <span class="text-danger">{{ $errors->first('user_commission') }}</span>
+                <label for="company_commission">{{ trans('cruds.adminSetting.fields.company_commission') }}</label>
+                <input class="form-control {{ $errors->has('company_commission') ? 'is-invalid' : '' }}" type="number" name="company_commission" id="company_commission" value="{{ old('company_commission', '0') }}" step="0.01">
+                @if($errors->has('company_commission'))
+                    <span class="text-danger">{{ $errors->first('company_commission') }}</span>
                 @endif
-                <span class="help-block">{{ trans('cruds.adminSetting.fields.user_commission_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.adminSetting.fields.company_commission_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="artist_commission">{{ trans('cruds.adminSetting.fields.artist_commission') }}</label>
-                <input class="form-control {{ $errors->has('artist_commission') ? 'is-invalid' : '' }}" type="number" name="artist_commission" id="artist_commission" value="{{ old('artist_commission', '0') }}" step="1">
-                @if($errors->has('artist_commission'))
-                    <span class="text-danger">{{ $errors->first('artist_commission') }}</span>
+                <label for="referral_user_commision">{{ trans('cruds.adminSetting.fields.referral_user_commision') }}</label>
+                <input class="form-control {{ $errors->has('referral_user_commision') ? 'is-invalid' : '' }}" type="number" name="referral_user_commision" id="referral_user_commision" value="{{ old('referral_user_commision', '0') }}" step="0.01">
+                @if($errors->has('referral_user_commision'))
+                    <span class="text-danger">{{ $errors->first('referral_user_commision') }}</span>
                 @endif
-                <span class="help-block">{{ trans('cruds.adminSetting.fields.artist_commission_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.adminSetting.fields.referral_user_commision_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="agent_commission">{{ trans('cruds.adminSetting.fields.agent_commission') }}</label>
-                <input class="form-control {{ $errors->has('agent_commission') ? 'is-invalid' : '' }}" type="number" name="agent_commission" id="agent_commission" value="{{ old('agent_commission', '0') }}" step="1">
-                @if($errors->has('agent_commission'))
-                    <span class="text-danger">{{ $errors->first('agent_commission') }}</span>
+                <label for="referal_artist_commision">{{ trans('cruds.adminSetting.fields.referal_artist_commision') }}</label>
+                <input class="form-control {{ $errors->has('referal_artist_commision') ? 'is-invalid' : '' }}" type="number" name="referal_artist_commision" id="referal_artist_commision" value="{{ old('referal_artist_commision', '0') }}" step="0.01">
+                @if($errors->has('referal_artist_commision'))
+                    <span class="text-danger">{{ $errors->first('referal_artist_commision') }}</span>
                 @endif
-                <span class="help-block">{{ trans('cruds.adminSetting.fields.agent_commission_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.adminSetting.fields.referal_artist_commision_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="referal_agent_commision">{{ trans('cruds.adminSetting.fields.referal_agent_commision') }}</label>
+                <input class="form-control {{ $errors->has('referal_agent_commision') ? 'is-invalid' : '' }}" type="number" name="referal_agent_commision" id="referal_agent_commision" value="{{ old('referal_agent_commision', '0') }}" step="0.01">
+                @if($errors->has('referal_agent_commision'))
+                    <span class="text-danger">{{ $errors->first('referal_agent_commision') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.adminSetting.fields.referal_agent_commision_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="artist_video_show_count_web">{{ trans('cruds.adminSetting.fields.artist_video_show_count_web') }}</label>
+                <input class="form-control {{ $errors->has('artist_video_show_count_web') ? 'is-invalid' : '' }}" type="number" name="artist_video_show_count_web" id="artist_video_show_count_web" value="{{ old('artist_video_show_count_web', '') }}" step="1">
+                @if($errors->has('artist_video_show_count_web'))
+                    <span class="text-danger">{{ $errors->first('artist_video_show_count_web') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.adminSetting.fields.artist_video_show_count_web_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="artist_video_show_count_app">{{ trans('cruds.adminSetting.fields.artist_video_show_count_app') }}</label>
+                <input class="form-control {{ $errors->has('artist_video_show_count_app') ? 'is-invalid' : '' }}" type="number" name="artist_video_show_count_app" id="artist_video_show_count_app" value="{{ old('artist_video_show_count_app', '') }}" step="1">
+                @if($errors->has('artist_video_show_count_app'))
+                    <span class="text-danger">{{ $errors->first('artist_video_show_count_app') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.adminSetting.fields.artist_video_show_count_app_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

@@ -183,6 +183,14 @@
                             {{ App\Order::ORDER_STATUS_SELECT[$order->order_status] ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.artist') }}
+                        </th>
+                        <td>
+                            {{ $order->artist->display_name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

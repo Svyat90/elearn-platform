@@ -85,6 +85,18 @@
                 <span class="help-block">{{ trans('cruds.artistResponse.fields.completion_update_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="artist_id">{{ trans('cruds.artistResponse.fields.artist') }}</label>
+                <select class="form-control select2 {{ $errors->has('artist') ? 'is-invalid' : '' }}" name="artist_id" id="artist_id">
+                    @foreach($artists as $id => $artist)
+                        <option value="{{ $id }}" {{ ($artistResponse->artist ? $artistResponse->artist->id : old('artist_id')) == $id ? 'selected' : '' }}>{{ $artist }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('artist'))
+                    <span class="text-danger">{{ $errors->first('artist') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.artistResponse.fields.artist_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

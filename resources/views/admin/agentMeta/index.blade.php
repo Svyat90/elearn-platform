@@ -28,6 +28,24 @@
                         {{ trans('cruds.agentMetum.fields.user') }}
                     </th>
                     <th>
+                        {{ trans('cruds.agentMetum.fields.agent_commission') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.agentMetum.fields.state') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.agentMetum.fields.city') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.agentMetum.fields.agent_status') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.agentMetum.fields.registered_on') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.agentMetum.fields.agent') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -85,6 +103,12 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'user_email', name: 'user.email' },
+{ data: 'agent_commission', name: 'agent_commission' },
+{ data: 'state', name: 'state' },
+{ data: 'city', name: 'city' },
+{ data: 'agent_status', name: 'agent_status' },
+{ data: 'registered_on', name: 'registered_on' },
+{ data: 'agent_first_name', name: 'agent.first_name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

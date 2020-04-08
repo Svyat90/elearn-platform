@@ -79,6 +79,14 @@
                             {{ $artistResponse->completion_update }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.artistResponse.fields.artist') }}
+                        </th>
+                        <td>
+                            {{ $artistResponse->artist->display_name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

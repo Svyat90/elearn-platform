@@ -25,26 +25,50 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.adminSetting.fields.user_commission') }}
+                            {{ trans('cruds.adminSetting.fields.company_commission') }}
                         </th>
                         <td>
-                            {{ $adminSetting->user_commission }}
+                            {{ $adminSetting->company_commission }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.adminSetting.fields.artist_commission') }}
+                            {{ trans('cruds.adminSetting.fields.referral_user_commision') }}
                         </th>
                         <td>
-                            {{ $adminSetting->artist_commission }}
+                            {{ $adminSetting->referral_user_commision }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.adminSetting.fields.agent_commission') }}
+                            {{ trans('cruds.adminSetting.fields.referal_artist_commision') }}
                         </th>
                         <td>
-                            {{ $adminSetting->agent_commission }}
+                            {{ $adminSetting->referal_artist_commision }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.adminSetting.fields.referal_agent_commision') }}
+                        </th>
+                        <td>
+                            {{ $adminSetting->referal_agent_commision }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.adminSetting.fields.artist_video_show_count_web') }}
+                        </th>
+                        <td>
+                            {{ $adminSetting->artist_video_show_count_web }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.adminSetting.fields.artist_video_show_count_app') }}
+                        </th>
+                        <td>
+                            {{ $adminSetting->artist_video_show_count_app }}
                         </td>
                     </tr>
                 </tbody>

@@ -10,9 +10,12 @@ class CreateAdminSettingsTable extends Migration
     {
         Schema::create('admin_settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_commission')->nullable();
-            $table->integer('artist_commission')->nullable();
-            $table->integer('agent_commission')->nullable();
+            $table->float('company_commission', 15, 2)->nullable();
+            $table->float('referral_user_commision', 15, 2)->nullable();
+            $table->float('referal_artist_commision', 15, 2)->nullable();
+            $table->float('referal_agent_commision', 15, 2)->nullable();
+            $table->integer('artist_video_show_count_web')->nullable();
+            $table->integer('artist_video_show_count_app')->nullable();
             $table->timestamps();
         });
 

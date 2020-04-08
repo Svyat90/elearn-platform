@@ -44,8 +44,8 @@ class LoginLogController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : "";
             });
-            $table->addColumn('user_name', function ($row) {
-                return $row->user ? $row->user->name : '';
+            $table->addColumn('user_first_name', function ($row) {
+                return $row->user ? $row->user->first_name : '';
             });
 
             $table->editColumn('ip_address', function ($row) {
@@ -70,7 +70,7 @@ class LoginLogController extends Controller
     {
         abort_if(Gate::denies('login_log_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.loginLogs.create', compact('users'));
     }
@@ -87,7 +87,7 @@ class LoginLogController extends Controller
     {
         abort_if(Gate::denies('login_log_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $loginLog->load('user');
 

@@ -46,6 +46,9 @@
                         {{ trans('cruds.artistResponse.fields.completion_update') }}
                     </th>
                     <th>
+                        {{ trans('cruds.artistResponse.fields.artist') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -109,10 +112,11 @@
 { data: 'artist_note', name: 'artist_note' },
 { data: 'action_update', name: 'action_update' },
 { data: 'completion_update', name: 'completion_update' },
+{ data: 'artist_display_name', name: 'artist.display_name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    pageLength: 25,
   };
   $('.datatable-ArtistResponse').DataTable(dtOverrideGlobals);
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){

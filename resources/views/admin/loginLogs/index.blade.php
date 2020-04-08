@@ -93,14 +93,14 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'user_name', name: 'user.name' },
+{ data: 'user_first_name', name: 'user.first_name' },
 { data: 'ip_address', name: 'ip_address' },
 { data: 'login_from', name: 'login_from' },
 { data: 'device', name: 'device' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    pageLength: 25,
   };
   $('.datatable-LoginLog').DataTable(dtOverrideGlobals);
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){

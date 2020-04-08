@@ -34,6 +34,7 @@ class ArtistResponse extends Model
     protected $fillable = [
         'order_id',
         'video_id',
+        'artist_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -77,6 +78,12 @@ class ArtistResponse extends Model
     public function setCompletionUpdateAttribute($value)
     {
         $this->attributes['completion_update'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
+
+    }
+
+    public function artist()
+    {
+        return $this->belongsTo(ArtistMetum::class, 'artist_id');
 
     }
 }

@@ -15,6 +15,8 @@ class AddRelationshipFieldsToOrdersTable extends Migration
             $table->foreign('language_id', 'language_fk_1273475')->references('id')->on('languages');
             $table->unsignedInteger('occasion_type_id')->nullable();
             $table->foreign('occasion_type_id', 'occasion_type_fk_1273482')->references('id')->on('occasions');
+            $table->unsignedInteger('artist_id')->nullable();
+            $table->foreign('artist_id', 'artist_fk_1275820')->references('id')->on('artist_meta');
         });
 
     }

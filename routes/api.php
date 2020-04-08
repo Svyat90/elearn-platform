@@ -46,6 +46,12 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Login Logs
     Route::apiResource('login-logs', 'LoginLogApiController');
 
+    // Artist Responses
+    Route::apiResource('artist-responses', 'ArtistResponseApiController');
+
+    // Agent Meta
+    Route::apiResource('agent-meta', 'AgentMetaApiController');
+
     // User Meta
     Route::post('user-meta/media', 'UserMetaApiController@storeMedia')->name('user-meta.storeMedia');
     Route::apiResource('user-meta', 'UserMetaApiController');

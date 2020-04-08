@@ -85,6 +85,9 @@
                         {{ trans('cruds.order.fields.order_status') }}
                     </th>
                     <th>
+                        {{ trans('cruds.order.fields.artist') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -161,6 +164,7 @@
 { data: 'booking_datetime', name: 'booking_datetime' },
 { data: 'payment_by', name: 'payment_by' },
 { data: 'order_status', name: 'order_status' },
+{ data: 'artist_display_name', name: 'artist.display_name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

@@ -28,6 +28,24 @@
                                 {{ trans('cruds.agentMetum.fields.user') }}
                             </th>
                             <th>
+                                {{ trans('cruds.agentMetum.fields.agent_commission') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.agentMetum.fields.state') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.agentMetum.fields.city') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.agentMetum.fields.agent_status') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.agentMetum.fields.registered_on') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.agentMetum.fields.agent') }}
+                            </th>
+                            <th>
                                 &nbsp;
                             </th>
                         </tr>
@@ -43,6 +61,24 @@
                                 </td>
                                 <td>
                                     {{ $agentMetum->user->email ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $agentMetum->agent_commission ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $agentMetum->state ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $agentMetum->city ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $agentMetum->agent_status ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $agentMetum->registered_on ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $agentMetum->agent->first_name ?? '' }}
                                 </td>
                                 <td>
                                     @can('agent_metum_show')

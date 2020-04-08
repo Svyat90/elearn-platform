@@ -39,6 +39,7 @@ class Order extends Model
         'message',
         'video_to',
         'video_for',
+        'artist_id',
         'to_gender',
         'updated_at',
         'created_at',
@@ -51,11 +52,11 @@ class Order extends Model
         'language_id',
         'order_status',
         'customer_name',
-        'delivery_phone',
+        'delivery_email',
         'promo_discount',
         'booking_amount',
         'payment_status',
-        'delivery_email',
+        'delivery_phone',
         'occasion_type_id',
         'booking_datetime',
     ];
@@ -105,6 +106,12 @@ class Order extends Model
     public function setBookingDatetimeAttribute($value)
     {
         $this->attributes['booking_datetime'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
+
+    }
+
+    public function artist()
+    {
+        return $this->belongsTo(ArtistMetum::class, 'artist_id');
 
     }
 }

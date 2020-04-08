@@ -1,52 +1,49 @@
 <div class="m-3">
-    @can('artist_response_create')
+    @can('agent_metum_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route("admin.artist-responses.create") }}">
-                    {{ trans('global.add') }} {{ trans('cruds.artistResponse.title_singular') }}
+                <a class="btn btn-success" href="{{ route("admin.agent-meta.create") }}">
+                    {{ trans('global.add') }} {{ trans('cruds.agentMetum.title_singular') }}
                 </a>
             </div>
         </div>
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('cruds.artistResponse.title_singular') }} {{ trans('global.list') }}
+            {{ trans('cruds.agentMetum.title_singular') }} {{ trans('global.list') }}
         </div>
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class=" table table-bordered table-striped table-hover datatable datatable-videoArtistResponses">
+                <table class=" table table-bordered table-striped table-hover datatable datatable-agentAgentMeta">
                     <thead>
                         <tr>
                             <th width="10">
 
                             </th>
                             <th>
-                                {{ trans('cruds.artistResponse.fields.id') }}
+                                {{ trans('cruds.agentMetum.fields.id') }}
                             </th>
                             <th>
-                                {{ trans('cruds.artistResponse.fields.order') }}
+                                {{ trans('cruds.agentMetum.fields.user') }}
                             </th>
                             <th>
-                                {{ trans('cruds.artistResponse.fields.artist_action') }}
+                                {{ trans('cruds.agentMetum.fields.agent_commission') }}
                             </th>
                             <th>
-                                {{ trans('cruds.artistResponse.fields.video_status') }}
+                                {{ trans('cruds.agentMetum.fields.state') }}
                             </th>
                             <th>
-                                {{ trans('cruds.artistResponse.fields.video') }}
+                                {{ trans('cruds.agentMetum.fields.city') }}
                             </th>
                             <th>
-                                {{ trans('cruds.artistResponse.fields.artist_note') }}
+                                {{ trans('cruds.agentMetum.fields.agent_status') }}
                             </th>
                             <th>
-                                {{ trans('cruds.artistResponse.fields.action_update') }}
+                                {{ trans('cruds.agentMetum.fields.registered_on') }}
                             </th>
                             <th>
-                                {{ trans('cruds.artistResponse.fields.completion_update') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.artistResponse.fields.artist') }}
+                                {{ trans('cruds.agentMetum.fields.agent') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -54,53 +51,50 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($artistResponses as $key => $artistResponse)
-                            <tr data-entry-id="{{ $artistResponse->id }}">
+                        @foreach($agentMeta as $key => $agentMetum)
+                            <tr data-entry-id="{{ $agentMetum->id }}">
                                 <td>
 
                                 </td>
                                 <td>
-                                    {{ $artistResponse->id ?? '' }}
+                                    {{ $agentMetum->id ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $artistResponse->order->payment_status ?? '' }}
+                                    {{ $agentMetum->user->email ?? '' }}
                                 </td>
                                 <td>
-                                    {{ App\ArtistResponse::ARTIST_ACTION_SELECT[$artistResponse->artist_action] ?? '' }}
+                                    {{ $agentMetum->agent_commission ?? '' }}
                                 </td>
                                 <td>
-                                    {{ App\ArtistResponse::VIDEO_STATUS_SELECT[$artistResponse->video_status] ?? '' }}
+                                    {{ $agentMetum->state ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $artistResponse->video->name ?? '' }}
+                                    {{ $agentMetum->city ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $artistResponse->artist_note ?? '' }}
+                                    {{ $agentMetum->agent_status ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $artistResponse->action_update ?? '' }}
+                                    {{ $agentMetum->registered_on ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $artistResponse->completion_update ?? '' }}
+                                    {{ $agentMetum->agent->first_name ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $artistResponse->artist->display_name ?? '' }}
-                                </td>
-                                <td>
-                                    @can('artist_response_show')
-                                        <a class="btn btn-xs btn-primary" href="{{ route('admin.artist-responses.show', $artistResponse->id) }}">
+                                    @can('agent_metum_show')
+                                        <a class="btn btn-xs btn-primary" href="{{ route('admin.agent-meta.show', $agentMetum->id) }}">
                                             {{ trans('global.view') }}
                                         </a>
                                     @endcan
 
-                                    @can('artist_response_edit')
-                                        <a class="btn btn-xs btn-info" href="{{ route('admin.artist-responses.edit', $artistResponse->id) }}">
+                                    @can('agent_metum_edit')
+                                        <a class="btn btn-xs btn-info" href="{{ route('admin.agent-meta.edit', $agentMetum->id) }}">
                                             {{ trans('global.edit') }}
                                         </a>
                                     @endcan
 
-                                    @can('artist_response_delete')
-                                        <form action="{{ route('admin.artist-responses.destroy', $artistResponse->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    @can('agent_metum_delete')
+                                        <form action="{{ route('admin.agent-meta.destroy', $agentMetum->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -122,11 +116,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('artist_response_delete')
+@can('agent_metum_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.artist-responses.massDestroy') }}",
+    url: "{{ route('admin.agent-meta.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -156,7 +150,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 25,
   });
-  $('.datatable-videoArtistResponses:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  $('.datatable-agentAgentMeta:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();

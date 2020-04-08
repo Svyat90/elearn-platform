@@ -28,7 +28,7 @@
                             {{ trans('cruds.loginLog.fields.user') }}
                         </th>
                         <td>
-                            {{ $loginLog->user->name ?? '' }}
+                            {{ $loginLog->user->first_name ?? '' }}
                         </td>
                     </tr>
                     <tr>

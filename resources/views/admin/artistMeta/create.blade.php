@@ -363,14 +363,14 @@
 <script>
     Dropzone.options.introVideoUrlDropzone = {
     url: '{{ route('admin.artist-meta.storeMedia') }}',
-    maxFilesize: 100, // MB
+    maxFilesize: 20000, // MB
     maxFiles: 1,
     addRemoveLinks: true,
     headers: {
       'X-CSRF-TOKEN': "{{ csrf_token() }}"
     },
     params: {
-      size: 100
+      size: 20000
     },
     success: function (file, response) {
       $('form').find('input[name="intro_video_url"]').remove()

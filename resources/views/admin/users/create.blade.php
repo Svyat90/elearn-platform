@@ -186,14 +186,6 @@
                 <span class="help-block">{{ trans('cruds.user.fields.registration_source_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="registered_on">{{ trans('cruds.user.fields.registered_on') }}</label>
-                <input class="form-control datetime {{ $errors->has('registered_on') ? 'is-invalid' : '' }}" type="text" name="registered_on" id="registered_on" value="{{ old('registered_on') }}">
-                @if($errors->has('registered_on'))
-                    <span class="text-danger">{{ $errors->first('registered_on') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.registered_on_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

@@ -39,6 +39,14 @@
                             {{ $country->short_code }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.country.fields.phone_code') }}
+                        </th>
+                        <td>
+                            {{ $country->phone_code }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

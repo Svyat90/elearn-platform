@@ -93,25 +93,42 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('order-payments/destroy', 'OrderPaymentController@massDestroy')->name('order-payments.massDestroy');
     Route::resource('order-payments', 'OrderPaymentController');
 
-    // Product Categories
-    Route::delete('product-categories/destroy', 'ProductCategoryController@massDestroy')->name('product-categories.massDestroy');
-    Route::post('product-categories/media', 'ProductCategoryController@storeMedia')->name('product-categories.storeMedia');
-    Route::post('product-categories/ckmedia', 'ProductCategoryController@storeCKEditorImages')->name('product-categories.storeCKEditorImages');
-    Route::resource('product-categories', 'ProductCategoryController');
+    // Admin Users
+    Route::delete('admin-users/destroy', 'AdminUserController@massDestroy')->name('admin-users.massDestroy');
+    Route::resource('admin-users', 'AdminUserController');
 
-    // Product Tags
-    Route::delete('product-tags/destroy', 'ProductTagController@massDestroy')->name('product-tags.massDestroy');
-    Route::resource('product-tags', 'ProductTagController');
+    // Sub Categories
+    Route::delete('sub-categories/destroy', 'SubCategoryController@massDestroy')->name('sub-categories.massDestroy');
+    Route::post('sub-categories/media', 'SubCategoryController@storeMedia')->name('sub-categories.storeMedia');
+    Route::post('sub-categories/ckmedia', 'SubCategoryController@storeCKEditorImages')->name('sub-categories.storeCKEditorImages');
+    Route::resource('sub-categories', 'SubCategoryController');
 
-    // Products
-    Route::delete('products/destroy', 'ProductController@massDestroy')->name('products.massDestroy');
-    Route::post('products/media', 'ProductController@storeMedia')->name('products.storeMedia');
-    Route::post('products/ckmedia', 'ProductController@storeCKEditorImages')->name('products.storeCKEditorImages');
-    Route::resource('products', 'ProductController');
+    // Admin Settings
+    Route::delete('admin-settings/destroy', 'AdminSettingsController@massDestroy')->name('admin-settings.massDestroy');
+    Route::resource('admin-settings', 'AdminSettingsController');
 
-    // Amin Users
-    Route::delete('amin-users/destroy', 'AminUserController@massDestroy')->name('amin-users.massDestroy');
-    Route::resource('amin-users', 'AminUserController');
+    // Occasions
+    Route::delete('occasions/destroy', 'OccasionController@massDestroy')->name('occasions.massDestroy');
+    Route::resource('occasions', 'OccasionController');
+
+    // Email Subscriptions
+    Route::delete('email-subscriptions/destroy', 'EmailSubscriptionController@massDestroy')->name('email-subscriptions.massDestroy');
+    Route::resource('email-subscriptions', 'EmailSubscriptionController');
+
+    // Promo Codes
+    Route::delete('promo-codes/destroy', 'PromoCodeController@massDestroy')->name('promo-codes.massDestroy');
+    Route::post('promo-codes/media', 'PromoCodeController@storeMedia')->name('promo-codes.storeMedia');
+    Route::post('promo-codes/ckmedia', 'PromoCodeController@storeCKEditorImages')->name('promo-codes.storeCKEditorImages');
+    Route::resource('promo-codes', 'PromoCodeController');
+
+    // Login Logs
+    Route::delete('login-logs/destroy', 'LoginLogController@massDestroy')->name('login-logs.massDestroy');
+    Route::resource('login-logs', 'LoginLogController');
+
+    // Payment Logs
+    Route::post('payment-logs/media', 'PaymentLogController@storeMedia')->name('payment-logs.storeMedia');
+    Route::post('payment-logs/ckmedia', 'PaymentLogController@storeCKEditorImages')->name('payment-logs.storeCKEditorImages');
+    Route::resource('payment-logs', 'PaymentLogController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

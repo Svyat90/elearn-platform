@@ -24,6 +24,8 @@ class UpdateCountryRequest extends FormRequest
                 'required'],
             'short_code' => [
                 'required'],
+            'phone_code' => [
+                'max:256'],
         ];
 
     }

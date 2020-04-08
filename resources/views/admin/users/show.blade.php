@@ -231,6 +231,16 @@
                 {{ trans('cruds.orderHistory.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#user_login_logs" role="tab" data-toggle="tab">
+                {{ trans('cruds.loginLog.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#user_payment_logs" role="tab" data-toggle="tab">
+                {{ trans('cruds.paymentLog.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="user_user_reviews">
@@ -244,6 +254,12 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="user_order_histories">
             @includeIf('admin.users.relationships.userOrderHistories', ['orderHistories' => $user->userOrderHistories])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="user_login_logs">
+            @includeIf('admin.users.relationships.userLoginLogs', ['loginLogs' => $user->userLoginLogs])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="user_payment_logs">
+            @includeIf('admin.users.relationships.userPaymentLogs', ['paymentLogs' => $user->userPaymentLogs])
         </div>
     </div>
 </div>

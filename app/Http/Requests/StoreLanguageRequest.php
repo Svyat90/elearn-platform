@@ -20,10 +20,12 @@ class StoreLanguageRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
+            'name'     => [
                 'max:256',
                 'required',
                 'unique:languages'],
+            'iso_code' => [
+                'max:256'],
         ];
 
     }

@@ -20,10 +20,12 @@ class UpdateLanguageRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
+            'name'     => [
                 'max:256',
                 'required',
                 'unique:languages,name,' . request()->route('language')->id],
+            'iso_code' => [
+                'max:256'],
         ];
 
     }

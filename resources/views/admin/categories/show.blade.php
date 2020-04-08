@@ -25,6 +25,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.category.fields.color') }}
+                        </th>
+                        <td>
+                            {{ $category->color }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.category.fields.name') }}
                         </th>
                         <td>
@@ -60,12 +68,20 @@
     </div>
     <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
         <li class="nav-item">
+            <a class="nav-link" href="#parent_sub_categories" role="tab" data-toggle="tab">
+                {{ trans('cruds.subCategory.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#category_users" role="tab" data-toggle="tab">
                 {{ trans('cruds.user.title') }}
             </a>
         </li>
     </ul>
     <div class="tab-content">
+        <div class="tab-pane" role="tabpanel" id="parent_sub_categories">
+            @includeIf('admin.categories.relationships.parentSubCategories', ['subCategories' => $category->parentSubCategories])
+        </div>
         <div class="tab-pane" role="tabpanel" id="category_users">
             @includeIf('admin.categories.relationships.categoryUsers', ['users' => $category->categoryUsers])
         </div>

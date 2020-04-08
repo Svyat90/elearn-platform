@@ -31,7 +31,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::apiResource('sub-categories', 'SubCategoryApiController');
 
     // Admin Settings
-    Route::apiResource('admin-settings', 'AdminSettingsApiController');
+    Route::apiResource('admin-settings', 'AdminSettingsApiController', ['except' => ['store', 'destroy']]);
 
     // Occasions
     Route::apiResource('occasions', 'OccasionApiController');
@@ -44,7 +44,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::apiResource('promo-codes', 'PromoCodeApiController');
 
     // Login Logs
-    Route::apiResource('login-logs', 'LoginLogApiController');
+    Route::apiResource('login-logs', 'LoginLogApiController', ['except' => ['store', 'update']]);
 
     // Artist Responses
     Route::apiResource('artist-responses', 'ArtistResponseApiController');
@@ -62,5 +62,8 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Artist Enquiries
     Route::post('artist-enquiries/media', 'ArtistEnquiryApiController@storeMedia')->name('artist-enquiries.storeMedia');
     Route::apiResource('artist-enquiries', 'ArtistEnquiryApiController');
+
+    // User Wishlists
+    Route::apiResource('user-wishlists', 'UserWishlistApiController');
 
 });

@@ -84,7 +84,7 @@
                             {{ trans('cruds.artistEnquiry.fields.country') }}
                         </th>
                         <td>
-                            {{ $artistEnquiry->country->short_code ?? '' }}
+                            {{ $artistEnquiry->country->name ?? '' }}
                         </td>
                     </tr>
                     <tr>

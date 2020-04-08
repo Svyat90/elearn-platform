@@ -174,490 +174,486 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => '42',
-                'title' => 'search_log_create',
-            ],
-            [
-                'id'    => '43',
-                'title' => 'search_log_edit',
-            ],
-            [
-                'id'    => '44',
                 'title' => 'search_log_show',
             ],
             [
-                'id'    => '45',
+                'id'    => '43',
                 'title' => 'search_log_delete',
             ],
             [
-                'id'    => '46',
+                'id'    => '44',
                 'title' => 'search_log_access',
             ],
             [
-                'id'    => '47',
+                'id'    => '45',
                 'title' => 'social_medium_create',
             ],
             [
-                'id'    => '48',
+                'id'    => '46',
                 'title' => 'social_medium_edit',
             ],
             [
-                'id'    => '49',
+                'id'    => '47',
                 'title' => 'social_medium_show',
             ],
             [
-                'id'    => '50',
+                'id'    => '48',
                 'title' => 'social_medium_delete',
             ],
             [
-                'id'    => '51',
+                'id'    => '49',
                 'title' => 'social_medium_access',
             ],
             [
-                'id'    => '52',
+                'id'    => '50',
                 'title' => 'content_management_access',
             ],
             [
-                'id'    => '53',
+                'id'    => '51',
                 'title' => 'audit_log_show',
             ],
             [
-                'id'    => '54',
+                'id'    => '52',
                 'title' => 'audit_log_access',
             ],
             [
-                'id'    => '55',
+                'id'    => '53',
                 'title' => 'order_create',
             ],
             [
-                'id'    => '56',
+                'id'    => '54',
                 'title' => 'order_edit',
             ],
             [
-                'id'    => '57',
+                'id'    => '55',
                 'title' => 'order_show',
             ],
             [
-                'id'    => '58',
+                'id'    => '56',
                 'title' => 'order_delete',
             ],
             [
-                'id'    => '59',
+                'id'    => '57',
                 'title' => 'order_access',
             ],
             [
-                'id'    => '60',
+                'id'    => '58',
                 'title' => 'video_create',
             ],
             [
-                'id'    => '61',
+                'id'    => '59',
                 'title' => 'video_edit',
             ],
             [
-                'id'    => '62',
+                'id'    => '60',
                 'title' => 'video_show',
             ],
             [
-                'id'    => '63',
+                'id'    => '61',
                 'title' => 'video_delete',
             ],
             [
-                'id'    => '64',
+                'id'    => '62',
                 'title' => 'video_access',
             ],
             [
-                'id'    => '65',
+                'id'    => '63',
                 'title' => 'user_review_create',
             ],
             [
-                'id'    => '66',
+                'id'    => '64',
                 'title' => 'user_review_edit',
             ],
             [
-                'id'    => '67',
+                'id'    => '65',
                 'title' => 'user_review_show',
             ],
             [
-                'id'    => '68',
+                'id'    => '66',
                 'title' => 'user_review_delete',
             ],
             [
-                'id'    => '69',
+                'id'    => '67',
                 'title' => 'user_review_access',
             ],
             [
-                'id'    => '70',
+                'id'    => '68',
                 'title' => 'gender_create',
             ],
             [
-                'id'    => '71',
+                'id'    => '69',
                 'title' => 'gender_edit',
             ],
             [
-                'id'    => '72',
+                'id'    => '70',
                 'title' => 'gender_show',
             ],
             [
-                'id'    => '73',
+                'id'    => '71',
                 'title' => 'gender_delete',
             ],
             [
-                'id'    => '74',
+                'id'    => '72',
                 'title' => 'gender_access',
             ],
             [
-                'id'    => '75',
+                'id'    => '73',
                 'title' => 'order_payment_show',
             ],
             [
-                'id'    => '76',
+                'id'    => '74',
                 'title' => 'order_payment_delete',
             ],
             [
-                'id'    => '77',
+                'id'    => '75',
                 'title' => 'order_payment_access',
             ],
             [
-                'id'    => '78',
+                'id'    => '76',
                 'title' => 'orders_list_access',
             ],
             [
-                'id'    => '79',
+                'id'    => '77',
                 'title' => 'customer_management_access',
             ],
             [
-                'id'    => '80',
+                'id'    => '78',
                 'title' => 'admin_user_create',
             ],
             [
-                'id'    => '81',
+                'id'    => '79',
                 'title' => 'admin_user_edit',
             ],
             [
-                'id'    => '82',
+                'id'    => '80',
                 'title' => 'admin_user_show',
             ],
             [
-                'id'    => '83',
+                'id'    => '81',
                 'title' => 'admin_user_delete',
             ],
             [
-                'id'    => '84',
+                'id'    => '82',
                 'title' => 'admin_user_access',
             ],
             [
-                'id'    => '85',
+                'id'    => '83',
                 'title' => 'media_management_access',
             ],
             [
-                'id'    => '86',
+                'id'    => '84',
                 'title' => 'site_log_access',
             ],
             [
-                'id'    => '87',
+                'id'    => '85',
                 'title' => 'site_management_access',
             ],
             [
-                'id'    => '88',
+                'id'    => '86',
                 'title' => 'sub_category_create',
             ],
             [
-                'id'    => '89',
+                'id'    => '87',
                 'title' => 'sub_category_edit',
             ],
             [
-                'id'    => '90',
+                'id'    => '88',
                 'title' => 'sub_category_show',
             ],
             [
-                'id'    => '91',
+                'id'    => '89',
                 'title' => 'sub_category_delete',
             ],
             [
-                'id'    => '92',
+                'id'    => '90',
                 'title' => 'sub_category_access',
             ],
             [
-                'id'    => '93',
-                'title' => 'admin_setting_create',
-            ],
-            [
-                'id'    => '94',
+                'id'    => '91',
                 'title' => 'admin_setting_edit',
             ],
             [
-                'id'    => '95',
+                'id'    => '92',
                 'title' => 'admin_setting_show',
             ],
             [
-                'id'    => '96',
-                'title' => 'admin_setting_delete',
-            ],
-            [
-                'id'    => '97',
+                'id'    => '93',
                 'title' => 'admin_setting_access',
             ],
             [
-                'id'    => '98',
+                'id'    => '94',
                 'title' => 'occasion_create',
             ],
             [
-                'id'    => '99',
+                'id'    => '95',
                 'title' => 'occasion_edit',
             ],
             [
-                'id'    => '100',
+                'id'    => '96',
                 'title' => 'occasion_show',
             ],
             [
-                'id'    => '101',
+                'id'    => '97',
                 'title' => 'occasion_delete',
             ],
             [
-                'id'    => '102',
+                'id'    => '98',
                 'title' => 'occasion_access',
             ],
             [
-                'id'    => '103',
+                'id'    => '99',
                 'title' => 'email_subscription_create',
             ],
             [
-                'id'    => '104',
+                'id'    => '100',
                 'title' => 'email_subscription_edit',
             ],
             [
-                'id'    => '105',
+                'id'    => '101',
                 'title' => 'email_subscription_show',
             ],
             [
-                'id'    => '106',
+                'id'    => '102',
                 'title' => 'email_subscription_delete',
             ],
             [
-                'id'    => '107',
+                'id'    => '103',
                 'title' => 'email_subscription_access',
             ],
             [
-                'id'    => '108',
+                'id'    => '104',
                 'title' => 'promo_code_create',
             ],
             [
-                'id'    => '109',
+                'id'    => '105',
                 'title' => 'promo_code_edit',
             ],
             [
-                'id'    => '110',
+                'id'    => '106',
                 'title' => 'promo_code_show',
             ],
             [
-                'id'    => '111',
+                'id'    => '107',
                 'title' => 'promo_code_delete',
             ],
             [
-                'id'    => '112',
+                'id'    => '108',
                 'title' => 'promo_code_access',
             ],
             [
-                'id'    => '113',
-                'title' => 'login_log_create',
-            ],
-            [
-                'id'    => '114',
-                'title' => 'login_log_edit',
-            ],
-            [
-                'id'    => '115',
+                'id'    => '109',
                 'title' => 'login_log_show',
             ],
             [
-                'id'    => '116',
+                'id'    => '110',
                 'title' => 'login_log_delete',
             ],
             [
-                'id'    => '117',
+                'id'    => '111',
                 'title' => 'login_log_access',
             ],
             [
-                'id'    => '118',
+                'id'    => '112',
                 'title' => 'payment_log_show',
             ],
             [
-                'id'    => '119',
+                'id'    => '113',
                 'title' => 'payment_log_access',
             ],
             [
-                'id'    => '120',
+                'id'    => '114',
                 'title' => 'payment_management_access',
             ],
             [
-                'id'    => '121',
+                'id'    => '115',
                 'title' => 'artist_payment_history_show',
             ],
             [
-                'id'    => '122',
+                'id'    => '116',
                 'title' => 'artist_payment_history_delete',
             ],
             [
-                'id'    => '123',
+                'id'    => '117',
                 'title' => 'artist_payment_history_access',
             ],
             [
-                'id'    => '124',
+                'id'    => '118',
                 'title' => 'agent_payment_history_show',
             ],
             [
-                'id'    => '125',
+                'id'    => '119',
                 'title' => 'agent_payment_history_delete',
             ],
             [
-                'id'    => '126',
+                'id'    => '120',
                 'title' => 'agent_payment_history_access',
             ],
             [
-                'id'    => '127',
+                'id'    => '121',
                 'title' => 'artist_response_create',
             ],
             [
-                'id'    => '128',
+                'id'    => '122',
                 'title' => 'artist_response_edit',
             ],
             [
-                'id'    => '129',
+                'id'    => '123',
                 'title' => 'artist_response_show',
             ],
             [
-                'id'    => '130',
+                'id'    => '124',
                 'title' => 'artist_response_delete',
             ],
             [
-                'id'    => '131',
+                'id'    => '125',
                 'title' => 'artist_response_access',
             ],
             [
-                'id'    => '132',
+                'id'    => '126',
                 'title' => 'agent_mangement_access',
             ],
             [
-                'id'    => '133',
+                'id'    => '127',
                 'title' => 'agent_list_access',
             ],
             [
-                'id'    => '134',
+                'id'    => '128',
                 'title' => 'agent_metum_create',
             ],
             [
-                'id'    => '135',
+                'id'    => '129',
                 'title' => 'agent_metum_edit',
             ],
             [
-                'id'    => '136',
+                'id'    => '130',
                 'title' => 'agent_metum_show',
             ],
             [
-                'id'    => '137',
+                'id'    => '131',
                 'title' => 'agent_metum_delete',
             ],
             [
-                'id'    => '138',
+                'id'    => '132',
                 'title' => 'agent_metum_access',
             ],
             [
-                'id'    => '139',
+                'id'    => '133',
                 'title' => 'artist_management_access',
             ],
             [
-                'id'    => '140',
+                'id'    => '134',
                 'title' => 'artist_list_access',
             ],
             [
-                'id'    => '141',
+                'id'    => '135',
                 'title' => 'artist_metum_create',
             ],
             [
-                'id'    => '142',
+                'id'    => '136',
                 'title' => 'artist_metum_edit',
             ],
             [
-                'id'    => '143',
+                'id'    => '137',
                 'title' => 'artist_metum_show',
             ],
             [
-                'id'    => '144',
+                'id'    => '138',
                 'title' => 'artist_metum_delete',
             ],
             [
-                'id'    => '145',
+                'id'    => '139',
                 'title' => 'artist_metum_access',
             ],
             [
-                'id'    => '146',
+                'id'    => '140',
                 'title' => 'customers_list_access',
             ],
             [
-                'id'    => '147',
+                'id'    => '141',
                 'title' => 'user_metum_create',
             ],
             [
-                'id'    => '148',
+                'id'    => '142',
                 'title' => 'user_metum_edit',
             ],
             [
-                'id'    => '149',
+                'id'    => '143',
                 'title' => 'user_metum_show',
             ],
             [
-                'id'    => '150',
+                'id'    => '144',
                 'title' => 'user_metum_delete',
             ],
             [
-                'id'    => '151',
+                'id'    => '145',
                 'title' => 'user_metum_access',
             ],
             [
-                'id'    => '152',
+                'id'    => '146',
                 'title' => 'user_wallet_history_show',
             ],
             [
-                'id'    => '153',
+                'id'    => '147',
                 'title' => 'user_wallet_history_delete',
             ],
             [
-                'id'    => '154',
+                'id'    => '148',
                 'title' => 'user_wallet_history_access',
             ],
             [
-                'id'    => '155',
+                'id'    => '149',
                 'title' => 'artist_enquiry_create',
             ],
             [
-                'id'    => '156',
+                'id'    => '150',
                 'title' => 'artist_enquiry_edit',
             ],
             [
-                'id'    => '157',
+                'id'    => '151',
                 'title' => 'artist_enquiry_show',
             ],
             [
-                'id'    => '158',
+                'id'    => '152',
                 'title' => 'artist_enquiry_delete',
             ],
             [
-                'id'    => '159',
+                'id'    => '153',
                 'title' => 'artist_enquiry_access',
             ],
             [
-                'id'    => '160',
+                'id'    => '154',
                 'title' => 'user_profile_avatar_image_access',
             ],
             [
-                'id'    => '161',
+                'id'    => '155',
                 'title' => 'talent_profile_image_access',
             ],
             [
-                'id'    => '162',
+                'id'    => '156',
                 'title' => 'talent_profile_intro_video_access',
             ],
             [
-                'id'    => '163',
+                'id'    => '157',
+                'title' => 'user_wishlist_create',
+            ],
+            [
+                'id'    => '158',
+                'title' => 'user_wishlist_edit',
+            ],
+            [
+                'id'    => '159',
+                'title' => 'user_wishlist_show',
+            ],
+            [
+                'id'    => '160',
+                'title' => 'user_wishlist_delete',
+            ],
+            [
+                'id'    => '161',
+                'title' => 'user_wishlist_access',
+            ],
+            [
+                'id'    => '162',
                 'title' => 'profile_password_edit',
             ],
         ];

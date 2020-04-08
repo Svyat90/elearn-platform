@@ -74,6 +74,12 @@ class ArtistMetum extends Model implements HasMedia
 
     }
 
+    public function artistUserWishlists()
+    {
+        return $this->hasMany(UserWishlist::class, 'artist_id', 'id');
+
+    }
+
     public function artist()
     {
         return $this->belongsTo(User::class, 'artist_id');

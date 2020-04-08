@@ -182,6 +182,12 @@ class User extends Authenticatable implements HasMedia
 
     }
 
+    public function userUserWishlists()
+    {
+        return $this->hasMany(UserWishlist::class, 'user_id', 'id');
+
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);

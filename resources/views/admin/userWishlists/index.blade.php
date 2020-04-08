@@ -1,26 +1,34 @@
 @extends('layouts.admin')
 @section('content')
-
+@can('user_wishlist_create')
+    <div style="margin-bottom: 10px;" class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-success" href="{{ route("admin.user-wishlists.create") }}">
+                {{ trans('global.add') }} {{ trans('cruds.userWishlist.title_singular') }}
+            </a>
+        </div>
+    </div>
+@endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.searchLog.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.userWishlist.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="card-body">
-        <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-SearchLog">
+        <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-UserWishlist">
             <thead>
                 <tr>
                     <th width="10">
 
                     </th>
                     <th>
-                        {{ trans('cruds.searchLog.fields.id') }}
+                        {{ trans('cruds.userWishlist.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.searchLog.fields.search_term') }}
+                        {{ trans('cruds.userWishlist.fields.user') }}
                     </th>
                     <th>
-                        {{ trans('cruds.searchLog.fields.search_from') }}
+                        {{ trans('cruds.userWishlist.fields.artist') }}
                     </th>
                     <th>
                         &nbsp;
@@ -39,11 +47,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('search_log_delete')
+@can('user_wishlist_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.search-logs.massDestroy') }}",
+    url: "{{ route('admin.user-wishlists.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
@@ -75,18 +83,18 @@
     serverSide: true,
     retrieve: true,
     aaSorting: [],
-    ajax: "{{ route('admin.search-logs.index') }}",
+    ajax: "{{ route('admin.user-wishlists.index') }}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'search_term', name: 'search_term' },
-{ data: 'search_from', name: 'search_from' },
+{ data: 'user_first_name', name: 'user.first_name' },
+{ data: 'artist_display_name', name: 'artist.display_name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],
     pageLength: 25,
   };
-  $('.datatable-SearchLog').DataTable(dtOverrideGlobals);
+  $('.datatable-UserWishlist').DataTable(dtOverrideGlobals);
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();

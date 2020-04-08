@@ -193,11 +193,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-<<<<<<< HEAD
-        $user->load('roles', 'languages', 'country', 'social_meidias', 'categories', 'gender', 'userUserReviews', 'userOrders', 'userVideos', 'userOrderHistories', 'userLoginLogs', 'userPaymentLogs');
-=======
-        $user->load('roles', 'country', 'gender', 'userUserReviews', 'userOrders', 'userVideos', 'userLoginLogs', 'userPaymentLogs', 'userArtistPaymentHistories', 'earnFromArtistPaymentHistories', 'userAgentPaymentHistories', 'earnFromAgentPaymentHistories', 'userAgentMeta', 'artistArtistMeta', 'userUserMeta', 'userUserWalletHistories', 'earnFromUserWalletHistories');
->>>>>>> quickadminpanel_2020_04_08_10_05_50
+        $user->load('roles', 'country', 'gender', 'userOrders', 'userVideos', 'userLoginLogs', 'userPaymentLogs', 'userArtistPaymentHistories', 'earnFromArtistPaymentHistories', 'userAgentPaymentHistories', 'earnFromAgentPaymentHistories', 'userAgentMeta', 'artistArtistMeta', 'userUserMeta', 'userUserWalletHistories', 'earnFromUserWalletHistories', 'artistArtistEnquiries');
 
         return view('admin.users.show', compact('user'));
     }

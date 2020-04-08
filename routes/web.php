@@ -85,11 +85,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Order Payments
     Route::delete('order-payments/destroy', 'OrderPaymentController@massDestroy')->name('order-payments.massDestroy');
-<<<<<<< HEAD
-    Route::resource('order-payments', 'OrderPaymentController');
-=======
     Route::resource('order-payments', 'OrderPaymentController', ['except' => ['create', 'store', 'edit', 'update']]);
->>>>>>> quickadminpanel_2020_04_08_10_05_50
 
     // Admin Users
     Route::delete('admin-users/destroy', 'AdminUserController@massDestroy')->name('admin-users.massDestroy');
@@ -127,8 +123,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('payment-logs/media', 'PaymentLogController@storeMedia')->name('payment-logs.storeMedia');
     Route::post('payment-logs/ckmedia', 'PaymentLogController@storeCKEditorImages')->name('payment-logs.storeCKEditorImages');
     Route::resource('payment-logs', 'PaymentLogController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
-<<<<<<< HEAD
-=======
 
     // Artist Payment Histories
     Route::delete('artist-payment-histories/destroy', 'ArtistPaymentHistoryController@massDestroy')->name('artist-payment-histories.massDestroy');
@@ -170,7 +164,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // User Wallet Histories
     Route::delete('user-wallet-histories/destroy', 'UserWalletHistoryController@massDestroy')->name('user-wallet-histories.massDestroy');
     Route::resource('user-wallet-histories', 'UserWalletHistoryController', ['except' => ['create', 'store', 'edit', 'update']]);
->>>>>>> quickadminpanel_2020_04_08_10_05_50
+
+    // Artist Enquiries
+    Route::delete('artist-enquiries/destroy', 'ArtistEnquiryController@massDestroy')->name('artist-enquiries.massDestroy');
+    Route::post('artist-enquiries/media', 'ArtistEnquiryController@storeMedia')->name('artist-enquiries.storeMedia');
+    Route::post('artist-enquiries/ckmedia', 'ArtistEnquiryController@storeCKEditorImages')->name('artist-enquiries.storeCKEditorImages');
+    Route::resource('artist-enquiries', 'ArtistEnquiryController');
 
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

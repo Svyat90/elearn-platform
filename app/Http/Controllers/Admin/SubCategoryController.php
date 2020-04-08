@@ -135,11 +135,7 @@ class SubCategoryController extends Controller
     {
         abort_if(Gate::denies('sub_category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-<<<<<<< HEAD
-        $subCategory->load('parent');
-=======
         $subCategory->load('parent', 'subCategoryArtistMeta');
->>>>>>> quickadminpanel_2020_04_08_10_05_50
 
         return view('admin.subCategories.show', compact('subCategory'));
     }

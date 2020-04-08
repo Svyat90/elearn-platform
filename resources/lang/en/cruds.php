@@ -97,11 +97,7 @@ return [
             'registered_on_helper'         => '',
         ],
     ],
-<<<<<<< HEAD
-    'category'           => [
-=======
     'category'             => [
->>>>>>> quickadminpanel_2020_04_08_10_05_50
         'title'          => 'Main Categories',
         'title_singular' => 'Main Category',
         'fields'         => [
@@ -175,11 +171,7 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-<<<<<<< HEAD
-    'page'               => [
-=======
     'page'                 => [
->>>>>>> quickadminpanel_2020_04_08_10_05_50
         'title'          => 'Web Page Content',
         'title_singular' => 'Web Page Content',
         'fields'         => [
@@ -197,11 +189,7 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-<<<<<<< HEAD
-    'searchLog'          => [
-=======
     'searchLog'            => [
->>>>>>> quickadminpanel_2020_04_08_10_05_50
         'title'          => 'Search Log',
         'title_singular' => 'Search Log',
         'fields'         => [
@@ -219,11 +207,7 @@ return [
             'search_from_helper' => '',
         ],
     ],
-<<<<<<< HEAD
-    'socialMedium'       => [
-=======
     'socialMedium'         => [
->>>>>>> quickadminpanel_2020_04_08_10_05_50
         'title'          => 'Social Media',
         'title_singular' => 'Social Medium',
         'fields'         => [
@@ -247,11 +231,7 @@ return [
         'title'          => 'Content Management',
         'title_singular' => 'Content Management',
     ],
-<<<<<<< HEAD
-    'auditLog'           => [
-=======
     'auditLog'             => [
->>>>>>> quickadminpanel_2020_04_08_10_05_50
         'title'          => 'Logs',
         'title_singular' => 'Log',
         'fields'         => [
@@ -275,11 +255,7 @@ return [
             'updated_at_helper'   => '',
         ],
     ],
-<<<<<<< HEAD
-    'order'              => [
-=======
     'order'                => [
->>>>>>> quickadminpanel_2020_04_08_10_05_50
         'title'          => 'Order History',
         'title_singular' => 'Order History',
         'fields'         => [
@@ -333,11 +309,7 @@ return [
             'order_status_helper'     => '1 pending, 2 completed,  3 rejected',
         ],
     ],
-<<<<<<< HEAD
-    'video'              => [
-=======
     'video'                => [
->>>>>>> quickadminpanel_2020_04_08_10_05_50
         'title'          => 'Order Videos',
         'title_singular' => 'Order Video',
         'fields'         => [
@@ -495,11 +467,6 @@ return [
             'parent_helper'     => '',
         ],
     ],
-<<<<<<< HEAD
-    'orderPayment'       => [
-        'title'          => 'Order Payment',
-        'title_singular' => 'Order Payment',
-=======
     'adminSetting'         => [
         'title'          => 'Site Settings',
         'title_singular' => 'Site Setting',
@@ -523,7 +490,6 @@ return [
     'occasion'             => [
         'title'          => 'Occasion List',
         'title_singular' => 'Occasion List',
->>>>>>> quickadminpanel_2020_04_08_10_05_50
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => '',
@@ -537,32 +503,6 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-<<<<<<< HEAD
-    'ordersList'         => [
-        'title'          => 'Order Management',
-        'title_singular' => 'Order Management',
-    ],
-    'customerManagement' => [
-        'title'          => 'Customer Management',
-        'title_singular' => 'Customer Management',
-    ],
-    'adminUser'          => [
-        'title'          => 'Admin Users',
-        'title_singular' => 'Admin User',
-        'fields'         => [
-            'id'                => 'ID',
-            'id_helper'         => '',
-            'username'          => 'Username',
-            'username_helper'   => '',
-            'password'          => 'Password',
-            'password_helper'   => '',
-            'role'              => 'Role',
-            'role_helper'       => '',
-            'email'             => 'Email',
-            'email_helper'      => '',
-            'status'            => 'Status',
-            'status_helper'     => '',
-=======
     'emailSubscription'    => [
         'title'          => 'Email Subscriptions',
         'title_singular' => 'Email Subscription',
@@ -625,7 +565,6 @@ return [
             'login_from_helper' => '',
             'device'            => 'Device',
             'device_helper'     => 'Mobile destop etc device info',
->>>>>>> quickadminpanel_2020_04_08_10_05_50
             'created_at'        => 'Created at',
             'created_at_helper' => '',
             'updated_at'        => 'Updated at',
@@ -634,32 +573,6 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-<<<<<<< HEAD
-    'mediaManagement'    => [
-        'title'          => 'Media Management',
-        'title_singular' => 'Media Management',
-    ],
-    'siteLog'            => [
-        'title'          => 'Site Logs',
-        'title_singular' => 'Site Log',
-    ],
-    'siteManagement'     => [
-        'title'          => 'Site Management',
-        'title_singular' => 'Site Management',
-    ],
-    'subCategory'        => [
-        'title'          => 'Sub Categories',
-        'title_singular' => 'Sub Category',
-        'fields'         => [
-            'id'                => 'ID',
-            'id_helper'         => '',
-            'name'              => 'Name',
-            'name_helper'       => '',
-            'color'             => 'Color',
-            'color_helper'      => '',
-            'image'             => 'Image',
-            'image_helper'      => '',
-=======
     'paymentLog'           => [
         'title'          => 'Payment Log',
         'title_singular' => 'Payment Log',
@@ -798,50 +711,6 @@ return [
             'id_helper'         => '',
             'user'              => 'User',
             'user_helper'       => '',
->>>>>>> quickadminpanel_2020_04_08_10_05_50
-            'created_at'        => 'Created at',
-            'created_at_helper' => '',
-            'updated_at'        => 'Updated at',
-            'updated_at_helper' => '',
-            'deleted_at'        => 'Deleted at',
-            'deleted_at_helper' => '',
-            'parent'            => 'Parent',
-            'parent_helper'     => '',
-        ],
-    ],
-<<<<<<< HEAD
-    'adminSetting'       => [
-        'title'          => 'Site Settings',
-        'title_singular' => 'Site Setting',
-        'fields'         => [
-            'id'                       => 'ID',
-            'id_helper'                => '',
-            'user_commission'          => 'User Commission',
-            'user_commission_helper'   => '',
-            'artist_commission'        => 'Artist Commission',
-            'artist_commission_helper' => '',
-            'agent_commission'         => 'Agent Commission',
-            'agent_commission_helper'  => '',
-            'created_at'               => 'Created at',
-            'created_at_helper'        => '',
-            'updated_at'               => 'Updated at',
-            'updated_at_helper'        => '',
-            'deleted_at'               => 'Deleted at',
-            'deleted_at_helper'        => '',
-        ],
-    ],
-    'unUsed'             => [
-        'title'          => 'UnUsed',
-        'title_singular' => 'UnUsed',
-    ],
-    'occasion'           => [
-        'title'          => 'Occasion List',
-        'title_singular' => 'Occasion List',
-        'fields'         => [
-            'id'                => 'ID',
-            'id_helper'         => '',
-            'name'              => 'Name',
-            'name_helper'       => '',
             'created_at'        => 'Created at',
             'created_at_helper' => '',
             'updated_at'        => 'Updated at',
@@ -850,69 +719,6 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-    'emailSubscription'  => [
-        'title'          => 'Email Subscriptions',
-        'title_singular' => 'Email Subscription',
-        'fields'         => [
-            'id'                     => 'ID',
-            'id_helper'              => '',
-            'email_address'          => 'Email Address',
-            'email_address_helper'   => '',
-            'status'                 => 'Status',
-            'status_helper'          => '',
-            'subscribed_on'          => 'Subscribed On',
-            'subscribed_on_helper'   => '',
-            'unsubscribed_on'        => 'Unsubscribed On',
-            'unsubscribed_on_helper' => '',
-            'created_at'             => 'Created at',
-            'created_at_helper'      => '',
-            'updated_at'             => 'Updated at',
-            'updated_at_helper'      => '',
-            'deleted_at'             => 'Deleted at',
-            'deleted_at_helper'      => '',
-        ],
-    ],
-    'promoCode'          => [
-        'title'          => 'Promo Codes',
-        'title_singular' => 'Promo Code',
-        'fields'         => [
-            'id'                         => 'ID',
-            'id_helper'                  => '',
-            'promo_code'                 => 'Promotional Code',
-            'promo_code_helper'          => '',
-            'discount'                   => 'Discount',
-            'discount_helper'            => 'How much discount get',
-            'minimum_order_value'        => 'Minimum Order Value',
-            'minimum_order_value_helper' => 'Min Amoutn Require to use promo code',
-            'start_date'                 => 'Start Date',
-            'start_date_helper'          => 'Protional Start Date',
-            'end_date'                   => 'End Date',
-            'end_date_helper'            => 'Promotinal End Date',
-            'promotion_info'             => 'Promotion Info',
-            'promotion_info_helper'      => '',
-            'created_at'                 => 'Created at',
-            'created_at_helper'          => '',
-            'updated_at'                 => 'Updated at',
-            'updated_at_helper'          => '',
-            'deleted_at'                 => 'Deleted at',
-            'deleted_at_helper'          => '',
-        ],
-    ],
-    'loginLog'           => [
-        'title'          => 'Login Log',
-        'title_singular' => 'Login Log',
-        'fields'         => [
-            'id'                => 'ID',
-            'id_helper'         => '',
-            'user'              => 'User',
-            'user_helper'       => '',
-            'ip_address'        => 'Ip Address',
-            'ip_address_helper' => '',
-            'login_from'        => 'Login From',
-            'login_from_helper' => '',
-            'device'            => 'Device',
-            'device_helper'     => 'Mobile destop etc device info',
-=======
     'artistManagement'     => [
         'title'          => 'Artist Management',
         'title_singular' => 'Artist Management',
@@ -1023,7 +829,6 @@ return [
             'user_helper'       => '[ref: > USER.referred_by]',
             'earn_from'         => 'Earn From',
             'earn_from_helper'  => '[ref: > USER.id]',
->>>>>>> quickadminpanel_2020_04_08_10_05_50
             'created_at'        => 'Created at',
             'created_at_helper' => '',
             'updated_at'        => 'Updated at',
@@ -1032,30 +837,38 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-    'paymentLog'         => [
-        'title'          => 'Payment Log',
-        'title_singular' => 'Payment Log',
+    'artistEnquiry'        => [
+        'title'          => 'Artist Enquiry',
+        'title_singular' => 'Artist Enquiry',
         'fields'         => [
-            'id'                  => 'ID',
-            'id_helper'           => '',
-            'user'                => 'User',
-            'user_helper'         => '',
-            'order'               => 'Order',
-            'order_helper'        => '',
-            'payment_info'        => 'Payment Info',
-            'payment_info_helper' => '',
-            'amount'              => 'Amount',
-            'amount_helper'       => '',
-            'created_at'          => 'Created at',
-            'created_at_helper'   => '',
-            'updated_at'          => 'Updated at',
-            'updated_at_helper'   => '',
-            'deleted_at'          => 'Deleted at',
-            'deleted_at_helper'   => '',
+            'id'                           => 'ID',
+            'id_helper'                    => '',
+            'artist'                       => 'Artist',
+            'artist_helper'                => '',
+            'name'                         => 'Name',
+            'name_helper'                  => 'Artist Name',
+            'email'                        => 'Email',
+            'email_helper'                 => 'Artist Email',
+            'contact_no'                   => 'Contact No',
+            'contact_no_helper'            => 'Contact No',
+            'social_media_type'            => 'Social Media Type',
+            'social_media_type_helper'     => 'Social Media type fb etc',
+            'social_media'                 => 'Social Media',
+            'social_media_helper'          => 'Social media id or url',
+            'social_media_followrs'        => 'Social Media Followrs',
+            'social_media_followrs_helper' => 'no of followers',
+            'country'                      => 'Country',
+            'country_helper'               => '',
+            'note'                         => 'Note',
+            'note_helper'                  => 'For backend use',
+            'status'                       => 'Status',
+            'status_helper'                => 'Enquiry Status 1. Pending, 2. Inprocess, 3. Completed',
+            'created_at'                   => 'Created at',
+            'created_at_helper'            => '',
+            'updated_at'                   => 'Updated at',
+            'updated_at_helper'            => '',
+            'deleted_at'                   => 'Deleted at',
+            'deleted_at_helper'            => '',
         ],
-    ],
-    'paymentManagement'  => [
-        'title'          => 'Payment Management',
-        'title_singular' => 'Payment Management',
     ],
 ];

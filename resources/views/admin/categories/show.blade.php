@@ -73,13 +73,8 @@
             </a>
         </li>
         <li class="nav-item">
-<<<<<<< HEAD
-            <a class="nav-link" href="#category_users" role="tab" data-toggle="tab">
-                {{ trans('cruds.user.title') }}
-=======
             <a class="nav-link" href="#main_catogery_artist_meta" role="tab" data-toggle="tab">
                 {{ trans('cruds.artistMetum.title') }}
->>>>>>> quickadminpanel_2020_04_08_10_05_50
             </a>
         </li>
     </ul>
@@ -87,13 +82,8 @@
         <div class="tab-pane" role="tabpanel" id="parent_sub_categories">
             @includeIf('admin.categories.relationships.parentSubCategories', ['subCategories' => $category->parentSubCategories])
         </div>
-<<<<<<< HEAD
-        <div class="tab-pane" role="tabpanel" id="category_users">
-            @includeIf('admin.categories.relationships.categoryUsers', ['users' => $category->categoryUsers])
-=======
         <div class="tab-pane" role="tabpanel" id="main_catogery_artist_meta">
             @includeIf('admin.categories.relationships.mainCatogeryArtistMeta', ['artistMeta' => $category->mainCatogeryArtistMeta])
->>>>>>> quickadminpanel_2020_04_08_10_05_50
         </div>
     </div>
 </div>

@@ -39,15 +39,12 @@ class SubCategory extends Model implements HasMedia
 
     }
 
-<<<<<<< HEAD
-=======
     public function subCategoryArtistMeta()
     {
         return $this->hasMany(ArtistMetum::class, 'sub_category_id', 'id');
 
     }
 
->>>>>>> quickadminpanel_2020_04_08_10_05_50
     public function getImageAttribute()
     {
         $file = $this->getMedia('image')->last();

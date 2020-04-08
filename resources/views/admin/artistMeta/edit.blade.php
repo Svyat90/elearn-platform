@@ -310,7 +310,7 @@
 <script>
     Dropzone.options.profilePhotoUrlDropzone = {
     url: '{{ route('admin.artist-meta.storeMedia') }}',
-    maxFilesize: 12, // MB
+    maxFilesize: 2000, // MB
     acceptedFiles: '.jpeg,.jpg,.png,.gif',
     maxFiles: 1,
     addRemoveLinks: true,
@@ -318,7 +318,7 @@
       'X-CSRF-TOKEN': "{{ csrf_token() }}"
     },
     params: {
-      size: 12,
+      size: 2000,
       width: 4096,
       height: 4096
     },

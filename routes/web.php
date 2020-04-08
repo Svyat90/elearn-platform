@@ -171,6 +171,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('artist-enquiries/ckmedia', 'ArtistEnquiryController@storeCKEditorImages')->name('artist-enquiries.storeCKEditorImages');
     Route::resource('artist-enquiries', 'ArtistEnquiryController');
 
+    // User Profile Avatar Images
+    Route::resource('user-profile-avatar-images', 'UserProfileAvatarImagesController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // Talent Profile Images
+    Route::resource('talent-profile-images', 'TalentProfileImagesController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // Talent Profile Intro Videos
+    Route::resource('talent-profile-intro-videos', 'TalentProfileIntroVideosController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
 // Change password

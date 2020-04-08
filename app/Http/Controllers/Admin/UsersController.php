@@ -89,9 +89,6 @@ class UsersController extends Controller
             $table->editColumn('registration_platform', function ($row) {
                 return $row->registration_platform ? User::REGISTRATION_PLATFORM_SELECT[$row->registration_platform] : '';
             });
-            $table->editColumn('status', function ($row) {
-                return $row->status ? User::STATUS_SELECT[$row->status] : '';
-            });
             $table->editColumn('ig_token', function ($row) {
                 return $row->ig_token ? $row->ig_token : "";
             });

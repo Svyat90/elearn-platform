@@ -123,14 +123,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.status') }}
-                        </th>
-                        <td>
-                            {{ App\User::STATUS_SELECT[$user->status] ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.user.fields.ig_token') }}
                         </th>
                         <td>

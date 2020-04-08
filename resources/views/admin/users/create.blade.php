@@ -127,19 +127,6 @@
                 <span class="help-block">{{ trans('cruds.user.fields.registration_platform_helper') }}</span>
             </div>
             <div class="form-group">
-                <label>{{ trans('cruds.user.fields.status') }}</label>
-                <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" id="status">
-                    <option value disabled {{ old('status', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\User::STATUS_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('status', '2') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('status'))
-                    <span class="text-danger">{{ $errors->first('status') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.status_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label for="ig_token">{{ trans('cruds.user.fields.ig_token') }}</label>
                 <input class="form-control {{ $errors->has('ig_token') ? 'is-invalid' : '' }}" type="text" name="ig_token" id="ig_token" value="{{ old('ig_token', '') }}">
                 @if($errors->has('ig_token'))

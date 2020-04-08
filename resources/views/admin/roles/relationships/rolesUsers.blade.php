@@ -58,9 +58,6 @@
                                 {{ trans('cruds.user.fields.registration_platform') }}
                             </th>
                             <th>
-                                {{ trans('cruds.user.fields.status') }}
-                            </th>
-                            <th>
                                 {{ trans('cruds.user.fields.ig_token') }}
                             </th>
                             <th>
@@ -129,9 +126,6 @@
                                 </td>
                                 <td>
                                     {{ App\User::REGISTRATION_PLATFORM_SELECT[$user->registration_platform] ?? '' }}
-                                </td>
-                                <td>
-                                    {{ App\User::STATUS_SELECT[$user->status] ?? '' }}
                                 </td>
                                 <td>
                                     {{ $user->ig_token ?? '' }}

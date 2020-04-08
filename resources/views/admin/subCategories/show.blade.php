@@ -70,9 +70,6 @@
     </div>
 </div>
 
-<<<<<<< HEAD
-
-=======
 <div class="card">
     <div class="card-header">
         {{ trans('global.relatedData') }}
@@ -90,6 +87,5 @@
         </div>
     </div>
 </div>
->>>>>>> quickadminpanel_2020_04_08_10_05_50
 
 @endsection

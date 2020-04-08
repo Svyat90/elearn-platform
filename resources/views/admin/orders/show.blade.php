@@ -214,11 +214,6 @@
                 {{ trans('cruds.artistResponse.title') }}
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#order_payment_logs" role="tab" data-toggle="tab">
-                {{ trans('cruds.paymentLog.title') }}
-            </a>
-        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="order_order_payments">
@@ -229,9 +224,6 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="order_artist_responses">
             @includeIf('admin.orders.relationships.orderArtistResponses', ['artistResponses' => $order->orderArtistResponses])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="order_payment_logs">
-            @includeIf('admin.orders.relationships.orderPaymentLogs', ['paymentLogs' => $order->orderPaymentLogs])
         </div>
     </div>
 </div>

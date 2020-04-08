@@ -68,10 +68,18 @@
                 {{ trans('cruds.user.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#country_artist_enquiries" role="tab" data-toggle="tab">
+                {{ trans('cruds.artistEnquiry.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="country_users">
             @includeIf('admin.countries.relationships.countryUsers', ['users' => $country->countryUsers])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="country_artist_enquiries">
+            @includeIf('admin.countries.relationships.countryArtistEnquiries', ['artistEnquiries' => $country->countryArtistEnquiries])
         </div>
     </div>
 </div>

@@ -62,25 +62,19 @@
                 {{ trans('cruds.adminUser.title') }}
             </a>
         </li>
-<<<<<<< HEAD
-=======
         <li class="nav-item">
             <a class="nav-link" href="#roles_users" role="tab" data-toggle="tab">
                 {{ trans('cruds.user.title') }}
             </a>
         </li>
->>>>>>> quickadminpanel_2020_04_08_10_05_50
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="role_admin_users">
             @includeIf('admin.roles.relationships.roleAdminUsers', ['adminUsers' => $role->roleAdminUsers])
         </div>
-<<<<<<< HEAD
-=======
         <div class="tab-pane" role="tabpanel" id="roles_users">
             @includeIf('admin.roles.relationships.rolesUsers', ['users' => $role->rolesUsers])
         </div>
->>>>>>> quickadminpanel_2020_04_08_10_05_50
     </div>
 </div>
 

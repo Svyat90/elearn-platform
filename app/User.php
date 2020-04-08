@@ -177,15 +177,9 @@ class User extends Authenticatable implements HasMedia
 
     }
 
-    public function userLoginLogs()
+    public function artistArtistEnquiries()
     {
-        return $this->hasMany(LoginLog::class, 'user_id', 'id');
-
-    }
-
-    public function userPaymentLogs()
-    {
-        return $this->hasMany(PaymentLog::class, 'user_id', 'id');
+        return $this->hasMany(ArtistEnquiry::class, 'artist_id', 'id');
 
     }
 

@@ -78,12 +78,6 @@ class Order extends Model
 
     }
 
-    public function orderPaymentLogs()
-    {
-        return $this->hasMany(PaymentLog::class, 'order_id', 'id');
-
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

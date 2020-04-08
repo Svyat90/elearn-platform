@@ -47,11 +47,11 @@ class CategoryController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : "";
             });
-            $table->editColumn('color', function ($row) {
-                return $row->color ? $row->color : "";
-            });
             $table->editColumn('name', function ($row) {
                 return $row->name ? $row->name : "";
+            });
+            $table->editColumn('color', function ($row) {
+                return $row->color ? $row->color : "";
             });
             $table->editColumn('image', function ($row) {
                 if ($photo = $row->image) {

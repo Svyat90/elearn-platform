@@ -77,8 +77,6 @@ return [
             'referred_by_helper'           => '',
             'registration_platform'        => 'Registration Platform',
             'registration_platform_helper' => '',
-            'status'                       => 'Status',
-            'status_helper'                => '',
             'mobile_no'                    => 'Mobile No',
             'mobile_no_helper'             => '',
             'ig_token'                     => 'Ig Token',

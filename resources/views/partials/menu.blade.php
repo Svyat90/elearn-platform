@@ -59,7 +59,7 @@
                             @can('user_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.users.index") }}" class="nav-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
-                                        <i class="fa-fw nav-icon fas fa-user">
+                                        <i class="fa-fw nav-icon fas fa-user-friends">
 
                                         </i>
                                         <p>
@@ -84,6 +84,12 @@
                                 <li class="nav-item">
                                     <a href="{{ route("admin.admin-users.index") }}" class="nav-link {{ request()->is('admin/admin-users') || request()->is('admin/admin-users/*') ? 'active' : '' }}">
                                         <i class="fa-fw nav-icon fas fa-users">
+<<<<<<< HEAD
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.adminUser.title') }}
+=======
 
                                         </i>
                                         <p>
@@ -96,9 +102,9 @@
                     </li>
                 @endcan
                 @can('customer_management_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/user-reviews*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/customers-lists*') ? 'menu-open' : '' }} {{ request()->is('admin/user-meta*') ? 'menu-open' : '' }} {{ request()->is('admin/user-wallet-histories*') ? 'menu-open' : '' }} {{ request()->is('admin/user-reviews*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
-                            <i class="fa-fw nav-icon fas fa-book">
+                            <i class="fa-fw nav-icon fas fa-users-cog">
 
                             </i>
                             <p>
@@ -107,6 +113,42 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            @can('customers_list_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.customers-lists.index") }}" class="nav-link {{ request()->is('admin/customers-lists') || request()->is('admin/customers-lists/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-user-friends">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.customersList.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('user_metum_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.user-meta.index") }}" class="nav-link {{ request()->is('admin/user-meta') || request()->is('admin/user-meta/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-user-friends">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.userMetum.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('user_wallet_history_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.user-wallet-histories.index") }}" class="nav-link {{ request()->is('admin/user-wallet-histories') || request()->is('admin/user-wallet-histories/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-file-invoice-dollar">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.userWalletHistory.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
                             @can('user_review_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.user-reviews.index") }}" class="nav-link {{ request()->is('admin/user-reviews') || request()->is('admin/user-reviews/*') ? 'active' : '' }}">
@@ -115,6 +157,134 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.userReview.title') }}
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+<<<<<<< HEAD
+                @can('customer_management_access')
+                    <li class="nav-item has-treeview {{ request()->is('admin/user-reviews*') ? 'menu-open' : '' }}">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="fa-fw nav-icon fas fa-book">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.customerManagement.title') }}
+=======
+                @can('artist_management_access')
+                    <li class="nav-item has-treeview {{ request()->is('admin/artist-lists*') ? 'menu-open' : '' }} {{ request()->is('admin/artist-meta*') ? 'menu-open' : '' }}">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="fa-fw nav-icon fas fa-user-graduate">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.artistManagement.title') }}
+                                <i class="right fa fa-fw fa-angle-left nav-icon"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('artist_list_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.artist-lists.index") }}" class="nav-link {{ request()->is('admin/artist-lists') || request()->is('admin/artist-lists/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-user-friends">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.artistList.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('artist_metum_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.artist-meta.index") }}" class="nav-link {{ request()->is('admin/artist-meta') || request()->is('admin/artist-meta/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-users">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.artistMetum.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+                @can('agent_mangement_access')
+                    <li class="nav-item has-treeview {{ request()->is('admin/agent-lists*') ? 'menu-open' : '' }} {{ request()->is('admin/agent-meta*') ? 'menu-open' : '' }}">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="fa-fw nav-icon fas fa-cogs">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.agentMangement.title') }}
+                                <i class="right fa fa-fw fa-angle-left nav-icon"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('agent_list_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.agent-lists.index") }}" class="nav-link {{ request()->is('admin/agent-lists') || request()->is('admin/agent-lists/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-users">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.agentList.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('agent_metum_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.agent-meta.index") }}" class="nav-link {{ request()->is('admin/agent-meta') || request()->is('admin/agent-meta/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-user-secret">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.agentMetum.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+                @can('media_management_access')
+                    <li class="nav-item has-treeview {{ request()->is('admin/videos*') ? 'menu-open' : '' }}">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="fa-fw nav-icon fas fa-video">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.mediaManagement.title') }}
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
+                                <i class="right fa fa-fw fa-angle-left nav-icon"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+<<<<<<< HEAD
+                            @can('user_review_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.user-reviews.index") }}" class="nav-link {{ request()->is('admin/user-reviews') || request()->is('admin/user-reviews/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon far fa-comment-alt">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.userReview.title') }}
+=======
+                            @can('video_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.videos.index") }}" class="nav-link {{ request()->is('admin/videos') || request()->is('admin/videos/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon far fa-file-video">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.video.title') }}
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
                                         </p>
                                     </a>
                                 </li>
@@ -123,7 +293,11 @@
                     </li>
                 @endcan
                 @can('orders_list_access')
+<<<<<<< HEAD
                     <li class="nav-item has-treeview {{ request()->is('admin/orders*') ? 'menu-open' : '' }} {{ request()->is('admin/order-payments*') ? 'menu-open' : '' }}">
+=======
+                    <li class="nav-item has-treeview {{ request()->is('admin/orders*') ? 'menu-open' : '' }} {{ request()->is('admin/order-payments*') ? 'menu-open' : '' }} {{ request()->is('admin/artist-responses*') ? 'menu-open' : '' }}">
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
                         <a class="nav-link nav-dropdown-toggle" href="#">
                             <i class="fa-fw nav-icon fas fa-hand-holding-usd">
 
@@ -147,6 +321,8 @@
                                 </li>
                             @endcan
                             @can('order_payment_access')
+<<<<<<< HEAD
+=======
                                 <li class="nav-item">
                                     <a href="{{ route("admin.order-payments.index") }}" class="nav-link {{ request()->is('admin/order-payments') || request()->is('admin/order-payments/*') ? 'active' : '' }}">
                                         <i class="fa-fw nav-icon fas fa-file-invoice-dollar">
@@ -154,6 +330,19 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.orderPayment.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('artist_response_access')
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.artist-responses.index") }}" class="nav-link {{ request()->is('admin/artist-responses') || request()->is('admin/artist-responses/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon far fa-comment-alt">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.artistResponse.title') }}
                                         </p>
                                     </a>
                                 </li>
@@ -272,6 +461,7 @@
                         </ul>
                     </li>
                 @endcan
+<<<<<<< HEAD
                 @can('media_management_access')
                     <li class="nav-item has-treeview {{ request()->is('admin/videos*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
@@ -280,10 +470,21 @@
                             </i>
                             <p>
                                 {{ trans('cruds.mediaManagement.title') }}
+=======
+                @can('site_log_access')
+                    <li class="nav-item has-treeview {{ request()->is('admin/search-logs*') ? 'menu-open' : '' }} {{ request()->is('admin/login-logs*') ? 'menu-open' : '' }} {{ request()->is('admin/payment-logs*') ? 'menu-open' : '' }}">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="fa-fw nav-icon fas fa-history">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.siteLog.title') }}
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
                                 <i class="right fa fa-fw fa-angle-left nav-icon"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+<<<<<<< HEAD
                             @can('video_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.videos.index") }}" class="nav-link {{ request()->is('admin/videos') || request()->is('admin/videos/*') ? 'active' : '' }}">
@@ -292,10 +493,21 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.video.title') }}
+=======
+                            @can('search_log_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.search-logs.index") }}" class="nav-link {{ request()->is('admin/search-logs') || request()->is('admin/search-logs/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-search">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.searchLog.title') }}
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
                                         </p>
                                     </a>
                                 </li>
                             @endcan
+<<<<<<< HEAD
                         </ul>
                     </li>
                 @endcan
@@ -328,6 +540,13 @@
                                     <a href="{{ route("admin.login-logs.index") }}" class="nav-link {{ request()->is('admin/login-logs') || request()->is('admin/login-logs/*') ? 'active' : '' }}">
                                         <i class="fa-fw nav-icon fas fa-cogs">
 
+=======
+                            @can('login_log_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.login-logs.index") }}" class="nav-link {{ request()->is('admin/login-logs') || request()->is('admin/login-logs/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-cogs">
+
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
                                         </i>
                                         <p>
                                             {{ trans('cruds.loginLog.title') }}
@@ -363,6 +582,15 @@
                         </a>
                         <ul class="nav nav-treeview">
                             @can('page_access')
+<<<<<<< HEAD
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.pages.index") }}" class="nav-link {{ request()->is('admin/pages') || request()->is('admin/pages/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-book-open">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.page.title') }}
+=======
                                 <li class="nav-item">
                                     <a href="{{ route("admin.pages.index") }}" class="nav-link {{ request()->is('admin/pages') || request()->is('admin/pages/*') ? 'active' : '' }}">
                                         <i class="fa-fw nav-icon fas fa-book-open">
@@ -382,10 +610,35 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.adminSetting.title') }}
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
                                         </p>
                                     </a>
                                 </li>
                             @endcan
+<<<<<<< HEAD
+                            @can('admin_setting_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.admin-settings.index") }}" class="nav-link {{ request()->is('admin/admin-settings') || request()->is('admin/admin-settings/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-sliders-h">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.adminSetting.title') }}
+=======
+                            @can('email_subscription_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.email-subscriptions.index") }}" class="nav-link {{ request()->is('admin/email-subscriptions') || request()->is('admin/email-subscriptions/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-envelope">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.emailSubscription.title') }}
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+<<<<<<< HEAD
                             @can('email_subscription_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.email-subscriptions.index") }}" class="nav-link {{ request()->is('admin/email-subscriptions') || request()->is('admin/email-subscriptions/*') ? 'active' : '' }}">
@@ -405,6 +658,15 @@
 
                                         </i>
                                         <p>
+=======
+                            @can('promo_code_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.promo-codes.index") }}" class="nav-link {{ request()->is('admin/promo-codes') || request()->is('admin/promo-codes/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-qrcode">
+
+                                        </i>
+                                        <p>
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
                                             {{ trans('cruds.promoCode.title') }}
                                         </p>
                                     </a>
@@ -413,6 +675,7 @@
                         </ul>
                     </li>
                 @endcan
+<<<<<<< HEAD
                 @can('un_used_access')
                     <li class="nav-item has-treeview {{ request()->is('admin/order-histories*') ? 'menu-open' : '' }} {{ request()->is('admin/referral-commissions*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
@@ -421,10 +684,21 @@
                             </i>
                             <p>
                                 {{ trans('cruds.unUsed.title') }}
+=======
+                @can('payment_management_access')
+                    <li class="nav-item has-treeview {{ request()->is('admin/artist-payment-histories*') ? 'menu-open' : '' }} {{ request()->is('admin/agent-payment-histories*') ? 'menu-open' : '' }}">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="fa-fw nav-icon fas fa-credit-card">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.paymentManagement.title') }}
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
                                 <i class="right fa fa-fw fa-angle-left nav-icon"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+<<<<<<< HEAD
                             @can('order_history_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.order-histories.index") }}" class="nav-link {{ request()->is('admin/order-histories') || request()->is('admin/order-histories/*') ? 'active' : '' }}">
@@ -433,10 +707,21 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.orderHistory.title') }}
+=======
+                            @can('artist_payment_history_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.artist-payment-histories.index") }}" class="nav-link {{ request()->is('admin/artist-payment-histories') || request()->is('admin/artist-payment-histories/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon far fa-money-bill-alt">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.artistPaymentHistory.title') }}
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
                                         </p>
                                     </a>
                                 </li>
                             @endcan
+<<<<<<< HEAD
                             @can('referral_commission_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.referral-commissions.index") }}" class="nav-link {{ request()->is('admin/referral-commissions') || request()->is('admin/referral-commissions/*') ? 'active' : '' }}">
@@ -445,6 +730,16 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.referralCommission.title') }}
+=======
+                            @can('agent_payment_history_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.agent-payment-histories.index") }}" class="nav-link {{ request()->is('admin/agent-payment-histories') || request()->is('admin/agent-payment-histories/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon far fa-money-bill-alt">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.agentPaymentHistory.title') }}
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
                                         </p>
                                     </a>
                                 </li>

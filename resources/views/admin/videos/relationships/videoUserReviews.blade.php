@@ -31,10 +31,13 @@
                                 {{ trans('cruds.userReview.fields.stars') }}
                             </th>
                             <th>
-                                {{ trans('cruds.userReview.fields.video') }}
+                                {{ trans('cruds.userReview.fields.show_video') }}
                             </th>
                             <th>
-                                {{ trans('cruds.userReview.fields.user') }}
+                                {{ trans('cruds.userReview.fields.review_apporval') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.userReview.fields.video') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -57,10 +60,13 @@
                                     {{ $userReview->stars ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $userReview->video->name ?? '' }}
+                                    {{ App\UserReview::SHOW_VIDEO_RADIO[$userReview->show_video] ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $userReview->user->name ?? '' }}
+                                    {{ App\UserReview::REVIEW_APPORVAL_SELECT[$userReview->review_apporval] ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $userReview->video->name ?? '' }}
                                 </td>
                                 <td>
                                     @can('user_review_show')

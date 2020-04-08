@@ -10,11 +10,11 @@ class CreateOrderPaymentsTable extends Migration
     {
         Schema::create('order_payments', function (Blueprint $table) {
             $table->increments('id');
-            $table->float('amount', 15, 2)->nullable();
-            $table->string('name')->nullable();
-            $table->string('address')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('text')->nullable();
+            $table->string('payment_by')->nullable();
+            $table->float('booking_amount', 15, 2)->nullable();
+            $table->float('recieved_amount', 15, 2)->nullable();
+            $table->string('payment_status')->nullable();
+            $table->string('pg_txnid')->nullable();
             $table->timestamps();
         });
 

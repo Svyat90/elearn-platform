@@ -1,13 +1,5 @@
 <div class="m-3">
-    @can('order_payment_create')
-        <div style="margin-bottom: 10px;" class="row">
-            <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route("admin.order-payments.create") }}">
-                    {{ trans('global.add') }} {{ trans('cruds.orderPayment.title_singular') }}
-                </a>
-            </div>
-        </div>
-    @endcan
+
     <div class="card">
         <div class="card-header">
             {{ trans('cruds.orderPayment.title_singular') }} {{ trans('global.list') }}
@@ -28,19 +20,19 @@
                                 {{ trans('cruds.orderPayment.fields.order') }}
                             </th>
                             <th>
-                                {{ trans('cruds.orderPayment.fields.amount') }}
+                                {{ trans('cruds.orderPayment.fields.payment_by') }}
                             </th>
                             <th>
-                                {{ trans('cruds.orderPayment.fields.name') }}
+                                {{ trans('cruds.orderPayment.fields.booking_amount') }}
                             </th>
                             <th>
-                                {{ trans('cruds.orderPayment.fields.address') }}
+                                {{ trans('cruds.orderPayment.fields.recieved_amount') }}
                             </th>
                             <th>
-                                {{ trans('cruds.orderPayment.fields.phone') }}
+                                {{ trans('cruds.orderPayment.fields.payment_status') }}
                             </th>
                             <th>
-                                {{ trans('cruds.orderPayment.fields.text') }}
+                                {{ trans('cruds.orderPayment.fields.pg_txnid') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -60,19 +52,19 @@
                                     {{ $orderPayment->order->payment_status ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $orderPayment->amount ?? '' }}
+                                    {{ App\OrderPayment::PAYMENT_BY_SELECT[$orderPayment->payment_by] ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $orderPayment->name ?? '' }}
+                                    {{ $orderPayment->booking_amount ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $orderPayment->address ?? '' }}
+                                    {{ $orderPayment->recieved_amount ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $orderPayment->phone ?? '' }}
+                                    {{ App\OrderPayment::PAYMENT_STATUS_SELECT[$orderPayment->payment_status] ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $orderPayment->text ?? '' }}
+                                    {{ $orderPayment->pg_txnid ?? '' }}
                                 </td>
                                 <td>
                                     @can('order_payment_show')
@@ -81,11 +73,6 @@
                                         </a>
                                     @endcan
 
-                                    @can('order_payment_edit')
-                                        <a class="btn btn-xs btn-info" href="{{ route('admin.order-payments.edit', $orderPayment->id) }}">
-                                            {{ trans('global.edit') }}
-                                        </a>
-                                    @endcan
 
                                     @can('order_payment_delete')
                                         <form action="{{ route('admin.order-payments.destroy', $orderPayment->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
@@ -142,7 +129,7 @@
 
   $.extend(true, $.fn.dataTable.defaults, {
     order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    pageLength: 25,
   });
   $('.datatable-orderOrderPayments:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){

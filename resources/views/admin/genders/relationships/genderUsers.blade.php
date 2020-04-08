@@ -40,28 +40,10 @@
                                 {{ trans('cruds.user.fields.email_verified_at') }}
                             </th>
                             <th>
-                                {{ trans('cruds.user.fields.dob') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.user.fields.position_occupation') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.user.fields.subscribers') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.user.fields.bio') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.user.fields.language') }}
+                                {{ trans('cruds.user.fields.mobile_no') }}
                             </th>
                             <th>
                                 {{ trans('cruds.user.fields.country') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.user.fields.social_meidia') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.user.fields.category') }}
                             </th>
                             <th>
                                 {{ trans('cruds.user.fields.gender') }}
@@ -76,10 +58,28 @@
                                 {{ trans('cruds.user.fields.registration_platform') }}
                             </th>
                             <th>
-                                {{ trans('cruds.user.fields.image') }}
+                                {{ trans('cruds.user.fields.status') }}
                             </th>
                             <th>
-                                {{ trans('cruds.user.fields.status') }}
+                                {{ trans('cruds.user.fields.ig_token') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.user.fields.ig_username') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.user.fields.user_status') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.user.fields.birth_date') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.user.fields.avatar') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.user.fields.registration_source') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.user.fields.registered_on') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -113,34 +113,10 @@
                                     {{ $user->email_verified_at ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $user->dob ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $user->position_occupation ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $user->subscribers ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $user->bio ?? '' }}
-                                </td>
-                                <td>
-                                    @foreach($user->languages as $key => $item)
-                                        <span class="badge badge-info">{{ $item->name }}</span>
-                                    @endforeach
+                                    {{ $user->mobile_no ?? '' }}
                                 </td>
                                 <td>
                                     {{ $user->country->name ?? '' }}
-                                </td>
-                                <td>
-                                    @foreach($user->social_meidias as $key => $item)
-                                        <span class="badge badge-info">{{ $item->name }}</span>
-                                    @endforeach
-                                </td>
-                                <td>
-                                    @foreach($user->categories as $key => $item)
-                                        <span class="badge badge-info">{{ $item->name }}</span>
-                                    @endforeach
                                 </td>
                                 <td>
                                     {{ $user->gender->name ?? '' }}
@@ -155,14 +131,32 @@
                                     {{ App\User::REGISTRATION_PLATFORM_SELECT[$user->registration_platform] ?? '' }}
                                 </td>
                                 <td>
-                                    @if($user->image)
-                                        <a href="{{ $user->image->getUrl() }}" target="_blank">
-                                            <img src="{{ $user->image->getUrl('thumb') }}" width="50px" height="50px">
+                                    {{ App\User::STATUS_SELECT[$user->status] ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $user->ig_token ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $user->ig_username ?? '' }}
+                                </td>
+                                <td>
+                                    {{ App\User::USER_STATUS_SELECT[$user->user_status] ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $user->birth_date ?? '' }}
+                                </td>
+                                <td>
+                                    @if($user->avatar)
+                                        <a href="{{ $user->avatar->getUrl() }}" target="_blank">
+                                            <img src="{{ $user->avatar->getUrl('thumb') }}" width="50px" height="50px">
                                         </a>
                                     @endif
                                 </td>
                                 <td>
-                                    {{ App\User::STATUS_SELECT[$user->status] ?? '' }}
+                                    {{ App\User::REGISTRATION_SOURCE_SELECT[$user->registration_source] ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $user->registered_on ?? '' }}
                                 </td>
                                 <td>
                                     @can('user_show')

@@ -20,4 +20,10 @@ class Tag extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public function tagsArtistMeta()
+    {
+        return $this->belongsToMany(ArtistMetum::class);
+
+    }
 }

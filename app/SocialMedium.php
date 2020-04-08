@@ -25,10 +25,4 @@ class SocialMedium extends Model
         'updated_at',
         'deleted_at',
     ];
-
-    public function socialMeidiaUsers()
-    {
-        return $this->belongsToMany(User::class);
-
-    }
 }

@@ -23,12 +23,23 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::post('videos/media', 'VideoApiController@storeMedia')->name('videos.storeMedia');
     Route::apiResource('videos', 'VideoApiController');
 
-    // Order Histories
-    Route::apiResource('order-histories', 'OrderHistoryApiController');
+    // Admin Users
+    Route::apiResource('admin-users', 'AdminUserApiController');
 
-    // Order Payments
-    Route::apiResource('order-payments', 'OrderPaymentApiController');
+    // Sub Categories
+    Route::post('sub-categories/media', 'SubCategoryApiController@storeMedia')->name('sub-categories.storeMedia');
+    Route::apiResource('sub-categories', 'SubCategoryApiController');
 
+    // Admin Settings
+    Route::apiResource('admin-settings', 'AdminSettingsApiController');
+
+    // Occasions
+    Route::apiResource('occasions', 'OccasionApiController');
+
+    // Email Subscriptions
+    Route::apiResource('email-subscriptions', 'EmailSubscriptionApiController');
+
+<<<<<<< HEAD
     // Admin Users
     Route::apiResource('admin-users', 'AdminUserApiController');
 
@@ -51,5 +62,20 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Login Logs
     Route::apiResource('login-logs', 'LoginLogApiController');
+=======
+    // Promo Codes
+    Route::post('promo-codes/media', 'PromoCodeApiController@storeMedia')->name('promo-codes.storeMedia');
+    Route::apiResource('promo-codes', 'PromoCodeApiController');
+
+    // Login Logs
+    Route::apiResource('login-logs', 'LoginLogApiController');
+
+    // User Meta
+    Route::post('user-meta/media', 'UserMetaApiController@storeMedia')->name('user-meta.storeMedia');
+    Route::apiResource('user-meta', 'UserMetaApiController');
+
+    // User Wallet Histories
+    Route::apiResource('user-wallet-histories', 'UserWalletHistoryApiController', ['except' => ['store', 'update']]);
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
 
 });

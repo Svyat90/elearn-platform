@@ -125,7 +125,11 @@ class CategoryController extends Controller
     {
         abort_if(Gate::denies('category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+<<<<<<< HEAD
         $category->load('parentSubCategories', 'categoryUsers');
+=======
+        $category->load('parentSubCategories', 'mainCatogeryArtistMeta', 'categoryUsers');
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
 
         return view('admin.categories.show', compact('category'));
     }

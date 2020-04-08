@@ -60,10 +60,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('social-media/destroy', 'SocialMediaController@massDestroy')->name('social-media.massDestroy');
     Route::resource('social-media', 'SocialMediaController');
 
-    // Referral Commissions
-    Route::delete('referral-commissions/destroy', 'ReferralCommissionController@massDestroy')->name('referral-commissions.massDestroy');
-    Route::resource('referral-commissions', 'ReferralCommissionController');
-
     // Audit Logs
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
@@ -79,19 +75,21 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // User Reviews
     Route::delete('user-reviews/destroy', 'UserReviewController@massDestroy')->name('user-reviews.massDestroy');
+    Route::post('user-reviews/media', 'UserReviewController@storeMedia')->name('user-reviews.storeMedia');
+    Route::post('user-reviews/ckmedia', 'UserReviewController@storeCKEditorImages')->name('user-reviews.storeCKEditorImages');
     Route::resource('user-reviews', 'UserReviewController');
 
     // Genders
     Route::delete('genders/destroy', 'GenderController@massDestroy')->name('genders.massDestroy');
     Route::resource('genders', 'GenderController');
 
-    // Order Histories
-    Route::delete('order-histories/destroy', 'OrderHistoryController@massDestroy')->name('order-histories.massDestroy');
-    Route::resource('order-histories', 'OrderHistoryController');
-
     // Order Payments
     Route::delete('order-payments/destroy', 'OrderPaymentController@massDestroy')->name('order-payments.massDestroy');
+<<<<<<< HEAD
     Route::resource('order-payments', 'OrderPaymentController');
+=======
+    Route::resource('order-payments', 'OrderPaymentController', ['except' => ['create', 'store', 'edit', 'update']]);
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
 
     // Admin Users
     Route::delete('admin-users/destroy', 'AdminUserController@massDestroy')->name('admin-users.massDestroy');
@@ -129,6 +127,50 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('payment-logs/media', 'PaymentLogController@storeMedia')->name('payment-logs.storeMedia');
     Route::post('payment-logs/ckmedia', 'PaymentLogController@storeCKEditorImages')->name('payment-logs.storeCKEditorImages');
     Route::resource('payment-logs', 'PaymentLogController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
+<<<<<<< HEAD
+=======
+
+    // Artist Payment Histories
+    Route::delete('artist-payment-histories/destroy', 'ArtistPaymentHistoryController@massDestroy')->name('artist-payment-histories.massDestroy');
+    Route::resource('artist-payment-histories', 'ArtistPaymentHistoryController', ['except' => ['create', 'store', 'edit', 'update']]);
+
+    // Agent Payment Histories
+    Route::delete('agent-payment-histories/destroy', 'AgentPaymentHistoryController@massDestroy')->name('agent-payment-histories.massDestroy');
+    Route::resource('agent-payment-histories', 'AgentPaymentHistoryController', ['except' => ['create', 'store', 'edit', 'update']]);
+
+    // Artist Responses
+    Route::delete('artist-responses/destroy', 'ArtistResponseController@massDestroy')->name('artist-responses.massDestroy');
+    Route::resource('artist-responses', 'ArtistResponseController');
+
+    // Agent Lists
+    Route::resource('agent-lists', 'AgentListController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // Agent Meta
+    Route::delete('agent-meta/destroy', 'AgentMetaController@massDestroy')->name('agent-meta.massDestroy');
+    Route::resource('agent-meta', 'AgentMetaController');
+
+    // Artist Lists
+    Route::resource('artist-lists', 'ArtistListController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // Artist Meta
+    Route::delete('artist-meta/destroy', 'ArtistMetaController@massDestroy')->name('artist-meta.massDestroy');
+    Route::post('artist-meta/media', 'ArtistMetaController@storeMedia')->name('artist-meta.storeMedia');
+    Route::post('artist-meta/ckmedia', 'ArtistMetaController@storeCKEditorImages')->name('artist-meta.storeCKEditorImages');
+    Route::resource('artist-meta', 'ArtistMetaController');
+
+    // Customers Lists
+    Route::resource('customers-lists', 'CustomersListController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // User Meta
+    Route::delete('user-meta/destroy', 'UserMetaController@massDestroy')->name('user-meta.massDestroy');
+    Route::post('user-meta/media', 'UserMetaController@storeMedia')->name('user-meta.storeMedia');
+    Route::post('user-meta/ckmedia', 'UserMetaController@storeCKEditorImages')->name('user-meta.storeCKEditorImages');
+    Route::resource('user-meta', 'UserMetaController');
+
+    // User Wallet Histories
+    Route::delete('user-wallet-histories/destroy', 'UserWalletHistoryController@massDestroy')->name('user-wallet-histories.massDestroy');
+    Route::resource('user-wallet-histories', 'UserWalletHistoryController', ['except' => ['create', 'store', 'edit', 'update']]);
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
 
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

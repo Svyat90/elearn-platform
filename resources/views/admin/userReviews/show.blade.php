@@ -33,6 +33,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.userReview.fields.review_text') }}
+                        </th>
+                        <td>
+                            {!! $userReview->review_text !!}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.userReview.fields.stars') }}
                         </th>
                         <td>
@@ -41,18 +49,26 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.userReview.fields.video') }}
+                            {{ trans('cruds.userReview.fields.show_video') }}
                         </th>
                         <td>
-                            {{ $userReview->video->name ?? '' }}
+                            {{ App\UserReview::SHOW_VIDEO_RADIO[$userReview->show_video] ?? '' }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.userReview.fields.user') }}
+                            {{ trans('cruds.userReview.fields.review_apporval') }}
                         </th>
                         <td>
-                            {{ $userReview->user->name ?? '' }}
+                            {{ App\UserReview::REVIEW_APPORVAL_SELECT[$userReview->review_apporval] ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.userReview.fields.video') }}
+                        </th>
+                        <td>
+                            {{ $userReview->video->name ?? '' }}
                         </td>
                     </tr>
                 </tbody>

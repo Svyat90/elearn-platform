@@ -70,6 +70,26 @@
     </div>
 </div>
 
+<<<<<<< HEAD
 
+=======
+<div class="card">
+    <div class="card-header">
+        {{ trans('global.relatedData') }}
+    </div>
+    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="#sub_category_artist_meta" role="tab" data-toggle="tab">
+                {{ trans('cruds.artistMetum.title') }}
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" role="tabpanel" id="sub_category_artist_meta">
+            @includeIf('admin.subCategories.relationships.subCategoryArtistMeta', ['artistMeta' => $subCategory->subCategoryArtistMeta])
+        </div>
+    </div>
+</div>
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
 
 @endsection

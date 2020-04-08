@@ -65,7 +65,11 @@ class RolesController extends Controller
     {
         abort_if(Gate::denies('role_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+<<<<<<< HEAD
         $role->load('permissions', 'roleAdminUsers');
+=======
+        $role->load('permissions', 'roleAdminUsers', 'rolesUsers');
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
 
         return view('admin.roles.show', compact('role'));
     }

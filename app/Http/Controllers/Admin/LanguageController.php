@@ -92,7 +92,7 @@ class LanguageController extends Controller
     {
         abort_if(Gate::denies('language_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $language->load('languageUsers');
+        $language->load('languageOrders', 'languageUsers', 'languagesArtistMeta');
 
         return view('admin.languages.show', compact('language'));
     }

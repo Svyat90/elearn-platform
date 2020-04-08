@@ -30,6 +30,15 @@ class Role extends Model
 
     }
 
+<<<<<<< HEAD
+=======
+    public function rolesUsers()
+    {
+        return $this->belongsToMany(User::class);
+
+    }
+
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
     public function permissions()
     {
         return $this->belongsToMany(Permission::class);

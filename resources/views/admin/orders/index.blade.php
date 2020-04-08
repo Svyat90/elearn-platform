@@ -28,22 +28,61 @@
                         {{ trans('cruds.order.fields.user') }}
                     </th>
                     <th>
-                        {{ trans('cruds.order.fields.video') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.order.fields.message') }}
                     </th>
                     <th>
-                        {{ trans('cruds.order.fields.payment_info') }}
+                        {{ trans('cruds.order.fields.payment_status') }}
                     </th>
                     <th>
-                        {{ trans('cruds.order.fields.total') }}
+                        {{ trans('cruds.order.fields.language') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.video_for') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.video_from') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.from_gender') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.video_to') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.to_gender') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.customer_name') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.occasion_type') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.delivery_email') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.delivery_phone') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.hide_video') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.promo_code') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.promo_discount') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.booking_amount') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.booking_datetime') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.payment_by') }}
                     </th>
                     <th>
                         {{ trans('cruds.order.fields.order_status') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.order.fields.payment_status') }}
                     </th>
                     <th>
                         &nbsp;
@@ -103,12 +142,25 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'user_name', name: 'user.name' },
-{ data: 'video_name', name: 'video.name' },
 { data: 'message', name: 'message' },
-{ data: 'payment_info', name: 'payment_info' },
-{ data: 'total', name: 'total' },
-{ data: 'order_status', name: 'order_status' },
 { data: 'payment_status', name: 'payment_status' },
+{ data: 'language_name', name: 'language.name' },
+{ data: 'video_for', name: 'video_for' },
+{ data: 'video_from', name: 'video_from' },
+{ data: 'from_gender', name: 'from_gender' },
+{ data: 'video_to', name: 'video_to' },
+{ data: 'to_gender', name: 'to_gender' },
+{ data: 'customer_name', name: 'customer_name' },
+{ data: 'occasion_type_name', name: 'occasion_type.name' },
+{ data: 'delivery_email', name: 'delivery_email' },
+{ data: 'delivery_phone', name: 'delivery_phone' },
+{ data: 'hide_video', name: 'hide_video' },
+{ data: 'promo_code', name: 'promo_code' },
+{ data: 'promo_discount', name: 'promo_discount' },
+{ data: 'booking_amount', name: 'booking_amount' },
+{ data: 'booking_datetime', name: 'booking_datetime' },
+{ data: 'payment_by', name: 'payment_by' },
+{ data: 'order_status', name: 'order_status' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

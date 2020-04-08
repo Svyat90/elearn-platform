@@ -127,7 +127,7 @@ class VideoController extends Controller
     {
         abort_if(Gate::denies('video_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $video->load('user', 'videoUserReviews', 'videoOrders', 'videoOrderHistories');
+        $video->load('user', 'videoArtistResponses', 'videoUserReviews');
 
         return view('admin.videos.show', compact('video'));
     }

@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyOrderRequest;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Language;
+use App\Occasion;
 use App\Order;
 use App\User;
-use App\Video;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +22,7 @@ class OrderController extends Controller
         abort_if(Gate::denies('order_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Order::with(['user', 'video'])->select(sprintf('%s.*', (new Order)->table));
+            $query = Order::with(['user', 'language', 'occasion_type'])->select(sprintf('%s.*', (new Order)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -49,27 +50,65 @@ class OrderController extends Controller
                 return $row->user ? $row->user->name : '';
             });
 
-            $table->addColumn('video_name', function ($row) {
-                return $row->video ? $row->video->name : '';
-            });
-
             $table->editColumn('message', function ($row) {
                 return $row->message ? $row->message : "";
-            });
-            $table->editColumn('payment_info', function ($row) {
-                return $row->payment_info ? $row->payment_info : "";
-            });
-            $table->editColumn('total', function ($row) {
-                return $row->total ? $row->total : "";
-            });
-            $table->editColumn('order_status', function ($row) {
-                return $row->order_status ? Order::ORDER_STATUS_SELECT[$row->order_status] : '';
             });
             $table->editColumn('payment_status', function ($row) {
                 return $row->payment_status ? Order::PAYMENT_STATUS_SELECT[$row->payment_status] : '';
             });
+            $table->addColumn('language_name', function ($row) {
+                return $row->language ? $row->language->name : '';
+            });
 
-            $table->rawColumns(['actions', 'placeholder', 'user', 'video']);
+            $table->editColumn('video_for', function ($row) {
+                return $row->video_for ? $row->video_for : "";
+            });
+            $table->editColumn('video_from', function ($row) {
+                return $row->video_from ? $row->video_from : "";
+            });
+            $table->editColumn('from_gender', function ($row) {
+                return $row->from_gender ? $row->from_gender : "";
+            });
+            $table->editColumn('video_to', function ($row) {
+                return $row->video_to ? $row->video_to : "";
+            });
+            $table->editColumn('to_gender', function ($row) {
+                return $row->to_gender ? $row->to_gender : "";
+            });
+            $table->editColumn('customer_name', function ($row) {
+                return $row->customer_name ? $row->customer_name : "";
+            });
+            $table->addColumn('occasion_type_name', function ($row) {
+                return $row->occasion_type ? $row->occasion_type->name : '';
+            });
+
+            $table->editColumn('delivery_email', function ($row) {
+                return $row->delivery_email ? $row->delivery_email : "";
+            });
+            $table->editColumn('delivery_phone', function ($row) {
+                return $row->delivery_phone ? $row->delivery_phone : "";
+            });
+            $table->editColumn('hide_video', function ($row) {
+                return $row->hide_video ? $row->hide_video : "";
+            });
+            $table->editColumn('promo_code', function ($row) {
+                return $row->promo_code ? $row->promo_code : "";
+            });
+            $table->editColumn('promo_discount', function ($row) {
+                return $row->promo_discount ? $row->promo_discount : "";
+            });
+            $table->editColumn('booking_amount', function ($row) {
+                return $row->booking_amount ? $row->booking_amount : "";
+            });
+
+            $table->editColumn('payment_by', function ($row) {
+                return $row->payment_by ? Order::PAYMENT_BY_SELECT[$row->payment_by] : '';
+            });
+            $table->editColumn('order_status', function ($row) {
+                return $row->order_status ? Order::ORDER_STATUS_SELECT[$row->order_status] : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'user', 'language', 'occasion_type']);
 
             return $table->make(true);
         }
@@ -83,9 +122,11 @@ class OrderController extends Controller
 
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $videos = Video::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $languages = Language::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.orders.create', compact('users', 'videos'));
+        $occasion_types = Occasion::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.orders.create', compact('users', 'languages', 'occasion_types'));
     }
 
     public function store(StoreOrderRequest $request)
@@ -102,11 +143,13 @@ class OrderController extends Controller
 
         $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $videos = Video::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $languages = Language::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $order->load('user', 'video');
+        $occasion_types = Occasion::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.orders.edit', compact('users', 'videos', 'order'));
+        $order->load('user', 'language', 'occasion_type');
+
+        return view('admin.orders.edit', compact('users', 'languages', 'occasion_types', 'order'));
     }
 
     public function update(UpdateOrderRequest $request, Order $order)
@@ -121,7 +164,11 @@ class OrderController extends Controller
     {
         abort_if(Gate::denies('order_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+<<<<<<< HEAD
         $order->load('user', 'video', 'orderOrderPayments', 'orderOrderHistories', 'orderPaymentLogs');
+=======
+        $order->load('user', 'language', 'occasion_type', 'orderOrderPayments', 'orderPaymentLogs', 'orderArtistResponses');
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
 
         return view('admin.orders.show', compact('order'));
     }

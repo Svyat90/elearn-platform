@@ -17,16 +17,26 @@ class OrderPayment extends Model
         'deleted_at',
     ];
 
+    const PAYMENT_STATUS_SELECT = [
+        '1' => 'Completed',
+        '2' => 'Failed',
+    ];
+
+    const PAYMENT_BY_SELECT = [
+        '1' => 'Wallet',
+        '2' => 'Payment gateway',
+    ];
+
     protected $fillable = [
-        'name',
-        'text',
-        'phone',
-        'amount',
-        'address',
         'order_id',
+        'pg_txnid',
+        'payment_by',
         'created_at',
         'updated_at',
         'deleted_at',
+        'booking_amount',
+        'payment_status',
+        'recieved_amount',
     ];
 
     public function order()

@@ -1,14 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-@can('order_payment_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.order-payments.create") }}">
-                {{ trans('global.add') }} {{ trans('cruds.orderPayment.title_singular') }}
-            </a>
-        </div>
-    </div>
-@endcan
+
 <div class="card">
     <div class="card-header">
         {{ trans('cruds.orderPayment.title_singular') }} {{ trans('global.list') }}
@@ -28,19 +20,19 @@
                         {{ trans('cruds.orderPayment.fields.order') }}
                     </th>
                     <th>
-                        {{ trans('cruds.orderPayment.fields.amount') }}
+                        {{ trans('cruds.orderPayment.fields.payment_by') }}
                     </th>
                     <th>
-                        {{ trans('cruds.orderPayment.fields.name') }}
+                        {{ trans('cruds.orderPayment.fields.booking_amount') }}
                     </th>
                     <th>
-                        {{ trans('cruds.orderPayment.fields.address') }}
+                        {{ trans('cruds.orderPayment.fields.recieved_amount') }}
                     </th>
                     <th>
-                        {{ trans('cruds.orderPayment.fields.phone') }}
+                        {{ trans('cruds.orderPayment.fields.payment_status') }}
                     </th>
                     <th>
-                        {{ trans('cruds.orderPayment.fields.text') }}
+                        {{ trans('cruds.orderPayment.fields.pg_txnid') }}
                     </th>
                     <th>
                         &nbsp;
@@ -100,15 +92,15 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'order_payment_status', name: 'order.payment_status' },
-{ data: 'amount', name: 'amount' },
-{ data: 'name', name: 'name' },
-{ data: 'address', name: 'address' },
-{ data: 'phone', name: 'phone' },
-{ data: 'text', name: 'text' },
+{ data: 'payment_by', name: 'payment_by' },
+{ data: 'booking_amount', name: 'booking_amount' },
+{ data: 'recieved_amount', name: 'recieved_amount' },
+{ data: 'payment_status', name: 'payment_status' },
+{ data: 'pg_txnid', name: 'pg_txnid' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    pageLength: 25,
   };
   $('.datatable-OrderPayment').DataTable(dtOverrideGlobals);
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){

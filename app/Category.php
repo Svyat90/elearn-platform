@@ -44,9 +44,9 @@ class Category extends Model implements HasMedia
 
     }
 
-    public function categoryUsers()
+    public function mainCatogeryArtistMeta()
     {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(ArtistMetum::class, 'main_catogery_id', 'id');
 
     }
 

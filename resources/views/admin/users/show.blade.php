@@ -75,44 +75,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.dob') }}
+                            {{ trans('cruds.user.fields.mobile_no') }}
                         </th>
                         <td>
-                            {{ $user->dob }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.position_occupation') }}
-                        </th>
-                        <td>
-                            {{ $user->position_occupation }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.subscribers') }}
-                        </th>
-                        <td>
-                            {{ $user->subscribers }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.bio') }}
-                        </th>
-                        <td>
-                            {{ $user->bio }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.language') }}
-                        </th>
-                        <td>
-                            @foreach($user->languages as $key => $language)
-                                <span class="label label-info">{{ $language->name }}</span>
-                            @endforeach
+                            {{ $user->mobile_no }}
                         </td>
                     </tr>
                     <tr>
@@ -121,26 +87,6 @@
                         </th>
                         <td>
                             {{ $user->country->name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.social_meidia') }}
-                        </th>
-                        <td>
-                            @foreach($user->social_meidias as $key => $social_meidia)
-                                <span class="label label-info">{{ $social_meidia->name }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.category') }}
-                        </th>
-                        <td>
-                            @foreach($user->categories as $key => $category)
-                                <span class="label label-info">{{ $category->name }}</span>
-                            @endforeach
                         </td>
                     </tr>
                     <tr>
@@ -177,22 +123,70 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.image') }}
+                            {{ trans('cruds.user.fields.status') }}
                         </th>
                         <td>
-                            @if($user->image)
-                                <a href="{{ $user->image->getUrl() }}" target="_blank">
-                                    <img src="{{ $user->image->getUrl('thumb') }}" width="50px" height="50px">
+                            {{ App\User::STATUS_SELECT[$user->status] ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.ig_token') }}
+                        </th>
+                        <td>
+                            {{ $user->ig_token }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.ig_username') }}
+                        </th>
+                        <td>
+                            {{ $user->ig_username }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.user_status') }}
+                        </th>
+                        <td>
+                            {{ App\User::USER_STATUS_SELECT[$user->user_status] ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.birth_date') }}
+                        </th>
+                        <td>
+                            {{ $user->birth_date }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.avatar') }}
+                        </th>
+                        <td>
+                            @if($user->avatar)
+                                <a href="{{ $user->avatar->getUrl() }}" target="_blank">
+                                    <img src="{{ $user->avatar->getUrl('thumb') }}" width="50px" height="50px">
                                 </a>
                             @endif
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.status') }}
+                            {{ trans('cruds.user.fields.registration_source') }}
                         </th>
                         <td>
-                            {{ App\User::STATUS_SELECT[$user->status] ?? '' }}
+                            {{ App\User::REGISTRATION_SOURCE_SELECT[$user->registration_source] ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.registered_on') }}
+                        </th>
+                        <td>
+                            {{ $user->registered_on }}
                         </td>
                     </tr>
                 </tbody>
@@ -212,11 +206,6 @@
     </div>
     <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
         <li class="nav-item">
-            <a class="nav-link" href="#user_user_reviews" role="tab" data-toggle="tab">
-                {{ trans('cruds.userReview.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="#user_orders" role="tab" data-toggle="tab">
                 {{ trans('cruds.order.title') }}
             </a>
@@ -227,8 +216,58 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#user_order_histories" role="tab" data-toggle="tab">
-                {{ trans('cruds.orderHistory.title') }}
+            <a class="nav-link" href="#user_login_logs" role="tab" data-toggle="tab">
+                {{ trans('cruds.loginLog.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#user_payment_logs" role="tab" data-toggle="tab">
+                {{ trans('cruds.paymentLog.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#user_artist_payment_histories" role="tab" data-toggle="tab">
+                {{ trans('cruds.artistPaymentHistory.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#earn_from_artist_payment_histories" role="tab" data-toggle="tab">
+                {{ trans('cruds.artistPaymentHistory.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#user_agent_payment_histories" role="tab" data-toggle="tab">
+                {{ trans('cruds.agentPaymentHistory.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#earn_from_agent_payment_histories" role="tab" data-toggle="tab">
+                {{ trans('cruds.agentPaymentHistory.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#user_agent_meta" role="tab" data-toggle="tab">
+                {{ trans('cruds.agentMetum.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#artist_artist_meta" role="tab" data-toggle="tab">
+                {{ trans('cruds.artistMetum.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#user_user_meta" role="tab" data-toggle="tab">
+                {{ trans('cruds.userMetum.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#user_user_wallet_histories" role="tab" data-toggle="tab">
+                {{ trans('cruds.userWalletHistory.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#earn_from_user_wallet_histories" role="tab" data-toggle="tab">
+                {{ trans('cruds.userWalletHistory.title') }}
             </a>
         </li>
         <li class="nav-item">
@@ -243,17 +282,44 @@
         </li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="user_user_reviews">
-            @includeIf('admin.users.relationships.userUserReviews', ['userReviews' => $user->userUserReviews])
-        </div>
         <div class="tab-pane" role="tabpanel" id="user_orders">
             @includeIf('admin.users.relationships.userOrders', ['orders' => $user->userOrders])
         </div>
         <div class="tab-pane" role="tabpanel" id="user_videos">
             @includeIf('admin.users.relationships.userVideos', ['videos' => $user->userVideos])
         </div>
-        <div class="tab-pane" role="tabpanel" id="user_order_histories">
-            @includeIf('admin.users.relationships.userOrderHistories', ['orderHistories' => $user->userOrderHistories])
+        <div class="tab-pane" role="tabpanel" id="user_login_logs">
+            @includeIf('admin.users.relationships.userLoginLogs', ['loginLogs' => $user->userLoginLogs])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="user_payment_logs">
+            @includeIf('admin.users.relationships.userPaymentLogs', ['paymentLogs' => $user->userPaymentLogs])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="user_artist_payment_histories">
+            @includeIf('admin.users.relationships.userArtistPaymentHistories', ['artistPaymentHistories' => $user->userArtistPaymentHistories])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="earn_from_artist_payment_histories">
+            @includeIf('admin.users.relationships.earnFromArtistPaymentHistories', ['artistPaymentHistories' => $user->earnFromArtistPaymentHistories])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="user_agent_payment_histories">
+            @includeIf('admin.users.relationships.userAgentPaymentHistories', ['agentPaymentHistories' => $user->userAgentPaymentHistories])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="earn_from_agent_payment_histories">
+            @includeIf('admin.users.relationships.earnFromAgentPaymentHistories', ['agentPaymentHistories' => $user->earnFromAgentPaymentHistories])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="user_agent_meta">
+            @includeIf('admin.users.relationships.userAgentMeta', ['agentMeta' => $user->userAgentMeta])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="artist_artist_meta">
+            @includeIf('admin.users.relationships.artistArtistMeta', ['artistMeta' => $user->artistArtistMeta])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="user_user_meta">
+            @includeIf('admin.users.relationships.userUserMeta', ['userMeta' => $user->userUserMeta])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="user_user_wallet_histories">
+            @includeIf('admin.users.relationships.userUserWalletHistories', ['userWalletHistories' => $user->userUserWalletHistories])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="earn_from_user_wallet_histories">
+            @includeIf('admin.users.relationships.earnFromUserWalletHistories', ['userWalletHistories' => $user->earnFromUserWalletHistories])
         </div>
         <div class="tab-pane" role="tabpanel" id="user_login_logs">
             @includeIf('admin.users.relationships.userLoginLogs', ['loginLogs' => $user->userLoginLogs])

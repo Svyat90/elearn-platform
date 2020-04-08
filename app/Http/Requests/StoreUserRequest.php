@@ -20,47 +20,35 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'roles.*'             => [
+            'roles.*'       => [
                 'integer'],
-            'roles'               => [
+            'roles'         => [
                 'required',
                 'array'],
-            'name'                => [
+            'name'          => [
                 'required'],
-            'first_name'          => [
+            'first_name'    => [
                 'max:256',
                 'required'],
-            'last_name'           => [
+            'last_name'     => [
                 'max:256'],
-            'email'               => [
+            'email'         => [
                 'required',
                 'unique:users'],
-            'password'            => [
+            'mobile_no'     => [
+                'max:200'],
+            'password'      => [
                 'required'],
-            'dob'                 => [
+            'ig_token'      => [
+                'max:256'],
+            'ig_username'   => [
+                'max:256'],
+            'birth_date'    => [
                 'date_format:' . config('panel.date_format'),
                 'nullable'],
-            'position_occupation' => [
-                'max:256'],
-            'subscribers'         => [
-                'nullable',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647'],
-            'bio'                 => [
-                'max:256'],
-            'languages.*'         => [
-                'integer'],
-            'languages'           => [
-                'array'],
-            'social_meidias.*'    => [
-                'integer'],
-            'social_meidias'      => [
-                'array'],
-            'categories.*'        => [
-                'integer'],
-            'categories'          => [
-                'array'],
+            'registered_on' => [
+                'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
+                'nullable'],
         ];
 
     }

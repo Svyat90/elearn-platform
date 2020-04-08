@@ -89,6 +89,11 @@ class OccasionController extends Controller
     {
         abort_if(Gate::denies('occasion_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+<<<<<<< HEAD
+=======
+        $occasion->load('occasionTypeOrders');
+
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
         return view('admin.occasions.show', compact('occasion'));
     }
 

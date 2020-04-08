@@ -23,4 +23,10 @@ class Occasion extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public function occasionTypeOrders()
+    {
+        return $this->hasMany(Order::class, 'occasion_type_id', 'id');
+
+    }
 }

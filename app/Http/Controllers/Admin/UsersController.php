@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
 use App\Country;
 use App\Gender;
 use App\Http\Controllers\Controller;
@@ -10,9 +9,7 @@ use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Language;
 use App\Role;
-use App\SocialMedium;
 use App\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -29,7 +26,7 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = User::with(['roles', 'languages', 'country', 'social_meidias', 'categories', 'gender'])->select(sprintf('%s.*', (new User)->table));
+            $query = User::with(['roles', 'country', 'gender'])->select(sprintf('%s.*', (new User)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -72,46 +69,13 @@ class UsersController extends Controller
                 return $row->email ? $row->email : "";
             });
 
-            $table->editColumn('position_occupation', function ($row) {
-                return $row->position_occupation ? $row->position_occupation : "";
-            });
-            $table->editColumn('subscribers', function ($row) {
-                return $row->subscribers ? $row->subscribers : "";
-            });
-            $table->editColumn('bio', function ($row) {
-                return $row->bio ? $row->bio : "";
-            });
-            $table->editColumn('language', function ($row) {
-                $labels = [];
-
-                foreach ($row->languages as $language) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $language->name);
-                }
-
-                return implode(' ', $labels);
+            $table->editColumn('mobile_no', function ($row) {
+                return $row->mobile_no ? $row->mobile_no : "";
             });
             $table->addColumn('country_name', function ($row) {
                 return $row->country ? $row->country->name : '';
             });
 
-            $table->editColumn('social_meidia', function ($row) {
-                $labels = [];
-
-                foreach ($row->social_meidias as $social_meidium) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $social_meidium->name);
-                }
-
-                return implode(' ', $labels);
-            });
-            $table->editColumn('category', function ($row) {
-                $labels = [];
-
-                foreach ($row->categories as $category) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $category->name);
-                }
-
-                return implode(' ', $labels);
-            });
             $table->addColumn('gender_name', function ($row) {
                 return $row->gender ? $row->gender->name : '';
             });
@@ -125,8 +89,21 @@ class UsersController extends Controller
             $table->editColumn('registration_platform', function ($row) {
                 return $row->registration_platform ? User::REGISTRATION_PLATFORM_SELECT[$row->registration_platform] : '';
             });
-            $table->editColumn('image', function ($row) {
-                if ($photo = $row->image) {
+            $table->editColumn('status', function ($row) {
+                return $row->status ? User::STATUS_SELECT[$row->status] : '';
+            });
+            $table->editColumn('ig_token', function ($row) {
+                return $row->ig_token ? $row->ig_token : "";
+            });
+            $table->editColumn('ig_username', function ($row) {
+                return $row->ig_username ? $row->ig_username : "";
+            });
+            $table->editColumn('user_status', function ($row) {
+                return $row->user_status ? User::USER_STATUS_SELECT[$row->user_status] : '';
+            });
+
+            $table->editColumn('avatar', function ($row) {
+                if ($photo = $row->avatar) {
                     return sprintf(
                         '<a href="%s" target="_blank"><img src="%s" width="50px" height="50px"></a>',
                         $photo->url,
@@ -137,11 +114,11 @@ class UsersController extends Controller
                 return '';
 
             });
-            $table->editColumn('status', function ($row) {
-                return $row->status ? User::STATUS_SELECT[$row->status] : '';
+            $table->editColumn('registration_source', function ($row) {
+                return $row->registration_source ? User::REGISTRATION_SOURCE_SELECT[$row->registration_source] : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'roles', 'language', 'country', 'social_meidia', 'category', 'gender', 'image']);
+            $table->rawColumns(['actions', 'placeholder', 'roles', 'country', 'gender', 'avatar']);
 
             return $table->make(true);
         }
@@ -155,29 +132,20 @@ class UsersController extends Controller
 
         $roles = Role::all()->pluck('title', 'id');
 
-        $languages = Language::all()->pluck('name', 'id');
-
         $countries = Country::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $social_meidias = SocialMedium::all()->pluck('name', 'id');
-
-        $categories = Category::all()->pluck('name', 'id');
 
         $genders = Gender::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.users.create', compact('roles', 'languages', 'countries', 'social_meidias', 'categories', 'genders'));
+        return view('admin.users.create', compact('roles', 'countries', 'genders'));
     }
 
     public function store(StoreUserRequest $request)
     {
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
-        $user->languages()->sync($request->input('languages', []));
-        $user->social_meidias()->sync($request->input('social_meidias', []));
-        $user->categories()->sync($request->input('categories', []));
 
-        if ($request->input('image', false)) {
-            $user->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
+        if ($request->input('avatar', false)) {
+            $user->addMedia(storage_path('tmp/uploads/' . $request->input('avatar')))->toMediaCollection('avatar');
         }
 
         if ($media = $request->input('ck-media', false)) {
@@ -194,36 +162,27 @@ class UsersController extends Controller
 
         $roles = Role::all()->pluck('title', 'id');
 
-        $languages = Language::all()->pluck('name', 'id');
-
         $countries = Country::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $social_meidias = SocialMedium::all()->pluck('name', 'id');
-
-        $categories = Category::all()->pluck('name', 'id');
 
         $genders = Gender::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $user->load('roles', 'languages', 'country', 'social_meidias', 'categories', 'gender');
+        $user->load('roles', 'country', 'gender');
 
-        return view('admin.users.edit', compact('roles', 'languages', 'countries', 'social_meidias', 'categories', 'genders', 'user'));
+        return view('admin.users.edit', compact('roles', 'countries', 'genders', 'user'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
-        $user->languages()->sync($request->input('languages', []));
-        $user->social_meidias()->sync($request->input('social_meidias', []));
-        $user->categories()->sync($request->input('categories', []));
 
-        if ($request->input('image', false)) {
-            if (!$user->image || $request->input('image') !== $user->image->file_name) {
-                $user->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
+        if ($request->input('avatar', false)) {
+            if (!$user->avatar || $request->input('avatar') !== $user->avatar->file_name) {
+                $user->addMedia(storage_path('tmp/uploads/' . $request->input('avatar')))->toMediaCollection('avatar');
             }
 
-        } elseif ($user->image) {
-            $user->image->delete();
+        } elseif ($user->avatar) {
+            $user->avatar->delete();
         }
 
         return redirect()->route('admin.users.index');
@@ -234,7 +193,11 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+<<<<<<< HEAD
         $user->load('roles', 'languages', 'country', 'social_meidias', 'categories', 'gender', 'userUserReviews', 'userOrders', 'userVideos', 'userOrderHistories', 'userLoginLogs', 'userPaymentLogs');
+=======
+        $user->load('roles', 'country', 'gender', 'userUserReviews', 'userOrders', 'userVideos', 'userLoginLogs', 'userPaymentLogs', 'userArtistPaymentHistories', 'earnFromArtistPaymentHistories', 'userAgentPaymentHistories', 'earnFromAgentPaymentHistories', 'userAgentMeta', 'artistArtistMeta', 'userUserMeta', 'userUserWalletHistories', 'earnFromUserWalletHistories');
+>>>>>>> quickadminpanel_2020_04_08_10_05_50
 
         return view('admin.users.show', compact('user'));
     }

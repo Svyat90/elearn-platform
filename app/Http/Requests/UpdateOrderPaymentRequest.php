@@ -20,6 +20,8 @@ class UpdateOrderPaymentRequest extends FormRequest
     public function rules()
     {
         return [
+            'pg_txnid' => [
+                'max:256'],
         ];
 
     }

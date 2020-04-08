@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -9,7 +10,7 @@ use Spatie\MediaLibrary\Models\Media;
 
 class Category extends Model implements HasMedia
 {
-    use HasMediaTrait;
+    use HasMediaTrait, Auditable;
 
     public $table = 'categories';
 
@@ -25,6 +26,7 @@ class Category extends Model implements HasMedia
 
     protected $fillable = [
         'name',
+        'color',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -36,9 +38,15 @@ class Category extends Model implements HasMedia
 
     }
 
-    public function categoryUsers()
+    public function parentSubCategories()
     {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(SubCategory::class, 'parent_id', 'id');
+
+    }
+
+    public function mainCatogeryArtistMeta()
+    {
+        return $this->hasMany(ArtistMetum::class, 'main_catogery_id', 'id');
 
     }
 

@@ -26,6 +26,14 @@
                 <span class="help-block">{{ trans('cruds.country.fields.short_code_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="phone_code">{{ trans('cruds.country.fields.phone_code') }}</label>
+                <input class="form-control {{ $errors->has('phone_code') ? 'is-invalid' : '' }}" type="text" name="phone_code" id="phone_code" value="{{ old('phone_code', '') }}">
+                @if($errors->has('phone_code'))
+                    <span class="text-danger">{{ $errors->first('phone_code') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.country.fields.phone_code_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

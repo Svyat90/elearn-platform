@@ -33,42 +33,42 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.orderPayment.fields.amount') }}
+                            {{ trans('cruds.orderPayment.fields.payment_by') }}
                         </th>
                         <td>
-                            {{ $orderPayment->amount }}
+                            {{ App\OrderPayment::PAYMENT_BY_SELECT[$orderPayment->payment_by] ?? '' }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.orderPayment.fields.name') }}
+                            {{ trans('cruds.orderPayment.fields.booking_amount') }}
                         </th>
                         <td>
-                            {{ $orderPayment->name }}
+                            {{ $orderPayment->booking_amount }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.orderPayment.fields.address') }}
+                            {{ trans('cruds.orderPayment.fields.recieved_amount') }}
                         </th>
                         <td>
-                            {{ $orderPayment->address }}
+                            {{ $orderPayment->recieved_amount }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.orderPayment.fields.phone') }}
+                            {{ trans('cruds.orderPayment.fields.payment_status') }}
                         </th>
                         <td>
-                            {{ $orderPayment->phone }}
+                            {{ App\OrderPayment::PAYMENT_STATUS_SELECT[$orderPayment->payment_status] ?? '' }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.orderPayment.fields.text') }}
+                            {{ trans('cruds.orderPayment.fields.pg_txnid') }}
                         </th>
                         <td>
-                            {{ $orderPayment->text }}
+                            {{ $orderPayment->pg_txnid }}
                         </td>
                     </tr>
                 </tbody>

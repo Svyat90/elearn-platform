@@ -39,6 +39,14 @@
                             {{ $socialMedium->short_code }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.socialMedium.fields.website') }}
+                        </th>
+                        <td>
+                            {{ $socialMedium->website }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -50,22 +58,6 @@
     </div>
 </div>
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.relatedData') }}
-    </div>
-    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
-        <li class="nav-item">
-            <a class="nav-link" href="#social_meidia_users" role="tab" data-toggle="tab">
-                {{ trans('cruds.user.title') }}
-            </a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="social_meidia_users">
-            @includeIf('admin.socialMedia.relationships.socialMeidiaUsers', ['users' => $socialMedium->socialMeidiaUsers])
-        </div>
-    </div>
-</div>
+
 
 @endsection

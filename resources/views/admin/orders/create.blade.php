@@ -22,53 +22,12 @@
                 <span class="help-block">{{ trans('cruds.order.fields.user_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="video_id">{{ trans('cruds.order.fields.video') }}</label>
-                <select class="form-control select2 {{ $errors->has('video') ? 'is-invalid' : '' }}" name="video_id" id="video_id">
-                    @foreach($videos as $id => $video)
-                        <option value="{{ $id }}" {{ old('video_id') == $id ? 'selected' : '' }}>{{ $video }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('video'))
-                    <span class="text-danger">{{ $errors->first('video') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.order.fields.video_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="message">{{ trans('cruds.order.fields.message') }}</label>
-                <input class="form-control {{ $errors->has('message') ? 'is-invalid' : '' }}" type="text" name="message" id="message" value="{{ old('message', '') }}">
+                <label class="required" for="message">{{ trans('cruds.order.fields.message') }}</label>
+                <input class="form-control {{ $errors->has('message') ? 'is-invalid' : '' }}" type="text" name="message" id="message" value="{{ old('message', '') }}" required>
                 @if($errors->has('message'))
                     <span class="text-danger">{{ $errors->first('message') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.order.fields.message_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="payment_info">{{ trans('cruds.order.fields.payment_info') }}</label>
-                <input class="form-control {{ $errors->has('payment_info') ? 'is-invalid' : '' }}" type="text" name="payment_info" id="payment_info" value="{{ old('payment_info', '') }}">
-                @if($errors->has('payment_info'))
-                    <span class="text-danger">{{ $errors->first('payment_info') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.order.fields.payment_info_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="total">{{ trans('cruds.order.fields.total') }}</label>
-                <input class="form-control {{ $errors->has('total') ? 'is-invalid' : '' }}" type="number" name="total" id="total" value="{{ old('total', '') }}" step="0.01">
-                @if($errors->has('total'))
-                    <span class="text-danger">{{ $errors->first('total') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.order.fields.total_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label>{{ trans('cruds.order.fields.order_status') }}</label>
-                <select class="form-control {{ $errors->has('order_status') ? 'is-invalid' : '' }}" name="order_status" id="order_status">
-                    <option value disabled {{ old('order_status', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Order::ORDER_STATUS_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('order_status', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('order_status'))
-                    <span class="text-danger">{{ $errors->first('order_status') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.order.fields.order_status_helper') }}</span>
             </div>
             <div class="form-group">
                 <label>{{ trans('cruds.order.fields.payment_status') }}</label>
@@ -82,6 +41,160 @@
                     <span class="text-danger">{{ $errors->first('payment_status') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.order.fields.payment_status_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="language_id">{{ trans('cruds.order.fields.language') }}</label>
+                <select class="form-control select2 {{ $errors->has('language') ? 'is-invalid' : '' }}" name="language_id" id="language_id">
+                    @foreach($languages as $id => $language)
+                        <option value="{{ $id }}" {{ old('language_id') == $id ? 'selected' : '' }}>{{ $language }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('language'))
+                    <span class="text-danger">{{ $errors->first('language') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.language_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="video_for">{{ trans('cruds.order.fields.video_for') }}</label>
+                <input class="form-control {{ $errors->has('video_for') ? 'is-invalid' : '' }}" type="number" name="video_for" id="video_for" value="{{ old('video_for', '0') }}" step="1">
+                @if($errors->has('video_for'))
+                    <span class="text-danger">{{ $errors->first('video_for') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.video_for_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="video_from">{{ trans('cruds.order.fields.video_from') }}</label>
+                <input class="form-control {{ $errors->has('video_from') ? 'is-invalid' : '' }}" type="text" name="video_from" id="video_from" value="{{ old('video_from', '') }}">
+                @if($errors->has('video_from'))
+                    <span class="text-danger">{{ $errors->first('video_from') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.video_from_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="from_gender">{{ trans('cruds.order.fields.from_gender') }}</label>
+                <input class="form-control {{ $errors->has('from_gender') ? 'is-invalid' : '' }}" type="text" name="from_gender" id="from_gender" value="{{ old('from_gender', '') }}">
+                @if($errors->has('from_gender'))
+                    <span class="text-danger">{{ $errors->first('from_gender') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.from_gender_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="video_to">{{ trans('cruds.order.fields.video_to') }}</label>
+                <input class="form-control {{ $errors->has('video_to') ? 'is-invalid' : '' }}" type="text" name="video_to" id="video_to" value="{{ old('video_to', '') }}">
+                @if($errors->has('video_to'))
+                    <span class="text-danger">{{ $errors->first('video_to') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.video_to_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="to_gender">{{ trans('cruds.order.fields.to_gender') }}</label>
+                <input class="form-control {{ $errors->has('to_gender') ? 'is-invalid' : '' }}" type="text" name="to_gender" id="to_gender" value="{{ old('to_gender', '') }}">
+                @if($errors->has('to_gender'))
+                    <span class="text-danger">{{ $errors->first('to_gender') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.to_gender_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="customer_name">{{ trans('cruds.order.fields.customer_name') }}</label>
+                <input class="form-control {{ $errors->has('customer_name') ? 'is-invalid' : '' }}" type="text" name="customer_name" id="customer_name" value="{{ old('customer_name', '') }}">
+                @if($errors->has('customer_name'))
+                    <span class="text-danger">{{ $errors->first('customer_name') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.customer_name_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="occasion_type_id">{{ trans('cruds.order.fields.occasion_type') }}</label>
+                <select class="form-control select2 {{ $errors->has('occasion_type') ? 'is-invalid' : '' }}" name="occasion_type_id" id="occasion_type_id">
+                    @foreach($occasion_types as $id => $occasion_type)
+                        <option value="{{ $id }}" {{ old('occasion_type_id') == $id ? 'selected' : '' }}>{{ $occasion_type }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('occasion_type'))
+                    <span class="text-danger">{{ $errors->first('occasion_type') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.occasion_type_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="delivery_email">{{ trans('cruds.order.fields.delivery_email') }}</label>
+                <input class="form-control {{ $errors->has('delivery_email') ? 'is-invalid' : '' }}" type="text" name="delivery_email" id="delivery_email" value="{{ old('delivery_email', '') }}">
+                @if($errors->has('delivery_email'))
+                    <span class="text-danger">{{ $errors->first('delivery_email') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.delivery_email_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="delivery_phone">{{ trans('cruds.order.fields.delivery_phone') }}</label>
+                <input class="form-control {{ $errors->has('delivery_phone') ? 'is-invalid' : '' }}" type="text" name="delivery_phone" id="delivery_phone" value="{{ old('delivery_phone', '') }}">
+                @if($errors->has('delivery_phone'))
+                    <span class="text-danger">{{ $errors->first('delivery_phone') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.delivery_phone_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="hide_video">{{ trans('cruds.order.fields.hide_video') }}</label>
+                <input class="form-control {{ $errors->has('hide_video') ? 'is-invalid' : '' }}" type="number" name="hide_video" id="hide_video" value="{{ old('hide_video', '1') }}" step="1">
+                @if($errors->has('hide_video'))
+                    <span class="text-danger">{{ $errors->first('hide_video') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.hide_video_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="promo_code">{{ trans('cruds.order.fields.promo_code') }}</label>
+                <input class="form-control {{ $errors->has('promo_code') ? 'is-invalid' : '' }}" type="text" name="promo_code" id="promo_code" value="{{ old('promo_code', '') }}">
+                @if($errors->has('promo_code'))
+                    <span class="text-danger">{{ $errors->first('promo_code') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.promo_code_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="promo_discount">{{ trans('cruds.order.fields.promo_discount') }}</label>
+                <input class="form-control {{ $errors->has('promo_discount') ? 'is-invalid' : '' }}" type="number" name="promo_discount" id="promo_discount" value="{{ old('promo_discount', '') }}" step="0.01">
+                @if($errors->has('promo_discount'))
+                    <span class="text-danger">{{ $errors->first('promo_discount') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.promo_discount_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="booking_amount">{{ trans('cruds.order.fields.booking_amount') }}</label>
+                <input class="form-control {{ $errors->has('booking_amount') ? 'is-invalid' : '' }}" type="number" name="booking_amount" id="booking_amount" value="{{ old('booking_amount', '') }}" step="0.01">
+                @if($errors->has('booking_amount'))
+                    <span class="text-danger">{{ $errors->first('booking_amount') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.booking_amount_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="booking_datetime">{{ trans('cruds.order.fields.booking_datetime') }}</label>
+                <input class="form-control datetime {{ $errors->has('booking_datetime') ? 'is-invalid' : '' }}" type="text" name="booking_datetime" id="booking_datetime" value="{{ old('booking_datetime') }}">
+                @if($errors->has('booking_datetime'))
+                    <span class="text-danger">{{ $errors->first('booking_datetime') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.booking_datetime_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label>{{ trans('cruds.order.fields.payment_by') }}</label>
+                <select class="form-control {{ $errors->has('payment_by') ? 'is-invalid' : '' }}" name="payment_by" id="payment_by">
+                    <option value disabled {{ old('payment_by', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Order::PAYMENT_BY_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('payment_by', '1') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('payment_by'))
+                    <span class="text-danger">{{ $errors->first('payment_by') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.payment_by_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label>{{ trans('cruds.order.fields.order_status') }}</label>
+                <select class="form-control {{ $errors->has('order_status') ? 'is-invalid' : '' }}" name="order_status" id="order_status">
+                    <option value disabled {{ old('order_status', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Order::ORDER_STATUS_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('order_status', '1') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('order_status'))
+                    <span class="text-danger">{{ $errors->first('order_status') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.order_status_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

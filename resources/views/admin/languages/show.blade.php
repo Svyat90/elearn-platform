@@ -31,6 +31,14 @@
                             {{ $language->name }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.language.fields.iso_code') }}
+                        </th>
+                        <td>
+                            {{ $language->iso_code }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -48,14 +56,22 @@
     </div>
     <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
         <li class="nav-item">
-            <a class="nav-link" href="#language_users" role="tab" data-toggle="tab">
-                {{ trans('cruds.user.title') }}
+            <a class="nav-link" href="#language_orders" role="tab" data-toggle="tab">
+                {{ trans('cruds.order.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#languages_artist_meta" role="tab" data-toggle="tab">
+                {{ trans('cruds.artistMetum.title') }}
             </a>
         </li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="language_users">
-            @includeIf('admin.languages.relationships.languageUsers', ['users' => $language->languageUsers])
+        <div class="tab-pane" role="tabpanel" id="language_orders">
+            @includeIf('admin.languages.relationships.languageOrders', ['orders' => $language->languageOrders])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="languages_artist_meta">
+            @includeIf('admin.languages.relationships.languagesArtistMeta', ['artistMeta' => $language->languagesArtistMeta])
         </div>
     </div>
 </div>

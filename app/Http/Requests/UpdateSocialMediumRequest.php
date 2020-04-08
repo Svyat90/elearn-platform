@@ -26,6 +26,8 @@ class UpdateSocialMediumRequest extends FormRequest
                 'unique:social_media,name,' . request()->route('social_medium')->id],
             'short_code' => [
                 'max:256'],
+            'website'    => [
+                'max:256'],
         ];
 
     }

@@ -33,14 +33,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.order.fields.video') }}
-                        </th>
-                        <td>
-                            {{ $order->video->name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.order.fields.message') }}
                         </th>
                         <td>
@@ -49,18 +41,138 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.order.fields.payment_info') }}
+                            {{ trans('cruds.order.fields.payment_status') }}
                         </th>
                         <td>
-                            {{ $order->payment_info }}
+                            {{ App\Order::PAYMENT_STATUS_SELECT[$order->payment_status] ?? '' }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.order.fields.total') }}
+                            {{ trans('cruds.order.fields.language') }}
                         </th>
                         <td>
-                            {{ $order->total }}
+                            {{ $order->language->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.video_for') }}
+                        </th>
+                        <td>
+                            {{ $order->video_for }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.video_from') }}
+                        </th>
+                        <td>
+                            {{ $order->video_from }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.from_gender') }}
+                        </th>
+                        <td>
+                            {{ $order->from_gender }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.video_to') }}
+                        </th>
+                        <td>
+                            {{ $order->video_to }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.to_gender') }}
+                        </th>
+                        <td>
+                            {{ $order->to_gender }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.customer_name') }}
+                        </th>
+                        <td>
+                            {{ $order->customer_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.occasion_type') }}
+                        </th>
+                        <td>
+                            {{ $order->occasion_type->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.delivery_email') }}
+                        </th>
+                        <td>
+                            {{ $order->delivery_email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.delivery_phone') }}
+                        </th>
+                        <td>
+                            {{ $order->delivery_phone }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.hide_video') }}
+                        </th>
+                        <td>
+                            {{ $order->hide_video }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.promo_code') }}
+                        </th>
+                        <td>
+                            {{ $order->promo_code }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.promo_discount') }}
+                        </th>
+                        <td>
+                            {{ $order->promo_discount }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.booking_amount') }}
+                        </th>
+                        <td>
+                            {{ $order->booking_amount }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.booking_datetime') }}
+                        </th>
+                        <td>
+                            {{ $order->booking_datetime }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.payment_by') }}
+                        </th>
+                        <td>
+                            {{ App\Order::PAYMENT_BY_SELECT[$order->payment_by] ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -69,14 +181,6 @@
                         </th>
                         <td>
                             {{ App\Order::ORDER_STATUS_SELECT[$order->order_status] ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.order.fields.payment_status') }}
-                        </th>
-                        <td>
-                            {{ App\Order::PAYMENT_STATUS_SELECT[$order->payment_status] ?? '' }}
                         </td>
                     </tr>
                 </tbody>
@@ -101,8 +205,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#order_order_histories" role="tab" data-toggle="tab">
-                {{ trans('cruds.orderHistory.title') }}
+            <a class="nav-link" href="#order_payment_logs" role="tab" data-toggle="tab">
+                {{ trans('cruds.paymentLog.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#order_artist_responses" role="tab" data-toggle="tab">
+                {{ trans('cruds.artistResponse.title') }}
             </a>
         </li>
     </ul>
@@ -110,8 +219,11 @@
         <div class="tab-pane" role="tabpanel" id="order_order_payments">
             @includeIf('admin.orders.relationships.orderOrderPayments', ['orderPayments' => $order->orderOrderPayments])
         </div>
-        <div class="tab-pane" role="tabpanel" id="order_order_histories">
-            @includeIf('admin.orders.relationships.orderOrderHistories', ['orderHistories' => $order->orderOrderHistories])
+        <div class="tab-pane" role="tabpanel" id="order_payment_logs">
+            @includeIf('admin.orders.relationships.orderPaymentLogs', ['paymentLogs' => $order->orderPaymentLogs])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="order_artist_responses">
+            @includeIf('admin.orders.relationships.orderArtistResponses', ['artistResponses' => $order->orderArtistResponses])
         </div>
     </div>
 </div>

@@ -21,7 +21,7 @@ class User extends Authenticatable implements HasMedia
     public $table = 'users';
 
     protected $appends = [
-        'image',
+        'avatar',
     ];
 
     protected $hidden = [
@@ -34,40 +34,56 @@ class User extends Authenticatable implements HasMedia
         '2' => 'App',
     ];
 
+    const REGISTRATION_SOURCE_SELECT = [
+        '1' => 'Manual form',
+        '2' => 'Instagram',
+    ];
+
     const STATUS_SELECT = [
         '1' => 'Active',
         '2' => 'NotActive',
         '3' => 'Banned',
     ];
 
+    const USER_STATUS_SELECT = [
+        '1' => 'Active',
+        '2' => 'Not Active',
+        '3' => 'Banned',
+        '4' => 'Deleted',
+    ];
+
     protected $dates = [
-        'dob',
+        'birth_date',
         'created_at',
         'updated_at',
         'deleted_at',
+        'registered_on',
         'email_verified_at',
     ];
 
     protected $fillable = [
-        'bio',
-        'dob',
         'name',
         'email',
         'status',
         'password',
-        'gender_id',
+        'ig_token',
         'last_name',
+        'mobile_no',
+        'gender_id',
         'updated_at',
         'created_at',
-        'country_id',
+        'birth_date',
         'deleted_at',
         'first_name',
+        'country_id',
+        'ig_username',
+        'user_status',
         'referred_by',
-        'subscribers',
         'referral_code',
+        'registered_on',
         'remember_token',
         'email_verified_at',
-        'position_occupation',
+        'registration_source',
         'registration_platform',
     ];
 
@@ -83,12 +99,6 @@ class User extends Authenticatable implements HasMedia
 
     }
 
-    public function userUserReviews()
-    {
-        return $this->hasMany(UserReview::class, 'user_id', 'id');
-
-    }
-
     public function userOrders()
     {
         return $this->hasMany(Order::class, 'user_id', 'id');
@@ -101,9 +111,69 @@ class User extends Authenticatable implements HasMedia
 
     }
 
-    public function userOrderHistories()
+    public function userLoginLogs()
     {
-        return $this->hasMany(OrderHistory::class, 'user_id', 'id');
+        return $this->hasMany(LoginLog::class, 'user_id', 'id');
+
+    }
+
+    public function userPaymentLogs()
+    {
+        return $this->hasMany(PaymentLog::class, 'user_id', 'id');
+
+    }
+
+    public function userArtistPaymentHistories()
+    {
+        return $this->hasMany(ArtistPaymentHistory::class, 'user_id', 'id');
+
+    }
+
+    public function earnFromArtistPaymentHistories()
+    {
+        return $this->hasMany(ArtistPaymentHistory::class, 'earn_from_id', 'id');
+
+    }
+
+    public function userAgentPaymentHistories()
+    {
+        return $this->hasMany(AgentPaymentHistory::class, 'user_id', 'id');
+
+    }
+
+    public function earnFromAgentPaymentHistories()
+    {
+        return $this->hasMany(AgentPaymentHistory::class, 'earn_from_id', 'id');
+
+    }
+
+    public function userAgentMeta()
+    {
+        return $this->hasMany(AgentMetum::class, 'user_id', 'id');
+
+    }
+
+    public function artistArtistMeta()
+    {
+        return $this->hasMany(ArtistMetum::class, 'artist_id', 'id');
+
+    }
+
+    public function userUserMeta()
+    {
+        return $this->hasMany(UserMetum::class, 'user_id', 'id');
+
+    }
+
+    public function userUserWalletHistories()
+    {
+        return $this->hasMany(UserWalletHistory::class, 'user_id', 'id');
+
+    }
+
+    public function earnFromUserWalletHistories()
+    {
+        return $this->hasMany(UserWalletHistory::class, 'earn_from_id', 'id');
 
     }
 
@@ -139,39 +209,9 @@ class User extends Authenticatable implements HasMedia
 
     }
 
-    public function getDobAttribute($value)
-    {
-        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
-
-    }
-
-    public function setDobAttribute($value)
-    {
-        $this->attributes['dob'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-
-    }
-
-    public function languages()
-    {
-        return $this->belongsToMany(Language::class);
-
-    }
-
     public function country()
     {
         return $this->belongsTo(Country::class, 'country_id');
-
-    }
-
-    public function social_meidias()
-    {
-        return $this->belongsToMany(SocialMedium::class);
-
-    }
-
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class);
 
     }
 
@@ -181,9 +221,21 @@ class User extends Authenticatable implements HasMedia
 
     }
 
-    public function getImageAttribute()
+    public function getBirthDateAttribute($value)
     {
-        $file = $this->getMedia('image')->last();
+        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+
+    }
+
+    public function setBirthDateAttribute($value)
+    {
+        $this->attributes['birth_date'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+
+    }
+
+    public function getAvatarAttribute()
+    {
+        $file = $this->getMedia('avatar')->last();
 
         if ($file) {
             $file->url       = $file->getUrl();
@@ -191,6 +243,18 @@ class User extends Authenticatable implements HasMedia
         }
 
         return $file;
+
+    }
+
+    public function getRegisteredOnAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
+
+    }
+
+    public function setRegisteredOnAttribute($value)
+    {
+        $this->attributes['registered_on'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
 
     }
 

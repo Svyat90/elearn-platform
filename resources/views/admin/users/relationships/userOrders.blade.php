@@ -28,22 +28,61 @@
                                 {{ trans('cruds.order.fields.user') }}
                             </th>
                             <th>
-                                {{ trans('cruds.order.fields.video') }}
-                            </th>
-                            <th>
                                 {{ trans('cruds.order.fields.message') }}
                             </th>
                             <th>
-                                {{ trans('cruds.order.fields.payment_info') }}
+                                {{ trans('cruds.order.fields.payment_status') }}
                             </th>
                             <th>
-                                {{ trans('cruds.order.fields.total') }}
+                                {{ trans('cruds.order.fields.language') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.video_for') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.video_from') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.from_gender') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.video_to') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.to_gender') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.customer_name') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.occasion_type') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.delivery_email') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.delivery_phone') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.hide_video') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.promo_code') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.promo_discount') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.booking_amount') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.booking_datetime') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.payment_by') }}
                             </th>
                             <th>
                                 {{ trans('cruds.order.fields.order_status') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.order.fields.payment_status') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -63,22 +102,61 @@
                                     {{ $order->user->name ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $order->video->name ?? '' }}
-                                </td>
-                                <td>
                                     {{ $order->message ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $order->payment_info ?? '' }}
+                                    {{ App\Order::PAYMENT_STATUS_SELECT[$order->payment_status] ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $order->total ?? '' }}
+                                    {{ $order->language->name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->video_for ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->video_from ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->from_gender ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->video_to ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->to_gender ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->customer_name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->occasion_type->name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->delivery_email ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->delivery_phone ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->hide_video ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->promo_code ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->promo_discount ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->booking_amount ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->booking_datetime ?? '' }}
+                                </td>
+                                <td>
+                                    {{ App\Order::PAYMENT_BY_SELECT[$order->payment_by] ?? '' }}
                                 </td>
                                 <td>
                                     {{ App\Order::ORDER_STATUS_SELECT[$order->order_status] ?? '' }}
-                                </td>
-                                <td>
-                                    {{ App\Order::PAYMENT_STATUS_SELECT[$order->payment_status] ?? '' }}
                                 </td>
                                 <td>
                                     @can('order_show')

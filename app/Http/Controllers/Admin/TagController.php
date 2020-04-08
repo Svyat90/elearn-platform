@@ -56,6 +56,8 @@ class TagController extends Controller
     {
         abort_if(Gate::denies('tag_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $tag->load('tagsArtistMeta');
+
         return view('admin.tags.show', compact('tag'));
     }
 

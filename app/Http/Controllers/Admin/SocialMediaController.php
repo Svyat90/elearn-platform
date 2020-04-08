@@ -10,16 +10,55 @@ use App\SocialMedium;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class SocialMediaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('social_medium_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $socialMedia = SocialMedium::all();
+        if ($request->ajax()) {
+            $query = SocialMedium::query()->select(sprintf('%s.*', (new SocialMedium)->table));
+            $table = Datatables::of($query);
 
-        return view('admin.socialMedia.index', compact('socialMedia'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'social_medium_show';
+                $editGate      = 'social_medium_edit';
+                $deleteGate    = 'social_medium_delete';
+                $crudRoutePart = 'social-media';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : "";
+            });
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : "";
+            });
+            $table->editColumn('short_code', function ($row) {
+                return $row->short_code ? $row->short_code : "";
+            });
+            $table->editColumn('website', function ($row) {
+                return $row->website ? $row->website : "";
+            });
+
+            $table->rawColumns(['actions', 'placeholder']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.socialMedia.index');
     }
 
     public function create()
@@ -78,4 +117,5 @@ class SocialMediaController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
 
     }
+
 }

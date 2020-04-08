@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 
 class Language extends Model
 {
+    use Auditable;
+
     public $table = 'languages';
 
     protected $dates = [
@@ -16,14 +19,21 @@ class Language extends Model
 
     protected $fillable = [
         'name',
+        'iso_code',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    public function languageUsers()
+    public function languageOrders()
     {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(Order::class, 'language_id', 'id');
+
+    }
+
+    public function languagesArtistMeta()
+    {
+        return $this->belongsToMany(ArtistMetum::class);
 
     }
 }

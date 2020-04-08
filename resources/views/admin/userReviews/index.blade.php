@@ -31,10 +31,13 @@
                         {{ trans('cruds.userReview.fields.stars') }}
                     </th>
                     <th>
-                        {{ trans('cruds.userReview.fields.video') }}
+                        {{ trans('cruds.userReview.fields.show_video') }}
                     </th>
                     <th>
-                        {{ trans('cruds.userReview.fields.user') }}
+                        {{ trans('cruds.userReview.fields.review_apporval') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.userReview.fields.video') }}
                     </th>
                     <th>
                         &nbsp;
@@ -95,8 +98,9 @@
 { data: 'id', name: 'id' },
 { data: 'text', name: 'text' },
 { data: 'stars', name: 'stars' },
+{ data: 'show_video', name: 'show_video' },
+{ data: 'review_apporval', name: 'review_apporval' },
 { data: 'video_name', name: 'video.name' },
-{ data: 'user_name', name: 'user.name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

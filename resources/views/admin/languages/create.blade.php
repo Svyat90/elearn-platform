@@ -18,6 +18,14 @@
                 <span class="help-block">{{ trans('cruds.language.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="iso_code">{{ trans('cruds.language.fields.iso_code') }}</label>
+                <input class="form-control {{ $errors->has('iso_code') ? 'is-invalid' : '' }}" type="text" name="iso_code" id="iso_code" value="{{ old('iso_code', '') }}">
+                @if($errors->has('iso_code'))
+                    <span class="text-danger">{{ $errors->first('iso_code') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.language.fields.iso_code_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

@@ -40,28 +40,10 @@
                         {{ trans('cruds.user.fields.email_verified_at') }}
                     </th>
                     <th>
-                        {{ trans('cruds.user.fields.dob') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.user.fields.position_occupation') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.user.fields.subscribers') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.user.fields.bio') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.user.fields.language') }}
+                        {{ trans('cruds.user.fields.mobile_no') }}
                     </th>
                     <th>
                         {{ trans('cruds.user.fields.country') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.user.fields.social_meidia') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.user.fields.category') }}
                     </th>
                     <th>
                         {{ trans('cruds.user.fields.gender') }}
@@ -76,10 +58,28 @@
                         {{ trans('cruds.user.fields.registration_platform') }}
                     </th>
                     <th>
-                        {{ trans('cruds.user.fields.image') }}
+                        {{ trans('cruds.user.fields.status') }}
                     </th>
                     <th>
-                        {{ trans('cruds.user.fields.status') }}
+                        {{ trans('cruds.user.fields.ig_token') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.ig_username') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.user_status') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.birth_date') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.avatar') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.registration_source') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.registered_on') }}
                     </th>
                     <th>
                         &nbsp;
@@ -143,20 +143,20 @@
 { data: 'last_name', name: 'last_name' },
 { data: 'email', name: 'email' },
 { data: 'email_verified_at', name: 'email_verified_at' },
-{ data: 'dob', name: 'dob' },
-{ data: 'position_occupation', name: 'position_occupation' },
-{ data: 'subscribers', name: 'subscribers' },
-{ data: 'bio', name: 'bio' },
-{ data: 'language', name: 'languages.name' },
+{ data: 'mobile_no', name: 'mobile_no' },
 { data: 'country_name', name: 'country.name' },
-{ data: 'social_meidia', name: 'social_meidias.name' },
-{ data: 'category', name: 'categories.name' },
 { data: 'gender_name', name: 'gender.name' },
 { data: 'referral_code', name: 'referral_code' },
 { data: 'referred_by', name: 'referred_by' },
 { data: 'registration_platform', name: 'registration_platform' },
-{ data: 'image', name: 'image', sortable: false, searchable: false },
 { data: 'status', name: 'status' },
+{ data: 'ig_token', name: 'ig_token' },
+{ data: 'ig_username', name: 'ig_username' },
+{ data: 'user_status', name: 'user_status' },
+{ data: 'birth_date', name: 'birth_date' },
+{ data: 'avatar', name: 'avatar', sortable: false, searchable: false },
+{ data: 'registration_source', name: 'registration_source' },
+{ data: 'registered_on', name: 'registered_on' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

@@ -12,18 +12,66 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
 {
     use MediaUploadingTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $categories = Category::all();
+        if ($request->ajax()) {
+            $query = Category::query()->select(sprintf('%s.*', (new Category)->table));
+            $table = Datatables::of($query);
 
-        return view('admin.categories.index', compact('categories'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'category_show';
+                $editGate      = 'category_edit';
+                $deleteGate    = 'category_delete';
+                $crudRoutePart = 'categories';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : "";
+            });
+            $table->editColumn('color', function ($row) {
+                return $row->color ? $row->color : "";
+            });
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : "";
+            });
+            $table->editColumn('image', function ($row) {
+                if ($photo = $row->image) {
+                    return sprintf(
+                        '<a href="%s" target="_blank"><img src="%s" width="50px" height="50px"></a>',
+                        $photo->url,
+                        $photo->thumbnail
+                    );
+                }
+
+                return '';
+
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'image']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.categories.index');
     }
 
     public function create()
@@ -77,7 +125,7 @@ class CategoryController extends Controller
     {
         abort_if(Gate::denies('category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $category->load('categoryUsers');
+        $category->load('parentSubCategories', 'mainCatogeryArtistMeta', 'categoryUsers');
 
         return view('admin.categories.show', compact('category'));
     }

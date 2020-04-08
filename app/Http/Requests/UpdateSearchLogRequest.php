@@ -20,9 +20,7 @@ class UpdateSearchLogRequest extends FormRequest
     public function rules()
     {
         return [
-            'term' => [
-                'max:256'],
-            'page' => [
+            'search_term' => [
                 'max:256'],
         ];
 

@@ -15,9 +15,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::post('categories/media', 'CategoryApiController@storeMedia')->name('categories.storeMedia');
     Route::apiResource('categories', 'CategoryApiController');
 
-    // Countries
-    Route::apiResource('countries', 'CountriesApiController');
-
     // Pages
     Route::post('pages/media', 'PageApiController@storeMedia')->name('pages.storeMedia');
     Route::apiResource('pages', 'PageApiController');
@@ -26,24 +23,34 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::post('videos/media', 'VideoApiController@storeMedia')->name('videos.storeMedia');
     Route::apiResource('videos', 'VideoApiController');
 
-    // Order Histories
-    Route::apiResource('order-histories', 'OrderHistoryApiController');
+    // Admin Users
+    Route::apiResource('admin-users', 'AdminUserApiController');
 
-    // Order Payments
-    Route::apiResource('order-payments', 'OrderPaymentApiController');
+    // Sub Categories
+    Route::post('sub-categories/media', 'SubCategoryApiController@storeMedia')->name('sub-categories.storeMedia');
+    Route::apiResource('sub-categories', 'SubCategoryApiController');
 
-    // Product Categories
-    Route::post('product-categories/media', 'ProductCategoryApiController@storeMedia')->name('product-categories.storeMedia');
-    Route::apiResource('product-categories', 'ProductCategoryApiController');
+    // Admin Settings
+    Route::apiResource('admin-settings', 'AdminSettingsApiController');
 
-    // Product Tags
-    Route::apiResource('product-tags', 'ProductTagApiController');
+    // Occasions
+    Route::apiResource('occasions', 'OccasionApiController');
 
-    // Products
-    Route::post('products/media', 'ProductApiController@storeMedia')->name('products.storeMedia');
-    Route::apiResource('products', 'ProductApiController');
+    // Email Subscriptions
+    Route::apiResource('email-subscriptions', 'EmailSubscriptionApiController');
 
-    // Amin Users
-    Route::apiResource('amin-users', 'AminUserApiController');
+    // Promo Codes
+    Route::post('promo-codes/media', 'PromoCodeApiController@storeMedia')->name('promo-codes.storeMedia');
+    Route::apiResource('promo-codes', 'PromoCodeApiController');
+
+    // Login Logs
+    Route::apiResource('login-logs', 'LoginLogApiController');
+
+    // User Meta
+    Route::post('user-meta/media', 'UserMetaApiController@storeMedia')->name('user-meta.storeMedia');
+    Route::apiResource('user-meta', 'UserMetaApiController');
+
+    // User Wallet Histories
+    Route::apiResource('user-wallet-histories', 'UserWalletHistoryApiController', ['except' => ['store', 'update']]);
 
 });

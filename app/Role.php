@@ -24,6 +24,12 @@ class Role extends Model
         'deleted_at',
     ];
 
+    public function roleAdminUsers()
+    {
+        return $this->hasMany(AdminUser::class, 'role_id', 'id');
+
+    }
+
     public function permissions()
     {
         return $this->belongsToMany(Permission::class);

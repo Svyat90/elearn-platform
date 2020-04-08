@@ -10,16 +10,52 @@ use App\SearchLog;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class SearchLogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         abort_if(Gate::denies('search_log_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $searchLogs = SearchLog::all();
+        if ($request->ajax()) {
+            $query = SearchLog::query()->select(sprintf('%s.*', (new SearchLog)->table));
+            $table = Datatables::of($query);
 
-        return view('admin.searchLogs.index', compact('searchLogs'));
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'search_log_show';
+                $editGate      = 'search_log_edit';
+                $deleteGate    = 'search_log_delete';
+                $crudRoutePart = 'search-logs';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : "";
+            });
+            $table->editColumn('search_term', function ($row) {
+                return $row->search_term ? $row->search_term : "";
+            });
+            $table->editColumn('search_from', function ($row) {
+                return $row->search_from ? SearchLog::SEARCH_FROM_SELECT[$row->search_from] : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.searchLogs.index');
     }
 
     public function create()
@@ -76,4 +112,5 @@ class SearchLogController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
 
     }
+
 }

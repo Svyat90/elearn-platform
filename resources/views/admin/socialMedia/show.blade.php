@@ -39,6 +39,14 @@
                             {{ $socialMedium->short_code }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.socialMedium.fields.website') }}
+                        </th>
+                        <td>
+                            {{ $socialMedium->website }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

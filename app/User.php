@@ -107,6 +107,18 @@ class User extends Authenticatable implements HasMedia
 
     }
 
+    public function userLoginLogs()
+    {
+        return $this->hasMany(LoginLog::class, 'user_id', 'id');
+
+    }
+
+    public function userPaymentLogs()
+    {
+        return $this->hasMany(PaymentLog::class, 'user_id', 'id');
+
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);

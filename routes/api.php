@@ -15,9 +15,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::post('categories/media', 'CategoryApiController@storeMedia')->name('categories.storeMedia');
     Route::apiResource('categories', 'CategoryApiController');
 
-    // Countries
-    Route::apiResource('countries', 'CountriesApiController');
-
     // Pages
     Route::post('pages/media', 'PageApiController@storeMedia')->name('pages.storeMedia');
     Route::apiResource('pages', 'PageApiController');
@@ -32,18 +29,27 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Order Payments
     Route::apiResource('order-payments', 'OrderPaymentApiController');
 
-    // Product Categories
-    Route::post('product-categories/media', 'ProductCategoryApiController@storeMedia')->name('product-categories.storeMedia');
-    Route::apiResource('product-categories', 'ProductCategoryApiController');
+    // Admin Users
+    Route::apiResource('admin-users', 'AdminUserApiController');
 
-    // Product Tags
-    Route::apiResource('product-tags', 'ProductTagApiController');
+    // Sub Categories
+    Route::post('sub-categories/media', 'SubCategoryApiController@storeMedia')->name('sub-categories.storeMedia');
+    Route::apiResource('sub-categories', 'SubCategoryApiController');
 
-    // Products
-    Route::post('products/media', 'ProductApiController@storeMedia')->name('products.storeMedia');
-    Route::apiResource('products', 'ProductApiController');
+    // Admin Settings
+    Route::apiResource('admin-settings', 'AdminSettingsApiController');
 
-    // Amin Users
-    Route::apiResource('amin-users', 'AminUserApiController');
+    // Occasions
+    Route::apiResource('occasions', 'OccasionApiController');
+
+    // Email Subscriptions
+    Route::apiResource('email-subscriptions', 'EmailSubscriptionApiController');
+
+    // Promo Codes
+    Route::post('promo-codes/media', 'PromoCodeApiController@storeMedia')->name('promo-codes.storeMedia');
+    Route::apiResource('promo-codes', 'PromoCodeApiController');
+
+    // Login Logs
+    Route::apiResource('login-logs', 'LoginLogApiController');
 
 });

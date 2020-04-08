@@ -2,6 +2,10 @@
 /public/hot
 /public/storage
 /storage/*.key
+/Info
+.idea
+/.idea
+.idea .workspace
 /vendor
 .env
 .env.backup

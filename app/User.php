@@ -86,6 +86,60 @@ class User extends Authenticatable implements HasMedia
 
     }
 
+    public function getCurrRole()
+    {
+        return $this->name;
+
+    }
+
+    /*
+     * Filter users by Role
+     */
+    public function scopeByRole($query,$role)
+    {
+        return $query->leftJoin('role_user','role_user.user_id','=','users.id')
+                    ->where('role_user.role_id', $role);
+
+    }
+
+    /*
+     * User Role
+     */
+    public function scopeIsUserRole($query)
+    {
+        return $query->leftJoin('role_user','role_user.user_id','=','users.id')
+            ->where('role_user.role_id', 2);
+
+    }
+
+    /*
+     * Artist Role
+     */
+    public function scopeIsArtistRole($query)
+    {
+        return $query->leftJoin('role_user','role_user.user_id','=','users.id')
+            ->where('role_user.role_id', 3);
+
+    }
+
+
+    /*
+     * Agent Role
+     */
+    public function scopeIsAgentRole($query)
+    {
+        return $query->leftJoin('role_user','role_user.user_id','=','users.id')
+            ->where('role_user.role_id', 4);
+
+    }
+
+    public function userReffered()
+    {
+        return $this->belongsTo( User::class, 'referred_by', 'id' );
+
+    }
+
+
     public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')->width(50)->height(50);

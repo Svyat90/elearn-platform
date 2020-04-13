@@ -101,8 +101,8 @@ class ArtistMetaController extends Controller
                 if ($photo = $row->profile_photo_url) {
                     return sprintf(
                         '<a href="%s" target="_blank"><img src="%s" width="50px" height="50px"></a>',
-                        $photo->url,
-                        $photo->thumbnail
+                        env('APP_URL').$photo->url,
+                        env('APP_URL').$photo->thumbnail
                     );
                 }
 
@@ -110,7 +110,7 @@ class ArtistMetaController extends Controller
 
             });
             $table->editColumn('intro_video_url', function ($row) {
-                return $row->intro_video_url ? '<a href="' . $row->intro_video_url->getUrl() . '" target="_blank">' . trans('global.downloadFile') . '</a>' : '';
+                return $row->intro_video_url ? '<a href="' . env('APP_URL').$row->intro_video_url->getUrl() . '" target="_blank">' . trans('global.downloadFile') . '</a>' : '';
             });
             $table->editColumn('url_name', function ($row) {
                 return $row->url_name ? $row->url_name : "";
@@ -155,7 +155,7 @@ class ArtistMetaController extends Controller
     {
         abort_if(Gate::denies('artist_metum_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $artists = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $artists = User::IsArtistRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $languages = Language::all()->pluck('name', 'id');
 
@@ -194,7 +194,7 @@ class ArtistMetaController extends Controller
     {
         abort_if(Gate::denies('artist_metum_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $artists = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $artists = User::IsArtistRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $languages = Language::all()->pluck('name', 'id');
 
@@ -227,6 +227,12 @@ class ArtistMetaController extends Controller
         if ($request->input('intro_video_url', false)) {
             if (!$artistMetum->intro_video_url || $request->input('intro_video_url') !== $artistMetum->intro_video_url->file_name) {
                 $artistMetum->addMedia(storage_path('tmp/uploads/' . $request->input('intro_video_url')))->toMediaCollection('intro_video_url');
+//                $artistMetum->addMedia(storage_path('tmp/uploads/' . $request->input('intro_video_url')))
+//                            ->addMediaConversion('thumb')
+//                            ->width(368)
+//                            ->height(232)
+//                            ->extractVideoFrameAtSecond(20)
+//                            ->performOnCollections('intro_video_url');
             }
 
         } elseif ($artistMetum->intro_video_url) {

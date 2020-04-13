@@ -53,15 +53,11 @@ class UserWalletHistoryController extends Controller
             $table->editColumn('status', function ($row) {
                 return $row->status ? UserWalletHistory::STATUS_SELECT[$row->status] : '';
             });
-            $table->addColumn('user_first_name', function ($row) {
-                return $row->user ? $row->user->first_name : '';
-            });
-
             $table->editColumn('user.first_name', function ($row) {
                 return $row->user ? (is_string($row->user) ? $row->user : $row->user->first_name) : '';
             });
             $table->addColumn('earn_from_first_name', function ($row) {
-                return $row->earn_from ? $row->earn_from->first_name : '';
+                return $row->earn_from ? $row->earn_from->first_name.' '.$row->earn_from->last_name : '';
             });
 
             $table->rawColumns(['actions', 'placeholder', 'user', 'earn_from']);

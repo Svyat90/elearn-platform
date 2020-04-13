@@ -56,22 +56,6 @@
                 <span class="help-block">{{ trans('cruds.order.fields.language_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="video_for">{{ trans('cruds.order.fields.video_for') }}</label>
-                <input class="form-control {{ $errors->has('video_for') ? 'is-invalid' : '' }}" type="number" name="video_for" id="video_for" value="{{ old('video_for', $order->video_for) }}" step="1">
-                @if($errors->has('video_for'))
-                    <span class="text-danger">{{ $errors->first('video_for') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.order.fields.video_for_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="video_from">{{ trans('cruds.order.fields.video_from') }}</label>
-                <input class="form-control {{ $errors->has('video_from') ? 'is-invalid' : '' }}" type="text" name="video_from" id="video_from" value="{{ old('video_from', $order->video_from) }}">
-                @if($errors->has('video_from'))
-                    <span class="text-danger">{{ $errors->first('video_from') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.order.fields.video_from_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label for="from_gender">{{ trans('cruds.order.fields.from_gender') }}</label>
                 <input class="form-control {{ $errors->has('from_gender') ? 'is-invalid' : '' }}" type="text" name="from_gender" id="from_gender" value="{{ old('from_gender', $order->from_gender) }}">
                 @if($errors->has('from_gender'))
@@ -130,14 +114,6 @@
                     <span class="text-danger">{{ $errors->first('delivery_phone') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.order.fields.delivery_phone_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="hide_video">{{ trans('cruds.order.fields.hide_video') }}</label>
-                <input class="form-control {{ $errors->has('hide_video') ? 'is-invalid' : '' }}" type="number" name="hide_video" id="hide_video" value="{{ old('hide_video', $order->hide_video) }}" step="1">
-                @if($errors->has('hide_video'))
-                    <span class="text-danger">{{ $errors->first('hide_video') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.order.fields.hide_video_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="promo_code">{{ trans('cruds.order.fields.promo_code') }}</label>
@@ -208,6 +184,45 @@
                     <span class="text-danger">{{ $errors->first('artist') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.order.fields.artist_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label>{{ trans('cruds.order.fields.video_for') }}</label>
+                <select class="form-control {{ $errors->has('video_for') ? 'is-invalid' : '' }}" name="video_for" id="video_for">
+                    <option value disabled {{ old('video_for', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Order::VIDEO_FOR_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('video_for', $order->video_for) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('video_for'))
+                    <span class="text-danger">{{ $errors->first('video_for') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.video_for_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label>{{ trans('cruds.order.fields.video_from') }}</label>
+                <select class="form-control {{ $errors->has('video_from') ? 'is-invalid' : '' }}" name="video_from" id="video_from">
+                    <option value disabled {{ old('video_from', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Order::VIDEO_FROM_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('video_from', $order->video_from) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('video_from'))
+                    <span class="text-danger">{{ $errors->first('video_from') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.video_from_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label>{{ trans('cruds.order.fields.hide_video') }}</label>
+                <select class="form-control {{ $errors->has('hide_video') ? 'is-invalid' : '' }}" name="hide_video" id="hide_video">
+                    <option value disabled {{ old('hide_video', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Order::HIDE_VIDEO_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('hide_video', $order->hide_video) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('hide_video'))
+                    <span class="text-danger">{{ $errors->first('hide_video') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.hide_video_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

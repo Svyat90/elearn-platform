@@ -80,6 +80,7 @@
                                     </a>
                                 </li>
                             @endcan
+                            <!--
                             @can('admin_user_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.admin-users.index") }}" class="nav-link {{ request()->is('admin/admin-users') || request()->is('admin/admin-users/*') ? 'active' : '' }}">
@@ -92,6 +93,7 @@
                                     </a>
                                 </li>
                             @endcan
+                            -->
                         </ul>
                     </li>
                 @endcan

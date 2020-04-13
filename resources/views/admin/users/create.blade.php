@@ -26,14 +26,6 @@
                 <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="name">{{ trans('cruds.user.fields.name') }}</label>
-                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
-                @if($errors->has('name'))
-                    <span class="text-danger">{{ $errors->first('name') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.name_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label class="required" for="first_name">{{ trans('cruds.user.fields.first_name') }}</label>
                 <input class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}" type="text" name="first_name" id="first_name" value="{{ old('first_name', '') }}" required>
                 @if($errors->has('first_name'))
@@ -107,7 +99,11 @@
             </div>
             <div class="form-group">
                 <label for="referred_by">{{ trans('cruds.user.fields.referred_by') }}</label>
-                <input class="form-control {{ $errors->has('referred_by') ? 'is-invalid' : '' }}" type="text" name="referred_by" id="referred_by" value="{{ old('referred_by', '') }}">
+                <select class="form-control select2 {{ $errors->has('artist') ? 'is-invalid' : '' }}" name="referred_by" id="referred_by">
+                    @foreach($referredList as $id => $artist)
+                        <option value="{{ $id }}" {{ old('referred_by') == $id ? 'selected' : '' }}>{{ $artist }}</option>
+                    @endforeach
+                </select>
                 @if($errors->has('referred_by'))
                     <span class="text-danger">{{ $errors->first('referred_by') }}</span>
                 @endif

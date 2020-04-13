@@ -71,7 +71,7 @@ class UserMetaController extends Controller
     {
         abort_if(Gate::denies('user_metum_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::IsUserRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.userMeta.create', compact('users'));
     }
@@ -92,7 +92,7 @@ class UserMetaController extends Controller
     {
         abort_if(Gate::denies('user_metum_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::IsUserRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $userMetum->load('user');
 

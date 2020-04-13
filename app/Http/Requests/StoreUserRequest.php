@@ -25,8 +25,6 @@ class StoreUserRequest extends FormRequest
             'roles'         => [
                 'required',
                 'array'],
-            'name'          => [
-                'required'],
             'first_name'    => [
                 'max:256',
                 'required'],

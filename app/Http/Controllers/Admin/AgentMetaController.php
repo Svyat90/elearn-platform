@@ -20,7 +20,7 @@ class AgentMetaController extends Controller
         abort_if(Gate::denies('agent_metum_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = AgentMetum::with(['user', 'agent'])->select(sprintf('%s.*', (new AgentMetum)->table));
+            $query = AgentMetum::with(['agent'])->select(sprintf('%s.*', (new AgentMetum)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -44,9 +44,7 @@ class AgentMetaController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : "";
             });
-            $table->addColumn('user_email', function ($row) {
-                return $row->user ? $row->user->email : '';
-            });
+
 
             $table->editColumn('agent_commission', function ($row) {
                 return $row->agent_commission ? $row->agent_commission : "";
@@ -62,7 +60,7 @@ class AgentMetaController extends Controller
             });
 
             $table->addColumn('agent_first_name', function ($row) {
-                return $row->agent ? $row->agent->first_name : '';
+                return $row->agent ? $row->agent->first_name.' '.$row->agent->last_name : '';
             });
 
             $table->rawColumns(['actions', 'placeholder', 'user', 'agent']);
@@ -79,7 +77,7 @@ class AgentMetaController extends Controller
 
         $users = User::all()->pluck('email', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $agents = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $agents = User::IsAgentRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.agentMeta.create', compact('users', 'agents'));
     }
@@ -87,7 +85,8 @@ class AgentMetaController extends Controller
     public function store(StoreAgentMetumRequest $request)
     {
         $agentMetum = AgentMetum::create($request->all());
-
+        $agentMetum->registered_on = date('Y-m-d');
+        $agentMetum->save();
         return redirect()->route('admin.agent-meta.index');
 
     }
@@ -98,9 +97,9 @@ class AgentMetaController extends Controller
 
         $users = User::all()->pluck('email', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $agents = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $agents = User::IsAgentRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $agentMetum->load('user', 'agent');
+        $agentMetum->load( 'agent');
 
         return view('admin.agentMeta.edit', compact('users', 'agents', 'agentMetum'));
     }
@@ -117,7 +116,7 @@ class AgentMetaController extends Controller
     {
         abort_if(Gate::denies('agent_metum_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $agentMetum->load('user', 'agent');
+        $agentMetum->load('agent');
 
         return view('admin.agentMeta.show', compact('agentMetum'));
     }

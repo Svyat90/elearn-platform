@@ -61,12 +61,6 @@ class OrderController extends Controller
                 return $row->language ? $row->language->name : '';
             });
 
-            $table->editColumn('video_for', function ($row) {
-                return $row->video_for ? $row->video_for : "";
-            });
-            $table->editColumn('video_from', function ($row) {
-                return $row->video_from ? $row->video_from : "";
-            });
             $table->editColumn('from_gender', function ($row) {
                 return $row->from_gender ? $row->from_gender : "";
             });
@@ -89,9 +83,6 @@ class OrderController extends Controller
             $table->editColumn('delivery_phone', function ($row) {
                 return $row->delivery_phone ? $row->delivery_phone : "";
             });
-            $table->editColumn('hide_video', function ($row) {
-                return $row->hide_video ? $row->hide_video : "";
-            });
             $table->editColumn('promo_code', function ($row) {
                 return $row->promo_code ? $row->promo_code : "";
             });
@@ -112,6 +103,16 @@ class OrderController extends Controller
                 return $row->artist ? $row->artist->display_name : '';
             });
 
+            $table->editColumn('video_for', function ($row) {
+                return $row->video_for ? Order::VIDEO_FOR_SELECT[$row->video_for] : '';
+            });
+            $table->editColumn('video_from', function ($row) {
+                return $row->video_from ? Order::VIDEO_FROM_SELECT[$row->video_from] : '';
+            });
+            $table->editColumn('hide_video', function ($row) {
+                return $row->hide_video ? Order::HIDE_VIDEO_SELECT[$row->hide_video] : '';
+            });
+
             $table->rawColumns(['actions', 'placeholder', 'user', 'language', 'occasion_type', 'artist']);
 
             return $table->make(true);
@@ -124,7 +125,7 @@ class OrderController extends Controller
     {
         abort_if(Gate::denies('order_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::IsUserRole()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $languages = Language::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -147,7 +148,7 @@ class OrderController extends Controller
     {
         abort_if(Gate::denies('order_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::IsUserRole()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $languages = Language::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 

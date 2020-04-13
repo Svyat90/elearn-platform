@@ -44,9 +44,6 @@
                         {{ trans('cruds.artistPaymentHistory.fields.user') }}
                     </th>
                     <th>
-                        {{ trans('cruds.user.fields.referred_by') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.artistPaymentHistory.fields.earn_from') }}
                     </th>
                     <th>
@@ -115,7 +112,6 @@
 { data: 'status', name: 'status' },
 { data: 'proccesed_by', name: 'proccesed_by' },
 { data: 'user_referred_by', name: 'user.referred_by' },
-{ data: 'user.referred_by', name: 'user.referred_by' },
 { data: 'earn_from_name', name: 'earn_from.name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],

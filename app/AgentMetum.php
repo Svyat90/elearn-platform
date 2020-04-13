@@ -19,10 +19,16 @@ class AgentMetum extends Model
         'registered_on',
     ];
 
+    const AGENT_STATUS_SELECT = [
+        '1' => 'Pending',
+        '2' => 'Active',
+        '3' => 'Not Active',
+    ];
+
+
     protected $fillable = [
         'city',
         'state',
-        'user_id',
         'agent_id',
         'created_at',
         'updated_at',
@@ -31,12 +37,6 @@ class AgentMetum extends Model
         'registered_on',
         'agent_commission',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-
-    }
 
     public function getRegisteredOnAttribute($value)
     {

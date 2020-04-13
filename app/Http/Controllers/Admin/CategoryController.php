@@ -57,8 +57,8 @@ class CategoryController extends Controller
                 if ($photo = $row->image) {
                     return sprintf(
                         '<a href="%s" target="_blank"><img src="%s" width="50px" height="50px"></a>',
-                        $photo->url,
-                        $photo->thumbnail
+                        env('APP_URL').$photo->url,
+                        env('APP_URL').$photo->thumbnail
                     );
                 }
 

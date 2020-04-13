@@ -12,7 +12,7 @@ Route::get('/home', function () {
 Auth::routes(['register' => false]);
 // Admin
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth.admin']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
@@ -136,6 +136,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('artist-responses', 'ArtistResponseController');
 
     // Agent Lists
+    Route::delete('agent-lists/destroy', 'AgentListController@massDestroy')->name('agent-lists.massDestroy');
     Route::resource('agent-lists', 'AgentListController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
 
     // Agent Meta
@@ -143,6 +144,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('agent-meta', 'AgentMetaController');
 
     // Artist Lists
+    Route::delete('artist-lists/destroy', 'ArtistListController@massDestroy')->name('artist-lists.massDestroy');
     Route::resource('artist-lists', 'ArtistListController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
 
     // Artist Meta
@@ -152,6 +154,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('artist-meta', 'ArtistMetaController');
 
     // Customers Lists
+    Route::delete('customers-lists/destroy', 'CustomersListController@massDestroy')->name('customers-lists.massDestroy');
     Route::resource('customers-lists', 'CustomersListController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
 
     // User Meta
@@ -184,7 +187,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('user-wishlists', 'UserWishlistController');
 
 });
-Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth.admin']], function () {
 // Change password
     if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php'))) {
         Route::get('password', 'ChangePasswordController@edit')->name('password.edit');

@@ -74,7 +74,7 @@ class VideoController extends Controller
     {
         abort_if(Gate::denies('video_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::IsUserRole()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.videos.create', compact('users'));
     }
@@ -99,7 +99,7 @@ class VideoController extends Controller
     {
         abort_if(Gate::denies('video_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::IsUserRole()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $video->load('user');
 

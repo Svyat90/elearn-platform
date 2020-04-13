@@ -94,7 +94,7 @@ class ArtistEnquiryController extends Controller
     {
         abort_if(Gate::denies('artist_enquiry_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $artists = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $artists = User::IsArtistRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $countries = Country::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -117,7 +117,7 @@ class ArtistEnquiryController extends Controller
     {
         abort_if(Gate::denies('artist_enquiry_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $artists = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $artists = User::IsArtistRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $countries = Country::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 

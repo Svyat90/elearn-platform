@@ -57,22 +57,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.order.fields.video_for') }}
-                        </th>
-                        <td>
-                            {{ $order->video_for }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.order.fields.video_from') }}
-                        </th>
-                        <td>
-                            {{ $order->video_from }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.order.fields.from_gender') }}
                         </th>
                         <td>
@@ -129,14 +113,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.order.fields.hide_video') }}
-                        </th>
-                        <td>
-                            {{ $order->hide_video }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.order.fields.promo_code') }}
                         </th>
                         <td>
@@ -189,6 +165,30 @@
                         </th>
                         <td>
                             {{ $order->artist->display_name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.video_for') }}
+                        </th>
+                        <td>
+                            {{ App\Order::VIDEO_FOR_SELECT[$order->video_for] ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.video_from') }}
+                        </th>
+                        <td>
+                            {{ App\Order::VIDEO_FROM_SELECT[$order->video_from] ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.hide_video') }}
+                        </th>
+                        <td>
+                            {{ App\Order::HIDE_VIDEO_SELECT[$order->hide_video] ?? '' }}
                         </td>
                     </tr>
                 </tbody>

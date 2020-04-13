@@ -65,12 +65,8 @@ class ArtistPaymentHistoryController extends Controller
             $table->editColumn('proccesed_by', function ($row) {
                 return $row->proccesed_by ? $row->proccesed_by : "";
             });
-            $table->addColumn('user_referred_by', function ($row) {
-                return $row->user ? $row->user->referred_by : '';
-            });
-
-            $table->editColumn('user.referred_by', function ($row) {
-                return $row->user ? (is_string($row->user) ? $row->user : $row->user->referred_by) : '';
+            $table->editColumn('user_referred_by', function ($row) {
+                return $row->user ? $row->user->first_name.' '.$row->user->last_name : '';
             });
             $table->addColumn('earn_from_name', function ($row) {
                 return $row->earn_from ? $row->earn_from->name : '';

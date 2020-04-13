@@ -26,7 +26,7 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = User::with(['roles', 'country', 'gender'])->select(sprintf('%s.*', (new User)->table));
+            $query = User::with(['roles', 'country', 'gender','userReffered'])->select(sprintf('%s.*', (new User)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -84,7 +84,7 @@ class UsersController extends Controller
                 return $row->referral_code ? $row->referral_code : "";
             });
             $table->editColumn('referred_by', function ($row) {
-                return $row->referred_by ? $row->referred_by : "";
+                return $row->userReffered ? $row->userReffered->first_name : "";
             });
             $table->editColumn('registration_platform', function ($row) {
                 return $row->registration_platform ? User::REGISTRATION_PLATFORM_SELECT[$row->registration_platform] : '';
@@ -103,8 +103,8 @@ class UsersController extends Controller
                 if ($photo = $row->avatar) {
                     return sprintf(
                         '<a href="%s" target="_blank"><img src="%s" width="50px" height="50px"></a>',
-                        $photo->url,
-                        $photo->thumbnail
+                        env('APP_URL').$photo->url,
+                        env('APP_URL').$photo->thumbnail
                     );
                 }
 
@@ -129,11 +129,13 @@ class UsersController extends Controller
 
         $roles = Role::all()->pluck('title', 'id');
 
+        $referredList = User::IsUserRole()->pluck('name', 'id');
+
         $countries = Country::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $genders = Gender::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.users.create', compact('roles', 'countries', 'genders'));
+        return view('admin.users.create', compact('roles','referredList', 'countries', 'genders'));
     }
 
     public function store(StoreUserRequest $request)
@@ -149,6 +151,9 @@ class UsersController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $user->id]);
         }
 
+        $user->name = $user->first_name.' '.$user->last_name;
+        $user->save();
+
         return redirect()->route('admin.users.index');
 
     }
@@ -159,13 +164,16 @@ class UsersController extends Controller
 
         $roles = Role::all()->pluck('title', 'id');
 
+        $referredList = User::IsUserRole()->pluck('name', 'id');
+
         $countries = Country::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $genders = Gender::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $user->load('roles', 'country', 'gender');
+        $user->load('roles', 'country','userReffered', 'gender');
 
-        return view('admin.users.edit', compact('roles', 'countries', 'genders', 'user'));
+
+        return view('admin.users.edit', compact('roles','referredList', 'countries', 'genders', 'user'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
@@ -181,6 +189,8 @@ class UsersController extends Controller
         } elseif ($user->avatar) {
             $user->avatar->delete();
         }
+        $user->name = $user->first_name.' '.$user->last_name;
+        $user->save();
 
         return redirect()->route('admin.users.index');
 

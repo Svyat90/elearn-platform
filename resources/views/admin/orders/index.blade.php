@@ -37,12 +37,6 @@
                         {{ trans('cruds.order.fields.language') }}
                     </th>
                     <th>
-                        {{ trans('cruds.order.fields.video_for') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.order.fields.video_from') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.order.fields.from_gender') }}
                     </th>
                     <th>
@@ -64,9 +58,6 @@
                         {{ trans('cruds.order.fields.delivery_phone') }}
                     </th>
                     <th>
-                        {{ trans('cruds.order.fields.hide_video') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.order.fields.promo_code') }}
                     </th>
                     <th>
@@ -86,6 +77,15 @@
                     </th>
                     <th>
                         {{ trans('cruds.order.fields.artist') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.video_for') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.video_from') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.hide_video') }}
                     </th>
                     <th>
                         &nbsp;
@@ -148,8 +148,6 @@
 { data: 'message', name: 'message' },
 { data: 'payment_status', name: 'payment_status' },
 { data: 'language_name', name: 'language.name' },
-{ data: 'video_for', name: 'video_for' },
-{ data: 'video_from', name: 'video_from' },
 { data: 'from_gender', name: 'from_gender' },
 { data: 'video_to', name: 'video_to' },
 { data: 'to_gender', name: 'to_gender' },
@@ -157,7 +155,6 @@
 { data: 'occasion_type_name', name: 'occasion_type.name' },
 { data: 'delivery_email', name: 'delivery_email' },
 { data: 'delivery_phone', name: 'delivery_phone' },
-{ data: 'hide_video', name: 'hide_video' },
 { data: 'promo_code', name: 'promo_code' },
 { data: 'promo_discount', name: 'promo_discount' },
 { data: 'booking_amount', name: 'booking_amount' },
@@ -165,6 +162,9 @@
 { data: 'payment_by', name: 'payment_by' },
 { data: 'order_status', name: 'order_status' },
 { data: 'artist_display_name', name: 'artist.display_name' },
+{ data: 'video_for', name: 'video_for' },
+{ data: 'video_from', name: 'video_from' },
+{ data: 'hide_video', name: 'hide_video' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

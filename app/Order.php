@@ -17,9 +17,19 @@ class Order extends Model
         '2' => 'Rejected',
     ];
 
+    const VIDEO_FOR_SELECT = [
+        '1' => 'myself',
+        '2' => 'someone else',
+    ];
+
     const PAYMENT_STATUS_SELECT = [
         '1' => 'Completed',
         '2' => 'Failed',
+    ];
+
+    const VIDEO_FROM_SELECT = [
+        '1' => 'Myself',
+        '2' => 'Customer name',
     ];
 
     protected $dates = [
@@ -34,31 +44,36 @@ class Order extends Model
         '2' => 'Website wallet',
     ];
 
+    const HIDE_VIDEO_SELECT = [
+        '1' => 'Show on artist profile',
+        '2' => 'Hide on artist profile',
+    ];
+
     protected $fillable = [
         'user_id',
         'message',
         'video_to',
+        'to_gender',
         'video_for',
         'artist_id',
-        'to_gender',
         'updated_at',
         'created_at',
-        'payment_by',
-        'promo_code',
         'hide_video',
-        'deleted_at',
         'video_from',
+        'payment_by',
+        'deleted_at',
+        'promo_code',
         'from_gender',
         'language_id',
         'order_status',
         'customer_name',
-        'delivery_email',
-        'promo_discount',
         'booking_amount',
-        'payment_status',
         'delivery_phone',
-        'occasion_type_id',
+        'delivery_email',
+        'payment_status',
+        'promo_discount',
         'booking_datetime',
+        'occasion_type_id',
     ];
 
     public function orderOrderPayments()

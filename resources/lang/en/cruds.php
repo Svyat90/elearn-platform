@@ -40,7 +40,7 @@ return [
         ],
     ],
     'user'                    => [
-        'title'          => 'Users',
+        'title'          => 'All Users',
         'title_singular' => 'User',
         'fields'         => [
             'id'                           => 'ID',
@@ -74,7 +74,7 @@ return [
             'referral_code'                => 'Referral Code',
             'referral_code_helper'         => 'user unique code which they can use to refer new user',
             'referred_by'                  => 'Referred By',
-            'referred_by_helper'           => '',
+            'referred_by_helper'           => 'Code who referrer user',
             'registration_platform'        => 'Registration Platform',
             'registration_platform_helper' => '',
             'mobile_no'                    => 'Mobile No',

@@ -89,6 +89,8 @@ sudo apt-get install php7.2-mbstring
 
 sudo apt-get install php7.2-xml
 
+sudo apt-get install php7.1-gd
+
 #--- list of errof composer install
 
 sudo chmod 777 -R  /var/www/crazy/storage
@@ -101,6 +103,11 @@ sudo add-apt-repository ppa:mc3man/trusty-media
 sudo apt-get update
 sudo apt-get install ffmpeg
 sudo apt-get install frei0r-plugins
+
+#change max upload = php.ini
+/etc/php/7.2/fpm
+upload_max_filesize = 1000M
+post_max_size = 58M
 
 #some info
 https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04

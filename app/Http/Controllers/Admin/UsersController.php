@@ -23,6 +23,8 @@ class UsersController extends Controller
 
     public function index(Request $request)
     {
+        echo phpinfo();
+        exit();
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {

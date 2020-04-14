@@ -1,6 +1,14 @@
 @extends('layouts.admin')
 @section('content')
-
+@can('artist_payment_history_create')
+    <div style="margin-bottom: 10px;" class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-success" href="{{ route("admin.artist-payment-histories.create") }}">
+                {{ trans('global.add') }} {{ trans('cruds.artistPaymentHistory.title_singular') }}
+            </a>
+        </div>
+    </div>
+@endcan
 <div class="card">
     <div class="card-header">
         {{ trans('cruds.artistPaymentHistory.title_singular') }} {{ trans('global.list') }}
@@ -44,8 +52,13 @@
                         {{ trans('cruds.artistPaymentHistory.fields.user') }}
                     </th>
                     <th>
+                        {{ trans('cruds.user.fields.referred_by') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.artistPaymentHistory.fields.earn_from') }}
                     </th>
+                    <th>Created</th>
+                    <th>Updated</th>
                     <th>
                         &nbsp;
                     </th>
@@ -112,7 +125,10 @@
 { data: 'status', name: 'status' },
 { data: 'proccesed_by', name: 'proccesed_by' },
 { data: 'user_referred_by', name: 'user.referred_by' },
+{ data: 'user.referred_by', name: 'user.referred_by' },
 { data: 'earn_from_name', name: 'earn_from.name' },
+        { data: 'created_at', name: 'created_at' },
+        { data: 'updated_at', name: 'updated_at' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

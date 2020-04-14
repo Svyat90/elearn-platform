@@ -377,7 +377,7 @@
                     </li>
                 @endcan
                 @can('payment_management_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/artist-payment-histories*') ? 'menu-open' : '' }} {{ request()->is('admin/agent-payment-histories*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/artist-payment-histories*') ? 'menu-open' : '' }} {{ request()->is('admin/artist-debited-transaction-lists*') ? 'menu-open' : '' }} {{ request()->is('admin/agent-debited-transaction-lists*') ? 'menu-open' : '' }} {{ request()->is('admin/agent-payment-histories*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
                             <i class="fa-fw nav-icon fas fa-credit-card">
 
@@ -399,19 +399,39 @@
                                         </p>
                                     </a>
                                 </li>
-                            @endcan
-                            @can('agent_payment_history_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.agent-payment-histories.index") }}" class="nav-link {{ request()->is('admin/agent-payment-histories') || request()->is('admin/agent-payment-histories/*') ? 'active' : '' }}">
-                                        <i class="fa-fw nav-icon far fa-money-bill-alt">
+                                    <li class="nav-item">
+                                        <a href="{{ route("admin.artist-debited-transaction-lists.index") }}" class="nav-link {{ request()->is('admin/artist-debited-transaction-lists') || request()->is('admin/artist-debited-transaction-lists/*') ? 'active' : '' }}">
+                                            <i class="fa-fw nav-icon fas fa-credit-card">
 
-                                        </i>
-                                        <p>
-                                            {{ trans('cruds.agentPaymentHistory.title') }}
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
+                                            </i>
+                                            <p>
+                                                {{ trans('cruds.artistDebitedTransactionList.title') }}
+                                            </p>
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('agent_payment_history_access')
+                                    <li class="nav-item">
+                                        <a href="{{ route("admin.agent-payment-histories.index") }}" class="nav-link {{ request()->is('admin/agent-payment-histories') || request()->is('admin/agent-payment-histories/*') ? 'active' : '' }}">
+                                            <i class="fa-fw nav-icon far fa-money-bill-alt">
+
+                                            </i>
+                                            <p>
+                                                {{ trans('cruds.agentPaymentHistory.title') }}
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route("admin.agent-debited-transaction-lists.index") }}" class="nav-link {{ request()->is('admin/agent-debited-transaction-lists') || request()->is('admin/agent-debited-transaction-lists/*') ? 'active' : '' }}">
+                                            <i class="fa-fw nav-icon fas fa-credit-card">
+
+                                            </i>
+                                            <p>
+                                                {{ trans('cruds.agentDebitedTransactionList.title') }}
+                                            </p>
+                                        </a>
+                                    </li>
+                                @endcan
                         </ul>
                     </li>
                 @endcan

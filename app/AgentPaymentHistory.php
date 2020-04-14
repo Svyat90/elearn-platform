@@ -29,8 +29,9 @@ class AgentPaymentHistory extends Model
     ];
 
     const TXN_FOR_SELECT = [
-        '1' => 'Refferal Earning',
-        '2' => 'Payout',
+        '1' => 'Video Fee',
+        '2' => 'Refferal Earning',
+        '3' => 'Payout',
     ];
 
     protected $fillable = [
@@ -46,7 +47,7 @@ class AgentPaymentHistory extends Model
         'any_charges',
         'final_amount',
         'proccesed_by',
-        'earn_from_id',// if referral earning then store earned from userid
+        'earn_from_id',
     ];
 
     public function user()

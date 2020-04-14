@@ -62,6 +62,9 @@ class UserWalletHistoryController extends Controller
             $table->addColumn('created_at', function ($row) {
                 return $row->created_at ? $row->created_at :'';
             });
+            $table->addColumn('updated_at', function ($row) {
+                return $row->updated_at ? $row->updated_at :'';
+            });
 
             $table->rawColumns(['actions', 'placeholder', 'user', 'earn_from']);
 

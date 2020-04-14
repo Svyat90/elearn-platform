@@ -25,6 +25,8 @@
                     <th>
                         {{ trans('cruds.paymentLog.fields.amount') }}
                     </th>
+                    <th>Created</th>
+                    <th>Updated</th>
                     <th>
                         &nbsp;
                     </th>
@@ -56,6 +58,8 @@
 { data: 'user_name', name: 'user.name' },
 { data: 'order_payment_status', name: 'order.payment_status' },
 { data: 'amount', name: 'amount' },
+        { data: 'created_at', name: 'created_at' },
+        { data: 'updated_at', name: 'updated_at' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

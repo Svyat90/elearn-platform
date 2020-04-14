@@ -31,11 +31,27 @@
             </div>
             <div class="form-group">
                 <label for="user_wishlist">{{ trans('cruds.userMetum.fields.user_wishlist') }}</label>
-                <input class="form-control {{ $errors->has('user_wishlist') ? 'is-invalid' : '' }}" type="number" name="user_wishlist" id="user_wishlist" value="{{ old('user_wishlist', '0') }}" step="1">
+                <input class="form-control {{ $errors->has('user_wishlist') ? 'is-invalid' : '' }}" type="text" name="user_wishlist" id="user_wishlist" value="{{ old('user_wishlist', '') }}">
                 @if($errors->has('user_wishlist'))
                     <span class="text-danger">{{ $errors->first('user_wishlist') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.userMetum.fields.user_wishlist_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="user_likelist">{{ trans('cruds.userMetum.fields.user_likelist') }}</label>
+                <input class="form-control {{ $errors->has('user_likelist') ? 'is-invalid' : '' }}" type="text" name="user_likelist" id="user_likelist" value="{{ old('user_likelist', '') }}">
+                @if($errors->has('user_likelist'))
+                    <span class="text-danger">{{ $errors->first('user_likelist') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.userMetum.fields.user_likelist_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="wallet_balance">{{ trans('cruds.userMetum.fields.wallet_balance') }}</label>
+                <input class="form-control {{ $errors->has('wallet_balance') ? 'is-invalid' : '' }}" type="number" name="wallet_balance" id="wallet_balance" value="{{ old('wallet_balance', '0') }}" step="0.01">
+                @if($errors->has('wallet_balance'))
+                    <span class="text-danger">{{ $errors->first('wallet_balance') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.userMetum.fields.wallet_balance_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

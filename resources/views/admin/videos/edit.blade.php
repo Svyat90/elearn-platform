@@ -61,6 +61,14 @@
                 <span class="help-block">{{ trans('cruds.video.fields.status_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="like_counter">{{ trans('cruds.video.fields.like_counter') }}</label>
+                <input class="form-control {{ $errors->has('like_counter') ? 'is-invalid' : '' }}" type="number" name="like_counter" id="like_counter" value="{{ old('like_counter', $video->like_counter) }}" step="1">
+                @if($errors->has('like_counter'))
+                    <span class="text-danger">{{ $errors->first('like_counter') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.video.fields.like_counter_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

@@ -112,6 +112,12 @@ class OrderController extends Controller
             $table->editColumn('hide_video', function ($row) {
                 return $row->hide_video ? Order::HIDE_VIDEO_SELECT[$row->hide_video] : '';
             });
+            $table->addColumn('created_at', function ($row) {
+                return $row->created_at ? $row->created_at :'';
+            });
+            $table->addColumn('updated_at', function ($row) {
+                return $row->updated_at ? $row->updated_at :'';
+            });
 
             $table->rawColumns(['actions', 'placeholder', 'user', 'language', 'occasion_type', 'artist']);
 

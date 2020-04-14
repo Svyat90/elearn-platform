@@ -38,6 +38,7 @@ class Video extends Model implements HasMedia
         'created_at',
         'updated_at',
         'deleted_at',
+        'like_counter',
     ];
 
     public function registerMediaConversions(Media $media = null)

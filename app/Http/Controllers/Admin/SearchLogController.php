@@ -25,7 +25,7 @@ class SearchLogController extends Controller
 
             $table->editColumn('actions', function ($row) {
                 $viewGate      = 'search_log_show';
-                $editGate      = 'search_log_edit';
+                $editGate      = '';
                 $deleteGate    = 'search_log_delete';
                 $crudRoutePart = 'search-logs';
 

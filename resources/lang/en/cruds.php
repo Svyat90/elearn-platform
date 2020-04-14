@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'userManagement'          => [
+    'userManagement'               => [
         'title'          => 'User management',
         'title_singular' => 'User management',
     ],
-    'permission'              => [
+    'permission'                   => [
         'title'          => 'Permissions',
         'title_singular' => 'Permission',
         'fields'         => [
@@ -21,7 +21,7 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-    'role'                    => [
+    'role'                         => [
         'title'          => 'Roles',
         'title_singular' => 'Role',
         'fields'         => [
@@ -39,7 +39,7 @@ return [
             'deleted_at_helper'  => '',
         ],
     ],
-    'user'                    => [
+    'user'                         => [
         'title'          => 'Users',
         'title_singular' => 'User',
         'fields'         => [
@@ -95,7 +95,7 @@ return [
             'registered_on_helper'         => '',
         ],
     ],
-    'category'                => [
+    'category'                     => [
         'title'          => 'Main Categories',
         'title_singular' => 'Main Category',
         'fields'         => [
@@ -115,7 +115,7 @@ return [
             'color_helper'      => '',
         ],
     ],
-    'country'                 => [
+    'country'                      => [
         'title'          => 'Countries',
         'title_singular' => 'Country',
         'fields'         => [
@@ -135,7 +135,7 @@ return [
             'phone_code_helper' => '',
         ],
     ],
-    'language'                => [
+    'language'                     => [
         'title'          => 'Languages',
         'title_singular' => 'Language',
         'fields'         => [
@@ -153,7 +153,7 @@ return [
             'iso_code_helper'   => 'Lang Iso code',
         ],
     ],
-    'tag'                     => [
+    'tag'                          => [
         'title'          => 'Tags',
         'title_singular' => 'Tag',
         'fields'         => [
@@ -169,7 +169,7 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-    'page'                    => [
+    'page'                         => [
         'title'          => 'Web Page Content',
         'title_singular' => 'Web Page Content',
         'fields'         => [
@@ -187,7 +187,7 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-    'searchLog'               => [
+    'searchLog'                    => [
         'title'          => 'Search Log',
         'title_singular' => 'Search Log',
         'fields'         => [
@@ -205,7 +205,7 @@ return [
             'search_from_helper' => '',
         ],
     ],
-    'socialMedium'            => [
+    'socialMedium'                 => [
         'title'          => 'Social Media',
         'title_singular' => 'Social Medium',
         'fields'         => [
@@ -225,11 +225,11 @@ return [
             'website_helper'    => '',
         ],
     ],
-    'contentManagement'       => [
+    'contentManagement'            => [
         'title'          => 'Content Management',
         'title_singular' => 'Content Management',
     ],
-    'auditLog'                => [
+    'auditLog'                     => [
         'title'          => 'Logs',
         'title_singular' => 'Log',
         'fields'         => [
@@ -253,7 +253,7 @@ return [
             'updated_at_helper'   => '',
         ],
     ],
-    'order'                   => [
+    'order'                        => [
         'title'          => 'Order History',
         'title_singular' => 'Order History',
         'fields'         => [
@@ -309,31 +309,33 @@ return [
             'hide_video_helper'       => 'hide show video on artist profile',
         ],
     ],
-    'video'                   => [
+    'video'                        => [
         'title'          => 'Order Videos',
         'title_singular' => 'Order Video',
         'fields'         => [
-            'id'                => 'ID',
-            'id_helper'         => '',
-            'name'              => 'Name',
-            'name_helper'       => '',
-            'created_at'        => 'Created at',
-            'created_at_helper' => '',
-            'updated_at'        => 'Updated at',
-            'updated_at_helper' => '',
-            'deleted_at'        => 'Deleted at',
-            'deleted_at_helper' => '',
-            'text'              => 'Description',
-            'text_helper'       => '',
-            'file'              => 'File',
-            'file_helper'       => '',
-            'user'              => 'User',
-            'user_helper'       => '',
-            'status'            => 'Status',
-            'status_helper'     => '',
+            'id'                  => 'ID',
+            'id_helper'           => '',
+            'name'                => 'Name',
+            'name_helper'         => '',
+            'created_at'          => 'Created at',
+            'created_at_helper'   => '',
+            'updated_at'          => 'Updated at',
+            'updated_at_helper'   => '',
+            'deleted_at'          => 'Deleted at',
+            'deleted_at_helper'   => '',
+            'text'                => 'Description',
+            'text_helper'         => '',
+            'file'                => 'File',
+            'file_helper'         => '',
+            'user'                => 'User',
+            'user_helper'         => '',
+            'status'              => 'Status',
+            'status_helper'       => '',
+            'like_counter'        => 'Like Counter',
+            'like_counter_helper' => '',
         ],
     ],
-    'userReview'              => [
+    'userReview'                   => [
         'title'          => 'Reviews',
         'title_singular' => 'Review',
         'fields'         => [
@@ -357,7 +359,7 @@ return [
             'video_helper'           => '',
         ],
     ],
-    'gender'                  => [
+    'gender'                       => [
         'title'          => 'Gender',
         'title_singular' => 'Gender',
         'fields'         => [
@@ -373,7 +375,7 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-    'orderPayment'            => [
+    'orderPayment'                 => [
         'title'          => 'Order Payment',
         'title_singular' => 'Order Payment',
         'fields'         => [
@@ -399,15 +401,15 @@ return [
             'pg_txnid_helper'        => 'payment gateway txn id',
         ],
     ],
-    'ordersList'              => [
+    'ordersList'                   => [
         'title'          => 'Order Management',
         'title_singular' => 'Order Management',
     ],
-    'customerManagement'      => [
+    'customerManagement'           => [
         'title'          => 'Customer Management',
         'title_singular' => 'Customer Management',
     ],
-    'adminUser'               => [
+    'adminUser'                    => [
         'title'          => 'Admin Users',
         'title_singular' => 'Admin User',
         'fields'         => [
@@ -431,19 +433,19 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-    'mediaManagement'         => [
+    'mediaManagement'              => [
         'title'          => 'Media Management',
         'title_singular' => 'Media Management',
     ],
-    'siteLog'                 => [
+    'siteLog'                      => [
         'title'          => 'Site Logs',
         'title_singular' => 'Site Log',
     ],
-    'siteManagement'          => [
+    'siteManagement'               => [
         'title'          => 'Site Management',
         'title_singular' => 'Site Management',
     ],
-    'subCategory'             => [
+    'subCategory'                  => [
         'title'          => 'Sub Categories',
         'title_singular' => 'Sub Category',
         'fields'         => [
@@ -465,7 +467,7 @@ return [
             'parent_helper'     => '',
         ],
     ],
-    'adminSetting'            => [
+    'adminSetting'                 => [
         'title'          => 'Site Settings',
         'title_singular' => 'Site Setting',
         'fields'         => [
@@ -483,7 +485,7 @@ return [
             'value_helper'      => '',
         ],
     ],
-    'occasion'                => [
+    'occasion'                     => [
         'title'          => 'Occasion List',
         'title_singular' => 'Occasion List',
         'fields'         => [
@@ -499,7 +501,7 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-    'emailSubscription'       => [
+    'emailSubscription'            => [
         'title'          => 'Email Subscriptions',
         'title_singular' => 'Email Subscription',
         'fields'         => [
@@ -521,7 +523,7 @@ return [
             'status_helper'          => '',
         ],
     ],
-    'promoCode'               => [
+    'promoCode'                    => [
         'title'          => 'Promo Codes',
         'title_singular' => 'Promo Code',
         'fields'         => [
@@ -545,9 +547,11 @@ return [
             'updated_at_helper'          => '',
             'deleted_at'                 => 'Deleted at',
             'deleted_at_helper'          => '',
+            'status'                     => 'Status',
+            'status_helper'              => 'Status Promo Code',
         ],
     ],
-    'loginLog'                => [
+    'loginLog'                     => [
         'title'          => 'Login Log',
         'title_singular' => 'Login Log',
         'fields'         => [
@@ -569,7 +573,7 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-    'paymentLog'              => [
+    'paymentLog'                   => [
         'title'          => 'Payment Log',
         'title_singular' => 'Payment Log',
         'fields'         => [
@@ -591,11 +595,11 @@ return [
             'deleted_at_helper'   => '',
         ],
     ],
-    'paymentManagement'       => [
+    'paymentManagement'            => [
         'title'          => 'Payment Management',
         'title_singular' => 'Payment Management',
     ],
-    'artistPaymentHistory'    => [
+    'artistPaymentHistory'         => [
         'title'          => 'Artist Payment',
         'title_singular' => 'Artist Payment',
         'fields'         => [
@@ -629,7 +633,7 @@ return [
             'deleted_at_helper'   => '',
         ],
     ],
-    'agentPaymentHistory'     => [
+    'agentPaymentHistory'          => [
         'title'          => 'Agent Payment',
         'title_singular' => 'Agent Payment',
         'fields'         => [
@@ -663,7 +667,7 @@ return [
             'deleted_at_helper'   => '',
         ],
     ],
-    'artistResponse'          => [
+    'artistResponse'               => [
         'title'          => 'Artist Response',
         'title_singular' => 'Artist Response',
         'fields'         => [
@@ -693,15 +697,15 @@ return [
             'artist_helper'            => '',
         ],
     ],
-    'agentMangement'          => [
+    'agentMangement'               => [
         'title'          => 'Agent Mangement',
         'title_singular' => 'Agent Mangement',
     ],
-    'agentList'               => [
+    'agentList'                    => [
         'title'          => 'Agent List',
         'title_singular' => 'Agent List',
     ],
-    'agentMetum'              => [
+    'agentMetum'                   => [
         'title'          => 'Agent Meta',
         'title_singular' => 'Agent Metum',
         'fields'         => [
@@ -729,15 +733,15 @@ return [
             'agent_helper'            => '',
         ],
     ],
-    'artistManagement'        => [
+    'artistManagement'             => [
         'title'          => 'Artist Management',
         'title_singular' => 'Artist Management',
     ],
-    'artistList'              => [
+    'artistList'                   => [
         'title'          => 'Artist List',
         'title_singular' => 'Artist List',
     ],
-    'artistMetum'             => [
+    'artistMetum'                  => [
         'title'          => 'Artist Meta',
         'title_singular' => 'Artist Metum',
         'fields'         => [
@@ -797,31 +801,35 @@ return [
             'deleted_at_helper'         => '',
         ],
     ],
-    'customersList'           => [
+    'customersList'                => [
         'title'          => 'Customers List',
         'title_singular' => 'Customers List',
     ],
-    'userMetum'               => [
+    'userMetum'                    => [
         'title'          => 'Customer Meta',
         'title_singular' => 'Customer Metum',
         'fields'         => [
-            'id'                   => 'ID',
-            'id_helper'            => '',
-            'user'                 => 'User',
-            'user_helper'          => '',
-            'bio'                  => 'Bio',
-            'bio_helper'           => 'User Bio Information',
-            'user_wishlist'        => 'User Wishlist',
-            'user_wishlist_helper' => 'User artist wishlist list',
-            'created_at'           => 'Created at',
-            'created_at_helper'    => '',
-            'updated_at'           => 'Updated at',
-            'updated_at_helper'    => '',
-            'deleted_at'           => 'Deleted at',
-            'deleted_at_helper'    => '',
+            'id'                    => 'ID',
+            'id_helper'             => '',
+            'user'                  => 'User',
+            'user_helper'           => '',
+            'bio'                   => 'Bio',
+            'bio_helper'            => 'User Bio Information',
+            'created_at'            => 'Created at',
+            'created_at_helper'     => '',
+            'updated_at'            => 'Updated at',
+            'updated_at_helper'     => '',
+            'deleted_at'            => 'Deleted at',
+            'deleted_at_helper'     => '',
+            'user_wishlist'         => 'User Wishlist',
+            'user_wishlist_helper'  => 'In array format',
+            'user_likelist'         => 'User Likelist',
+            'user_likelist_helper'  => 'In array format',
+            'wallet_balance'        => 'Wallet Balance',
+            'wallet_balance_helper' => '',
         ],
     ],
-    'userWalletHistory'       => [
+    'userWalletHistory'            => [
         'title'          => 'Wallet History',
         'title_singular' => 'Wallet History',
         'fields'         => [
@@ -847,7 +855,7 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-    'artistEnquiry'           => [
+    'artistEnquiry'                => [
         'title'          => 'Artist Enquiry',
         'title_singular' => 'Artist Enquiry',
         'fields'         => [
@@ -881,19 +889,19 @@ return [
             'deleted_at_helper'            => '',
         ],
     ],
-    'userProfileAvatarImage'  => [
+    'userProfileAvatarImage'       => [
         'title'          => 'User Profile Avatar Images',
         'title_singular' => 'User Profile Avatar Image',
     ],
-    'talentProfileImage'      => [
+    'talentProfileImage'           => [
         'title'          => 'Talent Profile Images',
         'title_singular' => 'Talent Profile Image',
     ],
-    'talentProfileIntroVideo' => [
+    'talentProfileIntroVideo'      => [
         'title'          => 'Talent Profile Intro Videos',
         'title_singular' => 'Talent Profile Intro Video',
     ],
-    'userWishlist'            => [
+    'userWishlist'                 => [
         'title'          => 'User Wishlist',
         'title_singular' => 'User Wishlist',
         'fields'         => [
@@ -910,5 +918,13 @@ return [
             'deleted_at'        => 'Deleted at',
             'deleted_at_helper' => '',
         ],
+    ],
+    'artistDebitedTransactionList' => [
+        'title'          => 'Artist Debited Transaction',
+        'title_singular' => 'Artist Debited Transaction',
+    ],
+    'agentDebitedTransactionList'  => [
+        'title'          => 'Agent Debited Transaction',
+        'title_singular' => 'Agent Debited Transaction',
     ],
 ];

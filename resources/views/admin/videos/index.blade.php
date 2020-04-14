@@ -37,6 +37,11 @@
                         {{ trans('cruds.video.fields.status') }}
                     </th>
                     <th>
+                        {{ trans('cruds.video.fields.like_counter') }}
+                    </th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -97,6 +102,9 @@
 { data: 'file', name: 'file', sortable: false, searchable: false },
 { data: 'user_name', name: 'user.name' },
 { data: 'status', name: 'status' },
+{ data: 'like_counter', name: 'like_counter' },
+        { data: 'created_at', name: 'created_at' },
+        { data: 'updated_at', name: 'updated_at' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

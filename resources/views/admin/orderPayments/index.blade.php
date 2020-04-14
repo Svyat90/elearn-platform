@@ -34,6 +34,8 @@
                     <th>
                         {{ trans('cruds.orderPayment.fields.pg_txnid') }}
                     </th>
+                    <th>Created</th>
+                    <th>Updated</th>
                     <th>
                         &nbsp;
                     </th>
@@ -97,6 +99,8 @@
 { data: 'recieved_amount', name: 'recieved_amount' },
 { data: 'payment_status', name: 'payment_status' },
 { data: 'pg_txnid', name: 'pg_txnid' },
+        { data: 'created_at', name: 'created_at' },
+        { data: 'updated_at', name: 'updated_at' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

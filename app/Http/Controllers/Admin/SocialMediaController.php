@@ -76,32 +76,34 @@ class SocialMediaController extends Controller
 
     }
 
-    public function edit(SocialMedium $socialMedium)
+    public function edit(SocialMedium $socialMedium,$id)
     {
+        $socialMedium = SocialMedium::find($id);
         abort_if(Gate::denies('social_medium_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('admin.socialMedia.edit', compact('socialMedium'));
     }
 
-    public function update(UpdateSocialMediumRequest $request, SocialMedium $socialMedium)
+    public function update(Request $request, SocialMedium $socialMedium,$id)
     {
+        $socialMedium = SocialMedium::find($id);
         $socialMedium->update($request->all());
 
         return redirect()->route('admin.social-media.index');
 
     }
 
-    public function show(SocialMedium $socialMedium)
+    public function show(SocialMedium $socialMedium,$id)
     {
+        $socialMedium = SocialMedium::find($id);
         abort_if(Gate::denies('social_medium_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $socialMedium->load('socialMeidiaUsers');
 
         return view('admin.socialMedia.show', compact('socialMedium'));
     }
 
-    public function destroy(SocialMedium $socialMedium)
+    public function destroy(SocialMedium $socialMedium,$id)
     {
+        $socialMedium = SocialMedium::find($id);
         abort_if(Gate::denies('social_medium_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $socialMedium->delete();

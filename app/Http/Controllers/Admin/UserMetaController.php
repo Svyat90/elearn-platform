@@ -58,6 +58,12 @@ class UserMetaController extends Controller
             $table->editColumn('user_wishlist', function ($row) {
                 return $row->user_wishlist ? $row->user_wishlist : "";
             });
+            $table->editColumn('user_likelist', function ($row) {
+                return $row->user_likelist ? $row->user_likelist : "";
+            });
+            $table->editColumn('wallet_balance', function ($row) {
+                return $row->wallet_balance ? $row->wallet_balance : "";
+            });
 
             $table->rawColumns(['actions', 'placeholder', 'user']);
 
@@ -71,12 +77,12 @@ class UserMetaController extends Controller
     {
         abort_if(Gate::denies('user_metum_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::IsUserRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.userMeta.create', compact('users'));
     }
 
-    public function store(StoreUserMetumRequest $request)
+    public function store(Request $request)
     {
         $userMetum = UserMetum::create($request->all());
 
@@ -92,14 +98,14 @@ class UserMetaController extends Controller
     {
         abort_if(Gate::denies('user_metum_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::IsUserRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $userMetum->load('user');
 
         return view('admin.userMeta.edit', compact('users', 'userMetum'));
     }
 
-    public function update(UpdateUserMetumRequest $request, UserMetum $userMetum)
+    public function update(Request $request, UserMetum $userMetum)
     {
         $userMetum->update($request->all());
 

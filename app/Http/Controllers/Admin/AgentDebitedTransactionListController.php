@@ -4,23 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\AgentPaymentHistory;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDestroyAgentPaymentHistoryRequest;
-use App\Http\Requests\StoreAgentPaymentHistoryRequest;
-use App\Http\Requests\UpdateAgentPaymentHistoryRequest;
-use App\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
 
-class AgentPaymentHistoryController extends Controller
+class AgentDebitedTransactionListController extends Controller
 {
     public function index(Request $request)
     {
         abort_if(Gate::denies('agent_payment_history_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = AgentPaymentHistory::with(['user', 'earn_from'])->select(sprintf('%s.*', (new AgentPaymentHistory)->table));
+            $query = AgentPaymentHistory::where('txn_type',2)->with(['user', 'earn_from'])->select(sprintf('%s.*', (new AgentPaymentHistory)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -29,7 +25,7 @@ class AgentPaymentHistoryController extends Controller
             $table->editColumn('actions', function ($row) {
                 $viewGate      = 'agent_payment_history_show';
                 $editGate      = 'agent_payment_history_edit';
-                $deleteGate    = 'agent_payment_history_delete';
+                $deleteGate    = '';
                 $crudRoutePart = 'agent-payment-histories';
 
                 return view('partials.datatablesActions', compact(
@@ -43,9 +39,6 @@ class AgentPaymentHistoryController extends Controller
 
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : "";
-            });
-            $table->editColumn('txn_type', function ($row) {
-                return $row->txn_type ? AgentPaymentHistory::TXN_TYPE_SELECT[$row->txn_type] : '';
             });
             $table->editColumn('any_fees', function ($row) {
                 return $row->any_fees ? $row->any_fees : "";
@@ -69,7 +62,7 @@ class AgentPaymentHistoryController extends Controller
                 return $row->proccesed_by ? $row->proccesed_by : "";
             });
             $table->addColumn('user_referred_by', function ($row) {
-                return $row->user ? $row->user->name : '';
+                return $row->user ? $row->user->referred_by : '';
             });
 
             $table->editColumn('user.referred_by', function ($row) {
@@ -89,74 +82,7 @@ class AgentPaymentHistoryController extends Controller
             return $table->make(true);
         }
 
-        return view('admin.agentPaymentHistories.index');
-    }
-
-    public function create()
-    {
-        abort_if(Gate::denies('agent_payment_history_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $users = User::IsUserRole()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $earn_froms = User::IsFrontUsersRole()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('admin.agentPaymentHistories.create', compact('users', 'earn_froms'));
-    }
-
-    public function store(StoreAgentPaymentHistoryRequest $request)
-    {
-        $agentPaymentHistory = AgentPaymentHistory::create($request->all());
-
-        return redirect()->route('admin.agent-payment-histories.index');
-
-    }
-
-    public function edit(AgentPaymentHistory $agentPaymentHistory)
-    {
-        abort_if(Gate::denies('agent_payment_history_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $users = User::IsUserRole()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $earn_froms = User::IsFrontUsersRole()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $agentPaymentHistory->load('user', 'earn_from');
-
-        return view('admin.agentPaymentHistories.edit', compact('users', 'earn_froms', 'agentPaymentHistory'));
-    }
-
-    public function update(UpdateAgentPaymentHistoryRequest $request, AgentPaymentHistory $agentPaymentHistory)
-    {
-        $agentPaymentHistory->update($request->all());
-
-        return redirect()->route('admin.agent-payment-histories.index');
-
-    }
-
-    public function show(AgentPaymentHistory $agentPaymentHistory)
-    {
-        abort_if(Gate::denies('agent_payment_history_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $agentPaymentHistory->load('user', 'earn_from');
-
-        return view('admin.agentPaymentHistories.show', compact('agentPaymentHistory'));
-    }
-
-    public function destroy(AgentPaymentHistory $agentPaymentHistory)
-    {
-        abort_if(Gate::denies('agent_payment_history_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $agentPaymentHistory->delete();
-
-        return back();
-
-    }
-
-    public function massDestroy(MassDestroyAgentPaymentHistoryRequest $request)
-    {
-        AgentPaymentHistory::whereIn('id', request('ids'))->delete();
-
-        return response(null, Response::HTTP_NO_CONTENT);
-
+        return view('admin.agentDebitedTransactionLists.index');
     }
 
 }

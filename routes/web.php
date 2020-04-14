@@ -125,17 +125,25 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('payment-logs/ckmedia', 'PaymentLogController@storeCKEditorImages')->name('payment-logs.storeCKEditorImages');
     Route::resource('payment-logs', 'PaymentLogController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
+
     // Artist Payment Histories
     Route::delete('artist-payment-histories/destroy', 'ArtistPaymentHistoryController@massDestroy')->name('artist-payment-histories.massDestroy');
-    Route::resource('artist-payment-histories', 'ArtistPaymentHistoryController', ['except' => ['create', 'store', 'edit', 'update']]);
+    Route::resource('artist-payment-histories', 'ArtistPaymentHistoryController');
 
     // Agent Payment Histories
     Route::delete('agent-payment-histories/destroy', 'AgentPaymentHistoryController@massDestroy')->name('agent-payment-histories.massDestroy');
-    Route::resource('agent-payment-histories', 'AgentPaymentHistoryController', ['except' => ['create', 'store', 'edit', 'update']]);
+    Route::resource('agent-payment-histories', 'AgentPaymentHistoryController');
 
     // Artist Responses
     Route::delete('artist-responses/destroy', 'ArtistResponseController@massDestroy')->name('artist-responses.massDestroy');
     Route::resource('artist-responses', 'ArtistResponseController');
+
+
+    // Artist Debited Transaction Lists
+    Route::resource('artist-debited-transaction-lists', 'ArtistDebitedTransactionListController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
+
+    // Agent Debited Transaction Lists
+    Route::resource('agent-debited-transaction-lists', 'AgentDebitedTransactionListController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
     // Agent Lists
     Route::delete('agent-lists/destroy', 'AgentListController@massDestroy')->name('agent-lists.massDestroy');

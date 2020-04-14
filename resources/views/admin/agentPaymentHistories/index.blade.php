@@ -1,6 +1,14 @@
 @extends('layouts.admin')
 @section('content')
-
+@can('agent_payment_history_create')
+    <div style="margin-bottom: 10px;" class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-success" href="{{ route("admin.agent-payment-histories.create") }}">
+                {{ trans('global.add') }} {{ trans('cruds.agentPaymentHistory.title_singular') }}
+            </a>
+        </div>
+    </div>
+@endcan
 <div class="card">
     <div class="card-header">
         {{ trans('cruds.agentPaymentHistory.title_singular') }} {{ trans('global.list') }}
@@ -43,7 +51,9 @@
                     <th>
                         {{ trans('cruds.agentPaymentHistory.fields.user') }}
                     </th>
-
+                    <th>
+                        {{ trans('cruds.user.fields.referred_by') }}
+                    </th>
                     <th>
                         {{ trans('cruds.agentPaymentHistory.fields.earn_from') }}
                     </th>
@@ -112,6 +122,7 @@
 { data: 'txn_info', name: 'txn_info' },
 { data: 'status', name: 'status' },
 { data: 'proccesed_by', name: 'proccesed_by' },
+{ data: 'user_referred_by', name: 'user.referred_by' },
 { data: 'user.referred_by', name: 'user.referred_by' },
 { data: 'earn_from_name', name: 'earn_from.name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }

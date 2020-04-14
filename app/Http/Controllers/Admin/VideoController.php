@@ -61,7 +61,15 @@ class VideoController extends Controller
             $table->editColumn('status', function ($row) {
                 return $row->status ? Video::STATUS_SELECT[$row->status] : '';
             });
-
+            $table->editColumn('like_counter', function ($row) {
+                return $row->like_counter ? $row->like_counter : "";
+            });
+            $table->addColumn('created_at', function ($row) {
+                return $row->created_at ? $row->created_at :'';
+            });
+            $table->addColumn('updated_at', function ($row) {
+                return $row->updated_at ? $row->updated_at :'';
+            });
             $table->rawColumns(['actions', 'placeholder', 'file', 'user']);
 
             return $table->make(true);
@@ -74,7 +82,7 @@ class VideoController extends Controller
     {
         abort_if(Gate::denies('video_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::IsUserRole()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         return view('admin.videos.create', compact('users'));
     }
@@ -99,7 +107,7 @@ class VideoController extends Controller
     {
         abort_if(Gate::denies('video_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::IsUserRole()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $video->load('user');
 

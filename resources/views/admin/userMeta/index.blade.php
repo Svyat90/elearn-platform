@@ -34,6 +34,12 @@
                         {{ trans('cruds.userMetum.fields.user_wishlist') }}
                     </th>
                     <th>
+                        {{ trans('cruds.userMetum.fields.user_likelist') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.userMetum.fields.wallet_balance') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -93,6 +99,8 @@
 { data: 'user_first_name', name: 'user.first_name' },
 { data: 'user.first_name', name: 'user.first_name' },
 { data: 'user_wishlist', name: 'user_wishlist' },
+{ data: 'user_likelist', name: 'user_likelist' },
+{ data: 'wallet_balance', name: 'wallet_balance' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

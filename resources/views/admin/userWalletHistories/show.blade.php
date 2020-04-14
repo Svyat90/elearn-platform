@@ -71,6 +71,23 @@
                             {{ $userWalletHistory->earn_from->first_name ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            Created
+                        </th>
+                        <td>
+                            {{ $userWalletHistory->created_at }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Updated
+                        </th>
+                        <td>
+                            {{ $userWalletHistory->updated_at }}
+                        </td>
+                    </tr>
+
                 </tbody>
             </table>
             <div class="form-group">

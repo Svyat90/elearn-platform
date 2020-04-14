@@ -27,6 +27,8 @@ class UserMetum extends Model implements HasMedia
         'updated_at',
         'deleted_at',
         'user_wishlist',
+        'user_likelist',
+        'wallet_balance',
     ];
 
     public function registerMediaConversions(Media $media = null)

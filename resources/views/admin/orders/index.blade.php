@@ -87,6 +87,8 @@
                     <th>
                         {{ trans('cruds.order.fields.hide_video') }}
                     </th>
+                    <th>Created</th>
+                    <th>Updated</th>
                     <th>
                         &nbsp;
                     </th>
@@ -165,6 +167,8 @@
 { data: 'video_for', name: 'video_for' },
 { data: 'video_from', name: 'video_from' },
 { data: 'hide_video', name: 'hide_video' },
+        { data: 'created_at', name: 'created_at' },
+        { data: 'updated_at', name: 'updated_at' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

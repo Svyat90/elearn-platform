@@ -103,6 +103,18 @@ class User extends Authenticatable implements HasMedia
     }
 
     /*
+      * Fron user Role
+      */
+    public function scopeIsFrontUsersRole($query)
+    {
+        return $query->leftJoin('role_user','role_user.user_id','=','users.id')
+            ->where('role_user.role_id', 2)
+            ->orWhere('role_user.role_id', 3)
+            ->orWhere('role_user.role_id', 4);
+
+    }
+
+    /*
      * User Role
      */
     public function scopeIsUserRole($query)

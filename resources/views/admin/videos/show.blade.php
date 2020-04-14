@@ -67,6 +67,14 @@
                             {{ App\Video::STATUS_SELECT[$video->status] ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.video.fields.like_counter') }}
+                        </th>
+                        <td>
+                            {{ $video->like_counter }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

@@ -46,8 +46,9 @@ class EmailSubscriptionController extends Controller
             $table->editColumn('email_address', function ($row) {
                 return $row->email_address ? $row->email_address : "";
             });
+
             $table->editColumn('status', function ($row) {
-                return $row->status ? EmailSubscription::STATUS_SELECT[$row->status] : '';
+                return $row->status ? EmailSubscription::STATUS_RADIO[$row->status] : '';
             });
 
             $table->rawColumns(['actions', 'placeholder']);

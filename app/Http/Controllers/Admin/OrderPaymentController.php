@@ -60,7 +60,12 @@ class OrderPaymentController extends Controller
             $table->editColumn('pg_txnid', function ($row) {
                 return $row->pg_txnid ? $row->pg_txnid : "";
             });
-
+            $table->addColumn('created_at', function ($row) {
+                return $row->created_at ? $row->created_at :'';
+            });
+            $table->addColumn('updated_at', function ($row) {
+                return $row->updated_at ? $row->updated_at :'';
+            });
             $table->rawColumns(['actions', 'placeholder', 'order']);
 
             return $table->make(true);

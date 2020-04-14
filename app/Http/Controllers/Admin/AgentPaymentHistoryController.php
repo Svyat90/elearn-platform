@@ -73,7 +73,7 @@ class AgentPaymentHistoryController extends Controller
             });
 
             $table->editColumn('user.referred_by', function ($row) {
-                return $row->user ? (is_string($row->user) ? $row->user : $row->user->referred_by) : '';
+                return $row->user ? (is_string($row->user) ? $row->user : $row->user->referral_code) : '';
             });
             $table->addColumn('earn_from_name', function ($row) {
                 return $row->earn_from ? $row->earn_from->name : '';

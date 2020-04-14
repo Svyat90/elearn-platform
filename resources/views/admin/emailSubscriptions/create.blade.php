@@ -18,19 +18,6 @@
                 <span class="help-block">{{ trans('cruds.emailSubscription.fields.email_address_helper') }}</span>
             </div>
             <div class="form-group">
-                <label>{{ trans('cruds.emailSubscription.fields.status') }}</label>
-                <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" id="status">
-                    <option value disabled {{ old('status', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\EmailSubscription::STATUS_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('status', '1') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('status'))
-                    <span class="text-danger">{{ $errors->first('status') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.emailSubscription.fields.status_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label for="subscribed_on">{{ trans('cruds.emailSubscription.fields.subscribed_on') }}</label>
                 <input class="form-control datetime {{ $errors->has('subscribed_on') ? 'is-invalid' : '' }}" type="text" name="subscribed_on" id="subscribed_on" value="{{ old('subscribed_on') }}">
                 @if($errors->has('subscribed_on'))
@@ -45,6 +32,19 @@
                     <span class="text-danger">{{ $errors->first('unsubscribed_on') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.emailSubscription.fields.unsubscribed_on_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label>{{ trans('cruds.emailSubscription.fields.status') }}</label>
+                @foreach(App\EmailSubscription::STATUS_RADIO as $key => $label)
+                    <div class="form-check {{ $errors->has('status') ? 'is-invalid' : '' }}">
+                        <input class="form-check-input" type="radio" id="status_{{ $key }}" name="status" value="{{ $key }}" {{ old('status', '1') === $key ? 'checked' : '' }}>
+                        <label class="form-check-label" for="status_{{ $key }}">{{ $label }}</label>
+                    </div>
+                @endforeach
+                @if($errors->has('status'))
+                    <span class="text-danger">{{ $errors->first('status') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.emailSubscription.fields.status_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

@@ -12,7 +12,7 @@ class EmailSubscription extends Model
 
     public $table = 'email_subscriptions';
 
-    const STATUS_SELECT = [
+    const STATUS_RADIO = [
         '1' => 'Subscribed',
         '2' => 'UnSubscribed',
     ];

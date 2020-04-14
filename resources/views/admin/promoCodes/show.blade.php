@@ -71,6 +71,14 @@
                             {!! $promoCode->promotion_info !!}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.promoCode.fields.status') }}
+                        </th>
+                        <td>
+                            {{ App\PromoCode::STATUS_RADIO[$promoCode->status] ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

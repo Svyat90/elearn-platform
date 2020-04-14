@@ -28,13 +28,13 @@
                         {{ trans('cruds.emailSubscription.fields.email_address') }}
                     </th>
                     <th>
-                        {{ trans('cruds.emailSubscription.fields.status') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.emailSubscription.fields.subscribed_on') }}
                     </th>
                     <th>
                         {{ trans('cruds.emailSubscription.fields.unsubscribed_on') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.emailSubscription.fields.status') }}
                     </th>
                     <th>
                         &nbsp;
@@ -94,9 +94,9 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'email_address', name: 'email_address' },
-{ data: 'status', name: 'status' },
 { data: 'subscribed_on', name: 'subscribed_on' },
 { data: 'unsubscribed_on', name: 'unsubscribed_on' },
+{ data: 'status', name: 'status' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

@@ -1,6 +1,14 @@
 @extends('layouts.admin')
 @section('content')
-
+@can('admin_setting_create')
+    <div style="margin-bottom: 10px;" class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-success" href="{{ route("admin.admin-settings.create") }}">
+                {{ trans('global.add') }} {{ trans('cruds.adminSetting.title_singular') }}
+            </a>
+        </div>
+    </div>
+@endcan
 <div class="card">
     <div class="card-header">
         {{ trans('cruds.adminSetting.title_singular') }} {{ trans('global.list') }}
@@ -17,22 +25,10 @@
                         {{ trans('cruds.adminSetting.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.adminSetting.fields.company_commission') }}
+                        {{ trans('cruds.adminSetting.fields.key') }}
                     </th>
                     <th>
-                        {{ trans('cruds.adminSetting.fields.referral_user_commision') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.adminSetting.fields.referal_artist_commision') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.adminSetting.fields.referal_agent_commision') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.adminSetting.fields.artist_video_show_count_web') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.adminSetting.fields.artist_video_show_count_app') }}
+                        {{ trans('cruds.adminSetting.fields.value') }}
                     </th>
                     <th>
                         &nbsp;
@@ -51,7 +47,36 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-  
+@can('admin_setting_delete')
+  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
+  let deleteButton = {
+    text: deleteButtonTrans,
+    url: "{{ route('admin.admin-settings.massDestroy') }}",
+    className: 'btn-danger',
+    action: function (e, dt, node, config) {
+      var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
+          return entry.id
+      });
+
+      if (ids.length === 0) {
+        alert('{{ trans('global.datatables.zero_selected') }}')
+
+        return
+      }
+
+      if (confirm('{{ trans('global.areYouSure') }}')) {
+        $.ajax({
+          headers: {'x-csrf-token': _token},
+          method: 'POST',
+          url: config.url,
+          data: { ids: ids, _method: 'DELETE' }})
+          .done(function () { location.reload() })
+      }
+    }
+  }
+  dtButtons.push(deleteButton)
+@endcan
+
   let dtOverrideGlobals = {
     buttons: dtButtons,
     processing: true,
@@ -62,12 +87,8 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'company_commission', name: 'company_commission' },
-{ data: 'referral_user_commision', name: 'referral_user_commision' },
-{ data: 'referal_artist_commision', name: 'referal_artist_commision' },
-{ data: 'referal_agent_commision', name: 'referal_agent_commision' },
-{ data: 'artist_video_show_count_web', name: 'artist_video_show_count_web' },
-{ data: 'artist_video_show_count_app', name: 'artist_video_show_count_app' },
+{ data: 'key', name: 'key' },
+{ data: 'value', name: 'value' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

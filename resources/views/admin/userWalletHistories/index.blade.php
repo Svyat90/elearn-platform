@@ -35,6 +35,9 @@
                         {{ trans('cruds.userWalletHistory.fields.earn_from') }}
                     </th>
                     <th>
+                       Date
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -97,6 +100,7 @@
 { data: 'status', name: 'status' },
 { data: 'user.first_name', name: 'user.first_name' },
 { data: 'earn_from_first_name', name: 'earn_from.first_name' },
+{ data: 'created_at', name: 'created_at' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

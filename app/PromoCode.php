@@ -15,6 +15,11 @@ class PromoCode extends Model implements HasMedia
 
     public $table = 'promo_codes';
 
+    const STATUS_RADIO = [
+        '1' => 'Active',
+        '2' => 'Not Active',
+    ];
+
     protected $dates = [
         'end_date',
         'start_date',
@@ -24,6 +29,7 @@ class PromoCode extends Model implements HasMedia
     ];
 
     protected $fillable = [
+        'status',
         'discount',
         'end_date',
         'promo_code',

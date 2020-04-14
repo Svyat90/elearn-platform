@@ -40,6 +40,9 @@
                         {{ trans('cruds.promoCode.fields.end_date') }}
                     </th>
                     <th>
+                        {{ trans('cruds.promoCode.fields.status') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -101,6 +104,7 @@
 { data: 'minimum_order_value', name: 'minimum_order_value' },
 { data: 'start_date', name: 'start_date' },
 { data: 'end_date', name: 'end_date' },
+{ data: 'status', name: 'status' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

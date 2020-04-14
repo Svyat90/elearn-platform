@@ -18,14 +18,10 @@ class AdminSetting extends Model
     ];
 
     protected $fillable = [
+        'key',
+        'value',
         'created_at',
         'updated_at',
         'deleted_at',
-        'company_commission',
-        'referral_user_commision',
-        'referal_agent_commision',
-        'referal_artist_commision',
-        'artist_video_show_count_web',
-        'artist_video_show_count_app',
     ];
 }

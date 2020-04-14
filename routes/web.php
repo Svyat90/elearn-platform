@@ -97,8 +97,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('sub-categories/ckmedia', 'SubCategoryController@storeCKEditorImages')->name('sub-categories.storeCKEditorImages');
     Route::resource('sub-categories', 'SubCategoryController');
 
+
     // Admin Settings
-    Route::resource('admin-settings', 'AdminSettingsController', ['except' => ['create', 'store', 'destroy']]);
+    Route::delete('admin-settings/destroy', 'AdminSettingsController@massDestroy')->name('admin-settings.massDestroy');
+    Route::resource('admin-settings', 'AdminSettingsController');
 
     // Occasions
     Route::delete('occasions/destroy', 'OccasionController@massDestroy')->name('occasions.massDestroy');

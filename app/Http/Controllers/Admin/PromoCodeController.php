@@ -57,6 +57,10 @@ class PromoCodeController extends Controller
                 return $row->minimum_order_value ? $row->minimum_order_value : "";
             });
 
+            $table->editColumn('status', function ($row) {
+                return $row->status ? PromoCode::STATUS_RADIO[$row->status] : '';
+            });
+
             $table->rawColumns(['actions', 'placeholder']);
 
             return $table->make(true);

@@ -33,14 +33,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.emailSubscription.fields.status') }}
-                        </th>
-                        <td>
-                            {{ App\EmailSubscription::STATUS_SELECT[$emailSubscription->status] ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.emailSubscription.fields.subscribed_on') }}
                         </th>
                         <td>
@@ -53,6 +45,14 @@
                         </th>
                         <td>
                             {{ $emailSubscription->unsubscribed_on }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.emailSubscription.fields.status') }}
+                        </th>
+                        <td>
+                            {{ App\EmailSubscription::STATUS_RADIO[$emailSubscription->status] ?? '' }}
                         </td>
                     </tr>
                 </tbody>

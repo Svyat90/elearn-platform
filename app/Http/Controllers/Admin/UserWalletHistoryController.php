@@ -59,6 +59,9 @@ class UserWalletHistoryController extends Controller
             $table->addColumn('earn_from_first_name', function ($row) {
                 return $row->earn_from ? $row->earn_from->first_name.' '.$row->earn_from->last_name : '';
             });
+            $table->addColumn('created_at', function ($row) {
+                return $row->created_at ? $row->created_at :'';
+            });
 
             $table->rawColumns(['actions', 'placeholder', 'user', 'earn_from']);
 

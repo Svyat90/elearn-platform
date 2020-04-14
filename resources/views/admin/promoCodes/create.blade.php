@@ -61,7 +61,7 @@
                 <label>{{ trans('cruds.promoCode.fields.status') }}</label>
                 @foreach(App\PromoCode::STATUS_RADIO as $key => $label)
                     <div class="form-check {{ $errors->has('status') ? 'is-invalid' : '' }}">
-                        <input class="form-check-input" type="radio" id="status_{{ $key }}" name="status" value="{{ $key }}" {{ old('status', '1') === $key ? 'checked' : '' }}>
+                        <input class="form-check-input" type="radio" id="status_{{ $key }}" name="status" value="{{ $key }}" {{ $key == 1 ? 'checked' : '' }}>
                         <label class="form-check-label" for="status_{{ $key }}">{{ $label }}</label>
                     </div>
                 @endforeach

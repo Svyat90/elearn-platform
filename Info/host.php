@@ -1,6 +1,6 @@
-crazytech.kurama.xyz/cpanel
-Login: crazytech
-Password: jyebc{v#upzZ
+<?php
+// http://161.35.26.83/
+?>
 
 <?php
 /*
@@ -16,4 +16,9 @@ Password: jyebc{v#upzZ
  * https://docs.spatie.be/laravel-medialibrary/v7/converting-other-file-types/using-image-generators/#video
 */
 ?>
+Username:	admin@admin.com
+Password:	password
 
+
+admin@ctech.com
+12345678

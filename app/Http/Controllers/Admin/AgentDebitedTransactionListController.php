@@ -24,7 +24,7 @@ class AgentDebitedTransactionListController extends Controller
 
             $table->editColumn('actions', function ($row) {
                 $viewGate      = 'agent_payment_history_show';
-                $editGate      = 'agent_payment_history_edit';
+                $editGate      = '';
                 $deleteGate    = '';
                 $crudRoutePart = 'agent-payment-histories';
 

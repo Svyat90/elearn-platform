@@ -24,7 +24,7 @@ class ArtistDebitedTransactionListController extends Controller
 
             $table->editColumn('actions', function ($row) {
                 $viewGate      = 'artist_payment_history_show';
-                $editGate      = 'artist_payment_history_edit';
+                $editGate      = '';
                 $deleteGate    = '';
                 $crudRoutePart = 'artist-payment-histories';
 

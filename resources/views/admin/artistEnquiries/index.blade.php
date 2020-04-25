@@ -25,7 +25,7 @@
                         {{ trans('cruds.artistEnquiry.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.artistEnquiry.fields.artist') }}
+                        {{ trans('general.artistEnquiry.fields.artist') }}
                     </th>
                     <th>
                         {{ trans('cruds.artistEnquiry.fields.name') }}

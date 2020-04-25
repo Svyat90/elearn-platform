@@ -25,7 +25,7 @@
                         {{ trans('cruds.artistMetum.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.artistMetum.fields.artist') }}
+                        {{ trans('general.artistMetum.fields.artist') }}
                     </th>
                     <th>
                         {{ trans('cruds.artistMetum.fields.display_name') }}
@@ -46,10 +46,10 @@
                         {{ trans('cruds.artistMetum.fields.tags') }}
                     </th>
                     <th>
-                        {{ trans('cruds.artistMetum.fields.artist_fee') }}
+                        {{ trans('general.artistMetum.fields.artist_fee') }}
                     </th>
                     <th>
-                        {{ trans('cruds.artistMetum.fields.artist_commission') }}
+                        {{ trans('general.artistMetum.fields.artist_commission') }}
                     </th>
                     <th>
                         {{ trans('cruds.artistMetum.fields.company_commission') }}

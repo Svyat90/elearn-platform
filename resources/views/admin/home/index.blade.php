@@ -72,6 +72,8 @@
                                 </div>
                                 <!-- /.info-box -->
                             </div>
+                            <div class="end_section1"></div>
+
                             <div class="{{ $chart5_day->options['column_class'] }}">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -106,7 +108,6 @@
                                     {!! $chart5_year->renderHtml() !!}
                                 </div>
                             </div>
-
                             <div class="{{ $chart5_amount_day->options['column_class'] }}">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -141,6 +142,7 @@
                                     {!! $chart5_amount_year->renderHtml() !!}
                                 </div>
                             </div>
+                            <div class="end_section2"></div>
 
                             {{-- Widget - latest entries --}}
                             <div class="{{ $settings7['column_class'] }}" style="overflow-x: auto;">
@@ -180,7 +182,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
                             {{-- Widget - latest entries --}}
                             <div class="{{ $settings8['column_class'] }}" style="overflow-x: auto;">
                                 <h3>{{ $settings8['chart_title'] }}</h3>
@@ -219,7 +220,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
                             {{-- Widget - latest entries --}}
                             <div class="{{ $settings9['column_class'] }}" style="overflow-x: auto;">
                                 <h3>{{ $settings9['chart_title'] }}</h3>
@@ -258,6 +258,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="end_section3"></div>
 
                             <div class="{{ $settings10['column_class'] }}">
                                 <div class="info-box">
@@ -307,6 +308,17 @@
             </div>
         </div>
     </div>
+    <style>
+        .end_section1,
+        .end_section2,
+        .end_section3
+        {
+            margin-top: 25px;
+            clear: both;
+            display: block;
+            width: 100%;
+        }
+    </style>
 @endsection
 @section('scripts')
     @parent

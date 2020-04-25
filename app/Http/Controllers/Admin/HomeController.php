@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ArtistEnquiry;
+use App\ArtistResponse;
 use App\Chart\CrazyChart;
+use App\Order;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 class HomeController
@@ -287,9 +290,9 @@ class HomeController
             'entries_number'        => '5',
             'fields'                => [
                 'id'           => '',
-                'created_at'   => '',
                 'user'         => 'name',
-                'order_status' => '',
+                'payment_status' => '',
+                'created_at'   => '',
             ],
         ];
 
@@ -297,8 +300,13 @@ class HomeController
 
         if (class_exists($settings7['model'])) {
             $settings7['data'] = $settings7['model']::latest()
-                ->take($settings7['entries_number'])
-                ->get();
+                                ->take($settings7['entries_number'])
+                                ->get();
+            if($settings7['data']) {
+                foreach ($settings7['data'] as $key => $row) {
+                    $row->payment_status =  $row->payment_status ? Order::PAYMENT_STATUS_SELECT[$row->payment_status] : '';
+                }
+            }
         }
 
         if (!array_key_exists('fields', $settings7)) {
@@ -320,11 +328,11 @@ class HomeController
             'entries_number'        => '5',
             'fields'                => [
                 'id'          => '',
-                'order'       => 'payment_status',
-                'video'       => 'name',
-                'artist_note' => '',
+                'video' => '',
+                'note' => '',
+                'celebrity'      => '',
+                'action'       => '',
                 'created_at'  => '',
-                'artist'      => 'display_name',
             ],
         ];
 
@@ -334,6 +342,15 @@ class HomeController
             $settings8['data'] = $settings8['model']::latest()
                 ->take($settings8['entries_number'])
                 ->get();
+
+            if($settings8['data']) {
+                foreach ($settings8['data'] as $key => $row) {
+                    $row->video =  $row->video ? $row->video->name : '';
+                    $row->action =  $row->artist_action ? ArtistResponse::ARTIST_ACTION_SELECT[$row->artist_action] : '';
+                    $row->note =  $row->artist_note ? $row->artist_note : "";
+                    $row->celebrity =  $row->artist ? $row->artist->display_name : '';
+                }
+            }
         }
 
         if (!array_key_exists('fields', $settings8)) {
@@ -355,11 +372,10 @@ class HomeController
             'entries_number'        => '5',
             'fields'                => [
                 'id'         => '',
-                'artist'     => 'first_name',
                 'name'       => '',
                 'email'      => '',
-                'contact_no' => '',
                 'status'     => '',
+                'created_at'  => '',
             ],
         ];
 
@@ -369,6 +385,11 @@ class HomeController
             $settings9['data'] = $settings9['model']::latest()
                 ->take($settings9['entries_number'])
                 ->get();
+            if($settings9['data']) {
+                foreach ($settings9['data'] as $key => $row) {
+                    $row->status =  $row->status ? ArtistEnquiry::STATUS_SELECT[$row->status] : '';
+                }
+            }
         }
 
         if (!array_key_exists('fields', $settings9)) {

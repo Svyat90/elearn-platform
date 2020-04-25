@@ -28,7 +28,7 @@
                         {{ trans('cruds.artistResponse.fields.order') }}
                     </th>
                     <th>
-                        {{ trans('cruds.artistResponse.fields.artist_action') }}
+                        {{ trans('general.artistResponse.fields.artist_action') }}
                     </th>
                     <th>
                         {{ trans('cruds.artistResponse.fields.video_status') }}
@@ -37,7 +37,7 @@
                         {{ trans('cruds.artistResponse.fields.video') }}
                     </th>
                     <th>
-                        {{ trans('cruds.artistResponse.fields.artist_note') }}
+                        {{ trans('general.artistResponse.fields.artist_note') }}
                     </th>
                     <th>
                         {{ trans('cruds.artistResponse.fields.action_update') }}
@@ -46,7 +46,7 @@
                         {{ trans('cruds.artistResponse.fields.completion_update') }}
                     </th>
                     <th>
-                        {{ trans('cruds.artistResponse.fields.artist') }}
+                        {{ trans('general.artistResponse.fields.artist') }}
                     </th>
                     <th>
                         &nbsp;

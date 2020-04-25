@@ -76,7 +76,7 @@
                         {{ trans('cruds.order.fields.order_status') }}
                     </th>
                     <th>
-                        {{ trans('cruds.order.fields.artist') }}
+                        {{ trans('general.artist') }}
                     </th>
                     <th>
                         {{ trans('cruds.order.fields.video_for') }}

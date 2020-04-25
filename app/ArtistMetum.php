@@ -35,6 +35,7 @@ class ArtistMetum extends Model implements HasMedia
         'url_name',
         'artist_id',
         'updated_at',
+        'tagline',
         'created_at',
         'deleted_at',
         'artist_fee',

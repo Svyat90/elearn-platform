@@ -164,8 +164,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('artist-meta', 'ArtistMetaController');
 
     // Customers Lists
-    Route::delete('customers-lists/destroy', 'CustomersListController@massDestroy')->name('customers-lists.massDestroy');
-    Route::resource('customers-lists', 'CustomersListController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+    Route::delete('customer-list/destroy', 'CustomersListController@massDestroy')->name('customer-list.massDestroy');
+    Route::resource('customer-list', 'CustomersListController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
 
     // User Meta
     Route::delete('user-meta/destroy', 'UserMetaController@massDestroy')->name('user-meta.massDestroy');
@@ -195,6 +195,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // User Wishlists
     Route::delete('user-wishlists/destroy', 'UserWishlistController@massDestroy')->name('user-wishlists.massDestroy');
     Route::resource('user-wishlists', 'UserWishlistController');
+
+    // Page Seos
+    Route::delete('page-seos/destroy', 'PageSeoController@massDestroy')->name('page-seos.massDestroy');
+    Route::post('page-seos/media', 'PageSeoController@storeMedia')->name('page-seos.storeMedia');
+    Route::post('page-seos/ckmedia', 'PageSeoController@storeCKEditorImages')->name('page-seos.storeCKEditorImages');
+    Route::resource('page-seos', 'PageSeoController');
+
+    // User Likes
+    Route::delete('user-likes/destroy', 'UserLikeController@massDestroy')->name('user-likes.massDestroy');
+    Route::resource('user-likes', 'UserLikeController');
 
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth.admin']], function () {

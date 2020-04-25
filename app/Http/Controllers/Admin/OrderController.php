@@ -112,6 +112,12 @@ class OrderController extends Controller
             $table->editColumn('hide_video', function ($row) {
                 return $row->hide_video ? Order::HIDE_VIDEO_SELECT[$row->hide_video] : '';
             });
+            $table->addColumn('order_id', function ($row) {
+                return $row->order_id ? $row->order_id : '';
+            });
+            $table->addColumn('order_pin', function ($row) {
+                return $row->order_pin ? $row->order_pin : '';
+            });
             $table->addColumn('created_at', function ($row) {
                 return $row->created_at ? $row->created_at :'';
             });

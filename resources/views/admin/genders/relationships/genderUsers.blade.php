@@ -70,7 +70,7 @@
                                 {{ trans('cruds.user.fields.birth_date') }}
                             </th>
                             <th>
-                                {{ trans('cruds.user.fields.avatar') }}
+                                {{ trans('general.user.fields.avatar') }}
                             </th>
                             <th>
                                 {{ trans('cruds.user.fields.registration_source') }}

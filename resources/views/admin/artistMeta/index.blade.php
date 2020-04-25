@@ -31,6 +31,9 @@
                         {{ trans('cruds.artistMetum.fields.display_name') }}
                     </th>
                     <th>
+                        {{ trans('general.artistMetum.fields.tagline') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.artistMetum.fields.languages') }}
                     </th>
                     <th>
@@ -149,6 +152,7 @@
 { data: 'id', name: 'id' },
 { data: 'artist_first_name', name: 'artist.first_name' },
 { data: 'display_name', name: 'display_name' },
+{ data: 'tagline', name: 'tagline' },
 { data: 'languages', name: 'languages.name' },
 { data: 'main_catogery_name', name: 'main_catogery.name' },
 { data: 'sub_category_name', name: 'sub_category.name' },

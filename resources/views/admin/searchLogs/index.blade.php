@@ -23,6 +23,9 @@
                         {{ trans('cruds.searchLog.fields.search_from') }}
                     </th>
                     <th>
+                        {{ trans('general.created') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -81,6 +84,7 @@
 { data: 'id', name: 'id' },
 { data: 'search_term', name: 'search_term' },
 { data: 'search_from', name: 'search_from' },
+{ data: 'created_at', name: 'created_at' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

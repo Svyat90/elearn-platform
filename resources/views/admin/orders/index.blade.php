@@ -87,8 +87,12 @@
                     <th>
                         {{ trans('cruds.order.fields.hide_video') }}
                     </th>
-                    <th>Created</th>
-                    <th>Updated</th>
+                    <th>
+                        {{ trans('cruds.order.fields.order') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.order_pin') }}
+                    </th>
                     <th>
                         &nbsp;
                     </th>
@@ -167,8 +171,8 @@
 { data: 'video_for', name: 'video_for' },
 { data: 'video_from', name: 'video_from' },
 { data: 'hide_video', name: 'hide_video' },
-        { data: 'created_at', name: 'created_at' },
-        { data: 'updated_at', name: 'updated_at' },
+{ data: 'order_id', name: 'order_id' },
+{ data: 'order_pin', name: 'order_pin' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

@@ -20,7 +20,10 @@ class UpdateUserMetumRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'wishlists.*' => [
+                'integer'],
+            'wishlists'   => [
+                'array'],
         ];
 
     }

@@ -41,26 +41,20 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.userMetum.fields.user_wishlist') }}
-                        </th>
-                        <td>
-                            {{ $userMetum->user_wishlist }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.userMetum.fields.user_likelist') }}
-                        </th>
-                        <td>
-                            {{ $userMetum->user_likelist }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.userMetum.fields.wallet_balance') }}
                         </th>
                         <td>
                             {{ $userMetum->wallet_balance }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.userMetum.fields.wishlist') }}
+                        </th>
+                        <td>
+                            @foreach($userMetum->wishlists as $key => $wishlist)
+                                <span class="label label-info">{{ $wishlist->name }}</span>
+                            @endforeach
                         </td>
                     </tr>
                 </tbody>

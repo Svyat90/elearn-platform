@@ -59,6 +59,9 @@ class ArtistMetaController extends Controller
             $table->editColumn('display_name', function ($row) {
                 return $row->display_name ? $row->display_name : "";
             });
+            $table->editColumn('tagline', function ($row) {
+                return $row->tagline ? $row->tagline : "";
+            });
             $table->editColumn('languages', function ($row) {
                 $labels = [];
 

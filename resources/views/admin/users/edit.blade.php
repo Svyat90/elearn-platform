@@ -162,13 +162,13 @@
                 <span class="help-block">{{ trans('cruds.user.fields.birth_date_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="avatar">{{ trans('cruds.user.fields.avatar') }}</label>
+                <label for="avatar">{{ trans('general.user.fields.avatar') }}</label>
                 <div class="needsclick dropzone {{ $errors->has('avatar') ? 'is-invalid' : '' }}" id="avatar-dropzone">
                 </div>
                 @if($errors->has('avatar'))
                     <span class="text-danger">{{ $errors->first('avatar') }}</span>
                 @endif
-                <span class="help-block">{{ trans('cruds.user.fields.avatar_helper') }}</span>
+                <span class="help-block">{{ trans('general.user.fields.avatar_helper') }}</span>
             </div>
             <div class="form-group">
                 <label>{{ trans('cruds.user.fields.registration_source') }}</label>

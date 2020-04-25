@@ -30,28 +30,44 @@
                 <span class="help-block">{{ trans('cruds.userMetum.fields.bio_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="user_wishlist">{{ trans('cruds.userMetum.fields.user_wishlist') }}</label>
-                <input class="form-control {{ $errors->has('user_wishlist') ? 'is-invalid' : '' }}" type="text" name="user_wishlist" id="user_wishlist" value="{{ old('user_wishlist', '') }}">
-                @if($errors->has('user_wishlist'))
-                    <span class="text-danger">{{ $errors->first('user_wishlist') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.userMetum.fields.user_wishlist_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="user_likelist">{{ trans('cruds.userMetum.fields.user_likelist') }}</label>
-                <input class="form-control {{ $errors->has('user_likelist') ? 'is-invalid' : '' }}" type="text" name="user_likelist" id="user_likelist" value="{{ old('user_likelist', '') }}">
-                @if($errors->has('user_likelist'))
-                    <span class="text-danger">{{ $errors->first('user_likelist') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.userMetum.fields.user_likelist_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label for="wallet_balance">{{ trans('cruds.userMetum.fields.wallet_balance') }}</label>
                 <input class="form-control {{ $errors->has('wallet_balance') ? 'is-invalid' : '' }}" type="number" name="wallet_balance" id="wallet_balance" value="{{ old('wallet_balance', '0') }}" step="0.01">
                 @if($errors->has('wallet_balance'))
                     <span class="text-danger">{{ $errors->first('wallet_balance') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.userMetum.fields.wallet_balance_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="wishlists">{{ trans('cruds.userMetum.fields.wishlist') }}</label>
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                </div>
+                <select class="form-control select2 {{ $errors->has('wishlists') ? 'is-invalid' : '' }}" name="wishlists[]" id="wishlists" multiple>
+                    @foreach($wishlists as $id => $wishlist)
+                        <option value="{{ $id }}" {{ in_array($id, old('wishlists', [])) ? 'selected' : '' }}>{{ $wishlist }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('wishlists'))
+                    <span class="text-danger">{{ $errors->first('wishlists') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.userMetum.fields.wishlist_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="userlikelists">{{ trans('general.userMetum.fields.userlikelists') }}</label>
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                </div>
+                <select class="form-control select2 {{ $errors->has('userlikelists') ? 'is-invalid' : '' }}" name="userlikelists[]" id="userlikelists" multiple>
+                    @foreach($userLikeLists as $id => $wishlist)
+                        <option value="{{ $id }}" {{ in_array($id, old('userlikelists', [])) ? 'selected' : '' }}>{{ $wishlist }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('userlikelists'))
+                    <span class="text-danger">{{ $errors->first('userlikelists') }}</span>
+                @endif
+
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

@@ -29,6 +29,9 @@
                         {{ trans('cruds.loginLog.fields.device') }}
                     </th>
                     <th>
+                        {{ trans('general.created') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -89,6 +92,7 @@
 { data: 'ip_address', name: 'ip_address' },
 { data: 'login_from', name: 'login_from' },
 { data: 'device', name: 'device' },
+{ data: 'created_at', name: 'created_at' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

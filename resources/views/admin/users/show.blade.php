@@ -155,7 +155,7 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.avatar') }}
+                            {{ trans('general.user.fields.avatar') }}
                         </th>
                         <td>
                             @if($user->avatar)

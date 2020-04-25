@@ -125,6 +125,7 @@
       <path value="$PROJECT_DIR$/vendor/pbmedia/php-ffmpeg" />
       <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
       <path value="$PROJECT_DIR$/vendor/neutron/temporary-filesystem" />
+      <path value="$PROJECT_DIR$/vendor/laraveldaily/laravel-charts" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

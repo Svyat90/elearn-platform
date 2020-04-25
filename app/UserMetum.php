@@ -21,14 +21,12 @@ class UserMetum extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'bio',
         'user_id',
+        'bio',
+        'wallet_balance',
         'created_at',
         'updated_at',
         'deleted_at',
-        'user_wishlist',
-        'user_likelist',
-        'wallet_balance',
     ];
 
     public function registerMediaConversions(Media $media = null)
@@ -42,4 +40,17 @@ class UserMetum extends Model implements HasMedia
         return $this->belongsTo(User::class, 'user_id');
 
     }
+
+    public function wishlists()
+    {
+        return $this->belongsToMany(User::class);
+
+    }
+
+    public function userlikelists()
+    {
+        return $this->belongsToMany(UserTwo::class);
+
+    }
+
 }

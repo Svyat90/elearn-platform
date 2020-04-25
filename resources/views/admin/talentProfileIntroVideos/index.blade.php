@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.talentProfileIntroVideo.title') }}
+        {{ trans('general.talentProfileIntroVideo.title') }}
     </div>
     <div class="card-body">
         <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-User">
@@ -42,7 +42,7 @@
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
             let deleteButton = {
                 text: deleteButtonTrans,
-                url: "{{ route('admin.customers-lists.massDestroy') }}",
+                url: "{{ route('admin.customer-list.massDestroy') }}",
                 className: 'btn-danger',
                 action: function (e, dt, node, config) {
                     var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {

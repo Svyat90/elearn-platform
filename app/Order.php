@@ -14,7 +14,8 @@ class Order extends Model
 
     const ORDER_STATUS_SELECT = [
         '1' => 'Pending',
-        '2' => 'Rejected',
+        '2' => 'Completed',
+        '3' => 'Rejected',
     ];
 
     const VIDEO_FOR_SELECT = [
@@ -33,10 +34,10 @@ class Order extends Model
     ];
 
     protected $dates = [
-        'updated_at',
-        'created_at',
-        'deleted_at',
         'booking_datetime',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     const PAYMENT_BY_SELECT = [
@@ -52,28 +53,30 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'message',
+        'payment_status',
+        'language_id',
+        'from_gender',
         'video_to',
         'to_gender',
-        'video_for',
-        'artist_id',
-        'updated_at',
-        'created_at',
-        'hide_video',
-        'video_from',
-        'payment_by',
-        'deleted_at',
-        'promo_code',
-        'from_gender',
-        'language_id',
-        'order_status',
         'customer_name',
-        'booking_amount',
-        'delivery_phone',
-        'delivery_email',
-        'payment_status',
-        'promo_discount',
-        'booking_datetime',
         'occasion_type_id',
+        'delivery_email',
+        'delivery_phone',
+        'promo_code',
+        'promo_discount',
+        'booking_amount',
+        'booking_datetime',
+        'payment_by',
+        'order_status',
+        'artist_id',
+        'video_for',
+        'video_from',
+        'hide_video',
+        'order_id',
+        'order_pin',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     public function orderOrderPayments()

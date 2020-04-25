@@ -98,7 +98,7 @@
                     </li>
                 @endcan
                 @can('customer_management_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/customers-lists*') ? 'menu-open' : '' }} {{ request()->is('admin/user-meta*') ? 'menu-open' : '' }} {{ request()->is('admin/user-wallet-histories*') ? 'menu-open' : '' }} {{ request()->is('admin/user-reviews*') ? 'menu-open' : '' }} {{ request()->is('admin/user-wishlists*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/customer-list*') ? 'menu-open' : '' }} {{ request()->is('admin/user-meta*') ? 'menu-open' : '' }} {{ request()->is('admin/user-wallet-histories*') ? 'menu-open' : '' }} {{ request()->is('admin/user-reviews*') ? 'menu-open' : '' }} {{ request()->is('admin/user-wishlists*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
                             <i class="fa-fw nav-icon fas fa-users-cog">
 
@@ -111,7 +111,7 @@
                         <ul class="nav nav-treeview">
                             @can('customers_list_access')
                                 <li class="nav-item">
-                                    <a href="{{ route("admin.customers-lists.index") }}" class="nav-link {{ request()->is('admin/customers-lists') || request()->is('admin/customers-lists/*') ? 'active' : '' }}">
+                                    <a href="{{ route("admin.customer-list.index") }}" class="nav-link {{ request()->is('admin/customer-list') || request()->is('admin/customer-list/*') ? 'active' : '' }}">
                                         <i class="fa-fw nav-icon fas fa-user-friends">
 
                                         </i>
@@ -165,6 +165,18 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.userWishlist.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('user_like_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.user-likes.index") }}" class="nav-link {{ request()->is('admin/user-likes') || request()->is('admin/user-likes/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-list-alt">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.userLike.title') }}
                                         </p>
                                     </a>
                                 </li>
@@ -305,7 +317,7 @@
 
                                         </i>
                                         <p>
-                                            {{ trans('cruds.talentProfileIntroVideo.title') }}
+                                            {{ trans('general.talentProfileIntroVideo.title') }}
                                         </p>
                                     </a>
                                 </li>
@@ -653,6 +665,18 @@
                                         </i>
                                         <p>
                                             {{ trans('cruds.promoCode.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('page_seo_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.page-seos.index") }}" class="nav-link {{ request()->is('admin/page-seos') || request()->is('admin/page-seos/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon far fa-sun">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.pageSeo.title') }}
                                         </p>
                                     </a>
                                 </li>

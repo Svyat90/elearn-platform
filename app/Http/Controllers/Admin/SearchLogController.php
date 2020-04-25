@@ -47,6 +47,9 @@ class SearchLogController extends Controller
             $table->editColumn('search_from', function ($row) {
                 return $row->search_from ? SearchLog::SEARCH_FROM_SELECT[$row->search_from] : '';
             });
+            $table->addColumn('created_at', function ($row) {
+                return $row->created_at ? $row->created_at :'';
+            });
 
             $table->rawColumns(['actions', 'placeholder']);
 

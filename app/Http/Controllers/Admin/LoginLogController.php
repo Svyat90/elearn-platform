@@ -54,6 +54,9 @@ class LoginLogController extends Controller
             $table->editColumn('device', function ($row) {
                 return $row->device ? $row->device : "";
             });
+            $table->addColumn('created_at', function ($row) {
+                return $row->created_at ? $row->created_at :'';
+            });
 
             $table->rawColumns(['actions', 'placeholder', 'user']);
 

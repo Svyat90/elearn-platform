@@ -191,6 +191,22 @@
                             {{ App\Order::HIDE_VIDEO_SELECT[$order->hide_video] ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.order') }}
+                        </th>
+                        <td>
+                            {{ $order->order }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.order_pin') }}
+                        </th>
+                        <td>
+                            {{ $order->order_pin }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

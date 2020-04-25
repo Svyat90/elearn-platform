@@ -17,7 +17,7 @@
                     {{ trans('cruds.user.fields.id') }}
                 </th>
                 <th>
-                    {{ trans('cruds.user.fields.avatar') }}
+                    {{ trans('general.user.fields.avatar') }}
                 </th>
                 <th>
                     {{ trans('cruds.user.fields.first_name') }}
@@ -44,7 +44,7 @@
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
             let deleteButton = {
                 text: deleteButtonTrans,
-                url: "{{ route('admin.customers-lists.massDestroy') }}",
+                url: "{{ route('admin.customer-list.massDestroy') }}",
                 className: 'btn-danger',
                 action: function (e, dt, node, config) {
                     var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {

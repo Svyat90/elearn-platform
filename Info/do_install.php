@@ -105,9 +105,14 @@ sudo apt-get install ffmpeg
 sudo apt-get install frei0r-plugins
 
 #change max upload = php.ini
-/etc/php/7.2/fpm
+/etc/php/7.2/fpm/php.ini
 upload_max_filesize = 1000M
 post_max_size = 58M
+
+#change max upload on nginxg
+sudo nano /etc/nginx/nginx.conf
+-- add inside http
+client_max_body_size 2000M;
 
 #some info
 https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04

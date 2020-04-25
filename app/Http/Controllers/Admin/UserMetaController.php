@@ -24,7 +24,7 @@ class UserMetaController extends Controller
         abort_if(Gate::denies('user_metum_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = UserMetum::with(['user'])->select(sprintf('%s.*', (new UserMetum)->table));
+            $query = UserMetum::with(['user', 'wishlists'])->select(sprintf('%s.*', (new UserMetum)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -55,17 +55,20 @@ class UserMetaController extends Controller
             $table->editColumn('user.first_name', function ($row) {
                 return $row->user ? (is_string($row->user) ? $row->user : $row->user->first_name) : '';
             });
-            $table->editColumn('user_wishlist', function ($row) {
-                return $row->user_wishlist ? $row->user_wishlist : "";
-            });
-            $table->editColumn('user_likelist', function ($row) {
-                return $row->user_likelist ? $row->user_likelist : "";
-            });
             $table->editColumn('wallet_balance', function ($row) {
                 return $row->wallet_balance ? $row->wallet_balance : "";
             });
+            $table->editColumn('wishlist', function ($row) {
+                $labels = [];
 
-            $table->rawColumns(['actions', 'placeholder', 'user']);
+                foreach ($row->wishlists as $wishlist) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $wishlist->name);
+                }
+
+                return implode(' ', $labels);
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'user', 'wishlist']);
 
             return $table->make(true);
         }
@@ -77,14 +80,19 @@ class UserMetaController extends Controller
     {
         abort_if(Gate::denies('user_metum_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::IsUserRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.userMeta.create', compact('users'));
+        $wishlists = User::IsUserRole()->pluck('name', 'id');
+
+        $userLikeLists = User::IsUserRole()->pluck('name', 'id');
+
+        return view('admin.userMeta.create', compact('users','userLikeLists', 'wishlists'));
     }
 
-    public function store(Request $request)
+    public function store(StoreUserMetumRequest $request)
     {
         $userMetum = UserMetum::create($request->all());
+        $userMetum->wishlists()->sync($request->input('wishlists', []));
 
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $userMetum->id]);
@@ -98,16 +106,22 @@ class UserMetaController extends Controller
     {
         abort_if(Gate::denies('user_metum_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::IsUserRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $userMetum->load('user');
+        $wishlists = User::IsUserRole()->pluck('name', 'id');
 
-        return view('admin.userMeta.edit', compact('users', 'userMetum'));
+        $userLikeLists = User::IsUserRole()->pluck('name', 'id');
+
+        $userMetum->load('user', 'wishlists','userlikelists');
+
+        return view('admin.userMeta.edit', compact('users','userLikeLists', 'wishlists', 'userMetum'));
     }
 
-    public function update(Request $request, UserMetum $userMetum)
+    public function update(UpdateUserMetumRequest $request, UserMetum $userMetum)
     {
         $userMetum->update($request->all());
+        $userMetum->wishlists()->sync($request->input('wishlists', []));
+        $userMetum->userlikelists()->sync($request->input('userlikelists', []));
 
         return redirect()->route('admin.user-meta.index');
 
@@ -117,7 +131,7 @@ class UserMetaController extends Controller
     {
         abort_if(Gate::denies('user_metum_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $userMetum->load('user');
+        $userMetum->load('user', 'wishlists');
 
         return view('admin.userMeta.show', compact('userMetum'));
     }

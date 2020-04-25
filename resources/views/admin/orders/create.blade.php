@@ -224,6 +224,22 @@
                 <span class="help-block">{{ trans('cruds.order.fields.hide_video_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="order">{{ trans('cruds.orde.fields.order') }}</label>
+                <input class="form-control {{ $errors->has('order_id') ? 'is-invalid' : '' }}" type="text" name="order_id" id="order_id" value="{{ old('order_id', '') }}" step="1">
+                @if($errors->has('order_id'))
+                    <span class="text-danger">{{ $errors->first('order_id') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order_id.fields.order_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="order_pin">{{ trans('cruds.order.fields.order_pin') }}</label>
+                <input class="form-control {{ $errors->has('order_pin') ? 'is-invalid' : '' }}" type="number" name="order_pin" id="order_pin" value="{{ old('order_pin', '') }}" step="1">
+                @if($errors->has('order_pin'))
+                    <span class="text-danger">{{ $errors->first('order_pin') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.order_pin_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

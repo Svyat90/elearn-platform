@@ -31,6 +31,14 @@
                 <span class="help-block">{{ trans('cruds.artistMetum.fields.display_name_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="tagline">{{ trans('general.artistMetum.fields.tagline') }}</label>
+                <input class="form-control {{ $errors->has('tagline') ? 'is-invalid' : '' }}" type="text" name="tagline" id="tagline" value="{{ old('tagline', $artistMetum->tagline) }}">
+                @if($errors->has('tagline'))
+                    <span class="text-danger">{{ $errors->first('tagline') }}</span>
+                @endif
+                <span class="help-block">{{ trans('general.artistMetum.fields.tagline_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label for="profile_info">{{ trans('cruds.artistMetum.fields.profile_info') }}</label>
                 <textarea class="form-control ckeditor {{ $errors->has('profile_info') ? 'is-invalid' : '' }}" name="profile_info" id="profile_info">{!! old('profile_info', $artistMetum->profile_info) !!}</textarea>
                 @if($errors->has('profile_info'))

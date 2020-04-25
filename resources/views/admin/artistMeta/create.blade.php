@@ -10,7 +10,7 @@
         <form method="POST" action="{{ route("admin.artist-meta.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="artist_id">{{ trans('cruds.artistMetum.fields.artist') }}</label>
+                <label for="artist_id">{{ trans('general.artistMetum.fields.artist') }}</label>
                 <select class="form-control select2 {{ $errors->has('artist') ? 'is-invalid' : '' }}" name="artist_id" id="artist_id">
                     @foreach($artists as $id => $artist)
                         <option value="{{ $id }}" {{ old('artist_id') == $id ? 'selected' : '' }}>{{ $artist }}</option>

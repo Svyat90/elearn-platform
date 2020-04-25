@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Chart\CrazyChart;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 class HomeController
@@ -53,6 +54,9 @@ class HomeController
             'chart_type'            => 'number_block',
             'report_type'           => 'group_by_date',
             'model'                 => 'App\\Order',
+            'conditions'            => [
+                ['name' => 'Count','condition' => "payment_status = '1' ", 'color' => 'black']
+            ],
             'group_by_field'        => 'created_at',
             'group_by_period'       => 'day',
             'aggregate_function'    => 'count',
@@ -66,6 +70,7 @@ class HomeController
 
         if (class_exists($settings2['model'])) {
             $settings2['total_number'] = $settings2['model']::when(isset($settings2['filter_field']), function ($query) use ($settings2) {
+                $query = $query->where('payment_status',1);
                 if (isset($settings2['filter_days'])) {
                     return $query->where($settings2['filter_field'], '>=',
                         now()->subDays($settings2['filter_days'])->format('Y-m-d'));
@@ -93,7 +98,7 @@ class HomeController
             'chart_type'            => 'number_block',
             'report_type'           => 'group_by_date',
             'model'                 => 'App\\User',
-            'group_by_field'        => 'email_verified_at',
+            'group_by_field'        => 'created_at',
             'group_by_period'       => 'day',
             'aggregate_function'    => 'count',
             'filter_field'          => 'created_at',
@@ -106,6 +111,8 @@ class HomeController
 
         if (class_exists($settings3['model'])) {
             $settings3['total_number'] = $settings3['model']::when(isset($settings3['filter_field']), function ($query) use ($settings3) {
+                $query = $query->leftJoin('role_user','role_user.user_id','=','users.id')
+                                ->where('role_user.role_id', 2);
                 if (isset($settings3['filter_days'])) {
                     return $query->where($settings3['filter_field'], '>=',
                         now()->subDays($settings3['filter_days'])->format('Y-m-d'));
@@ -133,7 +140,7 @@ class HomeController
             'chart_type'            => 'number_block',
             'report_type'           => 'group_by_date',
             'model'                 => 'App\\User',
-            'group_by_field'        => 'email_verified_at',
+            'group_by_field'        => 'created_at',
             'group_by_period'       => 'day',
             'aggregate_function'    => 'count',
             'filter_field'          => 'created_at',
@@ -146,6 +153,8 @@ class HomeController
 
         if (class_exists($settings4['model'])) {
             $settings4['total_number'] = $settings4['model']::when(isset($settings4['filter_field']), function ($query) use ($settings4) {
+                $query = $query->leftJoin('role_user','role_user.user_id','=','users.id')
+                                ->where('role_user.role_id', 3);
                 if (isset($settings4['filter_days'])) {
                     return $query->where($settings4['filter_field'], '>=',
                         now()->subDays($settings4['filter_days'])->format('Y-m-d'));
@@ -168,12 +177,15 @@ class HomeController
                 ($settings4['aggregate_field'] ?? '*');
         }
 
-        // Sales Bar dayli
+        // Sales Bar Count
         $settings5 = [
             'chart_title'           => 'Sales Bar Count',
             'chart_type'            => 'bar',
             'report_type'           => 'group_by_date',
             'model'                 => 'App\\Order',
+            'conditions'            => [
+                ['name' => 'Count','condition' => "payment_status = '1' ", 'color' => 'black']
+            ],
             'group_by_field'        => 'created_at',
             'group_by_period'       => 'day',
             'aggregate_function'    => 'count',
@@ -182,7 +194,65 @@ class HomeController
             'column_class'          => 'col-md-6',
             'entries_number'        => '5',
         ];
-        $chart5 = new LaravelChart($settings5);
+        $settings5_day = $settings5;
+        $settings5_day['group_by_period'] = 'day';
+        $settings5_day['chart_title'] = 'Sales Bar Count Daily';
+        $chart5_day = new CrazyChart($settings5_day);
+
+        $settings5_week = $settings5;
+        $settings5_week['group_by_period'] = 'week';
+        $settings5_week['chart_title'] = 'Sales Bar Count Weekly';
+        $chart5_week = new CrazyChart($settings5_week);
+
+        $settings5_month = $settings5;
+        $settings5_month['group_by_period'] = 'month';
+        $settings5_month['chart_title'] = 'Sales Bar Count Monthly';
+        $chart5_month = new CrazyChart($settings5_month);
+
+        $settings5_year = $settings5;
+        $settings5_year['group_by_period'] = 'year';
+        $settings5_year['chart_title'] = 'Sales Bar Count Year';
+        $chart5_year = new CrazyChart($settings5_year);
+
+
+        // Sales Bar Amount
+        $settings5_amout = [
+            'chart_title'           => 'Sales Bar Amount',
+            'chart_type'            => 'bar',
+            'report_type'           => 'group_by_date',
+            'model'                 => 'App\\Order',
+            'conditions'            => [
+                ['name' => 'Amount','condition' => "payment_status = '1' ", 'color' => 'black']
+            ],
+            'group_by_field'        => 'created_at',
+            'group_by_period'       => 'day',
+            'aggregate_function'    => 'sum',
+            'aggregate_field'       => 'booking_amount',
+            'filter_field'          => 'payment_status',
+            'group_by_field_format' => 'Y-m-d H:i:s',
+            'column_class'          => 'col-md-6',
+            'entries_number'        => '5',
+        ];
+        $settings5_amout_day = $settings5_amout;
+        $settings5_amout_day['group_by_period'] = 'day';
+        $settings5_amout_day['chart_title'] = 'Sales Bar Amount Daily';
+        $chart5_amount_day = new CrazyChart($settings5_amout_day);
+
+        $settings5_amout_week = $settings5_amout;
+        $settings5_amout_week['group_by_period'] = 'week';
+        $settings5_amout_week['chart_title'] = 'Sales Bar Amount Weekly';
+        $chart5_amount_week = new CrazyChart($settings5_amout_week);
+
+        $settings5_amout_month = $settings5_amout;
+        $settings5_amout_month['group_by_period'] = 'month';
+        $settings5_amout_month['chart_title'] = 'Sales Bar Amount Monthly';
+        $chart5_amount_month = new CrazyChart($settings5_amout_month);
+
+        $settings5_amout_year = $settings5_amout;
+        $settings5_amout_year['group_by_period'] = 'year';
+        $settings5_amout_year['chart_title'] = 'Sales Bar Amount Year';
+        $chart5_amount_year = new CrazyChart($settings5_amout_year);
+
 
         // Reigtered User
         $settings6 = [
@@ -199,7 +269,8 @@ class HomeController
             'entries_number'        => '5',
         ];
 
-        $chart6 = new LaravelChart($settings6);
+//        $chart6 = new LaravelChart($settings6);
+        $chart6 = '';
 
         $settings7 = [
             'chart_title'           => 'Latest Orders',
@@ -245,7 +316,7 @@ class HomeController
             'filter_field'          => 'created_at',
             'filter_days'           => '7',
             'group_by_field_format' => 'Y-m-d H:i:s',
-            'column_class'          => 'col-md-4',
+            'column_class'          => 'col-md-6',
             'entries_number'        => '5',
             'fields'                => [
                 'id'          => '',
@@ -305,7 +376,7 @@ class HomeController
         }
 
         $settings10 = [
-            'chart_title'           => 'Orders Completed',
+            'chart_title'           => 'Orders Completed %',
             'chart_type'            => 'number_block',
             'report_type'           => 'group_by_date',
             'model'                 => 'App\\Order',
@@ -345,7 +416,7 @@ class HomeController
         }
 
         $settings11 = [
-            'chart_title'           => 'Orders Processing',
+            'chart_title'           => 'Orders Processing %',
             'chart_type'            => 'number_block',
             'report_type'           => 'group_by_date',
             'model'                 => 'App\\Order',
@@ -385,7 +456,7 @@ class HomeController
         }
 
         $settings12 = [
-            'chart_title'           => 'Other Statuses',
+            'chart_title'           => 'Other Statuses %',
             'chart_type'            => 'number_block',
             'report_type'           => 'group_by_date',
             'model'                 => 'App\\Order',
@@ -424,7 +495,21 @@ class HomeController
                 ($settings12['aggregate_field'] ?? '*');
         }
 
-        return view('admin.home.index', compact('settings1', 'settings2', 'settings3', 'settings4', 'chart5', 'chart6', 'settings7', 'settings8', 'settings9', 'settings10', 'settings11', 'settings12'));
+        return view('admin.home.index', compact('settings1',
+            'settings2',
+            'settings3',
+            'settings4',
+            'chart5',
+            'chart5_day',
+            'chart5_week',
+            'chart5_month',
+            'chart5_year',
+            'chart5_amount',
+            'chart5_amount_day',
+            'chart5_amount_week',
+            'chart5_amount_month',
+            'chart5_amount_year',
+            'chart6', 'settings7', 'settings8', 'settings9', 'settings10', 'settings11', 'settings12'));
     }
 
 }

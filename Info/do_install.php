@@ -19,13 +19,17 @@ GRANT USAGE ON *.* TO 'crazy_user'@'localhost' IDENTIFIED BY '0f2afb52441efcaa47
 FLUSH PRIVILEGES;
 
 #dam acces pentru usr nou
-GRANT ALL PRIVILEGES ON crazy_db.* TO crazy_user@'92.181.132.7' IDENTIFIED BY '0f2afb52441efcaa47ba4b3d84675d44a03f86ad6f1e96b9';
+GRANT ALL PRIVILEGES ON crazy_db.* TO crazy_user@'94.139.137.210' IDENTIFIED BY '0f2afb52441efcaa47ba4b3d84675d44a03f86ad6f1e96b9';
 FLUSH PRIVILEGES;
 
 #allow by ip
 ufw allow from 92.181.132.7 to any port 3306
 
 #allo to connect to db
+GRANT ALL PRIVILEGES ON crazy_db.* TO root@'92.181.132.7' IDENTIFIED BY '0f2afb52441efcaa47ba4b3d84675d44a03f86ad6f1e96b9';
+FLUSH PRIVILEGES;
+
+#allo to connect to db new ip
 GRANT ALL PRIVILEGES ON crazy_db.* TO root@'92.181.132.7' IDENTIFIED BY '0f2afb52441efcaa47ba4b3d84675d44a03f86ad6f1e96b9';
 FLUSH PRIVILEGES;
 

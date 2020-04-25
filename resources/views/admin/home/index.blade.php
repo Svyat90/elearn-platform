@@ -72,17 +72,17 @@
                                 </div>
                                 <!-- /.info-box -->
                             </div>
-                            <div class="{{ $chart5->options['column_class'] }}">
+                            <div class="{{ $chart5_day->options['column_class'] }}">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div style="width: 50%;float: left">
                                             <h3>
-                                                {!! $chart5->options['chart_title'] !!}
+                                                {!! $chart5_day->options['chart_title'] !!}
                                             </h3>
                                         </div>
                                         <div style="width: 50%;float: left">
                                             <div class="form-group pull-right">
-                                                <select name="" id="" class="form-control ">
+                                                <select name="" id="" class="form-control sale_bar_count">
                                                     <option value="day">Daily</option>
                                                     <option value="week">Weekly</option>
                                                     <option value="month">Monthly</option>
@@ -93,12 +93,55 @@
                                         <div style="clear: both"></div>
                                     </div>
                                 </div>
-                                {!! $chart5->renderHtml() !!}
+                                <div class="sale_bar_count_day sale_bar_count_chart">
+                                    {!! $chart5_day->renderHtml() !!}
+                                </div>
+                                <div class="sale_bar_count_week sale_bar_count_chart">
+                                    {!! $chart5_week->renderHtml() !!}
+                                </div>
+                                <div class="sale_bar_count_month sale_bar_count_chart">
+                                    {!! $chart5_month->renderHtml() !!}
+                                </div>
+                                <div class="sale_bar_count_year sale_bar_count_chart">
+                                    {!! $chart5_year->renderHtml() !!}
+                                </div>
                             </div>
-                            <div class="{{ $chart6->options['column_class'] }}">
-                                <h3>{!! $chart6->options['chart_title'] !!}</h3>
-                                {!! $chart6->renderHtml() !!}
+
+                            <div class="{{ $chart5_amount_day->options['column_class'] }}">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div style="width: 50%;float: left">
+                                            <h3>
+                                                {!! $chart5_amount_day->options['chart_title'] !!}
+                                            </h3>
+                                        </div>
+                                        <div style="width: 50%;float: left">
+                                            <div class="form-group pull-right">
+                                                <select name="" id="" class="form-control sale_bar_amount">
+                                                    <option value="day">Daily</option>
+                                                    <option value="week">Weekly</option>
+                                                    <option value="month">Monthly</option>
+                                                    <option value="year">Yearly</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div style="clear: both"></div>
+                                    </div>
+                                </div>
+                                <div class="sale_bar_amount_day sale_bar_amount_chart">
+                                    {!! $chart5_amount_day->renderHtml() !!}
+                                </div>
+                                <div class="sale_bar_amount_week sale_bar_amount_chart">
+                                    {!! $chart5_amount_week->renderHtml() !!}
+                                </div>
+                                <div class="sale_bar_amount_month sale_bar_amount_chart">
+                                    {!! $chart5_amount_month->renderHtml() !!}
+                                </div>
+                                <div class="sale_bar_amount_year sale_bar_amount_chart">
+                                    {!! $chart5_amount_year->renderHtml() !!}
+                                </div>
                             </div>
+
                             {{-- Widget - latest entries --}}
                             <div class="{{ $settings7['column_class'] }}" style="overflow-x: auto;">
                                 <h3>{{ $settings7['chart_title'] }}</h3>
@@ -267,5 +310,36 @@
 @endsection
 @section('scripts')
     @parent
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>{!! $chart5->renderJs() !!}{!! $chart6->renderJs() !!}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    {!! $chart5_day->renderJs() !!}
+    {!! $chart5_week->renderJs() !!}
+    {!! $chart5_month->renderJs() !!}
+    {!! $chart5_year->renderJs() !!}
+
+    {!! $chart5_amount_day->renderJs() !!}
+    {!! $chart5_amount_week->renderJs() !!}
+    {!! $chart5_amount_month->renderJs() !!}
+    {!! $chart5_amount_year->renderJs() !!}
+
+    {{--{!! $chart6->renderJs() !!}--}}
+
+    <script>
+        $(function () {
+            $('.sale_bar_count_chart').hide();
+            $('.sale_bar_count_day').show();
+            $( ".sale_bar_count" ).change(function() {
+                $('.sale_bar_count_chart').hide();
+                $('.sale_bar_count_'+$(this).val()).show();
+            });
+            // amount
+            $('.sale_bar_amount_chart').hide();
+            $('.sale_bar_amount_day').show();
+            $( ".sale_bar_amount" ).change(function() {
+                $('.sale_bar_amount_chart').hide();
+                $('.sale_bar_amount_'+$(this).val()).show();
+            });
+        });
+
+    </script>
 @endsection

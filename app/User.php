@@ -115,7 +115,7 @@ class User extends Authenticatable implements HasMedia
     }
 
     /*
-     * User Role
+     * User/Customer Role
      */
     public function scopeIsUserRole($query)
     {

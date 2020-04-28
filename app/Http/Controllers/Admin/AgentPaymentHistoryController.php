@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyAgentPaymentHistoryRequest;
 use App\Http\Requests\StoreAgentPaymentHistoryRequest;
 use App\Http\Requests\UpdateAgentPaymentHistoryRequest;
 use App\User;
+use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;

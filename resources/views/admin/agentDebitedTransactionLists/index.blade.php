@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 @section('content')
 
+@include("admin._common.dateRangeHeader")
+
 <div class="card">
     <div class="card-header">
         {{ trans('cruds.agentDebitedTransactionList.title') }}
@@ -65,16 +67,14 @@
     <script>
         $(function () {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-
-
             let dtOverrideGlobals = {
                     buttons: dtButtons,
                     processing: true,
                     serverSide: true,
                     retrieve: true,
                     aaSorting: [],
-                    ajax: "{{ route('admin.agent-debited-transaction-lists.index') }}",
-                    columns: [
+                    ajax: "{!! isset($_GET['from']) ? route('admin.agent-debited-transaction-lists.index').'?from='.$_GET['from'].'&to='.$_GET['to'] : route('admin.agent-debited-transaction-lists.index') !!}",
+                columns: [
                         { data: 'placeholder', name: 'placeholder' },
                         { data: 'id', name: 'id' },
                         { data: 'any_fees', name: 'any_fees' },

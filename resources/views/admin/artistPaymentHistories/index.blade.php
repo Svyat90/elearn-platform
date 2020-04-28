@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 @section('content')
+
+@include("admin._common.dateRangeHeader")
+
 @can('artist_payment_history_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
@@ -112,7 +115,7 @@
     serverSide: true,
     retrieve: true,
     aaSorting: [],
-    ajax: "{{ route('admin.artist-payment-histories.index') }}",
+    ajax: "{!! isset($_GET['from']) ? route('admin.artist-payment-histories.index').'?from='.$_GET['from'].'&to='.$_GET['to'] : route('admin.artist-payment-histories.index') !!}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },

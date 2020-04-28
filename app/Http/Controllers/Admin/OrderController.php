@@ -112,17 +112,14 @@ class OrderController extends Controller
             $table->editColumn('hide_video', function ($row) {
                 return $row->hide_video ? Order::HIDE_VIDEO_SELECT[$row->hide_video] : '';
             });
-            $table->addColumn('order_id', function ($row) {
-                return $row->order_id ? $row->order_id : '';
+            $table->editColumn('order', function ($row) {
+                return $row->order ? $row->order : "";
             });
-            $table->addColumn('order_pin', function ($row) {
-                return $row->order_pin ? $row->order_pin : '';
+            $table->editColumn('order_pin', function ($row) {
+                return $row->order_pin ? $row->order_pin : "";
             });
-            $table->addColumn('created_at', function ($row) {
-                return $row->created_at ? $row->created_at :'';
-            });
-            $table->addColumn('updated_at', function ($row) {
-                return $row->updated_at ? $row->updated_at :'';
+            $table->editColumn('order_note', function ($row) {
+                return $row->order_note ? $row->order_note : "";
             });
 
             $table->rawColumns(['actions', 'placeholder', 'user', 'language', 'occasion_type', 'artist']);
@@ -137,7 +134,7 @@ class OrderController extends Controller
     {
         abort_if(Gate::denies('order_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::IsUserRole()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $languages = Language::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -160,7 +157,7 @@ class OrderController extends Controller
     {
         abort_if(Gate::denies('order_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::IsUserRole()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $languages = Language::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 

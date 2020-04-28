@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 @section('content')
+
+@include("admin._common.dateRangeHeader")
+
 @can('agent_payment_history_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
@@ -110,7 +113,7 @@
     serverSide: true,
     retrieve: true,
     aaSorting: [],
-    ajax: "{{ route('admin.agent-payment-histories.index') }}",
+    ajax: "{!! isset($_GET['from']) ? route('admin.agent-payment-histories.index').'?from='.$_GET['from'].'&to='.$_GET['to'] : route('admin.agent-payment-histories.index') !!}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },

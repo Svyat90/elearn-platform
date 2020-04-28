@@ -37,12 +37,6 @@
                                 {{ trans('cruds.order.fields.language') }}
                             </th>
                             <th>
-                                {{ trans('cruds.order.fields.video_for') }}
-                            </th>
-                            <th>
-                                {{ trans('cruds.order.fields.video_from') }}
-                            </th>
-                            <th>
                                 {{ trans('cruds.order.fields.from_gender') }}
                             </th>
                             <th>
@@ -64,9 +58,6 @@
                                 {{ trans('cruds.order.fields.delivery_phone') }}
                             </th>
                             <th>
-                                {{ trans('cruds.order.fields.hide_video') }}
-                            </th>
-                            <th>
                                 {{ trans('cruds.order.fields.promo_code') }}
                             </th>
                             <th>
@@ -86,6 +77,24 @@
                             </th>
                             <th>
                                 {{ trans('cruds.order.fields.artist') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.video_for') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.video_from') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.hide_video') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.order') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.order_pin') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.order.fields.order_note') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -114,12 +123,6 @@
                                     {{ $order->language->name ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $order->video_for ?? '' }}
-                                </td>
-                                <td>
-                                    {{ $order->video_from ?? '' }}
-                                </td>
-                                <td>
                                     {{ $order->from_gender ?? '' }}
                                 </td>
                                 <td>
@@ -141,9 +144,6 @@
                                     {{ $order->delivery_phone ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $order->hide_video ?? '' }}
-                                </td>
-                                <td>
                                     {{ $order->promo_code ?? '' }}
                                 </td>
                                 <td>
@@ -163,6 +163,24 @@
                                 </td>
                                 <td>
                                     {{ $order->artist->display_name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ App\Order::VIDEO_FOR_SELECT[$order->video_for] ?? '' }}
+                                </td>
+                                <td>
+                                    {{ App\Order::VIDEO_FROM_SELECT[$order->video_from] ?? '' }}
+                                </td>
+                                <td>
+                                    {{ App\Order::HIDE_VIDEO_SELECT[$order->hide_video] ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->order ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->order_pin ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $order->order_note ?? '' }}
                                 </td>
                                 <td>
                                     @can('order_show')

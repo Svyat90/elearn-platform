@@ -31,6 +31,9 @@
                                 {{ trans('cruds.artistMetum.fields.display_name') }}
                             </th>
                             <th>
+                                {{ trans('cruds.artistMetum.fields.tagline') }}
+                            </th>
+                            <th>
                                 {{ trans('cruds.artistMetum.fields.languages') }}
                             </th>
                             <th>
@@ -109,6 +112,9 @@
                                 </td>
                                 <td>
                                     {{ $artistMetum->display_name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $artistMetum->tagline ?? '' }}
                                 </td>
                                 <td>
                                     @foreach($artistMetum->languages as $key => $item)

@@ -18,9 +18,22 @@ class AgentPaymentHistoryController extends Controller
     public function index(Request $request)
     {
         abort_if(Gate::denies('agent_payment_history_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $from = '';
+        $to   = '';
+
+        if (request('from')) {
+            $from = Carbon::parse(request('from'))->format('Y-m-d');
+        }
+
+        if (request('to')) {
+            $to = Carbon::parse(request('to'))->format('Y-m-d');
+        }
 
         if ($request->ajax()) {
             $query = AgentPaymentHistory::with(['user', 'earn_from'])->select(sprintf('%s.*', (new AgentPaymentHistory)->table));
+            if($from && $to) {
+                $query = $query->whereBetween(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), [$from, $to]);
+            }
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');

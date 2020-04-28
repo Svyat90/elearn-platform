@@ -226,9 +226,9 @@
             </div>
             <div class="form-group">
                 <label for="order">{{ trans('cruds.order.fields.order') }}</label>
-                <input class="form-control {{ $errors->has('order_id') ? 'is-invalid' : '' }}" type="text" name="order_id" id="order_id" value="{{ old('order_id', $order->order_id) }}" step="1">
-                @if($errors->has('order_id'))
-                    <span class="text-danger">{{ $errors->first('order_id') }}</span>
+                <input class="form-control {{ $errors->has('order') ? 'is-invalid' : '' }}" type="number" name="order" id="order" value="{{ old('order', $order->order) }}" step="1">
+                @if($errors->has('order'))
+                    <span class="text-danger">{{ $errors->first('order') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.order.fields.order_helper') }}</span>
             </div>
@@ -239,6 +239,14 @@
                     <span class="text-danger">{{ $errors->first('order_pin') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.order.fields.order_pin_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="order_note">{{ trans('cruds.order.fields.order_note') }}</label>
+                <input class="form-control {{ $errors->has('order_note') ? 'is-invalid' : '' }}" type="text" name="order_note" id="order_note" value="{{ old('order_note', $order->order_note) }}">
+                @if($errors->has('order_note'))
+                    <span class="text-danger">{{ $errors->first('order_note') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.order.fields.order_note_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

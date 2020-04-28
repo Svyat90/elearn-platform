@@ -13,9 +13,11 @@ class Order extends Model
     public $table = 'orders';
 
     const ORDER_STATUS_SELECT = [
-        '1' => 'Pending',
-        '2' => 'Completed',
-        '3' => 'Rejected',
+        '1' => 'Pending',// When new order arrive it default marked as pending
+        '2' => 'Accepted',// When Artist Accept the Order It marked As Accepted
+        '3' => 'Completed', // When Artist Upload Video Then Order will be marked as Completed
+        '4' => 'Rejected', // When Artist Reject The Order Then it will be marked as rejected
+        '5' => 'Cancelled', // When User or Admin Cancelled Order It will Marked As Cancelled
     ];
 
     const VIDEO_FOR_SELECT = [
@@ -53,6 +55,7 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'message',
+        'order_note',
         'payment_status',
         'language_id',
         'from_gender',

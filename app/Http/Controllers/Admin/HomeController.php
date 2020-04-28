@@ -409,32 +409,10 @@ class HomeController
             'column_class'          => 'col-md-4',
             'entries_number'        => '5',
         ];
+        $total_orders           = $settings1['total_number'];
+        $total_completed_orders = Order::where('order_status',3)->count();// Completed
+        $settings10['total_number'] = $total_orders > 0 && $total_completed_orders > 0 ? ($total_completed_orders*100)/$total_orders : 0;
 
-        $settings10['total_number'] = 0;
-
-        if (class_exists($settings10['model'])) {
-            $settings10['total_number'] = $settings10['model']::when(isset($settings10['filter_field']), function ($query) use ($settings10) {
-                if (isset($settings10['filter_days'])) {
-                    return $query->where($settings10['filter_field'], '>=',
-                        now()->subDays($settings10['filter_days'])->format('Y-m-d'));
-                } else
-                    if (isset($settings10['filter_period'])) {
-                        switch ($settings10['filter_period']) {
-                            case 'week':$start  = date('Y-m-d', strtotime('last Monday'));break;
-                            case 'month':$start = date('Y-m') . '-01';break;
-                            case 'year':$start  = date('Y') . '-01-01';break;
-                        }
-
-                        if (isset($start)) {
-                            return $query->where($settings10['filter_field'], '>=', $start);
-                        }
-
-                    }
-
-            })
-                ->{$settings10['aggregate_function'] ?? 'count'}
-                ($settings10['aggregate_field'] ?? '*');
-        }
 
         $settings11 = [
             'chart_title'           => 'Orders Processing %',
@@ -449,32 +427,9 @@ class HomeController
             'column_class'          => 'col-md-4',
             'entries_number'        => '5',
         ];
+        $total_completed_processing = Order::where('order_status',2)->count();// Accepted
+        $settings11['total_number'] = $total_orders > 0 && $total_completed_processing > 0 ? ($total_completed_processing*100)/$total_orders : 0;
 
-        $settings11['total_number'] = 0;
-
-        if (class_exists($settings11['model'])) {
-            $settings11['total_number'] = $settings11['model']::when(isset($settings11['filter_field']), function ($query) use ($settings11) {
-                if (isset($settings11['filter_days'])) {
-                    return $query->where($settings11['filter_field'], '>=',
-                        now()->subDays($settings11['filter_days'])->format('Y-m-d'));
-                } else
-                    if (isset($settings11['filter_period'])) {
-                        switch ($settings11['filter_period']) {
-                            case 'week':$start  = date('Y-m-d', strtotime('last Monday'));break;
-                            case 'month':$start = date('Y-m') . '-01';break;
-                            case 'year':$start  = date('Y') . '-01-01';break;
-                        }
-
-                        if (isset($start)) {
-                            return $query->where($settings11['filter_field'], '>=', $start);
-                        }
-
-                    }
-
-            })
-                ->{$settings11['aggregate_function'] ?? 'count'}
-                ($settings11['aggregate_field'] ?? '*');
-        }
 
         $settings12 = [
             'chart_title'           => 'Other Statuses %',
@@ -490,31 +445,9 @@ class HomeController
             'entries_number'        => '5',
         ];
 
-        $settings12['total_number'] = 0;
+        $total_other = Order::where('order_status','!=',2)->where('order_status','!=',3)->count();// Not  Accepted and Completed
+        $settings12['total_number'] = $total_orders > 0 && $total_other > 0 ? ($total_other*100)/$total_orders : 0;
 
-        if (class_exists($settings12['model'])) {
-            $settings12['total_number'] = $settings12['model']::when(isset($settings12['filter_field']), function ($query) use ($settings12) {
-                if (isset($settings12['filter_days'])) {
-                    return $query->where($settings12['filter_field'], '>=',
-                        now()->subDays($settings12['filter_days'])->format('Y-m-d'));
-                } else
-                    if (isset($settings12['filter_period'])) {
-                        switch ($settings12['filter_period']) {
-                            case 'week':$start  = date('Y-m-d', strtotime('last Monday'));break;
-                            case 'month':$start = date('Y-m') . '-01';break;
-                            case 'year':$start  = date('Y') . '-01-01';break;
-                        }
-
-                        if (isset($start)) {
-                            return $query->where($settings12['filter_field'], '>=', $start);
-                        }
-
-                    }
-
-            })
-                ->{$settings12['aggregate_function'] ?? 'count'}
-                ($settings12['aggregate_field'] ?? '*');
-        }
 
         return view('admin.home.index', compact('settings1',
             'settings2',

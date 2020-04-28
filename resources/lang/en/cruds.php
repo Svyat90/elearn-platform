@@ -149,6 +149,8 @@ return [
             'updated_at_helper' => '',
             'deleted_at'        => 'Deleted at',
             'deleted_at_helper' => '',
+            'native_name'        => 'Native Name',
+            'native_name_helper' => '',
             'iso_code'          => 'Iso Code',
             'iso_code_helper'   => 'Lang Iso code',
         ],
@@ -311,6 +313,9 @@ return [
             'order_helper'            => 'order_id',
             'order_pin'               => 'Order Pin',
             'order_pin_helper'        => '',
+            'order_note'              => 'Order Note',
+            'order_note_helper'       => 'Any notes which admin need to add when admin change order status.',
+
         ],
     ],
     'video'                        => [

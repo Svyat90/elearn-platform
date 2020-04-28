@@ -20,6 +20,7 @@ class Language extends Model
     protected $fillable = [
         'name',
         'iso_code',
+        'native_name',
         'created_at',
         'updated_at',
         'deleted_at',

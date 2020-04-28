@@ -39,6 +39,14 @@
                             {{ $language->iso_code }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.language.fields.native_name') }}
+                        </th>
+                        <td>
+                            {{ $language->native_name }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

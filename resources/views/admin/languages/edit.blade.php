@@ -27,6 +27,14 @@
                 <span class="help-block">{{ trans('cruds.language.fields.iso_code_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="native_name">{{ trans('cruds.language.fields.native_name') }}</label>
+                <input class="form-control {{ $errors->has('native_name') ? 'is-invalid' : '' }}" type="text" name="native_name" id="native_name" value="{{ old('native_name', $language->native_name) }}">
+                @if($errors->has('native_name'))
+                    <span class="text-danger">{{ $errors->first('native_name') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.language.fields.native_name_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

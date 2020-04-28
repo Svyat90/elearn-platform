@@ -8,19 +8,39 @@ use App\Http\Requests\MassDestroyArtistPaymentHistoryRequest;
 use App\Http\Requests\StoreArtistPaymentHistoryRequest;
 use App\Http\Requests\UpdateArtistPaymentHistoryRequest;
 use App\User;
+use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
 
 class ArtistPaymentHistoryController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Exception
+     */
     public function index(Request $request)
     {
         abort_if(Gate::denies('artist_payment_history_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $from = '';
+        $to   = '';
+
+        if (request('from')) {
+            $from = Carbon::parse(request('from'))->format('Y-m-d');
+        }
+
+        if (request('to')) {
+            $to = Carbon::parse(request('to'))->format('Y-m-d');
+        }
 
         if ($request->ajax()) {
             $query = ArtistPaymentHistory::with(['user', 'earn_from'])->select(sprintf('%s.*', (new ArtistPaymentHistory)->table));
+            if($from && $to) {
+                $query = $query->whereBetween(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), [$from, $to]);
+            }
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');

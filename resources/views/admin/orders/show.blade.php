@@ -207,6 +207,14 @@
                             {{ $order->order_pin }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.order.fields.order_note') }}
+                        </th>
+                        <td>
+                            {{ $order->order_note }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

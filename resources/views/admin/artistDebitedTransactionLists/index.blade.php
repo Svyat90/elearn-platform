@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 @section('content')
 
+@include("admin._common.dateRangeHeader")
+
 <div class="card">
     <div class="card-header">
         {{ trans('cruds.artistDebitedTransactionList.title') }}
@@ -70,7 +72,7 @@
                     serverSide: true,
                     retrieve: true,
                     aaSorting: [],
-                    ajax: "{{ route('admin.artist-debited-transaction-lists.index') }}",
+                    ajax: "{!!  isset($_GET['from']) ? route('admin.artist-debited-transaction-lists.index').'?from='.$_GET['from'].'&to='.$_GET['to'] : route('admin.artist-debited-transaction-lists.index') !!}",
                     columns: [
                         { data: 'placeholder', name: 'placeholder' },
                         { data: 'id', name: 'id' },

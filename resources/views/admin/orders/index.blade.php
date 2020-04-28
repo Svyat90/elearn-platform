@@ -76,7 +76,7 @@
                         {{ trans('cruds.order.fields.order_status') }}
                     </th>
                     <th>
-                        {{ trans('general.artist') }}
+                        {{ trans('cruds.order.fields.artist') }}
                     </th>
                     <th>
                         {{ trans('cruds.order.fields.video_for') }}
@@ -92,6 +92,9 @@
                     </th>
                     <th>
                         {{ trans('cruds.order.fields.order_pin') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.order.fields.order_note') }}
                     </th>
                     <th>
                         &nbsp;
@@ -171,8 +174,9 @@
 { data: 'video_for', name: 'video_for' },
 { data: 'video_from', name: 'video_from' },
 { data: 'hide_video', name: 'hide_video' },
-{ data: 'order_id', name: 'order_id' },
+{ data: 'order', name: 'order' },
 { data: 'order_pin', name: 'order_pin' },
+{ data: 'order_note', name: 'order_note' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

@@ -31,6 +31,9 @@
                         {{ trans('cruds.language.fields.iso_code') }}
                     </th>
                     <th>
+                        {{ trans('cruds.language.fields.native_name') }}
+                    </th>
+                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -89,6 +92,7 @@
 { data: 'id', name: 'id' },
 { data: 'name', name: 'name' },
 { data: 'iso_code', name: 'iso_code' },
+{ data: 'native_name', name: 'native_name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

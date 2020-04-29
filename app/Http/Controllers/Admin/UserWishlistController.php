@@ -46,7 +46,7 @@ class UserWishlistController extends Controller
                 return $row->id ? $row->id : "";
             });
             $table->addColumn('user_first_name', function ($row) {
-                return $row->user ? $row->user->first_name : '';
+                return $row->user ? $row->user->name : '';
             });
 
             $table->addColumn('artist_display_name', function ($row) {

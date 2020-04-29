@@ -61,7 +61,7 @@
                     <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
                 </div>
                 <select class="form-control select2 {{ $errors->has('userlikelists') ? 'is-invalid' : '' }}" name="userlikelists[]" id="userlikelists" multiple>
-                    @foreach($wishlists as $id => $wishlist)
+                    @foreach($userLikeLists as $id => $wishlist)
                         <option value="{{ $id }}" {{ (in_array($id, old('userlikelists', [])) || $userMetum->userLikeLists->contains($id)) ? 'selected' : '' }}>{{ $wishlist }}</option>
                     @endforeach
                 </select>

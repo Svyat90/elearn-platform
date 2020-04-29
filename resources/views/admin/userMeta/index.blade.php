@@ -100,7 +100,7 @@
 { data: 'user.first_name', name: 'user.first_name' },
 { data: 'wallet_balance', name: 'wallet_balance' },
 { data: 'wishlist', name: 'wishlists.name' },
-{ data: 'wishlist', name: 'wishlists.name' },
+{ data: 'likelist', name: 'likelist.name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

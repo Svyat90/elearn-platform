@@ -62,7 +62,7 @@
                 </div>
                 <select class="form-control select2 {{ $errors->has('userlikelists') ? 'is-invalid' : '' }}" name="userlikelists[]" id="userlikelists" multiple>
                     @foreach($wishlists as $id => $wishlist)
-                        <option value="{{ $id }}" {{ (in_array($id, old('userlikelists', [])) || $userMetum->wishlists->contains($id)) ? 'selected' : '' }}>{{ $wishlist }}</option>
+                        <option value="{{ $id }}" {{ (in_array($id, old('userlikelists', [])) || $userMetum->userLikeLists->contains($id)) ? 'selected' : '' }}>{{ $wishlist }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('userlikelists'))

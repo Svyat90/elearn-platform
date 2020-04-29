@@ -31,6 +31,13 @@ class UserWishlist extends Model
 
     }
 
+    public function scopeWithUser($query)
+    {
+        return $query->leftJoin('users','users.id','=','user_wishlists.user_id');
+
+    }
+
+
     public function artist()
     {
         return $this->belongsTo(ArtistMetum::class, 'artist_id');

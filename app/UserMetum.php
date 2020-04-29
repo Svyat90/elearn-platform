@@ -43,13 +43,13 @@ class UserMetum extends Model implements HasMedia
 
     public function wishlists()
     {
-        return $this->belongsToMany(User::class);
-
+        return $this->belongsToMany(User::class, 'user_meta_likelist', 'user_meta_id', 'user_id');
     }
+
 
     public function userlikelists()
     {
-        return $this->belongsToMany(UserTwo::class);
+        return $this->belongsToMany(User::class);
 
     }
 

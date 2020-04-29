@@ -65,7 +65,7 @@ class UserWishlistController extends Controller
     {
         abort_if(Gate::denies('user_wishlist_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::IsUserRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $artists = ArtistMetum::all()->pluck('display_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -84,7 +84,7 @@ class UserWishlistController extends Controller
     {
         abort_if(Gate::denies('user_wishlist_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::IsUserRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $artists = ArtistMetum::all()->pluck('display_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 

@@ -8,7 +8,9 @@ use App\Http\Requests\MassDestroyUserMetumRequest;
 use App\Http\Requests\StoreUserMetumRequest;
 use App\Http\Requests\UpdateUserMetumRequest;
 use App\User;
+use App\UserLike;
 use App\UserMetum;
+use App\UserWishlist;
 use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Models\Media;
@@ -24,7 +26,7 @@ class UserMetaController extends Controller
         abort_if(Gate::denies('user_metum_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = UserMetum::with(['user', 'wishlists'])->select(sprintf('%s.*', (new UserMetum)->table));
+            $query = UserMetum::with(['user', 'wishlists','userlikelists'])->select(sprintf('%s.*', (new UserMetum)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -58,6 +60,13 @@ class UserMetaController extends Controller
             $table->editColumn('wallet_balance', function ($row) {
                 return $row->wallet_balance ? $row->wallet_balance : "";
             });
+            $table->editColumn('likelist', function ($row) {
+                $labels = [];
+                foreach ($row->userlikelists as $likelist) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $likelist->name);
+                }
+                return implode(' ', $labels);
+            });
             $table->editColumn('wishlist', function ($row) {
                 $labels = [];
 
@@ -68,7 +77,7 @@ class UserMetaController extends Controller
                 return implode(' ', $labels);
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'user', 'wishlist']);
+            $table->rawColumns(['actions', 'placeholder', 'user', 'wishlist','likelist']);
 
             return $table->make(true);
         }
@@ -82,9 +91,9 @@ class UserMetaController extends Controller
 
         $users = User::IsUserRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $wishlists = User::IsUserRole()->pluck('name', 'id');
+        $wishlists = UserWishlist::withUser()->pluck('users.name', 'users.id');
 
-        $userLikeLists = User::IsUserRole()->pluck('name', 'id');
+        $userLikeLists = UserLike::withUser()->pluck('users.name', 'users.id');
 
         return view('admin.userMeta.create', compact('users','userLikeLists', 'wishlists'));
     }
@@ -93,6 +102,7 @@ class UserMetaController extends Controller
     {
         $userMetum = UserMetum::create($request->all());
         $userMetum->wishlists()->sync($request->input('wishlists', []));
+        $userMetum->userlikelists()->sync($request->input('userlikelists', []));
 
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $userMetum->id]);
@@ -108,9 +118,9 @@ class UserMetaController extends Controller
 
         $users = User::IsUserRole()->pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $wishlists = User::IsUserRole()->pluck('name', 'id');
+        $wishlists = UserWishlist::withUser()->pluck('users.name', 'users.id');
 
-        $userLikeLists = User::IsUserRole()->pluck('name', 'id');
+        $userLikeLists = UserLike::withUser()->pluck('users.name', 'users.id');
 
         $userMetum->load('user', 'wishlists','userlikelists');
 

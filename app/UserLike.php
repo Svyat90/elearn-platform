@@ -28,6 +28,12 @@ class UserLike extends Model
 
     }
 
+    public function scopeWithUser($query)
+    {
+        return $query->leftJoin('users','users.id','=','user_likes.user_id');
+
+    }
+
     public function video()
     {
         return $this->belongsTo(Video::class, 'video_id');

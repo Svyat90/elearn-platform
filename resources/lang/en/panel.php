@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'Crazy Tech',
+    'site_title' => 'ELearn',
 ];

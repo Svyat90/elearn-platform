@@ -9,11 +9,10 @@ class CreateAdminUsersTable extends Migration
     public function up()
     {
         Schema::create('admin_users', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('username')->unique();
             $table->string('password');
             $table->string('email')->nullable();
-            $table->string('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

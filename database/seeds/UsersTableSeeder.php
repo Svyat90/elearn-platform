@@ -10,21 +10,11 @@ class UsersTableSeeder extends Seeder
         $users = [
             [
                 'id'             => 1,
-                'name'           => 'Admin',
                 'email'          => 'admin@admin.com',
-                'password'       => '$2y$10$RyVYCGWVxLArEjs3qekLneR926J/KuXRe3YX1VW2Sre8YTSEGAGMG',
-                'remember_token' => null,
-                'first_name'     => '',
-                'last_name'      => '',
-                'referral_code'  => '',
-                'referred_by'    => '',
-                'mobile_no'      => '',
-                'ig_token'       => '',
-                'ig_username'    => '',
+                'password'       => '$2y$10$RyVYCGWVxLArEjs3qekLneR926J/KuXRe3YX1VW2Sre8YTSEGAGMG', // password
             ],
         ];
 
-        User::insert($users);
-
+        User::query()->insert($users);
     }
 }

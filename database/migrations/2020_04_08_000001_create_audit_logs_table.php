@@ -9,7 +9,7 @@ class CreateAuditLogsTable extends Migration
     public function up()
     {
         Schema::create('audit_logs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->text('description');
             $table->unsignedInteger('subject_id')->nullable();
             $table->string('subject_type')->nullable();

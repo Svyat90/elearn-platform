@@ -40,23 +40,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Audit Logs
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
-    // Admin Users
-    Route::delete('admin-users/destroy', 'AdminUserController@massDestroy')->name('admin-users.massDestroy');
-    Route::resource('admin-users', 'AdminUserController');
-
     // Sub Categories
     Route::delete('sub-categories/destroy', 'SubCategoryController@massDestroy')->name('sub-categories.massDestroy');
     Route::post('sub-categories/media', 'SubCategoryController@storeMedia')->name('sub-categories.storeMedia');
     Route::post('sub-categories/ckmedia', 'SubCategoryController@storeCKEditorImages')->name('sub-categories.storeCKEditorImages');
     Route::resource('sub-categories', 'SubCategoryController');
-
-    // Admin Settings
-    Route::delete('admin-settings/destroy', 'AdminSettingsController@massDestroy')->name('admin-settings.massDestroy');
-    Route::resource('admin-settings', 'AdminSettingsController');
-
-    // User Profile Avatar Images
-    Route::resource('user-profile-avatar-images', 'UserProfileAvatarImagesController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
-
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth.admin']], function () {

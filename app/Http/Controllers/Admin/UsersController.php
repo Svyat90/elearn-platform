@@ -165,7 +165,7 @@ class UsersController extends Controller
      */
     public function massDestroy(MassDestroyUserRequest $request) : Response
     {
-        User::query()->whereIn('id', request('ids'))->delete();
+        User::query()->whereIn('id', $request->ids)->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

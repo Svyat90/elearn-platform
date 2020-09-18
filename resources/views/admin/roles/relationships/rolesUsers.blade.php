@@ -37,46 +37,19 @@
                             {{ trans('cruds.user.fields.email') }}
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.email_verified_at') }}
+                        {{ trans('cruds.user.fields.position') }}
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.mobile_no') }}
+                            {{ trans('cruds.user.fields.institution') }}
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.country') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.gender') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.referral_code') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.referred_by') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.registration_platform') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.ig_token') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.ig_username') }}
+                            {{ trans('cruds.user.fields.phone') }}
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.user_status') }}
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.birth_date') }}
-                        </th>
-                        <th>
-                            {{ trans('general.user.fields.avatar') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.registration_source') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.registered_on') }}
+                            {{ trans('cruds.user.fields.created_at') }}
                         </th>
                         <th>
                             &nbsp;
@@ -86,9 +59,7 @@
                     <tbody>
                     @foreach($users as $key => $user)
                         <tr data-entry-id="{{ $user->id }}">
-                            <td>
-
-                            </td>
+                            <td></td>
                             <td>
                                 {{ $user->id ?? '' }}
                             </td>
@@ -107,43 +78,19 @@
                                 {{ $user->email ?? '' }}
                             </td>
                             <td>
-                                {{ $user->email_verified_at ?? '' }}
+                                {{ $user->position ?? '' }}
                             </td>
                             <td>
-                                {{ $user->mobile_no ?? '' }}
+                                {{ $user->institution ?? '' }}
                             </td>
                             <td>
-                                {{ $user->country->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $user->gender->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $user->referral_code ?? '' }}
-                            </td>
-                            <td>
-                                {{ $user->referred_by ?? '' }}
-                            </td>
-                            <td>
-                                {{ App\User::REGISTRATION_PLATFORM_SELECT[$user->registration_platform] ?? '' }}
-                            </td>
-                            <td>
-                                {{ $user->ig_token ?? '' }}
-                            </td>
-                            <td>
-                                {{ $user->ig_username ?? '' }}
+                                {{ $user->phone ?? '' }}
                             </td>
                             <td>
                                 {{ App\User::USER_STATUS_SELECT[$user->user_status] ?? '' }}
                             </td>
                             <td>
-                                {{ $user->birth_date ?? '' }}
-                            </td>
-                            <td>
-                                {{ App\User::REGISTRATION_SOURCE_SELECT[$user->registration_source] ?? '' }}
-                            </td>
-                            <td>
-                                {{ $user->registered_on ?? '' }}
+                                {{ $user->created_at ?? '' }}
                             </td>
                             <td>
                                 @can('user_show')

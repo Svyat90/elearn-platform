@@ -93,6 +93,9 @@ return [
             'registration_source_helper'   => 'manual form or instagram',
             'registered_on'                => 'Registered On',
             'registered_on_helper'         => '',
+            'position'                     => 'Position',
+            'institution'                  => 'Institution',
+            'phone'                        => 'Phone',
         ],
     ],
     'category'                     => [

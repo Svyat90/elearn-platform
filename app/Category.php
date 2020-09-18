@@ -4,19 +4,13 @@ namespace App;
 
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\Models\Media;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model implements HasMedia
+class Category extends Model
 {
-    use HasMediaTrait, Auditable;
+    use SoftDeletes, Auditable;
 
     public $table = 'categories';
-
-    protected $appends = [
-        'image',
-    ];
 
     protected $dates = [
         'created_at',
@@ -25,42 +19,18 @@ class Category extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'name',
-        'color',
+        'name_ru',
+        'name_ro',
+        'name_en',
+        'access',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    public function registerMediaConversions(Media $media = null)
-    {
-        $this->addMediaConversion('thumb')->width(50)->height(50);
-
-    }
-
     public function parentSubCategories()
     {
         return $this->hasMany(SubCategory::class, 'parent_id', 'id');
-
-    }
-
-    public function mainCatogeryArtistMeta()
-    {
-        return $this->hasMany(ArtistMetum::class, 'main_catogery_id', 'id');
-
-    }
-
-    public function getImageAttribute()
-    {
-        $file = $this->getMedia('image')->last();
-
-        if ($file) {
-            $file->url       = $file->getUrl();
-            $file->thumbnail = $file->getUrl('thumb');
-        }
-
-        return $file;
-
     }
 
 }

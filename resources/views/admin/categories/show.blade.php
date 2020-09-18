@@ -33,22 +33,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.category.fields.color') }}
+                            {{ trans('cruds.category.fields.access') }}
                         </th>
                         <td>
-                            {{ $category->color }}
+                            {{ $category->access }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.category.fields.image') }}
+                            {{ trans('cruds.category.fields.created_at') }}
                         </th>
                         <td>
-                            @if($category->image)
-                                <a href="{{ $category->image->getUrl() }}" target="_blank">
-                                    <img src="{{ $category->image->getUrl('thumb') }}" width="50px" height="50px">
-                                </a>
-                            @endif
+                            {{ $category->created_at }}
                         </td>
                     </tr>
                 </tbody>
@@ -72,18 +68,11 @@
                 {{ trans('cruds.subCategory.title') }}
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#main_catogery_artist_meta" role="tab" data-toggle="tab">
-                {{ trans('cruds.artistMetum.title') }}
-            </a>
-        </li>
+
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="parent_sub_categories">
             @includeIf('admin.categories.relationships.parentSubCategories', ['subCategories' => $category->parentSubCategories])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="main_catogery_artist_meta">
-            @includeIf('admin.categories.relationships.mainCatogeryArtistMeta', ['artistMeta' => $category->mainCatogeryArtistMeta])
         </div>
     </div>
 </div>

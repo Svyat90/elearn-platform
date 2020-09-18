@@ -82,6 +82,8 @@ return [
 
     'locale' => 'en',
 
+    'locale_default_column' => env('LOCATE_DEFAULT_COLUMN', 'ro'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale

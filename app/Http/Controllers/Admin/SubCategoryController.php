@@ -4,21 +4,27 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Traits\MediaUploadingTrait;
-use App\Http\Requests\MassDestroySubCategoryRequest;
-use App\Http\Requests\StoreSubCategoryRequest;
-use App\Http\Requests\UpdateSubCategoryRequest;
+use App\Http\Requests\SubCategory\MassDestroySubCategoryRequest;
+use App\Http\Requests\SubCategory\StoreSubCategoryRequest;
+use App\Http\Requests\SubCategory\UpdateSubCategoryRequest;
+use App\Services\CategoryService;
 use App\SubCategory;
-use Gate;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
-use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 class SubCategoryController extends Controller
 {
-    use MediaUploadingTrait;
-
+    /**
+     * @param Request $request
+     * @return Application|Factory|View
+     * @throws \Exception
+     */
     public function index(Request $request)
     {
         abort_if(Gate::denies('sub_category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -30,7 +36,7 @@ class SubCategoryController extends Controller
             $table->addColumn('placeholder', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
 
-            $table->editColumn('actions', function ($row) {
+            $table->addColumn('actions', function ($row) {
                 $viewGate      = 'sub_category_show';
                 $editGate      = 'sub_category_edit';
                 $deleteGate    = 'sub_category_delete';
@@ -45,32 +51,15 @@ class SubCategoryController extends Controller
                 ));
             });
 
-            $table->editColumn('id', function ($row) {
-                return $row->id ? $row->id : "";
-            });
-            $table->editColumn('name', function ($row) {
-                return $row->name ? $row->name : "";
-            });
-            $table->editColumn('color', function ($row) {
-                return $row->color ? $row->color : "";
-            });
-            $table->editColumn('image', function ($row) {
-                if ($photo = $row->image) {
-                    return sprintf(
-                        '<a href="%s" target="_blank"><img src="%s" width="50px" height="50px"></a>',
-                        env('APP_URL').$photo->url,
-                        env('APP_URL').$photo->thumbnail
-                    );
-                }
+            $localeColumn = localeColumn('name');
 
-                return '';
+            $table->addColumn('id', fn ($row) => $row->id ?? '');
+            $table->addColumn('name', fn ($row) => $row->$localeColumn ?? '');
+            $table->addColumn('parent_name', fn ($row) => $row->parent->$localeColumn ?? '');
+            $table->addColumn('access', fn ($row) => $row->access ?? '');
+            $table->addColumn('created_at', fn ($row) => $row->created_at ?? '');
 
-            });
-            $table->addColumn('parent_name', function ($row) {
-                return $row->parent ? $row->parent->name : '';
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'image', 'parent']);
+            $table->rawColumns(['actions', 'placeholder', 'parent']);
 
             return $table->make(true);
         }
@@ -78,97 +67,117 @@ class SubCategoryController extends Controller
         return view('admin.subCategories.index');
     }
 
-    public function create()
+    /**
+     * @param CategoryService $categoryService
+     * @return View
+     */
+    public function create(CategoryService $categoryService) : View
     {
         abort_if(Gate::denies('sub_category_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $parents = Category::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $parents = Category::all()
+            ->pluck(localeColumn('name'), 'id')
+            ->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.subCategories.create', compact('parents'));
+        $accessTypes = $categoryService->getAccessTypes();
+        $accessTypesSelect = collect($accessTypes)
+            ->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.subCategories.create', compact(
+            'parents',
+            'accessTypes',
+            'accessTypesSelect'
+            )
+        );
     }
 
-    public function store(StoreSubCategoryRequest $request)
+    /**
+     * @param StoreSubCategoryRequest $request
+     * @return RedirectResponse
+     */
+    public function store(StoreSubCategoryRequest $request) : RedirectResponse
     {
-        $subCategory = SubCategory::create($request->all());
-
-        if ($request->input('image', false)) {
-            $subCategory->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
-        }
-
-        if ($media = $request->input('ck-media', false)) {
-            Media::whereIn('id', $media)->update(['model_id' => $subCategory->id]);
-        }
+        SubCategory::query()->create($request->all());
 
         return redirect()->route('admin.sub-categories.index');
-
     }
 
-    public function edit(SubCategory $subCategory)
+    /**
+     * @param CategoryService $categoryService
+     * @param SubCategory $subCategory
+     * @return View
+     */
+    public function edit(CategoryService $categoryService, SubCategory $subCategory) : View
     {
         abort_if(Gate::denies('sub_category_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $parents = Category::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $parents = Category::all()
+            ->pluck(localeColumn('name'), 'id')
+            ->prepend(trans('global.pleaseSelect'), '');
+
+        $accessTypes = $categoryService->getAccessTypes();
+        $accessTypesSelect = collect($accessTypes)
+            ->prepend(trans('global.pleaseSelect'), '');
 
         $subCategory->load('parent');
 
-        return view('admin.subCategories.edit', compact('parents', 'subCategory'));
+        return view('admin.subCategories.edit', compact(
+            'parents',
+            'subCategory',
+            'accessTypes',
+            'accessTypesSelect'
+            )
+        );
     }
 
-    public function update(UpdateSubCategoryRequest $request, SubCategory $subCategory)
+    /**
+     * @param UpdateSubCategoryRequest $request
+     * @param SubCategory $subCategory
+     * @return RedirectResponse
+     */
+    public function update(UpdateSubCategoryRequest $request, SubCategory $subCategory) : RedirectResponse
     {
         $subCategory->update($request->all());
 
-        if ($request->input('image', false)) {
-            if (!$subCategory->image || $request->input('image') !== $subCategory->image->file_name) {
-                $subCategory->addMedia(storage_path('tmp/uploads/' . $request->input('image')))->toMediaCollection('image');
-            }
-
-        } elseif ($subCategory->image) {
-            $subCategory->image->delete();
-        }
-
         return redirect()->route('admin.sub-categories.index');
-
     }
 
-    public function show(SubCategory $subCategory)
+    /**
+     * @param SubCategory $subCategory
+     * @return View
+     */
+    public function show(SubCategory $subCategory) : View
     {
         abort_if(Gate::denies('sub_category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $subCategory->load('parent', 'subCategoryArtistMeta');
+        $subCategory->load('parent');
 
         return view('admin.subCategories.show', compact('subCategory'));
     }
 
-    public function destroy(SubCategory $subCategory)
+    /**
+     * @param SubCategory $subCategory
+     * @return RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy(SubCategory $subCategory) : RedirectResponse
     {
         abort_if(Gate::denies('sub_category_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $subCategory->delete();
 
         return back();
-
     }
 
-    public function massDestroy(MassDestroySubCategoryRequest $request)
+    /**
+     * @param MassDestroySubCategoryRequest $request
+     * @return Response
+     */
+    public function massDestroy(MassDestroySubCategoryRequest $request) : Response
     {
-        SubCategory::whereIn('id', request('ids'))->delete();
+        SubCategory::query()->whereIn('id', $request->ids)->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
-
-    }
-
-    public function storeCKEditorImages(Request $request)
-    {
-        abort_if(Gate::denies('sub_category_create') && Gate::denies('sub_category_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $model         = new SubCategory();
-        $model->id     = $request->input('crud_id', 0);
-        $model->exists = true;
-        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media', 'public');
-
-        return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
-
     }
 
 }

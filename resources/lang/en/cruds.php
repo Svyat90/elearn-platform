@@ -116,6 +116,7 @@ return [
             'image_helper'      => '',
             'color'             => 'Color',
             'color_helper'      => '',
+            'access'            => 'Access'
         ],
     ],
     'contentManagement'            => [
@@ -166,6 +167,8 @@ return [
             'deleted_at_helper' => '',
             'parent'            => 'Parent',
             'parent_helper'     => '',
+            'access'            => 'Access',
+            'parent_name'       => 'Parent name',
         ],
     ],
     'adminSetting'                 => [

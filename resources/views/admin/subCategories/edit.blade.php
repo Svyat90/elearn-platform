@@ -56,7 +56,7 @@
                     <label class="required" for="access">{{ trans('cruds.subCategory.fields.access') }}</label>
                     <select class="form-control select2 {{ $errors->has('access') ? 'is-invalid' : '' }}"
                             name="access" id="access" required>
-                        @foreach($accessTypesSelect as $access)
+                        @foreach($accessTypes as $access)
                             <option
                                 value="{{ $access }}" {{ old('access', $subCategory->access) === $access ? 'selected' : '' }}>{{ $access }}</option>
                         @endforeach
@@ -64,7 +64,7 @@
                     @if($errors->has('access'))
                         <span class="text-danger">{{ $errors->first('access') }}</span>
                     @endif
-                    <span class="help-block">{{ implode(", ", $accessTypes) }}</span>
+                    <span class="help-block">{{ trans('cruds.subCategory.fields.access_helper') }}</span>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">

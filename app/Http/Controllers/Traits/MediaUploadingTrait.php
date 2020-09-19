@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 trait MediaUploadingTrait
 {
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function storeMedia(Request $request)
     {
         // Validates file size
@@ -26,27 +30,29 @@ trait MediaUploadingTrait
             ]);
         }
 
-        $path = storage_path('tmp/uploads');
+        $entity = strtolower(str_replace("Controller", "", class_basename(static::class)));
+        $date = date("Y-m-d");
+        $folder = sprintf("%s/%s/", $entity, $date);
+
+        $path = storage_path('app/public/' . $folder);
 
         try {
             if (!file_exists($path)) {
                 mkdir($path, 0755, true);
             }
-
         } catch (\Exception $e) {
         }
 
         $file = $request->file('file');
-
-        $name = uniqid() . '_' . trim($file->getClientOriginalName());
+        $name = sprintf("%s.%s", uniqid(), $file->getClientOriginalExtension());
 
         $file->move($path, $name);
 
         return response()->json([
             'name'          => $name,
+            'file_path'     => $folder . $name,
             'original_name' => $file->getClientOriginalName(),
         ]);
-
     }
 
 }

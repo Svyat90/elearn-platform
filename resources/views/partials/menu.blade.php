@@ -115,6 +115,18 @@
                                     </a>
                                 </li>
                             @endcan
+                            @can('document_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.documents.index") }}" class="nav-link {{ request()->is('admin/documents') || request()->is('admin/documents/*') ? 'active' : '' }}">
+                                        <i class="fa-fw nav-icon fas fa-file-alt">
+
+                                        </i>
+                                        <p>
+                                            {{ trans('cruds.document.title') }}
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
                         </ul>
                     </li>
                 @endcan

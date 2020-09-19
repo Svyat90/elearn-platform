@@ -79,16 +79,10 @@ class SubCategoryController extends Controller
             ->pluck(localeColumn('name'), 'id')
             ->prepend(trans('global.pleaseSelect'), '');
 
-        $accessTypes = $categoryService->getAccessTypes();
-        $accessTypesSelect = collect($accessTypes)
+        $accessTypes = collect($categoryService->getAccessTypes())
             ->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.subCategories.create', compact(
-            'parents',
-            'accessTypes',
-            'accessTypesSelect'
-            )
-        );
+        return view('admin.subCategories.create', compact('parents', 'accessTypes'));
     }
 
     /**
@@ -115,19 +109,12 @@ class SubCategoryController extends Controller
             ->pluck(localeColumn('name'), 'id')
             ->prepend(trans('global.pleaseSelect'), '');
 
-        $accessTypes = $categoryService->getAccessTypes();
-        $accessTypesSelect = collect($accessTypes)
+        $accessTypes = collect($categoryService->getAccessTypes())
             ->prepend(trans('global.pleaseSelect'), '');
 
         $subCategory->load('parent');
 
-        return view('admin.subCategories.edit', compact(
-            'parents',
-            'subCategory',
-            'accessTypes',
-            'accessTypesSelect'
-            )
-        );
+        return view('admin.subCategories.edit', compact('parents', 'subCategory', 'accessTypes'));
     }
 
     /**

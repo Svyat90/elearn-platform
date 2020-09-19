@@ -17,6 +17,7 @@ Auth::routes(['register' => false]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth.admin']], function () {
     Route::get('/', 'HomeController@index')->name('home');
+
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');
@@ -27,24 +28,23 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Users
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
-    Route::post('users/media', 'UsersController@storeMedia')->name('users.storeMedia');
-    Route::post('users/ckmedia', 'UsersController@storeCKEditorImages')->name('users.storeCKEditorImages');
     Route::resource('users', 'UsersController');
 
     // Categories
     Route::delete('categories/destroy', 'CategoryController@massDestroy')->name('categories.massDestroy');
-    Route::post('categories/media', 'CategoryController@storeMedia')->name('categories.storeMedia');
-    Route::post('categories/ckmedia', 'CategoryController@storeCKEditorImages')->name('categories.storeCKEditorImages');
     Route::resource('categories', 'CategoryController');
-
-    // Audit Logs
-    Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
     // Sub Categories
     Route::delete('sub-categories/destroy', 'SubCategoryController@massDestroy')->name('sub-categories.massDestroy');
-    Route::post('sub-categories/media', 'SubCategoryController@storeMedia')->name('sub-categories.storeMedia');
-    Route::post('sub-categories/ckmedia', 'SubCategoryController@storeCKEditorImages')->name('sub-categories.storeCKEditorImages');
     Route::resource('sub-categories', 'SubCategoryController');
+
+    // Documents
+    Route::delete('documents/destroy', 'DocumentController@massDestroy')->name('documents.massDestroy');
+    Route::post('documents/media', 'DocumentController@storeMedia')->name('documents.storeMedia');
+    Route::resource('documents', 'DocumentController');
+
+    // Audit Logs
+    Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth.admin']], function () {

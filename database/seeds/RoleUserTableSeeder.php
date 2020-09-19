@@ -2,11 +2,15 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
+use \App\Services\PermissionService;
 
 class RoleUserTableSeeder extends Seeder
 {
     public function run()
     {
-        User::findOrFail(1)->roles()->sync(1);
+        User::query()
+            ->findOrFail(PermissionService::ROLE_ADMIN_ID)
+            ->roles()
+            ->sync(PermissionService::ROLE_ADMIN_ID);
     }
 }

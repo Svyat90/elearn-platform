@@ -70,11 +70,10 @@ class CategoryController extends Controller
     {
         abort_if(Gate::denies('category_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $accessTypes = $categoryService->getAccessTypes();
-        $accessTypesSelect = collect($accessTypes)
+        $accessTypes = collect($categoryService->getAccessTypes())
             ->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.categories.create', compact('accessTypes', 'accessTypesSelect'));
+        return view('admin.categories.create', compact('accessTypes'));
     }
 
     /**
@@ -97,11 +96,10 @@ class CategoryController extends Controller
     {
         abort_if(Gate::denies('category_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $accessTypes = $categoryService->getAccessTypes();
-        $accessTypesSelect = collect($accessTypes)
+        $accessTypes = collect($categoryService->getAccessTypes())
             ->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.categories.edit', compact('category', 'accessTypes', 'accessTypesSelect'));
+        return view('admin.categories.edit', compact('category', 'accessTypes'));
     }
 
     /**

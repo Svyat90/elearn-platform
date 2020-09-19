@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UpdatePasswordRequest;
-use Illuminate\Contracts\Auth\Access\Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\RedirectResponse;

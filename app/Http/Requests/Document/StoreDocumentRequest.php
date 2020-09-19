@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Http\Requests\Document;
+
+use App\Services\DocumentService;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Symfony\Component\HttpFoundation\Response;
+
+class StoreDocumentRequest extends FormRequest
+{
+    public function authorize()
+    {
+        abort_if(Gate::denies('document_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return true;
+    }
+
+    /**
+     * @param DocumentService $documentService
+     * @return array
+     */
+    public function rules(DocumentService $documentService)
+    {
+        return [
+            'type' => 'sometimes|nullable|max:255',
+            'number' => 'sometimes|nullable|max:255',
+            'name_ru' => 'sometimes|nullable|max:255',
+            'name_ro' => 'sometimes|nullable|max:255',
+            'name_en' => 'sometimes|nullable|max:255',
+            'name_issuer_ru' => 'sometimes|nullable|max:255',
+            'name_issuer_ro' => 'sometimes|nullable|max:255',
+            'name_issuer_en' => 'sometimes|nullable|max:255',
+            'topic_ru' => 'sometimes|nullable|max:255',
+            'topic_ro' => 'sometimes|nullable|max:255',
+            'topic_en' => 'sometimes|nullable|max:255',
+            'description' => 'sometimes|nullable',
+            'status' => 'required|' . Rule::in($documentService->getStatuses()),
+            'access' => 'required|' . Rule::in($documentService->getAccessTypes()),
+            'approved_at' => 'sometimes|nullable',
+            'published_at' => 'sometimes|nullable',
+            'image_path' => 'required|string',
+            'file_path' => 'required|string',
+        ];
+    }
+}

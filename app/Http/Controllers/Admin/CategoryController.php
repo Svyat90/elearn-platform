@@ -32,10 +32,14 @@ class CategoryController extends Controller
             $query = Category::query()->select(sprintf('%s.*', (new Category)->table));
             $table = Datatables::of($query);
 
+            $nameLocaleColumn = localeColumn('name');
+
             $table->addColumn('placeholder', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
-
-            $table->editColumn('actions', function ($row) {
+            $table->editColumn('id', fn ($row) => $row->id ?? '');
+            $table->editColumn($nameLocaleColumn, fn ($row) => $row->$nameLocaleColumn ?? '');
+            $table->editColumn('access', fn ($row) => $row->access ?? '');
+            $table->addColumn('actions', function ($row) {
                 $viewGate      = 'category_show';
                 $editGate      = 'category_edit';
                 $deleteGate    = 'category_delete';
@@ -49,10 +53,6 @@ class CategoryController extends Controller
                     'row'
                 ));
             });
-
-            $table->editColumn('id', fn ($row) => $row->id ?? '');
-            $table->editColumn('name', fn ($row) => $row->{localeColumn('name')} ?? '');
-            $table->editColumn('access', fn ($row) => $row->access ?? '');
 
             $table->rawColumns(['actions', 'placeholder']);
 

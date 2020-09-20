@@ -35,16 +35,20 @@ class DocumentController extends Controller
             $query = Document::query()->select(sprintf('%s.*', (new Document)->table));
             $table = Datatables::of($query);
 
+            $nameLocaleColumn = localeColumn('name');
+            $nameIssuerLocaleColumn = localeColumn('name_issuer');
+            $topicLocaleColumn = localeColumn('topic');
+
             $table->addColumn('placeholder', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
-            $table->addColumn('id', fn ($row) => $row->id ?? '');
-            $table->addColumn('type', fn ($row) => $row->type ?? '');
-            $table->addColumn('number', fn ($row) => $row->number ?? '');
-            $table->addColumn('name', fn ($row) => $row->{localeColumn('name')} ?? '');
-            $table->addColumn('name_issuer', fn ($row) => $row->{localeColumn('name_issuer')} ?? '');
-            $table->addColumn('topic', fn ($row) => $row->{localeColumn('topic')} ?? '');
-            $table->addColumn('access', fn ($row) => $row->access ?? '');
-            $table->addColumn('status', fn ($row) => $row->status ?? '');
+            $table->editColumn('id', fn ($row) => $row->id ?? '');
+            $table->editColumn('type', fn ($row) => $row->type ?? '');
+            $table->editColumn('number', fn ($row) => $row->number ?? '');
+            $table->editColumn($nameLocaleColumn, fn ($row) => $row->$nameLocaleColumn ?? '');
+            $table->editColumn($nameIssuerLocaleColumn, fn ($row) => $row->$nameIssuerLocaleColumn ?? '');
+            $table->editColumn($topicLocaleColumn, fn ($row) => $row->$topicLocaleColumn ?? '');
+            $table->editColumn('access', fn ($row) => $row->access ?? '');
+            $table->editColumn('status', fn ($row) => $row->status ?? '');
             $table->addColumn('approved_at', fn ($row) => $row->approved_at ?? '');
             $table->addColumn('published_at', fn ($row) => $row->published_at ?? '');
             $table->addColumn('image', fn ($row) => $row->image_path ? sprintf('<img src="%s" width="50px" height="50px" />', storageUrl($row->image_path)) : '');

@@ -34,22 +34,6 @@ class UsersController extends Controller
 
             $table->addColumn('placeholder', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
-
-            $table->editColumn('actions', function ($row) {
-                $viewGate      = 'user_show';
-                $editGate      = 'user_edit';
-                $deleteGate    = 'user_delete';
-                $crudRoutePart = 'users';
-
-                return view('partials.datatablesActions', compact(
-                    'viewGate',
-                    'editGate',
-                    'deleteGate',
-                    'crudRoutePart',
-                    'row'
-                ));
-            });
-
             $table->editColumn('id', fn ($row) => $row->id ? $row->id : "");
             $table->editColumn('roles', function ($row) {
                 $labels = [];
@@ -65,6 +49,20 @@ class UsersController extends Controller
             $table->addColumn('institution', fn ($row) => $row->institution ?? '');
             $table->editColumn('phone', fn ($row) => $row->phone ?? '');
             $table->editColumn('user_status', fn ($row) => $row->user_status ? User::USER_STATUS_SELECT[$row->user_status] : '');
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'user_show';
+                $editGate      = 'user_edit';
+                $deleteGate    = 'user_delete';
+                $crudRoutePart = 'users';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
 
             $table->rawColumns(['actions', 'placeholder', 'roles']);
 

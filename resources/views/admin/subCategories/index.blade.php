@@ -85,6 +85,8 @@
             dtButtons.push(deleteButton)
             @endcan
 
+            let nameLocaleColumn = '{{ localeColumn('name') }}';
+
             let dtOverrideGlobals = {
                 buttons: dtButtons,
                 processing: true,
@@ -95,8 +97,8 @@
                 columns: [
                     {data: 'placeholder', name: 'placeholder'},
                     {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
-                    {data: 'parent_name', name: 'parent.name'},
+                    {data: nameLocaleColumn, name: nameLocaleColumn},
+                    {data: 'parent_name', name: 'parent.' + nameLocaleColumn},
                     {data: 'access', name: 'access'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: '{{ trans('global.actions') }}'}

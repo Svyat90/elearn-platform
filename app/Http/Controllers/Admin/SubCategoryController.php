@@ -33,9 +33,15 @@ class SubCategoryController extends Controller
             $query = SubCategory::with(['parent'])->select(sprintf('%s.*', (new SubCategory)->table));
             $table = Datatables::of($query);
 
+            $nameLocaleColumn = localeColumn('name');
+
             $table->addColumn('placeholder', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
-
+            $table->addColumn('id', fn ($row) => $row->id ?? '');
+            $table->editColumn($nameLocaleColumn, fn ($row) => $row->$nameLocaleColumn ?? '');
+            $table->editColumn('parent_name', fn ($row) => $row->parent->$nameLocaleColumn ?? '');
+            $table->editColumn('access', fn ($row) => $row->access ?? '');
+            $table->addColumn('created_at', fn ($row) => $row->created_at ?? '');
             $table->addColumn('actions', function ($row) {
                 $viewGate      = 'sub_category_show';
                 $editGate      = 'sub_category_edit';
@@ -50,14 +56,6 @@ class SubCategoryController extends Controller
                     'row'
                 ));
             });
-
-            $localeColumn = localeColumn('name');
-
-            $table->addColumn('id', fn ($row) => $row->id ?? '');
-            $table->addColumn('name', fn ($row) => $row->$localeColumn ?? '');
-            $table->addColumn('parent_name', fn ($row) => $row->parent->$localeColumn ?? '');
-            $table->addColumn('access', fn ($row) => $row->access ?? '');
-            $table->addColumn('created_at', fn ($row) => $row->created_at ?? '');
 
             $table->rawColumns(['actions', 'placeholder', 'parent']);
 

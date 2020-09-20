@@ -28,6 +28,12 @@
                         {{ trans('cruds.document.fields.image') }}
                     </th>
                     <th>
+                        {{ trans('cruds.document.fields.type') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.document.fields.number') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.document.fields.name') }} ({{ config('app.locale_default_column') }})
                     </th>
                     <th>
@@ -99,6 +105,10 @@
             dtButtons.push(deleteButton)
             @endcan
 
+            let nameLocaleColumn = '{{ localeColumn('name') }}';
+            let nameIssuerLocaleColumn = '{{ localeColumn('name_issuer') }}';
+            let topicLocaleColumn = '{{ localeColumn('topic') }}';
+
             let dtOverrideGlobals = {
                 buttons: dtButtons,
                 processing: true,
@@ -110,9 +120,11 @@
                     {data: 'placeholder', name: 'placeholder'},
                     {data: 'id', name: 'id'},
                     {data: 'image', name: 'image'},
-                    {data: 'name', name: 'name'},
-                    {data: 'name_issuer', name: 'name_issuer'},
-                    {data: 'topic', name: 'topic'},
+                    {data: 'type', name: 'type'},
+                    {data: 'number', name: 'number'},
+                    {data: nameLocaleColumn, name: nameLocaleColumn},
+                    {data: nameIssuerLocaleColumn, name: nameIssuerLocaleColumn},
+                    {data: topicLocaleColumn, name: topicLocaleColumn},
                     {data: 'access', name: 'access'},
                     {data: 'status', name: 'status'},
                     {data: 'approved_at', name: 'approved_at'},

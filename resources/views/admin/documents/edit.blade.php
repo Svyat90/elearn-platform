@@ -193,6 +193,7 @@
                     <label class="required" for="file">{{ trans('cruds.document.fields.file') }}</label>
                     <div>{!! sprintf('<a href="%s" target="_blank">Show File (PNG)</a>', storageUrl($document->file_path)) !!}</div>
                     <p><a href="#" id="show-file-dropzone">Add New File (PNG)</a></p>
+                    <input type="hidden" name="file_path" value="{{ $document->file_path ?? '' }}">
                     <span id="file-dropzone" style="{{ $document->image_path ? 'display: none;' : '' }};">
                         <div class="needsclick dropzone {{ $errors->has('file') ? 'is-invalid' : '' }}"
                              id="file-drop-zone">

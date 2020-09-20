@@ -5,6 +5,7 @@ namespace App;
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Category extends Model
 {
@@ -31,6 +32,14 @@ class Category extends Model
     public function parentSubCategories()
     {
         return $this->hasMany(SubCategory::class, 'parent_id', 'id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function documents()
+    {
+        return $this->belongsToMany(Document::class, 'document_category', 'category_id', 'document_id');
     }
 
 }

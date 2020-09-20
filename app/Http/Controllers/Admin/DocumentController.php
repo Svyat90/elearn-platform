@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Document;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\Document\MassDestroyDocumentRequest;
 use App\Http\Requests\Document\StoreDocumentRequest;
 use App\Http\Requests\Document\UpdateDocumentRequest;
+use App\Role;
 use App\Services\DocumentService;
+use App\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
@@ -83,6 +86,10 @@ class DocumentController extends Controller
     {
         abort_if(Gate::denies('document_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $categories = Category::all()->pluck(localeColumn('name'), 'id');
+        $users = User::all()->pluck('email', 'id');
+        $roles = Role::all()->pluck('title', 'id');
+
         $accessTypes = collect($documentService->getAccessTypes())
             ->prepend(trans('global.pleaseSelect'), '');
 
@@ -93,18 +100,28 @@ class DocumentController extends Controller
         return view('admin.documents.create', compact(
             'accessTypes',
                 'statuses',
-                'statusesSelect'
+                'statusesSelect',
+                'categories',
+                'roles',
+                'users'
             )
         );
     }
 
     /**
      * @param StoreDocumentRequest $request
+     * @param DocumentService $documentService
      * @return RedirectResponse
      */
-    public function store(StoreDocumentRequest $request) : RedirectResponse
+    public function store(StoreDocumentRequest $request, DocumentService $documentService) : RedirectResponse
     {
-        Document::query()->create($request->validated());
+        $insertData = $request->validated();
+        $insertData['description'] = strip_tags($insertData['description']);
+
+        /** @var Document $document */
+        $document = Document::query()->create($insertData);
+
+        $documentService->handleRelationships($document, $request);
 
         return redirect()->route('admin.documents.index');
     }
@@ -118,6 +135,14 @@ class DocumentController extends Controller
     {
         abort_if(Gate::denies('document_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $allCategories = Category::all()->pluck(localeColumn('name'), 'id');
+        $allUsers = User::all()->pluck('email', 'id');
+        $allRoles = Role::all()->pluck('title', 'id');
+
+        $categoryIds = $document->categories()->pluck('id')->toArray();
+        $roleIds = $document->roles()->pluck('id')->toArray();
+        $userIds = $document->users()->pluck('id')->toArray();
+
         $accessTypes = collect($documentService->getAccessTypes())
             ->prepend(trans('global.pleaseSelect'), '');
 
@@ -129,7 +154,13 @@ class DocumentController extends Controller
             'document',
             'accessTypes',
             'statuses',
-            'statusesSelect'
+            'statusesSelect',
+            'categoryIds',
+            'roleIds',
+            'userIds',
+            'allCategories',
+            'allUsers',
+            'allRoles'
             )
         );
     }
@@ -148,8 +179,11 @@ class DocumentController extends Controller
     {
         $documentService->handleImage($document, $request->image_path);
         $documentService->handleFile($document, $request->file_path);
+        $documentService->handleRelationships($document, $request);
 
-        $document->update($request->validated());
+        $updateData = $request->validated();
+        $updateData['description'] = strip_tags($updateData['description']);
+        $document->update($updateData);
 
         return redirect()->route('admin.documents.index');
     }
@@ -162,7 +196,7 @@ class DocumentController extends Controller
     {
         abort_if(Gate::denies('document_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-//        $document->load('parentSubCategories');
+        $document->load('categories', 'roles', 'users');
 
         return view('admin.documents.show', compact('document'));
     }

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Document;
 use App\Traits\FilterConstantsTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 class DocumentService
@@ -56,6 +57,17 @@ class DocumentService
             $filePath = storage_path('app/public/' . $document->file_path);
             File::delete($filePath);
         }
+    }
+
+    /**
+     * @param Document $document
+     * @param Request $request
+     */
+    public function handleRelationships(Document $document, Request $request) : void
+    {
+        $document->roles()->sync($request->role_ids);
+        $document->users()->sync($request->user_ids);
+        $document->categories()->sync($request->category_ids);
     }
 
 }

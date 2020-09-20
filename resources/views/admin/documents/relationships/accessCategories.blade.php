@@ -2,15 +2,15 @@
     @can('sub_category_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route("admin.sub-categories.create") }}">
-                    {{ trans('global.add') }} {{ trans('cruds.subCategory.title_singular') }}
+                <a class="btn btn-success" href="{{ route("admin.categories.create") }}">
+                    {{ trans('global.add') }} {{ trans('cruds.category.title_singular') }}
                 </a>
             </div>
         </div>
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('cruds.subCategory.title_singular') }} {{ trans('global.list') }}
+            {{ trans('cruds.category.title_singular') }} {{ trans('global.list') }}
         </div>
 
         <div class="card-body">
@@ -22,13 +22,16 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.subCategory.fields.id') }}
+                            {{ trans('cruds.category.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.subCategory.fields.name') }}
+                            {{ trans('cruds.category.fields.name') }} ({{ config('app.locale_default_column') }})
                         </th>
                         <th>
-                            {{ trans('cruds.subCategory.fields.parent') }}
+                            {{ trans('cruds.category.fields.access') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.category.fields.created_at') }}
                         </th>
                         <th>
                             &nbsp;
@@ -36,37 +39,40 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($subCategories as $key => $subCategory)
-                        <tr data-entry-id="{{ $subCategory->id }}">
+                    @foreach($categories as $key => $category)
+                        <tr data-entry-id="{{ $category->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $subCategory->id ?? '' }}
+                                {{ $category->id }}
                             </td>
                             <td>
-                                {{ $subCategory->name ?? '' }}
+                                {{ $category->{localeColumn('name')} ?? '' }} ({{ config('app.locale_default_column') }})
                             </td>
                             <td>
-                                {{ $subCategory->parent->name ?? '' }}
+                                {{ $category->access }}
+                            </td>
+                            <td>
+                                {{ $category->created_at }}
                             </td>
                             <td>
                                 @can('sub_category_show')
                                     <a class="btn btn-xs btn-primary"
-                                       href="{{ route('admin.sub-categories.show', $subCategory->id) }}">
+                                       href="{{ route('admin.categories.show', $category->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
                                 @can('sub_category_edit')
                                     <a class="btn btn-xs btn-info"
-                                       href="{{ route('admin.sub-categories.edit', $subCategory->id) }}">
+                                       href="{{ route('admin.categories.edit', $category->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
                                 @can('sub_category_delete')
-                                    <form action="{{ route('admin.sub-categories.destroy', $subCategory->id) }}"
+                                    <form action="{{ route('admin.categories.destroy', $category->id) }}"
                                           method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
                                           style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
@@ -91,11 +97,11 @@
     <script>
         $(function () {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-            @can('sub_category_delete')
+            @can('category_delete')
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
             let deleteButton = {
                 text: deleteButtonTrans,
-                url: "{{ route('admin.sub-categories.massDestroy') }}",
+                url: "{{ route('admin.categories.massDestroy') }}",
                 className: 'btn-danger',
                 action: function (e, dt, node, config) {
                     var ids = $.map(dt.rows({selected: true}).nodes(), function (entry) {

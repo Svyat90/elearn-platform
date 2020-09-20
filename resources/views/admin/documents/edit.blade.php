@@ -13,7 +13,7 @@
                 @csrf
                 <div class="row">
                     <div class="form-group col-md-4 col-sm-6 col-xs-12">
-                        <label class="" for="name_ru">{{ trans('cruds.document.fields.name') }}(ru)</label>
+                        <label class="" for="name_ru">{{ trans('cruds.document.fields.name') }} (ru)</label>
                         <input class="form-control {{ $errors->has('name_ru') ? 'is-invalid' : '' }}" type="text"
                                name="name_ru"
                                id="name_ru" value="{{ old('name_ru', $document->name_ru) }}">
@@ -23,7 +23,7 @@
                         <span class="help-block">{{ trans('cruds.document.fields.name_helper') }}</span>
                     </div>
                     <div class="form-group col-md-4 col-sm-6 col-xs-12">
-                        <label class="" for="name_ro">{{ trans('cruds.document.fields.name') }}(ro)</label>
+                        <label class="" for="name_ro">{{ trans('cruds.document.fields.name') }} (ro)</label>
                         <input class="form-control {{ $errors->has('name_ro') ? 'is-invalid' : '' }}" type="text"
                                name="name_ro"
                                id="name_ro" value="{{ old('name_ro', $document->name_ro) }}">
@@ -33,7 +33,7 @@
                         <span class="help-block">{{ trans('cruds.document.fields.name_helper') }}</span>
                     </div>
                     <div class="form-group col-md-4 col-sm-6 col-xs-12">
-                        <label class="" for="name_en">{{ trans('cruds.document.fields.name') }}(en)</label>
+                        <label class="" for="name_en">{{ trans('cruds.document.fields.name') }} (en)</label>
                         <input class="form-control {{ $errors->has('name_en') ? 'is-invalid' : '' }}" type="text"
                                name="name_en"
                                id="name_en" value="{{ old('name_en', $document->name_en) }}">
@@ -130,20 +130,22 @@
                     </div>
 
                     <div class="form-group col-md-4 col-sm-6 col-xs-12">
-                        <label class="required" for="access">{{ trans('cruds.subCategory.fields.access') }}</label>
-                        <select class="form-control select2 {{ $errors->has('access') ? 'is-invalid' : '' }}"
-                                name="access" id="access" required>
-                            @foreach($accessTypes as $access)
-                                <option
-                                    value="{{ $access }}" {{ $access }}
-                                " {{ old('access', $document->access) === $access ? 'selected' : '' }}
-                                >{{ $access }}</option>
-                            @endforeach
-                        </select>
-                        @if($errors->has('access'))
-                            <span class="text-danger">{{ $errors->first('access') }}</span>
+                        <label class="" for="approved_at">{{ trans('cruds.document.fields.approved_at') }}</label>
+                        <input name="approved_at" type='text' class="form-control datetime" id='datetimepicker'
+                               value="{{ $document->approved_at ?? '' }}"/>
+                        @if($errors->has('approved_at'))
+                            <span class="text-danger">{{ $errors->first('approved_at') }}</span>
                         @endif
-                        <span class="help-block">{{ trans('cruds.document.fields.access_helper') }}</span>
+                        <span class="help-block">{{ trans('cruds.document.fields.approved_at_helper') }}</span>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                        <label class="" for="published_at">{{ trans('cruds.document.fields.published_at') }}</label>
+                        <input name="published_at" type='text' class="form-control datetime" id='datetimepicker'
+                               value="{{ $document->published_at ?? '' }}"/>
+                        @if($errors->has('published_at'))
+                            <span class="text-danger">{{ $errors->first('published_at') }}</span>
+                        @endif
+                        <span class="help-block">{{ trans('cruds.document.fields.published_at_helper') }}</span>
                     </div>
 
                     <div class="form-group col-md-4 col-sm-6 col-xs-12">
@@ -162,27 +164,90 @@
                     </div>
 
                     <div class="form-group col-md-4 col-sm-6 col-xs-12">
-                        <label class="" for="approved_at">{{ trans('cruds.document.fields.approved_at') }}</label>
-                        <input name="approved_at" type='text' class="form-control datetime" id='datetimepicker' value="{{ $document->approved_at ?? '' }}" />
-                        @if($errors->has('approved_at'))
-                            <span class="text-danger">{{ $errors->first('approved_at') }}</span>
+                        <label class="required" for="access">{{ trans('cruds.subCategory.fields.access') }}</label>
+                        <select class="form-control select2 {{ $errors->has('access') ? 'is-invalid' : '' }}"
+                                name="access" id="access" required>
+                            @foreach($accessTypes as $access)
+                                <option
+                                    value="{{ $access }}" {{ $access }}
+                                " {{ old('access', $document->access) === $access ? 'selected' : '' }}
+                                >{{ $access }}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('access'))
+                            <span class="text-danger">{{ $errors->first('access') }}</span>
                         @endif
-                        <span class="help-block">{{ trans('cruds.document.fields.approved_at_helper') }}</span>
-                    </div>
-                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
-                        <label class="" for="published_at">{{ trans('cruds.document.fields.published_at') }}</label>
-                        <input name="published_at" type='text' class="form-control datetime" id='datetimepicker' value="{{ $document->published_at ?? '' }}" />
-                        @if($errors->has('published_at'))
-                            <span class="text-danger">{{ $errors->first('published_at') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.document.fields.published_at_helper') }}</span>
+                        <span class="help-block">{{ trans('cruds.document.fields.access_helper') }}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
+                    <label class="" for="category_ids">{{ trans('global.categories') }}</label>
+                    <div style="padding-bottom: 4px">
+                        <span class="btn btn-info btn-xs select-all"
+                              style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                        <span class="btn btn-info btn-xs deselect-all"
+                              style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                    </div>
+                    <select class="form-control select2 {{ $errors->has('roles') ? 'is-invalid' : '' }}"
+                            name="category_ids[]"
+                            id="category_ids" multiple>
+                        @foreach($allCategories as $id => $category)
+                            <option
+                                value="{{ $id }}" {{ in_array($id, old('category_ids', $categoryIds)) ? 'selected' : '' }}>{{ $category }}</option>
+                        @endforeach
+                    </select>
+                    @if($errors->has('category_ids'))
+                        <span class="text-danger">{{ $errors->first('category_ids') }}</span>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <label class="" for="role_ids">{{ trans('cruds.user.fields.access_roles') }}</label>
+                    <div style="padding-bottom: 4px">
+                        <span class="btn btn-info btn-xs select-all"
+                              style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                        <span class="btn btn-info btn-xs deselect-all"
+                              style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                    </div>
+                    <select class="form-control select2 {{ $errors->has('roles') ? 'is-invalid' : '' }}"
+                            name="role_ids[]"
+                            id="role_ids" multiple>
+                        @foreach($allRoles as $id => $role)
+                            <option
+                                value="{{ $id }}" {{ in_array($id, old('role_ids', $roleIds)) ? 'selected' : '' }}>{{ $role }}</option>
+                        @endforeach
+                    </select>
+                    @if($errors->has('role_ids'))
+                        <span class="text-danger">{{ $errors->first('role_ids') }}</span>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <label class="" for="user_ids">{{ trans('cruds.user.fields.access_users') }}</label>
+                    <div style="padding-bottom: 4px">
+                        <span class="btn btn-info btn-xs select-all"
+                              style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                        <span class="btn btn-info btn-xs deselect-all"
+                              style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                    </div>
+                    <select class="form-control select2 {{ $errors->has('users') ? 'is-invalid' : '' }}"
+                            name="user_ids[]"
+                            id="user_ids" multiple>
+                        @foreach($allUsers as $id => $user)
+                            <option
+                                value="{{ $id }}" {{ in_array($id, old('user_ids', $userIds)) ? 'selected' : '' }}>{{ $user }}</option>
+                        @endforeach
+                    </select>
+                    @if($errors->has('user_ids'))
+                        <span class="text-danger">{{ $errors->first('user_ids') }}</span>
+                    @endif
+                </div>
+
+                <div class="form-group">
                     <label for="description">{{ trans('cruds.document.fields.description') }}</label>
-                    <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
-                              name="description" id="description">{!! old('description') !!}</textarea>
+                    <textarea class="form-control ckeditor {{ $errors->has('description') ? 'is-invalid' : '' }}"
+                              name="description" id="description">{!! old('description', $document->description) !!}</textarea>
                     @if($errors->has('description'))
                         <span class="text-danger">{{ $errors->first('description') }}</span>
                     @endif
@@ -238,6 +303,11 @@
             $('#datetimepicker').datetimepicker({
                 minDate: moment().startOf('minute').add(180, 'm'),
             });
+
+            var allEditors = document.querySelectorAll('.ckeditor');
+            for (var i = 0; i < allEditors.length; ++i) {
+                ClassicEditor.create(allEditors[i]);
+            }
 
             $('#show-image-dropzone').click(function (e) {
                 e.preventDefault();

@@ -5,6 +5,7 @@ namespace App;
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Document extends Model
 {
@@ -27,5 +28,29 @@ class Document extends Model
         'type', 'status', 'number', 'access', 'description', 'image_path', 'file_path',
         'created_at', 'updated_at', 'deleted_at', 'approved_at', 'published_at'
     ];
+
+    /**
+     * @return BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'document_category', 'document_id', 'category_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePermissionRolePivotTable extends Migration
+class CreateDocumentUserPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreatePermissionRolePivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('permission_role', function (Blueprint $table) {
-            $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id')
-                ->references('id')->on('roles')
+        Schema::create('document_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('document_id');
+            $table->foreign('document_id')
+                ->references('id')->on('documents')
                 ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->unsignedBigInteger('permission_id');
-            $table->foreign('permission_id')
-                ->references('id')->on('permissions')
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
         });
 
@@ -34,6 +34,6 @@ class CreatePermissionRolePivotTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permission_role');
+        Schema::dropIfExists('document_user');
     }
 }

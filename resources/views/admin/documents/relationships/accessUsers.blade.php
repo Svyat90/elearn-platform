@@ -89,7 +89,10 @@
                                 {{ $user->phone ?? '' }}
                             </td>
                             <td>
-                                {{ App\User::STATUS_SELECT[$user->status] ?? '' }}
+                                {{ App\User::USER_STATUS_SELECT[$user->status] ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->created_at ?? '' }}
                             </td>
                             <td>
                                 @can('user_show')

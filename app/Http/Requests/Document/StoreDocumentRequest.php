@@ -42,6 +42,12 @@ class StoreDocumentRequest extends FormRequest
             'published_at' => 'sometimes|nullable',
             'image_path' => 'required|string',
             'file_path' => 'required|string',
+            'category_ids'   => 'sometimes|array',
+            'category_ids.*' => 'integer|exists:categories,id',
+            'role_ids'   => 'sometimes|array',
+            'role_ids.*' => 'integer|exists:roles,id',
+            'user_ids'   => 'sometimes|array',
+            'user_ids.*' => 'integer|exists:users,id',
         ];
     }
 }

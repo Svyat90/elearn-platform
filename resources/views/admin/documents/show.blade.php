@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.category.title') }}
+        {{ trans('global.show') }} {{ trans('cruds.document.title') }}
     </div>
 
     <div class="card-body">
@@ -48,23 +48,39 @@
     </div>
 </div>
 
-{{--<div class="card">--}}
-{{--    <div class="card-header">--}}
-{{--        {{ trans('global.relatedData') }}--}}
-{{--    </div>--}}
-{{--    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">--}}
-{{--        <li class="nav-item">--}}
-{{--            <a class="nav-link" href="#parent_sub_categories" role="tab" data-toggle="tab">--}}
-{{--                {{ trans('cruds.subCategory.title') }}--}}
-{{--            </a>--}}
-{{--        </li>--}}
-
-{{--    </ul>--}}
-{{--    <div class="tab-content">--}}
-{{--        <div class="tab-pane" role="tabpanel" id="parent_sub_categories">--}}
-{{--            @includeIf('admin.documents.relationships.parentSubCategories', ['subCategories' => $category->parentSubCategories])--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
+<div class="card">
+    <div class="card-header">
+        {{ trans('global.relatedData') }}
+    </div>
+    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="#access_categories" role="tab" data-toggle="tab">
+                {{ trans('cruds.user.fields.access_categories') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#access_users" role="tab" data-toggle="tab">
+                {{ trans('cruds.user.fields.access_users') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#access_roles" role="tab" data-toggle="tab">
+                {{ trans('cruds.user.fields.access_roles') }}
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" role="tabpanel" id="access_categories">
+            @includeIf('admin.documents.relationships.accessCategories', ['categories' => $document->categories])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="access_users">
+            @includeIf('admin.documents.relationships.accessUsers', ['users' => $document->users])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="access_roles">
+            @includeIf('admin.documents.relationships.accessRoles', ['roles' => $document->roles])
+        </div>
+    </div>
+</div>
 
 @endsection
+

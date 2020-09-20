@@ -42,6 +42,12 @@ class UpdateDocumentRequest extends FormRequest
             'published_at' => 'sometimes|nullable',
             'image_path' => 'sometimes|string',
             'file_path' => 'sometimes|string',
+            'category_ids'   => 'sometimes|array',
+            'category_ids.*' => 'integer|exists:categories,id',
+            'role_ids'   => 'sometimes|array',
+            'role_ids.*' => 'integer|exists:roles,id',
+            'user_ids'   => 'sometimes|array',
+            'user_ids.*' => 'integer|exists:users,id',
         ];
     }
 

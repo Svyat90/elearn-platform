@@ -96,6 +96,9 @@ return [
             'position'                     => 'Position',
             'institution'                  => 'Institution',
             'phone'                        => 'Phone',
+            'access_users'                 => 'Access Users',
+            'access_roles'                 => 'Access Roles',
+            'access_categories'            => 'Access Categories',
         ],
     ],
     'category'                     => [

@@ -7,17 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Document extends Model
+class Course extends Model
 {
     use SoftDeletes, Auditable;
 
-    public $table = 'documents';
+    public $table = 'courses';
 
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
-        'approved_at',
         'published_at'
     ];
 
@@ -25,8 +24,8 @@ class Document extends Model
         'name_ru', 'name_ro', 'name_en',
         'name_issuer_ru', 'name_issuer_ro', 'name_issuer_en',
         'topic_ru', 'topic_ro', 'topic_en',
-        'type', 'status', 'number', 'access', 'description', 'image_path', 'file_path',
-        'created_at', 'updated_at', 'deleted_at', 'approved_at', 'published_at'
+        'access', 'description', 'image_path',
+        'created_at', 'updated_at', 'deleted_at', 'published_at'
     ];
 
     /**
@@ -34,7 +33,7 @@ class Document extends Model
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'document_category', 'document_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'course_category', 'course_id', 'category_id');
     }
 
     /**
@@ -56,9 +55,9 @@ class Document extends Model
     /**
      * @return BelongsToMany
      */
-    public function courses()
+    public function documents()
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Document::class);
     }
 
 }

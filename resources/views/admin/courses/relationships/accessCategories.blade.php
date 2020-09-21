@@ -48,7 +48,7 @@
                                 {{ $category->id }}
                             </td>
                             <td>
-                                {{ $category->{localeColumn('name')} ?? '' }} ({{ config('app.locale_default_column') }})
+                                {{ $category->{localeColumn('name')} ?? '' }}
                             </td>
                             <td>
                                 {!! labelAccess($category->access) !!}

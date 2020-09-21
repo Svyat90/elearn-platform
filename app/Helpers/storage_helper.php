@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('default_locale')) {
+if (!function_exists('storageUrl')) {
 
     /**
      * @param string|null $path

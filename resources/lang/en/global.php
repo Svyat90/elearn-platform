@@ -107,6 +107,7 @@ return [
     'campaign'                             => 'Campaign',
     'campaigns'                            => 'Campaigns',
     'categories'                           => 'Categories',
+    'documents'                            => 'Documents',
     'category'                             => 'Category',
     'category_name'                        => 'Category name',
     'change_notifications_field_1_label'   => 'Send email notification to User',

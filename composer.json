@@ -40,7 +40,8 @@
     "autoload": {
         "files":[
             "app/Helpers/locale_helper.php",
-            "app/Helpers/storage_helper.php"
+            "app/Helpers/storage_helper.php",
+            "app/Helpers/label_helper.php"
         ],
         "psr-4": {
             "App\\": "app/"

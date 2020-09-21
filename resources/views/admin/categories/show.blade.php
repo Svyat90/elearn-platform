@@ -36,7 +36,7 @@
                             {{ trans('cruds.category.fields.access') }}
                         </th>
                         <td>
-                            {{ $category->access }}
+                            {!! labelAccess($category->access) !!}
                         </td>
                     </tr>
                     <tr>

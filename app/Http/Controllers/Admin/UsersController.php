@@ -38,7 +38,7 @@ class UsersController extends Controller
             $table->editColumn('roles', function ($row) {
                 $labels = [];
                 foreach ($row->roles as $role) {
-                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $role->title);
+                    $labels[] = sprintf('<span class="badge badge-info">%s</span>', $role->title);
                 }
                 return implode(' ', $labels);
             });

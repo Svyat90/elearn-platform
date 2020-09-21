@@ -1,79 +1,66 @@
 <div class="m-3">
-    @can('sub_category_create')
+    @can('role_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route("admin.categories.create") }}">
-                    {{ trans('global.add') }} {{ trans('cruds.category.title_singular') }}
+                <a class="btn btn-success" href="{{ route("admin.roles.create") }}">
+                    {{ trans('global.add') }} {{ trans('cruds.role.title_singular') }}
                 </a>
             </div>
         </div>
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('cruds.category.title_singular') }} {{ trans('global.list') }}
+            {{ trans('cruds.role.title_singular') }} {{ trans('global.list') }}
         </div>
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class=" table table-bordered table-striped table-hover datatable datatable-parentSubCategories">
+                <table class=" table table-bordered table-striped table-hover datatable datatable-categoryRoles">
                     <thead>
                     <tr>
                         <th width="10">
 
                         </th>
                         <th>
-                            {{ trans('cruds.category.fields.id') }}
+                            {{ trans('cruds.role.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.category.fields.name') }} ({{ config('app.locale_default_column') }})
+                            {{ trans('cruds.role.fields.title') }}
                         </th>
-                        <th>
-                            {{ trans('cruds.category.fields.access') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.category.fields.created_at') }}
-                        </th>
+
                         <th>
                             &nbsp;
                         </th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($categories as $key => $category)
-                        <tr data-entry-id="{{ $category->id }}">
+                    @foreach($roles as $key => $role)
+                        <tr data-entry-id="{{ $role->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $category->id }}
+                                {{ $role->id ?? '' }}
                             </td>
                             <td>
-                                {{ $category->{localeColumn('name')} ?? '' }} ({{ config('app.locale_default_column') }})
+                                {{ $role->title ?? '' }}
                             </td>
                             <td>
-                                {!! labelAccess($category->access) !!}
-                            </td>
-                            <td>
-                                {{ $category->created_at }}
-                            </td>
-                            <td>
-                                @can('sub_category_show')
-                                    <a class="btn btn-xs btn-primary"
-                                       href="{{ route('admin.categories.show', $category->id) }}">
+                                @can('role_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.roles.show', $role->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('sub_category_edit')
-                                    <a class="btn btn-xs btn-info"
-                                       href="{{ route('admin.categories.edit', $category->id) }}">
+                                @can('role_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.roles.edit', $role->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('sub_category_delete')
-                                    <form action="{{ route('admin.categories.destroy', $category->id) }}"
-                                          method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
+                                @can('role_delete')
+                                    <form action="{{ route('admin.roles.destroy', $role->id) }}" method="POST"
+                                          onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
                                           style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -97,11 +84,11 @@
     <script>
         $(function () {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-            @can('category_delete')
+            @can('role_delete')
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
             let deleteButton = {
                 text: deleteButtonTrans,
-                url: "{{ route('admin.categories.massDestroy') }}",
+                url: "{{ route('admin.roles.massDestroy') }}",
                 className: 'btn-danger',
                 action: function (e, dt, node, config) {
                     var ids = $.map(dt.rows({selected: true}).nodes(), function (entry) {
@@ -134,7 +121,7 @@
                 order: [[1, 'desc']],
                 pageLength: 25,
             });
-            $('.datatable-parentSubCategories:not(.ajaxTable)').DataTable({buttons: dtButtons})
+            $('.datatable-categoryRoles:not(.ajaxTable)').DataTable({buttons: dtButtons})
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 $($.fn.dataTable.tables(true)).DataTable()
                     .columns.adjust();

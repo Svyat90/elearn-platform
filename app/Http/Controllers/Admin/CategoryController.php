@@ -38,7 +38,7 @@ class CategoryController extends Controller
             $table->addColumn('actions', '&nbsp;');
             $table->editColumn('id', fn ($row) => $row->id ?? '');
             $table->editColumn($nameLocaleColumn, fn ($row) => $row->$nameLocaleColumn ?? '');
-            $table->editColumn('access', fn ($row) => $row->access ?? '');
+            $table->editColumn('access', fn ($row) => labelAccess($row->access));
             $table->addColumn('actions', function ($row) {
                 $viewGate      = 'category_show';
                 $editGate      = 'category_edit';
@@ -54,7 +54,7 @@ class CategoryController extends Controller
                 ));
             });
 
-            $table->rawColumns(['actions', 'placeholder']);
+            $table->rawColumns(['actions', 'placeholder', 'access']);
 
             return $table->make(true);
         }

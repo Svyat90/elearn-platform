@@ -43,6 +43,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('documents/media', 'DocumentController@storeMedia')->name('documents.storeMedia');
     Route::resource('documents', 'DocumentController');
 
+    // Courses
+    Route::delete('courses/destroy', 'CourseController@massDestroy')->name('courses.massDestroy');
+    Route::post('courses/media', 'CourseController@storeMedia')->name('courses.storeMedia');
+    Route::resource('courses', 'CourseController');
+
     // Audit Logs
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 });

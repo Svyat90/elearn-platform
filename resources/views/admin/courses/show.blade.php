@@ -3,27 +3,27 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.document.title') }}
+        {{ trans('global.show') }} {{ trans('cruds.course.title') }}
     </div>
 
     <div class="card-body">
         <div class="form-group">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.documents.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.courses.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
             <table class="table table-bordered table-striped">
                 <tbody>
-                @foreach($document->getFillable() as $field)
+                @foreach($course->getFillable() as $field)
                     @if($field === 'image_path')
                         <tr>
                             <th>Image</th>
-                            <td>{!! sprintf('<img src="%s" width="100px" />', storageUrl($document->{$field})) !!}</td>
+                            <td>{!! sprintf('<img src="%s" width="100px" />', storageUrl($course->{$field})) !!}</td>
                         </tr>
                     @elseif($field === 'file_path')
                         @php
-                        $link = storageUrl($document->{$field});
+                        $link = storageUrl($course->{$field});
                         $segments = explode("/", $link);
                         @endphp
                         <tr>
@@ -33,24 +33,19 @@
                     @elseif($field === 'access')
                         <tr>
                             <th>{{ trans("cruds.document.fields.{$field}") }}</th>
-                            <td>{!! labelAccess($document->{$field}) !!}</td>
-                        </tr>
-                    @elseif($field === 'status')
-                        <tr>
-                            <th>{{ trans("cruds.document.fields.{$field}") }}</th>
-                            <td>{!! labelDocumentStatus($document->{$field}) !!}</td>
+                            <td>{!! labelAccess($course->{$field}) !!}</td>
                         </tr>
                     @else
                         <tr>
-                            <th>{{ trans("cruds.document.fields.{$field}") }}</th>
-                            <td>{{ $document->{$field} }}</td>
+                            <th>{{ trans("cruds.course.fields.{$field}") }}</th>
+                            <td>{{ $course->{$field} }}</td>
                         </tr>
                     @endif
                 @endforeach
                 </tbody>
             </table>
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.documents.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.courses.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -79,23 +74,23 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#access_courses" role="tab" data-toggle="tab">
-                {{ trans('cruds.user.fields.access_courses') }}
+            <a class="nav-link" href="#access_documents" role="tab" data-toggle="tab">
+                {{ trans('cruds.user.fields.access_documents') }}
             </a>
         </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="access_categories">
-            @includeIf('admin.documents.relationships.accessCategories', ['categories' => $document->categories])
+            @includeIf('admin.courses.relationships.accessCategories', ['categories' => $course->categories])
         </div>
         <div class="tab-pane" role="tabpanel" id="access_users">
-            @includeIf('admin.documents.relationships.accessUsers', ['users' => $document->users])
+            @includeIf('admin.courses.relationships.accessUsers', ['users' => $course->users])
         </div>
         <div class="tab-pane" role="tabpanel" id="access_roles">
-            @includeIf('admin.documents.relationships.accessRoles', ['roles' => $document->roles])
+            @includeIf('admin.courses.relationships.accessRoles', ['roles' => $course->roles])
         </div>
-        <div class="tab-pane" role="tabpanel" id="access_courses">
-            @includeIf('admin.documents.relationships.accessCourses', ['courses' => $document->courses])
+        <div class="tab-pane" role="tabpanel" id="access_documents">
+            @includeIf('admin.courses.relationships.accessDocuments', ['documents' => $course->documents])
         </div>
     </div>
 </div>

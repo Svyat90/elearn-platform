@@ -25,10 +25,13 @@
                             {{ trans('cruds.subCategory.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.subCategory.fields.name') }}
+                            {{ trans('cruds.subCategory.fields.name') }} ({{ config('app.locale_default_column') }})
                         </th>
                         <th>
-                            {{ trans('cruds.subCategory.fields.parent') }}
+                            {{ trans('cruds.subCategory.fields.parent') }} ({{ config('app.locale_default_column') }})
+                        </th>
+                        <th>
+                            {{ trans('cruds.subCategory.fields.access') }}
                         </th>
                         <th>
                             &nbsp;
@@ -45,10 +48,13 @@
                                 {{ $subCategory->id ?? '' }}
                             </td>
                             <td>
-                                {{ $subCategory->name ?? '' }}
+                                {{ $subCategory->{localeColumn('name')} ?? '' }}
                             </td>
                             <td>
-                                {{ $subCategory->parent->name ?? '' }}
+                                {{ $subCategory->parent->{localeColumn('name')} ?? '' }}
+                            </td>
+                            <td>
+                                {!! labelAccess($subCategory->access) !!}
                             </td>
                             <td>
                                 @can('sub_category_show')

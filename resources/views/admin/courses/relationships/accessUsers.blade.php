@@ -1,37 +1,55 @@
 <div class="m-3">
-    @can('sub_category_create')
+    @can('user_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route("admin.categories.create") }}">
-                    {{ trans('global.add') }} {{ trans('cruds.category.title_singular') }}
+                <a class="btn btn-success" href="{{ route("admin.users.create") }}">
+                    {{ trans('global.add') }} {{ trans('cruds.user.title_singular') }}
                 </a>
             </div>
         </div>
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('cruds.category.title_singular') }} {{ trans('global.list') }}
+            {{ trans('cruds.user.title_singular') }} {{ trans('global.list') }}
         </div>
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class=" table table-bordered table-striped table-hover datatable datatable-parentSubCategories">
+                <table class=" table table-bordered table-striped table-hover datatable datatable-categoryUsers">
                     <thead>
                     <tr>
                         <th width="10">
 
                         </th>
                         <th>
-                            {{ trans('cruds.category.fields.id') }}
+                            {{ trans('cruds.user.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.category.fields.name') }} ({{ config('app.locale_default_column') }})
+                            {{ trans('cruds.user.fields.roles') }}
                         </th>
                         <th>
-                            {{ trans('cruds.category.fields.access') }}
+                            {{ trans('cruds.user.fields.first_name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.category.fields.created_at') }}
+                            {{ trans('cruds.user.fields.last_name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.email') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.position') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.institution') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.phone') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.user_status') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.created_at') }}
                         </th>
                         <th>
                             &nbsp;
@@ -39,41 +57,59 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($categories as $key => $category)
-                        <tr data-entry-id="{{ $category->id }}">
+                    @foreach($users as $key => $user)
+                        <tr data-entry-id="{{ $user->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $category->id }}
+                                {{ $user->id ?? '' }}
                             </td>
                             <td>
-                                {{ $category->{localeColumn('name')} ?? '' }} ({{ config('app.locale_default_column') }})
+                                @foreach($user->roles as $key => $item)
+                                    <span class="badge badge-info">{{ $item->title }}</span>
+                                @endforeach
                             </td>
                             <td>
-                                {!! labelAccess($category->access) !!}
+                                {{ $user->first_name ?? '' }}
                             </td>
                             <td>
-                                {{ $category->created_at }}
+                                {{ $user->last_name ?? '' }}
                             </td>
                             <td>
-                                @can('sub_category_show')
-                                    <a class="btn btn-xs btn-primary"
-                                       href="{{ route('admin.categories.show', $category->id) }}">
+                                {{ $user->email ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->position ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->institution ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->phone ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\User::USER_STATUS_SELECT[$user->status] ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->created_at ?? '' }}
+                            </td>
+                            <td>
+                                @can('user_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.users.show', $user->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('sub_category_edit')
-                                    <a class="btn btn-xs btn-info"
-                                       href="{{ route('admin.categories.edit', $category->id) }}">
+                                @can('user_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.users.edit', $user->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('sub_category_delete')
-                                    <form action="{{ route('admin.categories.destroy', $category->id) }}"
-                                          method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
+                                @can('user_delete')
+                                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
+                                          onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
                                           style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -97,11 +133,11 @@
     <script>
         $(function () {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-            @can('category_delete')
+            @can('user_delete')
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
             let deleteButton = {
                 text: deleteButtonTrans,
-                url: "{{ route('admin.categories.massDestroy') }}",
+                url: "{{ route('admin.users.massDestroy') }}",
                 className: 'btn-danger',
                 action: function (e, dt, node, config) {
                     var ids = $.map(dt.rows({selected: true}).nodes(), function (entry) {
@@ -134,7 +170,7 @@
                 order: [[1, 'desc']],
                 pageLength: 25,
             });
-            $('.datatable-parentSubCategories:not(.ajaxTable)').DataTable({buttons: dtButtons})
+            $('.datatable-categoryUsers:not(.ajaxTable)').DataTable({buttons: dtButtons})
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 $($.fn.dataTable.tables(true)).DataTable()
                     .columns.adjust();

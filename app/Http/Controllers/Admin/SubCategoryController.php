@@ -40,7 +40,7 @@ class SubCategoryController extends Controller
             $table->addColumn('id', fn ($row) => $row->id ?? '');
             $table->editColumn($nameLocaleColumn, fn ($row) => $row->$nameLocaleColumn ?? '');
             $table->editColumn('parent_name', fn ($row) => $row->parent->$nameLocaleColumn ?? '');
-            $table->editColumn('access', fn ($row) => $row->access ?? '');
+            $table->editColumn('access', fn ($row) => labelAccess($row->access));
             $table->addColumn('created_at', fn ($row) => $row->created_at ?? '');
             $table->addColumn('actions', function ($row) {
                 $viewGate      = 'sub_category_show';
@@ -57,7 +57,7 @@ class SubCategoryController extends Controller
                 ));
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'parent']);
+            $table->rawColumns(['actions', 'placeholder', 'parent', 'access']);
 
             return $table->make(true);
         }

@@ -50,8 +50,8 @@ class DocumentController extends Controller
             $table->editColumn($nameLocaleColumn, fn ($row) => $row->$nameLocaleColumn ?? '');
             $table->editColumn($nameIssuerLocaleColumn, fn ($row) => $row->$nameIssuerLocaleColumn ?? '');
             $table->editColumn($topicLocaleColumn, fn ($row) => $row->$topicLocaleColumn ?? '');
-            $table->editColumn('access', fn ($row) => $row->access ?? '');
-            $table->editColumn('status', fn ($row) => $row->status ?? '');
+            $table->editColumn('access', fn ($row) => labelAccess($row->access));
+            $table->editColumn('status', fn ($row) => labelDocumentStatus($row->status));
             $table->addColumn('approved_at', fn ($row) => $row->approved_at ?? '');
             $table->addColumn('published_at', fn ($row) => $row->published_at ?? '');
             $table->addColumn('image', fn ($row) => $row->image_path ? sprintf('<img src="%s" width="50px" height="50px" />', storageUrl($row->image_path)) : '');
@@ -70,7 +70,7 @@ class DocumentController extends Controller
                 ));
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'image']);
+            $table->rawColumns(['actions', 'placeholder', 'image', 'access', 'status']);
 
             return $table->make(true);
         }
@@ -196,7 +196,7 @@ class DocumentController extends Controller
     {
         abort_if(Gate::denies('document_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $document->load('categories', 'roles', 'users');
+        $document->load('categories', 'roles', 'users', 'courses');
 
         return view('admin.documents.show', compact('document'));
     }

@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('default_locale')) {
+if (!function_exists('localeColumn')) {
 
     /**
      * @param string $column

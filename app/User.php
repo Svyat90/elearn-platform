@@ -128,4 +128,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Document::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class);
+    }
+
 }

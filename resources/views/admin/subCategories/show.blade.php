@@ -28,7 +28,7 @@
                             {{ trans('cruds.subCategory.fields.name') }}
                         </th>
                         <td>
-                            {{ $subCategory->name }}
+                            {{ $subCategory->{localeColumn('name')} }}
                         </td>
                     </tr>
                     <tr>
@@ -36,7 +36,7 @@
                             {{ trans('cruds.subCategory.fields.parent') }}
                         </th>
                         <td>
-                            {{ $subCategory->parent->name ?? '' }}
+                            {{ $subCategory->parent->{localeColumn('name')} ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -44,7 +44,7 @@
                             {{ trans('cruds.subCategory.fields.access') }}
                         </th>
                         <td>
-                            {{ $subCategory->access ?? '' }}
+                            {!! labelAccess($subCategory->access) !!}
                         </td>
                     </tr>
                     <tr>

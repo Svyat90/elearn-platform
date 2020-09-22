@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Middleware\LocaleMiddleware;
 
+Route::get('set-locale/{lang}', 'Front\LocaleController@setLocale')->name('setLocate');
 Route::get('/', 'Front\HomeController@index')->name('front.home');
 
 // Front
-Route::group(['namespace' => 'Front'], function () {
+Route::group(['prefix' => LocaleMiddleware::getLocale(), 'namespace' => 'Front'], function () {
     Route::get('home', 'HomeController@index')->name('front.home');
 });
 

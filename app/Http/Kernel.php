@@ -12,6 +12,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \App\Http\Middleware\LocaleMiddleware::class,
     ];
 
     protected $middlewareGroups = [
@@ -28,7 +29,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\AuthGates::class,
-            \App\Http\Middleware\SetLocale::class,
+//            \App\Http\Middleware\SetLocale::class,
         ],
     ];
 

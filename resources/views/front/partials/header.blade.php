@@ -6,8 +6,9 @@
             <span>Adress: <a href="https://maps.google.com?saddr=Current+Location&daddr=47.025007,28.818153">MD 2004, Republica Moldova, Chișinău, str. S.Lazo, 1</a></span>
         </div>
         <ul class="lang">
-            <li><a href="">RO</a></li>
-            <li class="active"><a href="">EN</a></li>
+            <li class="{{ app()->getLocale() === 'ro' ? 'active' : '' }}"><a href="{{ route('setLocate', 'ro') }}">RO</a></li>
+            <li class="{{ app()->getLocale() === 'en' ? 'active' : '' }}"><a href="{{ route('setLocate', 'en') }}">EN</a></li>
+            <li class="{{ app()->getLocale() === 'ru' ? 'active' : '' }}"><a href="{{ route('setLocate', 'ru') }}">RU</a></li>
         </ul>
     </div>
     <div class="head-bottom container-fluid">
@@ -40,7 +41,7 @@
                     @if( ! Auth::user())
                         @include('front.partials.modals.login')
                         @include('front.partials.modals.registration')
-                        <a class="login" href="#login">Log in</a>
+                        <a class="login" href="#login">{{ trans('auth.login') }}</a>
                         <a href="#reg" class="button">Registrare</a>
                     @else
                         <span class="login" href="#login">{{ auth()->user()->email }}</span>

@@ -3,12 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+Route::get('/', 'Front\HomeController@index')->name('front.home');
+
 // Front
 Route::group(['namespace' => 'Front'], function () {
-    Route::get('/home', 'HomeController@index')->name('front.home');
+    Route::get('home', 'HomeController@index')->name('front.home');
 });
 
-Auth::routes(['register' => false]);
+Auth::routes();
 
 // Admin
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth.admin']], function () {

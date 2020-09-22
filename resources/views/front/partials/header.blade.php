@@ -34,11 +34,21 @@
             </div>
             <div class="col-md-6">
                 <div class="head-right">
-                    <a class="md-hidden" href=""><img src="images/search.svg" alt=""></a>
-                    <a href=""><span>Watch later</span><img src="images/clock.svg" alt=""></a>
-                    <a href=""><span>Favourites</span><img src="images/bookmark.svg" alt=""></a>
-                    <a class="login" href="#login">Log in</a>
-                    <a href="#reg" class="button">Registrare</a>
+                    <a class="md-hidden" href=""><img src="{{ asset('front/images/search.svg') }}" alt=""></a>
+                    <a href=""><span>Watch later</span><img src="{{ asset('front/images/clock.svg') }}" alt=""></a>
+                    <a href=""><span>Favourites</span><img src="{{ asset('front/images/bookmark.svg') }}" alt=""></a>
+                    @if( ! Auth::user())
+                        @include('front.partials.modals.login')
+                        @include('front.partials.modals.registration')
+                        <a class="login" href="#login">Log in</a>
+                        <a href="#reg" class="button">Registrare</a>
+                    @else
+                        <span class="login" href="#login">{{ auth()->user()->email }}</span>
+                        <a class="login" id="logout-btn" href="#" >Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>

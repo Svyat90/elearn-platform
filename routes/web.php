@@ -3,19 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::redirect('/', '/login');
-Route::get('/home', function () {
-    if (session('status')) {
-        return redirect()->route('admin.home')->with('status', session('status'));
-    }
-
-    return redirect()->route('admin.home');
+// Front
+Route::group(['namespace' => 'Front'], function () {
+    Route::get('/home', 'HomeController@index')->name('front.home');
 });
 
 Auth::routes(['register' => false]);
-// Admin
 
+// Admin
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth.admin']], function () {
+    Route::redirect('/admin', '/login');
     Route::get('/', 'HomeController@index')->name('home');
 
     // Permissions

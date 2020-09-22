@@ -83,6 +83,11 @@
                 {{ trans('cruds.user.fields.access_courses') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#related_documents" role="tab" data-toggle="tab">
+                {{ trans('cruds.document.fields.related_documents') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="access_categories">
@@ -96,6 +101,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="access_courses">
             @includeIf('admin.documents.relationships.accessCourses', ['courses' => $document->courses])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="related_documents">
+            @includeIf('admin.documents.relationships.relatedDocuments', ['relatedDocuments' => $document->relatedDocuments])
         </div>
     </div>
 </div>

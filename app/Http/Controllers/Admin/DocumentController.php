@@ -89,6 +89,7 @@ class DocumentController extends Controller
         $categories = Category::all()->pluck(localeColumn('name'), 'id');
         $users = User::all()->pluck('email', 'id');
         $roles = Role::all()->pluck('title', 'id');
+        $documents = Document::query()->pluck(localeColumn('name'), 'id');
 
         $accessTypes = collect($documentService->getAccessTypes())
             ->prepend(trans('global.pleaseSelect'), '');
@@ -102,6 +103,7 @@ class DocumentController extends Controller
                 'statuses',
                 'statusesSelect',
                 'categories',
+                'documents',
                 'roles',
                 'users'
             )
@@ -135,13 +137,17 @@ class DocumentController extends Controller
     {
         abort_if(Gate::denies('document_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $allDocuments = Document::all()->pluck(localeColumn('name'), 'id')->except([$document->id]);
         $allCategories = Category::all()->pluck(localeColumn('name'), 'id');
         $allUsers = User::all()->pluck('email', 'id');
         $allRoles = Role::all()->pluck('title', 'id');
 
-        $categoryIds = $document->categories()->pluck('id')->toArray();
-        $roleIds = $document->roles()->pluck('id')->toArray();
-        $userIds = $document->users()->pluck('id')->toArray();
+        $document->load('categories', 'roles', 'users', 'relatedDocuments');
+
+        $relatedDocumentIds = $document->relatedDocuments->pluck('id')->toArray();
+        $categoryIds = $document->categories->pluck('id')->toArray();
+        $roleIds = $document->roles->pluck('id')->toArray();
+        $userIds = $document->users->pluck('id')->toArray();
 
         $accessTypes = collect($documentService->getAccessTypes())
             ->prepend(trans('global.pleaseSelect'), '');
@@ -156,9 +162,11 @@ class DocumentController extends Controller
             'statuses',
             'statusesSelect',
             'categoryIds',
+            'relatedDocumentIds',
             'roleIds',
             'userIds',
             'allCategories',
+            'allDocuments',
             'allUsers',
             'allRoles'
             )
@@ -196,7 +204,7 @@ class DocumentController extends Controller
     {
         abort_if(Gate::denies('document_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $document->load('categories', 'roles', 'users', 'courses');
+        $document->load('categories', 'roles', 'users', 'courses', 'relatedDocuments');
 
         return view('admin.documents.show', compact('document'));
     }

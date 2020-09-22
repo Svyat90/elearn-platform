@@ -61,4 +61,17 @@ class Document extends Model
         return $this->belongsToMany(Course::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
+    public function relatedDocuments()
+    {
+        return $this->belongsToMany(
+            self::class,
+            'document_related',
+            'document_id',
+            'related_document_id'
+        );
+    }
+
 }

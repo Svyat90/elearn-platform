@@ -48,6 +48,8 @@ class UpdateDocumentRequest extends FormRequest
             'role_ids.*' => 'integer|exists:roles,id',
             'user_ids'   => 'sometimes|array',
             'user_ids.*' => 'integer|exists:users,id',
+            'related_document_ids'   => 'sometimes|array',
+            'related_document_ids.*' => 'integer|exists:documents,id',
         ];
     }
 

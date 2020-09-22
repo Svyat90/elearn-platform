@@ -68,6 +68,7 @@ class DocumentService
         $document->roles()->sync($request->role_ids);
         $document->users()->sync($request->user_ids);
         $document->categories()->sync($request->category_ids);
+        $document->relatedDocuments()->sync($request->related_document_ids);
     }
 
 }

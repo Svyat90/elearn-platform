@@ -236,6 +236,26 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="" for="related_document_ids">{{ trans('cruds.document.fields.related_documents') }}</label>
+                    <div style="padding-bottom: 4px">
+                        <span class="btn btn-info btn-xs select-all"
+                              style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                        <span class="btn btn-info btn-xs deselect-all"
+                              style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                    </div>
+                    <select class="form-control select2 {{ $errors->has('users') ? 'is-invalid' : '' }}"
+                            name="related_document_ids[]"
+                            id="related_document_ids" multiple >
+                        @foreach($documents as $id => $document)
+                            <option value="{{ $id }}" {{ in_array($id, old('related_document_ids', [])) ? 'selected' : '' }}>{{ $document }}</option>
+                        @endforeach
+                    </select>
+                    @if($errors->has('related_document_ids'))
+                        <span class="text-danger">{{ $errors->first('related_document_ids') }}</span>
+                    @endif
+                </div>
+
+                <div class="form-group">
                     <label for="description">{{ trans('cruds.document.fields.description') }}</label>
                     <textarea class="form-control ckeditor {{ $errors->has('description') ? 'is-invalid' : '' }}"
                               name="description" id="description">{!! old('description') !!}</textarea>

@@ -250,6 +250,8 @@ return [
             'description_helper'=> '',
             'file'              => 'File (PDF)',
             'file_helper'       => '',
+            'related_documents'              => 'Related Documents',
+            'related_documents_helper'       => '',
         ],
     ],
     'course'                     => [

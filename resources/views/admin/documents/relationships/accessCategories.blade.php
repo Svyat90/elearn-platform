@@ -1,5 +1,5 @@
 <div class="m-3">
-    @can('sub_category_create')
+    @can('category_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
                 <a class="btn btn-success" href="{{ route("admin.categories.create") }}">
@@ -57,21 +57,21 @@
                                 {{ $category->created_at }}
                             </td>
                             <td>
-                                @can('sub_category_show')
+                                @can('category_show')
                                     <a class="btn btn-xs btn-primary"
                                        href="{{ route('admin.categories.show', $category->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('sub_category_edit')
+                                @can('category_edit')
                                     <a class="btn btn-xs btn-info"
                                        href="{{ route('admin.categories.edit', $category->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('sub_category_delete')
+                                @can('category_delete')
                                     <form action="{{ route('admin.categories.destroy', $category->id) }}"
                                           method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
                                           style="display: inline-block;">

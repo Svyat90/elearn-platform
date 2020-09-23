@@ -136,4 +136,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Course::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
 }

@@ -57,4 +57,12 @@ class Role extends Model
         return $this->belongsToMany(Course::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
 }

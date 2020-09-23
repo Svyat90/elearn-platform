@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\MassDestroyCategoryRequest;
 use App\Http\Requests\Category\StoreCategoryRequest;
 use App\Http\Requests\Category\UpdateCategoryRequest;
+use App\Role;
 use App\Services\CategoryService;
+use App\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
@@ -73,16 +75,23 @@ class CategoryController extends Controller
         $accessTypes = collect($categoryService->getAccessTypes())
             ->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.categories.create', compact('accessTypes'));
+        $roles = Role::all()->pluck('title', 'id');
+        $users = User::all()->pluck('email', 'id');
+
+        return view('admin.categories.create', compact('accessTypes', 'roles', 'users'));
     }
 
     /**
+     * @param CategoryService $categoryService
      * @param StoreCategoryRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreCategoryRequest $request) : RedirectResponse
+    public function store(CategoryService $categoryService, StoreCategoryRequest $request) : RedirectResponse
     {
-        Category::query()->create($request->validated());
+        /** @var Category $category */
+        $category = Category::query()->create($request->validated());
+
+        $categoryService->handleRelationships($category, $request);
 
         return redirect()->route('admin.categories.index');
     }
@@ -99,17 +108,33 @@ class CategoryController extends Controller
         $accessTypes = collect($categoryService->getAccessTypes())
             ->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.categories.edit', compact('category', 'accessTypes'));
+        $allUsers = User::all()->pluck('email', 'id');
+        $allRoles = Role::all()->pluck('title', 'id');
+
+        $roleIds = $category->roles()->pluck('id')->toArray();
+        $userIds = $category->users()->pluck('id')->toArray();
+
+        return view('admin.categories.edit', compact(
+            'category',
+            'accessTypes',
+            'allRoles',
+            'allUsers',
+            'roleIds',
+            'userIds'
+        ));
     }
 
     /**
+     * @param CategoryService $categoryService
      * @param UpdateCategoryRequest $request
      * @param Category $category
      * @return RedirectResponse
      */
-    public function update(UpdateCategoryRequest $request, Category $category) : RedirectResponse
+    public function update(CategoryService $categoryService, UpdateCategoryRequest $request, Category $category) : RedirectResponse
     {
         $category->update($request->validated());
+
+        $categoryService->handleRelationships($category, $request);
 
         return redirect()->route('admin.categories.index');
     }
@@ -122,7 +147,7 @@ class CategoryController extends Controller
     {
         abort_if(Gate::denies('category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $category->load('parentSubCategories');
+        $category->load('subCategories');
 
         return view('admin.categories.show', compact('category'));
     }

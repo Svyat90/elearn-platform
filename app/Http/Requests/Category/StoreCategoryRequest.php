@@ -31,7 +31,11 @@ class StoreCategoryRequest extends FormRequest
                 'sometimes',
                 'nullable',
                 Rule::in($categoryService->getAccessTypes())
-            ]
+            ],
+            'role_ids'   => 'sometimes|array',
+            'role_ids.*' => 'integer|exists:roles,id',
+            'user_ids'   => 'sometimes|array',
+            'user_ids.*' => 'integer|exists:users,id',
         ];
     }
 }

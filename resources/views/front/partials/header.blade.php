@@ -44,56 +44,8 @@
                 </div>
             </div>
         </div>
-        <div class="nav-box">
-            <nav class="menu">
-                <ul class="navigation">
-                    <li><a href="">Actele normative:</a>
-                        <ul class="submenu">
-                            <li><a href="">Emise de către Consiliul Institutului Național al Justiției;</a></li>
-                            <li><a href="">Emise de către Directorul Institutului Național al Justiției;</a></li>
-                            <li><a href="">Altele legate de activitatea Institutului Național al Justiției.</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="">Actele legate de evaluările (continue/finale):</a></li>
-                    <li><a href="">Calendarul</a>
-                        <ul class="submenu">
-                            <li><a href="">Tematica</a></li>
-                            <li><a href="">Subiectele</a></li>
-                            <li><a href="">și altele.</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="">Materialele de cercetare</a>
-                        <ul class="submenu">
-                            <li><a href="">Cărți</a></li>
-                            <li><a href="">Monografii</a></li>
-                            <li><a href="">Studii</a></li>
-                            <li><a href="">Articole științifice</a></li>
-                            <li><a href="">Alte materiale elaborate în procesul de cercetare</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="">Materialele metodico-didactice elaborate în cadrul instruirilor inițiale și
-                            continue:</a>
-                        <ul class="submenu">
-                            <li><a href="">Suporturi de curs</a></li>
-                            <li><a href="">Module</a></li>
-                            <li><a href="">Recomandări didactice</a></li>
-                            <li><a href="">Materiale didactice</a></li>
-                            <li><a href="">Ghiduri</a></li>
-                            <li><a href="">Altele legate de activitatea Institutului Național al Justiției.</a></li>
-                            <li><a href="">Instrucțiuni metodice</a></li>
-                            <li><a href="">Texte de cursuri</a></li>
-                            <li><a href="">Texte de cursuri</a></li>
-                            <li><a href="">Compendii</a></li>
-                            <li><a href="">Studii</a></li>
-                            <li><a href="">Rapoarte</a></li>
-                            <li><a href="">Prezentări</a></li>
-                            <li><a href="">Planuri de curs și seminare etc</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
 
+        @include('front.partials.navigation')
 
     </div>
     <div class="head-nav container-fluid">

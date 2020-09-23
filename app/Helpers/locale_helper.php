@@ -11,3 +11,15 @@ if (!function_exists('localeColumn')) {
         return sprintf("%s_%s", $column, config('app.locale_default_column'));
     }
 }
+
+if (!function_exists('localeAppColumn')) {
+
+    /**
+     * @param string $column
+     * @return string
+     */
+    function localeAppColumn(string $column) : string
+    {
+        return sprintf("%s_%s", $column, app()->getLocale());
+    }
+}

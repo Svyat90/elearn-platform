@@ -33,7 +33,7 @@ class Category extends Model
     /**
      * @return HasMany
      */
-    public function parentSubCategories()
+    public function subCategories()
     {
         return $this->hasMany(SubCategory::class, 'parent_id', 'id');
     }
@@ -52,6 +52,22 @@ class Category extends Model
     public function courses()
     {
         return $this->belongsToMany(Course::class, 'course_category', 'category_id', 'course_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 
 }

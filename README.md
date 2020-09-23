@@ -10,7 +10,7 @@ sudo apt-get install -y xpdf
 ```
 #### Copy And Set Settings
 ```bash
-cp .env-example .env
+cp .env.example .env
 ```
 #### Set Permissions
 ```bash

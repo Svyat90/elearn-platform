@@ -1,9 +1,9 @@
 <header>
     <div class="head-top container-fluid">
         <div class="contact">
-            <span>Phone: <a href="tel:+373859495">+373 85 94 95</a></span>
-            <span>E-mail: <a href="mailto:e-learning@gmail.com">e-learning@gmail.com</a></span>
-            <span>Adress: <a href="https://maps.google.com?saddr=Current+Location&daddr=47.025007,28.818153">MD 2004, Republica Moldova, Chișinău, str. S.Lazo, 1</a></span>
+            <span>{{ __('main.phone') }}: <a href="tel:+373859495">+373 85 94 95</a></span>
+            <span>{{ __('main.email') }}: <a href="mailto:e-learning@gmail.com">e-learning@gmail.com</a></span>
+            <span>{{ __('main.address') }}: <a href="https://maps.google.com?saddr=Current+Location&daddr=47.025007,28.818153">MD 2004, Republica Moldova, Chișinău, str. S.Lazo, 1</a></span>
         </div>
         <ul class="lang">
             <li class="{{ app()->getLocale() === 'ro' ? 'active' : '' }}"><a href="{{ route('setLocate', 'ro') }}">RO</a></li>
@@ -17,12 +17,12 @@
                 <div class="head-left">
                     <div class="top-catalog">
                         <div class="toggle"><span></span><span></span><span></span></div>
-                        <span class="links">Categorii</span>
+                        <span class="links">{{ __('header.categories') }}</span>
                     </div>
                     <div class="logo"><a href="/"><img src="{{ asset('front/images/logo.svg') }}" alt=""></a></div>
 
                     <form class="search" action="">
-                        <input type="search" placeholder="Cauta documente...">
+                        <input type="search" placeholder="{{ __('header.searching_docs') }}">
                         <button type="submit"></button>
                     </form>
 
@@ -36,20 +36,11 @@
             <div class="col-md-6">
                 <div class="head-right">
                     <a class="md-hidden" href=""><img src="{{ asset('front/images/search.svg') }}" alt=""></a>
-                    <a href=""><span>Watch later</span><img src="{{ asset('front/images/clock.svg') }}" alt=""></a>
-                    <a href=""><span>Favourites</span><img src="{{ asset('front/images/bookmark.svg') }}" alt=""></a>
-                    @if( ! Auth::user())
-                        @include('front.partials.modals.login')
-                        @include('front.partials.modals.registration')
-                        <a class="login" href="#login">{{ trans('auth.login') }}</a>
-                        <a href="#reg" class="button">Registrare</a>
-                    @else
-                        <span class="login" href="#login">{{ auth()->user()->email }}</span>
-                        <a class="login" id="logout-btn" href="#" >Logout</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    @endif
+                    <a href=""><span>{{ __('header.watch_later') }}</span><img src="{{ asset('front/images/clock.svg') }}" alt=""></a>
+                    <a href=""><span>{{ __('header.favourites') }}</span><img src="{{ asset('front/images/bookmark.svg') }}" alt=""></a>
+
+                    @include('front.partials.auth')
+
                 </div>
             </div>
         </div>
@@ -108,10 +99,10 @@
     <div class="head-nav container-fluid">
         <div class="toggle"><span></span><span></span><span></span></div>
         <ul>
-            <li><a href="">Despre noi</a></li>
-            <li><a href="">Cursuri electronice</a></li>
-            <li><a href="">Materiale informative</a></li>
-            <li><a href="">Contacte</a></li>
+            <li><a href="">{{ __('main.about_us') }}</a></li>
+            <li><a href="">{{ __('main.electronic_courses') }}</a></li>
+            <li><a href="">{{ __('main.info_materials') }}</a></li>
+            <li><a href="">{{ __('main.contacts') }}</a></li>
         </ul>
     </div>
 </header>

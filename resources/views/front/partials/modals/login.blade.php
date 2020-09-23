@@ -1,15 +1,15 @@
 <div id="login" class="modalDialog">
     <div>
-        <a href="#close" title="Закрыть" class="close"> </a>
-        <div class="title-section">Login</div>
+        <a href="#close" title="{{ __('main.close') }}" class="close"> </a>
+        <div class="title-section">{{ __('auth.login') }}</div>
         <form action="{{ route('login') }}" method="post" name="login">
             <span class="full-input">
-                <label for="">E-mail</label>
+                <label for="">{{ __('auth.email') }}</label>
                 <input name="email" type="email" />
             </span>
 
             <span class="full-input">
-                <label for="">Password</label>
+                <label for="">{{ __('auth.password') }}</label>
                 <input name="password" type="password" />
             </span>
 
@@ -18,19 +18,19 @@
             <span class="row-input">
                 <label for="">
                     <input class="check" type="checkbox" />
-                    Remember me
+                    {{ __('auth.remember_me') }}
                 </label>
             </span>
 
             <span class="row-input right">
-                <a href="">Forgot password?</a>
+                <a href="">{{ __('auth.forgot_password') }}</a>
             </span>
 
             <span class="full-input">
-                <input class="button" type="submit" value="Login">
+                <input class="button" type="submit" value="{{ __('auth.login') }}">
             </span>
             <p>
-                N-a veti account? <a href="#reg">Registrare</a>
+                {{ __('auth.dont_have_account') }} <a href="#reg">{{ __('auth.register') }}</a>
             </p>
         </form>
     </div>

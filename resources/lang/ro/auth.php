@@ -14,5 +14,13 @@ return [
 
     'failed'   => 'Datele de identificare nu pot fi confirmate.',
     'throttle' => 'Prea multe încercări de intrare în cont. Puteți încerca din nou peste :seconds secunde.',
-    'login'    => 'A intra'
+    'login' => 'Autentificare',
+    'register' => 'Înregistrare',
+    'email' => 'E-mail',
+    'password' => 'Parolă',
+    'confirm_password' => 'Confirmați parola',
+    'remember_me' => 'Reține-mă',
+    'forgot_password' => 'Ți-ai uitat parola?',
+    'dont_have_account' => 'Nu aveți un cont?',
+    'do_you_have_account' => 'Aveți un cont?'
 ];

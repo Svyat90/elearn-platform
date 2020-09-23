@@ -1,21 +1,21 @@
 <div id="reg" class="modalDialog">
     <div>
-        <a href="#close" title="Закрыть" class="close"> </a>
-        <div class="title-section">Registrare</div>
-        <form action="{{ route('register') }}" method="post" name="register">
+        <a href="#close" title="{{ __('main.close') }}" class="close"> </a>
+        <div class="title-section">{{ __('auth.register') }}</div>
+        <form action="{{ route('register') . '/ru' }}" method="post" name="register">
             <span class="full-input">
-                <label for="">E-mail</label>
+                <label for="">{{ __('auth.email') }}</label>
                 <input name="email-register" type="email" />
             </span>
 
             <span class="full-input password-input">
-                <label for="">Password</label>
+                <label for="">{{ __('auth.password') }}</label>
                 <span class="show"></span>
                 <input class="password" name="password-register" type="password">
             </span>
 
             <span class="full-input password-input">
-                <label for="">Confirm password</label>
+                <label for="">{{ __('auth.confirm_password') }}</label>
                 <span class="show"></span>
                 <input class="password" name="confirm-password-register" type="password">
             </span>
@@ -23,11 +23,11 @@
             <div id="register-errors" class="full-input no-search" style="display: none;"></div>
 
             <span class="full-input">
-                <input class="button" type="submit" value="Login">
+                <input class="button" type="submit" value="{{ __('auth.register') }}">
             </span>
 
             <p>
-                Aveti account? <a href="#login">Login</a>
+                {{ __('auth.do_you_have_account') }} <a href="#login">{{ __('auth.login') }}</a>
             </p>
 
         </form>

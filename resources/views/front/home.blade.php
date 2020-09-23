@@ -2,7 +2,7 @@
 @section('content')
     <main>
         <section class="container home-top">
-            <h1 class="title-site">More than 1000 books, courses, articles and regulations</h1>
+            <h1 class="title-site">{{ __('home.title') }}</h1>
         </section>
 
         <section class="home-one container">
@@ -18,10 +18,10 @@
                             <p>Specificul psihologic şi particularităţile audierii victimelor traficului de fiinţe
                                 umane</p>
                             <div class="course-but">
-                                <a href="" class="more">Read more <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
+                                <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
                                 <a href="" class="button-grey"><img src="{{ asset('front/images/clock.svg') }}" alt="">
-                                    <span>Watch later</span></a>
-                                <a href="" class="button-grey"><img src="{{ asset('front/images/bookmark.svg') }}" alt=""> <span>Add to favourits</span></a>
+                                    <span>{{ __('main.watch_later') }}</span></a>
+                                <a href="" class="button-grey"><img src="{{ asset('front/images/bookmark.svg') }}" alt=""> <span>{{ __('main.add_to_favourites') }}</span></a>
                             </div>
                         </div>
                     </div>
@@ -37,10 +37,10 @@
                             <p>Specificul psihologic şi particularităţile audierii victimelor traficului de fiinţe
                                 umane</p>
                             <div class="course-but">
-                                <a href="" class="more">Read more <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
+                                <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
                                 <a href="" class="button-grey"><img src="{{ asset('front/images/clock.svg') }}" alt="">
-                                    <span>Watch later</span></a>
-                                <a href="" class="button-grey"><img src="{{ asset('front/images/bookmark.svg') }}" alt=""> <span>Add to favourits</span></a>
+                                    <span>{{ __('main.watch_later') }}</span></a>
+                                <a href="" class="button-grey"><img src="{{ asset('front/images/bookmark.svg') }}" alt=""> <span>{{ __('main.add_to_favourites') }}</span></a>
                             </div>
                         </div>
                     </div>
@@ -56,10 +56,10 @@
                             <p>Specificul psihologic şi particularităţile audierii victimelor traficului de fiinţe
                                 umane</p>
                             <div class="course-but">
-                                <a href="" class="more">Read more <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
+                                <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
                                 <a href="" class="button-grey"><img src="{{ asset('front/images/clock.svg') }}" alt="">
-                                    <span>Watch later</span></a>
-                                <a href="" class="button-grey"><img src="{{ asset('front/images/bookmark.svg') }}" alt=""> <span>Add to favourits</span></a>
+                                    <span>{{ __('main.watch_later') }}</span></a>
+                                <a href="" class="button-grey"><img src="{{ asset('front/images/bookmark.svg') }}" alt=""> <span>{{ __('main.add_to_favourites') }}</span></a>
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
             </div>
         </section>
 
-        <div class="title-section container">Education</div>
+        <div class="title-section container">{{ __('home.education') }}</div>
 
         <section class="home-two white container">
             <div class="row">
@@ -90,7 +90,7 @@
                             </div>
                             <div class="meta">
                                 <div class="date">11.03.2020</div>
-                                <a href="" class="more">Read more <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
+                                <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                             </div>
                             <div class="meta">
                                 <div class="date">11.03.2020</div>
-                                <a href="" class="more">Read more <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
+                                <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                             </div>
                             <div class="meta">
                                 <div class="date">11.03.2020</div>
-                                <a href="" class="more">Read more <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
+                                <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -159,7 +159,7 @@
                             </div>
                             <div class="meta">
                                 <div class="date">11.03.2020</div>
-                                <a href="" class="more">Read more <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
+                                <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -168,7 +168,7 @@
             </div>
         </section>
 
-        <div class="title-section container">Category</div>
+        <div class="title-section container">{{ __('home.category') }}</div>
 
         <section class="home-three container">
             <div class="row">
@@ -209,7 +209,7 @@
             </div>
         </section>
 
-        <div class="title-section container">Most popular</div>
+        <div class="title-section container">{{ __('home.most_popular') }}</div>
 
         <section class="home-for white container">
             <div id="popular" class="owl-carousel">

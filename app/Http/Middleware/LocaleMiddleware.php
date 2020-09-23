@@ -26,11 +26,11 @@ class LocaleMiddleware
     public static function getLocale()
     {
         $uri = Request::path();
-        $segments_uri = explode('/', $uri);
-        $locale = $segments_uri[0];
+        $segmentsUri = explode('/', $uri);
+        $locale = $segmentsUri[0];
 
         if (!empty($locale) && in_array($locale, self::$languages)) {
-            if ($locale != self::$mainLanguage)
+            if ($locale !== self::$mainLanguage)
                 return $locale;
         }
 
@@ -46,13 +46,9 @@ class LocaleMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $locale = self::getLocale();
+        $locale = self::getLocale() ?? self::$mainLanguage;
 
-        if ($locale) {
-            App::setLocale($locale);
-        } else {
-            App::setLocale(self::$mainLanguage);
-        }
+        App::setLocale($locale);
 
         return $next($request);
     }

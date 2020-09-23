@@ -15,7 +15,7 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class=" table table-bordered table-striped table-hover datatable datatable-parentSubCategories">
+                <table class=" table table-bordered table-striped table-hover datatable datatable-accessCategories">
                     <thead>
                     <tr>
                         <th width="10">
@@ -134,7 +134,7 @@
                 order: [[1, 'desc']],
                 pageLength: 25,
             });
-            $('.datatable-parentSubCategories:not(.ajaxTable)').DataTable({buttons: dtButtons})
+            $('.datatable-accessCategories:not(.ajaxTable)').DataTable({buttons: dtButtons})
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 $($.fn.dataTable.tables(true)).DataTable()
                     .columns.adjust();

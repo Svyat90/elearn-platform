@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Services\PermissionService;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -43,13 +44,21 @@ class LoginController extends Controller
 
     /**
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      * @throws \Illuminate\Validation\ValidationException
      */
     public function login(Request $request)
     {
         App::setLocale($request->input('locale'));
 
-        $this->loginTrait($request);
+        $response = $this->loginTrait($request);
+
+        $permissionService = new PermissionService();
+        if ($permissionService->loginUserHasAccessToAdminPanel()) {
+            return response()->redirectTo('admin');
+        }
+
+        return $response;
     }
 
 }

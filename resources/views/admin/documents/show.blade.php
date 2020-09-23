@@ -91,19 +91,19 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="access_categories">
-            @includeIf('admin.documents.relationships.accessCategories', ['categories' => $document->categories])
+            @includeIf('admin.partials.relationships.accessCategories', ['categories' => $document->categories])
         </div>
         <div class="tab-pane" role="tabpanel" id="access_users">
-            @includeIf('admin.documents.relationships.accessUsers', ['users' => $document->users])
+            @includeIf('admin.partials.relationships.accessUsers', ['users' => $document->users])
         </div>
         <div class="tab-pane" role="tabpanel" id="access_roles">
-            @includeIf('admin.documents.relationships.accessRoles', ['roles' => $document->roles])
+            @includeIf('admin.partials.relationships.accessRoles', ['roles' => $document->roles])
         </div>
         <div class="tab-pane" role="tabpanel" id="access_courses">
-            @includeIf('admin.documents.relationships.accessCourses', ['courses' => $document->courses])
+            @includeIf('admin.partials.relationships.accessCourses', ['courses' => $document->courses])
         </div>
         <div class="tab-pane" role="tabpanel" id="related_documents">
-            @includeIf('admin.documents.relationships.relatedDocuments', ['relatedDocuments' => $document->relatedDocuments])
+            @includeIf('admin.partials.relationships.accessDocuments', ['documents' => $document->relatedDocuments])
         </div>
     </div>
 </div>

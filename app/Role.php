@@ -65,4 +65,12 @@ class Role extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
+    public function subCategories()
+    {
+        return $this->belongsToMany(SubCategory::class, 'sub_category_role', 'role_id', 'sub_category_id');
+    }
+
 }

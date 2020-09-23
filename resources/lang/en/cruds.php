@@ -99,6 +99,7 @@ return [
             'access_users'                 => 'Access Users',
             'access_roles'                 => 'Access Roles',
             'access_categories'            => 'Access Categories',
+            'access_sub_categories'        => 'Access Sub Categories',
             'access_documents'             => 'Access Documents',
             'access_courses'               => 'Access Courses',
         ],

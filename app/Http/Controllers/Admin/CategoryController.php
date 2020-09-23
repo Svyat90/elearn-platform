@@ -47,7 +47,7 @@ class CategoryController extends Controller
                 $deleteGate    = 'category_delete';
                 $crudRoutePart = 'categories';
 
-                return view('partials.datatablesActions', compact(
+                return view('admin.partials.datatablesActions', compact(
                     'viewGate',
                     'editGate',
                     'deleteGate',
@@ -147,7 +147,7 @@ class CategoryController extends Controller
     {
         abort_if(Gate::denies('category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $category->load('subCategories');
+        $category->load('subCategories', 'users', 'roles');
 
         return view('admin.categories.show', compact('category'));
     }

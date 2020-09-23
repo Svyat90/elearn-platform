@@ -58,7 +58,7 @@ class CourseController extends Controller
                 $deleteGate    = 'course_delete';
                 $crudRoutePart = 'courses';
 
-                return view('partials.datatablesActions', compact(
+                return view('admin.partials.datatablesActions', compact(
                     'viewGate',
                     'editGate',
                     'deleteGate',

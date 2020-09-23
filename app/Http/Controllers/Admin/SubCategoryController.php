@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SubCategory\MassDestroySubCategoryRequest;
 use App\Http\Requests\SubCategory\StoreSubCategoryRequest;
 use App\Http\Requests\SubCategory\UpdateSubCategoryRequest;
-use App\Services\CategoryService;
+use App\Role;
+use App\Services\SubCategoryService;
 use App\SubCategory;
+use App\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
@@ -48,7 +50,7 @@ class SubCategoryController extends Controller
                 $deleteGate    = 'sub_category_delete';
                 $crudRoutePart = 'sub-categories';
 
-                return view('partials.datatablesActions', compact(
+                return view('admin.partials.datatablesActions', compact(
                     'viewGate',
                     'editGate',
                     'deleteGate',
@@ -66,10 +68,10 @@ class SubCategoryController extends Controller
     }
 
     /**
-     * @param CategoryService $categoryService
+     * @param SubCategoryService $subCategoryService
      * @return View
      */
-    public function create(CategoryService $categoryService) : View
+    public function create(SubCategoryService $subCategoryService) : View
     {
         abort_if(Gate::denies('sub_category_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -77,29 +79,41 @@ class SubCategoryController extends Controller
             ->pluck(localeColumn('name'), 'id')
             ->prepend(trans('global.pleaseSelect'), '');
 
-        $accessTypes = collect($categoryService->getAccessTypes())
+        $accessTypes = collect($subCategoryService->getAccessTypes())
             ->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.subCategories.create', compact('parents', 'accessTypes'));
+        $roles = Role::all()->pluck('title', 'id');
+        $users = User::all()->pluck('email', 'id');
+
+        return view('admin.subCategories.create', compact(
+            'parents',
+            'accessTypes',
+            'roles',
+            'users'
+        ));
     }
 
     /**
+     * @param SubCategoryService $subCategoryService
      * @param StoreSubCategoryRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreSubCategoryRequest $request) : RedirectResponse
+    public function store(SubCategoryService $subCategoryService, StoreSubCategoryRequest $request) : RedirectResponse
     {
-        SubCategory::query()->create($request->all());
+        /** @var SubCategoryService $subCategory */
+        $subCategory = SubCategory::query()->create($request->all());
+
+        $subCategoryService->handleRelationships($subCategory, $request);
 
         return redirect()->route('admin.sub-categories.index');
     }
 
     /**
-     * @param CategoryService $categoryService
+     * @param SubCategoryService $subCategoryService
      * @param SubCategory $subCategory
      * @return View
      */
-    public function edit(CategoryService $categoryService, SubCategory $subCategory) : View
+    public function edit(SubCategoryService $subCategoryService, SubCategory $subCategory) : View
     {
         abort_if(Gate::denies('sub_category_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -107,22 +121,39 @@ class SubCategoryController extends Controller
             ->pluck(localeColumn('name'), 'id')
             ->prepend(trans('global.pleaseSelect'), '');
 
-        $accessTypes = collect($categoryService->getAccessTypes())
+        $accessTypes = collect($subCategoryService->getAccessTypes())
             ->prepend(trans('global.pleaseSelect'), '');
+
+        $allUsers = User::all()->pluck('email', 'id');
+        $allRoles = Role::all()->pluck('title', 'id');
+
+        $roleIds = $subCategory->roles()->pluck('id')->toArray();
+        $userIds = $subCategory->users()->pluck('id')->toArray();
 
         $subCategory->load('parent');
 
-        return view('admin.subCategories.edit', compact('parents', 'subCategory', 'accessTypes'));
+        return view('admin.subCategories.edit', compact(
+            'parents',
+            'subCategory',
+            'accessTypes',
+            'allUsers',
+            'allRoles',
+            'roleIds',
+            'userIds'
+        ));
     }
 
     /**
+     * @param SubCategoryService $subCategoryService
      * @param UpdateSubCategoryRequest $request
      * @param SubCategory $subCategory
      * @return RedirectResponse
      */
-    public function update(UpdateSubCategoryRequest $request, SubCategory $subCategory) : RedirectResponse
+    public function update(SubCategoryService $subCategoryService, UpdateSubCategoryRequest $request, SubCategory $subCategory) : RedirectResponse
     {
-        $subCategory->update($request->all());
+        $subCategory->update($request->validated());
+
+        $subCategoryService->handleRelationships($subCategory, $request);
 
         return redirect()->route('admin.sub-categories.index');
     }
@@ -135,7 +166,7 @@ class SubCategoryController extends Controller
     {
         abort_if(Gate::denies('sub_category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $subCategory->load('parent');
+        $subCategory->load('parent', 'users', 'roles');
 
         return view('admin.subCategories.show', compact('subCategory'));
     }

@@ -81,16 +81,16 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="access_categories">
-            @includeIf('admin.courses.relationships.accessCategories', ['categories' => $course->categories])
+            @includeIf('admin.partials.relationships.accessCategories', ['categories' => $course->categories])
         </div>
         <div class="tab-pane" role="tabpanel" id="access_users">
-            @includeIf('admin.courses.relationships.accessUsers', ['users' => $course->users])
+            @includeIf('admin.partials.relationships.accessUsers', ['users' => $course->users])
         </div>
         <div class="tab-pane" role="tabpanel" id="access_roles">
-            @includeIf('admin.courses.relationships.accessRoles', ['roles' => $course->roles])
+            @includeIf('admin.partials.relationships.accessRoles', ['roles' => $course->roles])
         </div>
         <div class="tab-pane" role="tabpanel" id="access_documents">
-            @includeIf('admin.courses.relationships.accessDocuments', ['documents' => $course->documents])
+            @includeIf('admin.partials.relationships.accessDocuments', ['documents' => $course->documents])
         </div>
     </div>
 </div>

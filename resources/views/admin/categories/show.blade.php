@@ -68,11 +68,26 @@
                 {{ trans('cruds.subCategory.title') }}
             </a>
         </li>
-
+        <li class="nav-item">
+            <a class="nav-link" href="#access_users" role="tab" data-toggle="tab">
+                {{ trans('cruds.user.fields.access_users') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#access_roles" role="tab" data-toggle="tab">
+                {{ trans('cruds.user.fields.access_roles') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="parent_sub_categories">
-            @includeIf('admin.categories.relationships.parentSubCategories', ['subCategories' => $category->parentSubCategories])
+            @includeIf('admin.partials.relationships.accessSubCategories', ['subCategories' => $category->subCategories])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="access_users">
+            @includeIf('admin.partials.relationships.accessUsers', ['users' => $category->users])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="access_roles">
+            @includeIf('admin.partials.relationships.accessRoles', ['roles' => $category->roles])
         </div>
     </div>
 </div>

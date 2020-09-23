@@ -55,7 +55,7 @@ class UsersController extends Controller
                 $deleteGate    = 'user_delete';
                 $crudRoutePart = 'users';
 
-                return view('partials.datatablesActions', compact(
+                return view('admin.partials.datatablesActions', compact(
                     'viewGate',
                     'editGate',
                     'deleteGate',
@@ -135,7 +135,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->load('roles');
+        $user->load('roles', 'categories', 'subCategories', 'courses', 'documents');
 
         return view('admin.users.show', compact('user'));
     }

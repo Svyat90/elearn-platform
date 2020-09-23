@@ -1,4 +1,4 @@
-####Install Dependencies
+#### Install Dependencies
 ```
 sudo apt update && sudo apt install default-jre
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -

@@ -37,7 +37,7 @@ class AuditLogsController extends Controller
                 $deleteGate    = 'audit_log_delete';
                 $crudRoutePart = 'audit-logs';
 
-                return view('partials.datatablesActions', compact(
+                return view('admin.partials.datatablesActions', compact(
                     'viewGate',
                     'editGate',
                     'deleteGate',

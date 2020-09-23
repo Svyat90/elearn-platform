@@ -62,10 +62,42 @@
                 {{ trans('cruds.user.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#access_categories" role="tab" data-toggle="tab">
+                {{ trans('cruds.user.fields.access_categories') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#parent_sub_categories" role="tab" data-toggle="tab">
+                {{ trans('cruds.subCategory.title') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#access_courses" role="tab" data-toggle="tab">
+                {{ trans('cruds.user.fields.access_courses') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#related_documents" role="tab" data-toggle="tab">
+                {{ trans('cruds.document.fields.related_documents') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="roles_users">
-            @includeIf('admin.roles.relationships.rolesUsers', ['users' => $role->rolesUsers])
+            @includeIf('admin.partials.relationships.accessUsers', ['users' => $role->rolesUsers])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="access_categories">
+            @includeIf('admin.partials.relationships.accessCategories', ['categories' => $role->categories])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="parent_sub_categories">
+            @includeIf('admin.partials.relationships.accessSubCategories', ['subCategories' => $role->subCategories])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="access_courses">
+            @includeIf('admin.partials.relationships.accessCourses', ['courses' => $role->courses])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="related_documents">
+            @includeIf('admin.partials.relationships.accessDocuments', ['documents' => $role->documents])
         </div>
     </div>
 </div>

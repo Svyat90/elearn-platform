@@ -61,7 +61,7 @@ class DocumentController extends Controller
                 $deleteGate    = 'document_delete';
                 $crudRoutePart = 'documents';
 
-                return view('partials.datatablesActions', compact(
+                return view('admin.partials.datatablesActions', compact(
                     'viewGate',
                     'editGate',
                     'deleteGate',

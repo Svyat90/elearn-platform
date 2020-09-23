@@ -115,6 +115,11 @@ class User extends Authenticatable
         $this->notify(new ResetPassword($token));
     }
 
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class);
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
@@ -142,6 +147,14 @@ class User extends Authenticatable
     public function categories()
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function subCategories()
+    {
+        return $this->belongsToMany(SubCategory::class);
     }
 
 }

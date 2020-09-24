@@ -41,7 +41,7 @@ class Course extends Model
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class, 'course_role', 'course_id', 'role_id');
     }
 
     /**
@@ -49,7 +49,7 @@ class Course extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'course_user', 'course_id', 'user_id');
     }
 
     /**
@@ -57,7 +57,7 @@ class Course extends Model
      */
     public function documents()
     {
-        return $this->belongsToMany(Document::class);
+        return $this->belongsToMany(Document::class, 'course_document', 'course_id', 'document_id');
     }
 
 }

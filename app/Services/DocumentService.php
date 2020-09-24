@@ -2,30 +2,21 @@
 
 namespace App\Services;
 
+use App\Category;
 use App\Document;
-use App\Traits\FilterConstantsTrait;
+use App\Http\Requests\Front\Category\IndexCategoryRequest;
+use App\Role;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class DocumentService
+class DocumentService extends AbstractAccessService
 {
-    use FilterConstantsTrait;
-
     public const DOCUMENT_STATUS_INITIAL = 'initial';
     public const DOCUMENT_STATUS_UPDATED = 'updated';
     public const DOCUMENT_STATUS_CANCELED = 'canceled';
-
-    public const DOCUMENT_ACCESS_TYPE_PUBLIC = 'public';
-    public const DOCUMENT_ACCESS_TYPE_PROTECTED = 'protected';
-    public const DOCUMENT_ACCESS_TYPE_PRIVATE = 'private';
-
-    /**
-     * @return array
-     */
-    public static function getAccessTypes() : array
-    {
-        return static::filterConstants("DOCUMENT_ACCESS_TYPE");
-    }
 
     /**
      * @return array
@@ -69,6 +60,137 @@ class DocumentService
         $document->users()->sync($request->user_ids);
         $document->categories()->sync($request->category_ids);
         $document->relatedDocuments()->sync($request->related_document_ids);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getDocumentTypes() : Collection
+    {
+        return Document::query()
+            ->select('type')
+            ->distinct()
+            ->pluck('type');
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getDocumentIssuers() : Collection
+    {
+        $localeColumn = localeAppColumn('name_issuer');
+
+        return Document::query()
+            ->select($localeColumn)
+            ->distinct()
+            ->pluck($localeColumn);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getDocumentTopics() : Collection
+    {
+        $localeColumn = localeAppColumn('topic');
+
+        return Document::query()
+            ->select($localeColumn)
+            ->distinct()
+            ->pluck($localeColumn);
+    }
+
+    /**
+     * @param Category $category
+     * @param IndexCategoryRequest $request
+     * @return Builder|BelongsToMany
+     */
+    public function getAvailableDocuments(Category $category, IndexCategoryRequest $request)
+    {
+        $queryBuilder = $category->documents()
+            ->where('access', self::ACCESS_TYPE_PUBLIC);
+
+        $this->setFilters($queryBuilder, $request);
+
+        return $queryBuilder->orWhere(function (Builder $query) use ($category, $request) {
+            $this->setFilters($query, $request);
+
+            $query->where('document_category.category_id', $category->id)
+                ->where('access', self::ACCESS_TYPE_PROTECTED)
+                ->whereIn('id', $this->getProtectedDocumentIds());
+        });
+    }
+
+    /**
+     * @param $queryBuilder
+     * @param IndexCategoryRequest $request
+     */
+    private function setFilters(&$queryBuilder, IndexCategoryRequest $request) : void
+    {
+        /** @var $queryBuilder Builder */
+        if ($request->has('filter_type') && !empty($request->filter_type)) {
+            $queryBuilder->where('type', $request->filter_type);
+        }
+
+        if ($request->has('filter_issuer') && !empty($request->filter_issuer)) {
+            $queryBuilder->where(localeAppColumn('name_issuer'), $request->filter_issuer);
+        }
+
+        if ($request->has('filter_topic') && !empty($request->filter_topic)) {
+            $queryBuilder->where(localeAppColumn('topic'), $request->filter_topic);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    private function getProtectedDocumentIds() : array
+    {
+        if ( ! $this->getUser())
+            return [];
+
+        $roleDocuments = $this->getRolesDocuments();
+        $userDocuments = $this->getUserDocuments();
+        $categoryDocuments = $this->getCategoriesDocuments();
+
+        return $roleDocuments
+            ->merge($userDocuments)
+            ->merge($categoryDocuments)
+            ->unique()
+            ->toArray();
+    }
+
+    /**
+     * @return Collection
+     */
+    private function getRolesDocuments() : Collection
+    {
+        return $this->getUser()->roles->map(function (Role $role) {
+            return $role->documents->map(function (Document $document) {
+                return $document->id;
+            });
+        })->collapse();
+    }
+
+    /**
+     * @return Collection
+     */
+    private function getUserDocuments() : Collection
+    {
+        return $this->getUser()->documents->map(function (Document $document) {
+            return $document->id;
+        });
+    }
+
+    /**
+     * @return Collection
+     */
+    private function getCategoriesDocuments() : Collection
+    {
+        return $this->getUser()->categories->map(function (Category $category) {
+            return $category->documents->map(function (Document $document) {
+                return $document->id;
+            });
+        })->collapse();
     }
 
 }

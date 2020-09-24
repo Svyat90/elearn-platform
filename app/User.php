@@ -37,92 +37,22 @@ class User extends Authenticatable
     ];
 
     protected $fillable = [
-        'email',
-        'password',
-        'first_name',
-        'last_name',
-        'user_status',
-        'position',
-        'institution',
-        'phone',
-        'remember_token',
-        'email_verified_at',
-        'updated_at',
-        'created_at',
-        'deleted_at',
+        'email', 'password', 'first_name', 'last_name',
+        'user_status', 'position', 'institution', 'phone', 'remember_token',
+        'email_verified_at', 'updated_at', 'created_at', 'deleted_at',
     ];
-
-    public function getIsAdminAttribute()
-    {
-        return $this->roles()->where('id', 1)->exists();
-    }
-
-    public function getCurrRole()
-    {
-        return $this->name;
-    }
-
-    /*
-     * Filter users by Role
-     */
-    public function scopeByRole($query,$role)
-    {
-        return $query->leftJoin('role_user','role_user.user_id','=','users.id')
-            ->where('role_user.role_id', $role);
-    }
-
-    /*
-      * Fron user Role
-      */
-    public function scopeIsFrontUsersRole($query)
-    {
-        return $query->leftJoin('role_user','role_user.user_id','=','users.id')
-            ->where('role_user.role_id', 2)
-            ->orWhere('role_user.role_id', 3)
-            ->orWhere('role_user.role_id', 4);
-    }
-
-    /*
-     * User/Customer Role
-     * IsUserRole
-     */
-    public function scopeIsUserRole($query)
-    {
-        return $query->leftJoin('role_user','role_user.user_id','=','users.id')
-            ->where('role_user.role_id', 2);
-
-    }
-
-    public function getEmailVerifiedAtAttribute($value)
-    {
-        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
-    }
-
-    public function setEmailVerifiedAtAttribute($value)
-    {
-        $this->attributes['email_verified_at'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
-    }
-
-    public function setPasswordAttribute($input)
-    {
-        if ($input) {
-            $this->attributes['password'] = app('hash')->needsRehash($input) ? Hash::make($input) : $input;
-        }
-    }
-
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ResetPassword($token));
-    }
 
     public function permissions()
     {
         return $this->hasMany(Permission::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
     }
 
     /**
@@ -130,7 +60,7 @@ class User extends Authenticatable
      */
     public function documents()
     {
-        return $this->belongsToMany(Document::class);
+        return $this->belongsToMany(Document::class, 'document_user', 'user_id', 'document_id');
     }
 
     /**
@@ -138,7 +68,7 @@ class User extends Authenticatable
      */
     public function courses()
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class, 'course_user', 'user_id', 'course_id');
     }
 
     /**
@@ -146,7 +76,7 @@ class User extends Authenticatable
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'category_user', 'user_id', 'category_id');
     }
 
     /**
@@ -154,7 +84,7 @@ class User extends Authenticatable
      */
     public function subCategories()
     {
-        return $this->belongsToMany(SubCategory::class);
+        return $this->belongsToMany(SubCategory::class, 'sub_category_user', 'user_id', 'sub_category_id');
     }
 
 }

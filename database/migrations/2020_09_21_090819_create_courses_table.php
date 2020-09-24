@@ -31,7 +31,7 @@ class CreateCoursesTable extends Migration
             $table->text('description')->nullable();
 
             $table->enum('access', DocumentService::getAccessTypes())
-                ->default(DocumentService::DOCUMENT_ACCESS_TYPE_PUBLIC);
+                ->default(DocumentService::ACCESS_TYPE_PUBLIC);
 
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

@@ -7,21 +7,9 @@ use App\Traits\FilterConstantsTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-class CourseService
+class CourseService extends AbstractAccessService
 {
     use FilterConstantsTrait;
-
-    public const COURSE_ACCESS_TYPE_PUBLIC = 'public';
-    public const COURSE_ACCESS_TYPE_PROTECTED = 'protected';
-    public const COURSE_ACCESS_TYPE_PRIVATE = 'private';
-
-    /**
-     * @return array
-     */
-    public static function getAccessTypes() : array
-    {
-        return self::filterConstants("COURSE_ACCESS");
-    }
 
     /**
      * @param Course $course

@@ -21,14 +21,8 @@ class SubCategory extends Model
     ];
 
     protected $fillable = [
-        'name_ru',
-        'name_ro',
-        'name_en',
-        'access',
-        'parent_id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
+        'name_ru', 'name_ro', 'name_en', 'access', 'parent_id',
+        'created_at', 'updated_at', 'deleted_at',
     ];
 
     /**

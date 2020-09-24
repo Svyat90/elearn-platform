@@ -16,6 +16,11 @@ class FrontController extends Controller
     protected ? User $user = null;
 
     /**
+     * @var int
+     */
+    protected int $pageLimit = 20;
+
+    /**
      * HomeController constructor.
      */
     public function __construct()

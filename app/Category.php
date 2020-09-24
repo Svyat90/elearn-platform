@@ -59,7 +59,7 @@ class Category extends Model
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class, 'category_role', 'category_id', 'role_id');
     }
 
     /**
@@ -67,7 +67,7 @@ class Category extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'category_user', 'category_id', 'user_id');
     }
 
 }

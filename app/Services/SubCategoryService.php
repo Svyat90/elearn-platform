@@ -6,39 +6,13 @@ use App\Category;
 use App\Role;
 use App\SubCategory;
 use App\Traits\FilterConstantsTrait;
-use App\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
-class SubCategoryService
+class SubCategoryService extends AbstractAccessService
 {
     use FilterConstantsTrait;
-
-    public const SUB_CATEGORY_ACCESS_TYPE_PUBLIC = 'public';
-    public const SUB_CATEGORY_ACCESS_TYPE_PROTECTED = 'protected';
-    public const SUB_CATEGORY_ACCESS_TYPE_PRIVATE = 'private';
-
-    /**
-     * @var User|null
-     */
-    protected ? User $user = null;
-
-    /**
-     * @param User|null $user
-     */
-    public function setUser( ? User $user): void
-    {
-        $this->user = $user;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getAccessTypes() : array
-    {
-        return static::filterConstants("SUB_CATEGORY_ACCESS_TYPE");
-    }
 
     /**
      * @param SubCategory $subCategory
@@ -58,9 +32,11 @@ class SubCategoryService
     {
         return SubCategory::query()
             ->where('parent_id', $parentCategory->id)
-            ->where('access', self::SUB_CATEGORY_ACCESS_TYPE_PUBLIC)
-            ->orWhere(function (Builder $query) {
-                $query->where('access', self::SUB_CATEGORY_ACCESS_TYPE_PROTECTED)
+            ->where('access', self::ACCESS_TYPE_PUBLIC)
+            ->orWhere(function (Builder $query) use ($parentCategory) {
+                $query
+                    ->where('parent_id', $parentCategory->id)
+                    ->where('access', self::ACCESS_TYPE_PROTECTED)
                     ->whereIn('id', $this->getProtectedSubCategoryIds());
             })
             ->get();
@@ -71,7 +47,7 @@ class SubCategoryService
      */
     private function getProtectedSubCategoryIds() : array
     {
-        if ( ! $this->user)
+        if ( ! $this->getUser())
             return [];
 
         $roleSubCategoryIds = $this->getUserRolesSubCategories();
@@ -88,7 +64,7 @@ class SubCategoryService
      */
     private function getUserRolesSubCategories() : Collection
     {
-        return $this->user->roles->map(function (Role $role) {
+        return $this->getUser()->roles->map(function (Role $role) {
             return $role->subCategories->map(function (SubCategory $subCategory) {
                 return $subCategory->id;
             });
@@ -101,7 +77,7 @@ class SubCategoryService
      */
     private function getUserSubCategories() : Collection
     {
-        return $this->user->subCategories->map(function (SubCategory $subCategory) {
+        return $this->getUser()->subCategories->map(function (SubCategory $subCategory) {
             return $subCategory->id;
         });
     }

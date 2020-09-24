@@ -10,6 +10,9 @@ Route::get('set-locale/{lang}', 'Front\LocaleController@setLocale')->name('setLo
 // Front
 Route::group(['prefix' => LocaleMiddleware::getLocale(), 'namespace' => 'Front'], function () {
     Route::get('home', 'HomeController@index')->name('front.home');
+    Route::resource('categories', 'CategoryController')->only('show');
+    Route::resource('sub-categories', 'SubCategoryController')->only('show');
+    Route::resource('documents', 'DocumentController')->only('show');
 });
 
 Auth::routes();

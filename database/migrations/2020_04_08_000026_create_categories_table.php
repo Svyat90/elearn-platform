@@ -16,7 +16,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name_en')->nullable();
 
             $table->enum('access', CategoryService::getAccessTypes())
-                ->default(CategoryService::CATEGORY_ACCESS_TYPE_PUBLIC);
+                ->default(CategoryService::ACCESS_TYPE_PUBLIC);
 
             $table->timestamps();
             $table->softDeletes();

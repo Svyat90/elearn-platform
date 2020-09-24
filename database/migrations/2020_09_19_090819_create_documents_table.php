@@ -37,7 +37,7 @@ class CreateDocumentsTable extends Migration
                 ->default(DocumentService::DOCUMENT_STATUS_INITIAL);
 
             $table->enum('access', DocumentService::getAccessTypes())
-                ->default(DocumentService::DOCUMENT_ACCESS_TYPE_PUBLIC);
+                ->default(DocumentService::ACCESS_TYPE_PUBLIC);
 
             $table->timestamp('approved_at')->nullable();
             $table->timestamp('published_at')->nullable();

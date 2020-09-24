@@ -3,11 +3,11 @@
         <ul class="navigation">
             @foreach($categories as $category)
                 <li>
-                    <a href="">{{ $category->{localeAppColumn('name')} }}:</a>
+                    <a href="{{ route('categories.show', $category->id) }}">{{ $category->{localeAppColumn('name')} }}:</a>
                     @if($category->availableSubCategories)
                         <ul class="submenu">
                             @foreach($category->availableSubCategories as $subCategory)
-                                <li><a href="">{{ $subCategory->{localeAppColumn('name')} }}</a></li>
+                                <li><a href="{{ route('sub-categories.show', $subCategory->id) }}">{{ $subCategory->{localeAppColumn('name')} }}</a></li>
                             @endforeach
                         </ul>
                     @endif

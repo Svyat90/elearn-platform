@@ -85,7 +85,7 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="roles_users">
-            @includeIf('admin.partials.relationships.accessUsers', ['users' => $role->rolesUsers])
+            @includeIf('admin.partials.relationships.accessUsers', ['users' => $role->users])
         </div>
         <div class="tab-pane" role="tabpanel" id="access_categories">
             @includeIf('admin.partials.relationships.accessCategories', ['categories' => $role->categories])

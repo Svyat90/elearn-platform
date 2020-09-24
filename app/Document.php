@@ -42,7 +42,7 @@ class Document extends Model
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class, 'document_role', 'document_id', 'role_id');
     }
 
     /**
@@ -50,7 +50,7 @@ class Document extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'document_user', 'document_id', 'user_id');
     }
 
     /**
@@ -58,7 +58,7 @@ class Document extends Model
      */
     public function courses()
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class, 'course_document', 'document_id', 'course_id');
     }
 
     /**
@@ -66,12 +66,7 @@ class Document extends Model
      */
     public function relatedDocuments()
     {
-        return $this->belongsToMany(
-            self::class,
-            'document_related',
-            'document_id',
-            'related_document_id'
-        );
+        return $this->belongsToMany(self::class, 'document_related', 'document_id', 'related_document_id');
     }
 
 }

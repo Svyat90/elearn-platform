@@ -60,7 +60,7 @@ class RolesController extends Controller
     {
         abort_if(Gate::denies('role_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $role->load('permissions', 'rolesUsers', 'categories', 'subCategories', 'courses', 'documents');
+        $role->load('permissions', 'users', 'categories', 'subCategories', 'courses', 'documents');
 
         return view('admin.roles.show', compact('role'));
     }

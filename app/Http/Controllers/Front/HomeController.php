@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\FrontController;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
-class HomeController extends Controller
+class HomeController extends FrontController
 {
 
     /**

@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Schema;
 
 class CategoryService
 {
@@ -17,6 +18,19 @@ class CategoryService
     public const CATEGORY_ACCESS_TYPE_PUBLIC = 'public';
     public const CATEGORY_ACCESS_TYPE_PROTECTED = 'protected';
     public const CATEGORY_ACCESS_TYPE_PRIVATE = 'private';
+
+    /**
+     * @var User|null
+     */
+    protected ? User $user = null;
+
+    /**
+     * @param User|null $user
+     */
+    public function setUser( ? User $user): void
+    {
+        $this->user = $user;
+    }
 
     /**
      * @return array
@@ -41,7 +55,11 @@ class CategoryService
      */
     public function getAvailableCategories() : Collection
     {
-        return Category::with('subCategories')
+        if ( ! Schema::hasTable('categories')){
+            return collect();
+        }
+
+        return Category::query()
             ->where('access', self::CATEGORY_ACCESS_TYPE_PUBLIC)
             ->orWhere(function (Builder $query) {
                 $query->where('access', self::CATEGORY_ACCESS_TYPE_PROTECTED)
@@ -55,13 +73,11 @@ class CategoryService
      */
     private function getProtectedCategoryIds() : array
     {
-        /** @var User $user */
-        $user = auth()->user();
-        if ( ! $user)
+        if ( ! $this->user)
             return [];
 
-        $roleCategoryIds = $this->getUserRolesCategories($user);
-        $userCategoryIds = $this->getUserCategories($user);
+        $roleCategoryIds = $this->getUserRolesCategories();
+        $userCategoryIds = $this->getUserCategories();
 
         return $roleCategoryIds
             ->merge($userCategoryIds)
@@ -70,12 +86,11 @@ class CategoryService
     }
 
     /**
-     * @param User $user
      * @return Collection
      */
-    private function getUserRolesCategories(User $user) : Collection
+    private function getUserRolesCategories() : Collection
     {
-        return $user->roles->map(function (Role $role) {
+        return $this->user->roles->map(function (Role $role) {
             return $role->categories->map(function (Category $category) {
                 return $category->id;
             });
@@ -84,12 +99,11 @@ class CategoryService
     }
 
     /**
-     * @param User $user
      * @return Collection
      */
-    private function getUserCategories(User $user) : Collection
+    private function getUserCategories() : Collection
     {
-        return $user->categories->map(function (Category $category) {
+        return $this->user->categories->map(function (Category $category) {
             return $category->id;
         });
     }

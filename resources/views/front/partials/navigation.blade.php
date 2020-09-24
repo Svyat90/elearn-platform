@@ -4,9 +4,9 @@
             @foreach($categories as $category)
                 <li>
                     <a href="">{{ $category->{localeAppColumn('name')} }}:</a>
-                    @if($category->subCategories)
+                    @if($category->availableSubCategories)
                         <ul class="submenu">
-                            @foreach($category->subCategories as $subCategory)
+                            @foreach($category->availableSubCategories as $subCategory)
                                 <li><a href="">{{ $subCategory->{localeAppColumn('name')} }}</a></li>
                             @endforeach
                         </ul>

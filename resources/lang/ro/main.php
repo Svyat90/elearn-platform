@@ -25,4 +25,5 @@ return [
     'less_items' => 'Mai puține articole',
     'read_now' => 'Read now',
     'download_pdf' => 'Descarca PDF',
+    'not_found_available_document' => 'Nu s-au găsit documente disponibile',
 ];

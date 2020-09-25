@@ -25,4 +25,5 @@ return [
     'less_items' => 'Меньше элементов',
     'read_now' => 'Читать сейчас',
     'download_pdf' => 'Скачать PDF',
+    'not_found_available_document' => 'Не найдено доступных документов',
 ];

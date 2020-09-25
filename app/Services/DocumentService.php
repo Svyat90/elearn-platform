@@ -56,6 +56,25 @@ class DocumentService extends AbstractAccessService
     }
 
     /**
+     * @return Builder|BelongsToMany
+     */
+    public function getAvailableDocuments()
+    {
+        if ( ! $this->getUser()) {
+            return Document::query()->where('access', self::ACCESS_TYPE_PUBLIC);
+        }
+
+        return $this->getUser()->documents()
+            ->where('access', self::ACCESS_TYPE_PUBLIC)
+            ->orWhere(function (Builder $query) {
+                $query
+                    ->where('user_id', $this->getUser()->id)
+                    ->where('access', self::ACCESS_TYPE_PROTECTED)
+                    ->whereIn('id', $this->getProtectedDocumentIds());
+            });
+    }
+
+    /**
      * @param Course $course
      * @return Builder|BelongsToMany
      */

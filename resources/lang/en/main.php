@@ -25,4 +25,5 @@ return [
     'less_items' => 'Less items',
     'read_now' => 'Read now',
     'download_pdf' => 'Download PDF',
+    'not_found_available_document' => 'Not found available documents',
 ];

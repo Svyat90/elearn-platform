@@ -40,6 +40,14 @@ class Document extends Model
     /**
      * @return BelongsToMany
      */
+    public function subCategories()
+    {
+        return $this->belongsToMany(SubCategory::class, 'document_sub_category', 'document_id', 'sub_category_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'document_role', 'document_id', 'role_id');

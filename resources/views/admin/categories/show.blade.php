@@ -64,23 +64,29 @@
     </div>
     <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
         <li class="nav-item">
-            <a class="nav-link" href="#parent_sub_categories" role="tab" data-toggle="tab">
+            <a class="nav-link" href="#sub_categories" role="tab" data-toggle="tab">
                 {{ trans('cruds.subCategory.title') }}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#access_users" role="tab" data-toggle="tab">
-                {{ trans('cruds.user.fields.access_users') }}
+                {{ trans('global.access_users') }}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#access_roles" role="tab" data-toggle="tab">
-                {{ trans('cruds.user.fields.access_roles') }}
+                {{ trans('global.access_roles') }}
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#access_documents" role="tab" data-toggle="tab">
+                {{ trans('global.access_documents') }}
             </a>
         </li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="parent_sub_categories">
+        <div class="tab-pane" role="tabpanel" id="sub_categories">
             @includeIf('admin.partials.relationships.accessSubCategories', ['subCategories' => $category->subCategories])
         </div>
         <div class="tab-pane" role="tabpanel" id="access_users">
@@ -88,6 +94,10 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="access_roles">
             @includeIf('admin.partials.relationships.accessRoles', ['roles' => $category->roles])
+        </div>
+
+        <div class="tab-pane" role="tabpanel" id="access_documents">
+            @includeIf('admin.partials.relationships.accessDocuments', ['documents' => $category->documents])
         </div>
     </div>
 </div>

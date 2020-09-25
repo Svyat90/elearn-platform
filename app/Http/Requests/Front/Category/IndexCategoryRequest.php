@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Front\Category;
 
-use App\Services\DocumentService;
+use App\Repositories\DocumentRepository;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -16,14 +16,14 @@ class IndexCategoryRequest extends FormRequest
     }
 
     /**
-     * @param DocumentService $documentService
+     * @param DocumentRepository $documentRepository
      * @return string[]
      */
-    public function rules(DocumentService $documentService)
+    public function rules(DocumentRepository $documentRepository)
     {
-        $allTypes = $documentService->getDocumentTypes();
-        $allIssuers = $documentService->getDocumentIssuers();
-        $allTopics = $documentService->getDocumentTopics();
+        $allTypes = $documentRepository->getDocumentTypes();
+        $allIssuers = $documentRepository->getDocumentIssuers();
+        $allTopics = $documentRepository->getDocumentTopics();
 
         return [
             'filter_type'  => 'sometimes|nullable|' . Rule::in($allTypes),

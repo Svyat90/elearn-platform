@@ -73,12 +73,17 @@
     <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
         <li class="nav-item">
             <a class="nav-link" href="#access_users" role="tab" data-toggle="tab">
-                {{ trans('cruds.user.fields.access_users') }}
+                {{ trans('global.access_users') }}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#access_roles" role="tab" data-toggle="tab">
-                {{ trans('cruds.user.fields.access_roles') }}
+                {{ trans('global.access_roles') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#access_documents" role="tab" data-toggle="tab">
+                {{ trans('global.access_documents') }}
             </a>
         </li>
     </ul>
@@ -88,6 +93,9 @@
         </div>
         <div class="tab-pane" role="tabpanel" id="access_roles">
             @includeIf('admin.partials.relationships.accessRoles', ['roles' => $subCategory->roles])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="access_documents">
+            @includeIf('admin.partials.relationships.accessDocuments', ['documents' => $subCategory->documents])
         </div>
     </div>
 </div>

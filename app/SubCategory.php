@@ -49,4 +49,12 @@ class SubCategory extends Model
         return $this->belongsToMany(User::class, 'sub_category_user', 'sub_category_id', 'user_id');
     }
 
+    /**
+     * @return BelongsToMany
+     */
+    public function documents()
+    {
+        return $this->belongsToMany(Document::class, 'document_sub_category', 'sub_category_id', 'document_id');
+    }
+
 }

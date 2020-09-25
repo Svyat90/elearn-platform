@@ -65,33 +65,41 @@
     <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
         <li class="nav-item">
             <a class="nav-link" href="#access_categories" role="tab" data-toggle="tab">
-                {{ trans('cruds.user.fields.access_categories') }}
+                {{ trans('global.access_categories') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#access_sub_categories" role="tab" data-toggle="tab">
+                {{ trans('global.access_sub_categories') }}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#access_users" role="tab" data-toggle="tab">
-                {{ trans('cruds.user.fields.access_users') }}
+                {{ trans('global.access_users') }}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#access_roles" role="tab" data-toggle="tab">
-                {{ trans('cruds.user.fields.access_roles') }}
+                {{ trans('global.access_roles') }}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#access_courses" role="tab" data-toggle="tab">
-                {{ trans('cruds.user.fields.access_courses') }}
+                {{ trans('global.access_courses') }}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#related_documents" role="tab" data-toggle="tab">
-                {{ trans('cruds.document.fields.related_documents') }}
+                {{ trans('global.related_documents') }}
             </a>
         </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="access_categories">
             @includeIf('admin.partials.relationships.accessCategories', ['categories' => $document->categories])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="access_sub_categories">
+            @includeIf('admin.partials.relationships.accessSubCategories', ['subCategories' => $document->subCategories])
         </div>
         <div class="tab-pane" role="tabpanel" id="access_users">
             @includeIf('admin.partials.relationships.accessUsers', ['users' => $document->users])

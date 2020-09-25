@@ -166,7 +166,7 @@ class SubCategoryController extends Controller
     {
         abort_if(Gate::denies('sub_category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $subCategory->load('parent', 'users', 'roles');
+        $subCategory->load('parent', 'users', 'roles', 'documents');
 
         return view('admin.subCategories.show', compact('subCategory'));
     }

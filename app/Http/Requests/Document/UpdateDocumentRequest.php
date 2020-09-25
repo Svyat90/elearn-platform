@@ -44,6 +44,8 @@ class UpdateDocumentRequest extends FormRequest
             'file_path' => 'sometimes|string',
             'category_ids'   => 'sometimes|array',
             'category_ids.*' => 'integer|exists:categories,id',
+            'sub_category_ids'   => 'sometimes|array',
+            'sub_category_ids.*' => 'integer|exists:sub_categories,id',
             'role_ids'   => 'sometimes|array',
             'role_ids.*' => 'integer|exists:roles,id',
             'user_ids'   => 'sometimes|array',

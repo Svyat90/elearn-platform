@@ -11,6 +11,7 @@ use App\Http\Requests\Document\StoreDocumentRequest;
 use App\Http\Requests\Document\UpdateDocumentRequest;
 use App\Role;
 use App\Services\DocumentService;
+use App\SubCategory;
 use App\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
@@ -87,6 +88,7 @@ class DocumentController extends Controller
         abort_if(Gate::denies('document_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $categories = Category::all()->pluck(localeColumn('name'), 'id');
+        $subCategories = Category::all()->pluck(localeColumn('name'), 'id');
         $users = User::all()->pluck('email', 'id');
         $roles = Role::all()->pluck('title', 'id');
         $documents = Document::query()->pluck(localeColumn('name'), 'id');
@@ -103,6 +105,7 @@ class DocumentController extends Controller
                 'statuses',
                 'statusesSelect',
                 'categories',
+                'subCategories',
                 'documents',
                 'roles',
                 'users'
@@ -139,13 +142,15 @@ class DocumentController extends Controller
 
         $allDocuments = Document::all()->pluck(localeColumn('name'), 'id')->except([$document->id]);
         $allCategories = Category::all()->pluck(localeColumn('name'), 'id');
+        $allSubCategories = SubCategory::all()->pluck(localeColumn('name'), 'id');
         $allUsers = User::all()->pluck('email', 'id');
         $allRoles = Role::all()->pluck('title', 'id');
 
-        $document->load('categories', 'roles', 'users', 'relatedDocuments');
+        $document->load('categories', 'subCategories', 'roles', 'users', 'relatedDocuments');
 
         $relatedDocumentIds = $document->relatedDocuments->pluck('id')->toArray();
         $categoryIds = $document->categories->pluck('id')->toArray();
+        $subCategoryIds = $document->subCategories->pluck('id')->toArray();
         $roleIds = $document->roles->pluck('id')->toArray();
         $userIds = $document->users->pluck('id')->toArray();
 
@@ -162,10 +167,12 @@ class DocumentController extends Controller
             'statuses',
             'statusesSelect',
             'categoryIds',
+            'subCategoryIds',
             'relatedDocumentIds',
             'roleIds',
             'userIds',
             'allCategories',
+            'allSubCategories',
             'allDocuments',
             'allUsers',
             'allRoles'

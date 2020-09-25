@@ -59,44 +59,8 @@ class DocumentService extends AbstractAccessService
         $document->roles()->sync($request->role_ids);
         $document->users()->sync($request->user_ids);
         $document->categories()->sync($request->category_ids);
+        $document->subCategories()->sync($request->sub_category_ids);
         $document->relatedDocuments()->sync($request->related_document_ids);
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getDocumentTypes() : Collection
-    {
-        return Document::query()
-            ->select('type')
-            ->distinct()
-            ->pluck('type');
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getDocumentIssuers() : Collection
-    {
-        $localeColumn = localeAppColumn('name_issuer');
-
-        return Document::query()
-            ->select($localeColumn)
-            ->distinct()
-            ->pluck($localeColumn);
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getDocumentTopics() : Collection
-    {
-        $localeColumn = localeAppColumn('topic');
-
-        return Document::query()
-            ->select($localeColumn)
-            ->distinct()
-            ->pluck($localeColumn);
     }
 
     /**

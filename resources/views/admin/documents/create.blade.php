@@ -194,6 +194,25 @@
                         <span class="text-danger">{{ $errors->first('category_ids') }}</span>
                     @endif
                 </div>
+                <div class="form-group">
+                    <label class="" for="sub_category_ids">{{ trans('global.sub_categories') }}</label>
+                    <div style="padding-bottom: 4px">
+                        <span class="btn btn-info btn-xs select-all"
+                              style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                        <span class="btn btn-info btn-xs deselect-all"
+                              style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                    </div>
+                    <select class="form-control select2 {{ $errors->has('roles') ? 'is-invalid' : '' }}"
+                            name="sub_category_ids[]"
+                            id="sub_category_ids" multiple >
+                        @foreach($subCaterories as $id => $subCategory)
+                            <option value="{{ $id }}" {{ in_array($id, old('sub_category_ids', [])) ? 'selected' : '' }}>{{ $subCategory }}</option>
+                        @endforeach
+                    </select>
+                    @if($errors->has('sub_category_ids'))
+                        <span class="text-danger">{{ $errors->first('sub_category_ids') }}</span>
+                    @endif
+                </div>
 
                 <div class="form-group">
                     <label class="" for="role_ids">{{ trans('cruds.user.fields.access_roles') }}</label>

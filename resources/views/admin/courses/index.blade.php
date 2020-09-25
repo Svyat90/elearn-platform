@@ -40,6 +40,9 @@
                         {{ trans('cruds.course.fields.access') }}
                     </th>
                     <th>
+                        {{ trans('cruds.course.fields.status') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.course.fields.published_at') }}
                     </th>
                     <th>
@@ -112,6 +115,7 @@
                     {data: nameIssuerLocaleColumn, name: nameIssuerLocaleColumn},
                     {data: topicLocaleColumn, name: topicLocaleColumn},
                     {data: 'access', name: 'access'},
+                    {data: 'status', name: 'status'},
                     {data: 'published_at', name: 'published_at'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: '{{ trans('global.actions') }}'}

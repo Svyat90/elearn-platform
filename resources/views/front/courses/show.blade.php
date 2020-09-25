@@ -45,7 +45,7 @@
                                 </tr>
                                 <tr>
                                     <th>{{ __('main.status') }}</th>
-                                    <td><a class="status" href="">Modificat</a></td>
+                                    <td><a class="status" href="">{{ localeStatus($course->status) }}</a></td>
                                 </tr>
                             </table>
 
@@ -56,7 +56,7 @@
                         </div>
                         <div class="doc-bottom">
                             <div class="title">{{ __('main.description') }}</div>
-                            <p>{{ $course->description }}</p>
+                            <p>{!! $course->{localeAppColumn('description')} !!}</p>
                         </div>
 
                     </div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Document;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\AccessStatuses;
+use App\Http\Controllers\Traits\AccessTypes;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\Document\MassDestroyDocumentRequest;
 use App\Http\Requests\Document\StoreDocumentRequest;
@@ -24,7 +26,16 @@ use Illuminate\View\View;
 
 class DocumentController extends Controller
 {
-    use MediaUploadingTrait;
+    use MediaUploadingTrait, AccessTypes, AccessStatuses;
+
+    /**
+     * CourseController constructor.
+     */
+    public function __construct()
+    {
+        $this->shareAccessTypes();
+        $this->shareAccessStatuses();
+    }
 
     /**
      * @param Request $request
@@ -52,7 +63,7 @@ class DocumentController extends Controller
             $table->editColumn($nameIssuerLocaleColumn, fn ($row) => $row->$nameIssuerLocaleColumn ?? '');
             $table->editColumn($topicLocaleColumn, fn ($row) => $row->$topicLocaleColumn ?? '');
             $table->editColumn('access', fn ($row) => labelAccess($row->access));
-            $table->editColumn('status', fn ($row) => labelDocumentStatus($row->status));
+            $table->editColumn('status', fn ($row) => labelStatus($row->status));
             $table->addColumn('approved_at', fn ($row) => $row->approved_at ?? '');
             $table->addColumn('published_at', fn ($row) => $row->published_at ?? '');
             $table->addColumn('image', fn ($row) => $row->image_path ? sprintf('<img src="%s" width="50px" height="50px" />', storageUrl($row->image_path)) : '');
@@ -80,10 +91,9 @@ class DocumentController extends Controller
     }
 
     /**
-     * @param DocumentService $documentService
      * @return View
      */
-    public function create(DocumentService $documentService) : View
+    public function create() : View
     {
         abort_if(Gate::denies('document_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -93,17 +103,7 @@ class DocumentController extends Controller
         $roles = Role::all()->pluck('title', 'id');
         $documents = Document::query()->pluck(localeColumn('name'), 'id');
 
-        $accessTypes = collect($documentService->getAccessTypes())
-            ->prepend(trans('global.pleaseSelect'), '');
-
-        $statuses = $documentService->getStatuses();
-        $statusesSelect = collect($statuses)
-            ->prepend(trans('global.pleaseSelect'), '');
-
         return view('admin.documents.create', compact(
-            'accessTypes',
-                'statuses',
-                'statusesSelect',
                 'categories',
                 'subCategories',
                 'documents',
@@ -133,10 +133,9 @@ class DocumentController extends Controller
 
     /**
      * @param Document $document
-     * @param DocumentService $documentService
      * @return View
      */
-    public function edit(Document $document, DocumentService $documentService) : View
+    public function edit(Document $document) : View
     {
         abort_if(Gate::denies('document_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -154,18 +153,8 @@ class DocumentController extends Controller
         $roleIds = $document->roles->pluck('id')->toArray();
         $userIds = $document->users->pluck('id')->toArray();
 
-        $accessTypes = collect($documentService->getAccessTypes())
-            ->prepend(trans('global.pleaseSelect'), '');
-
-        $statuses = $documentService->getStatuses();
-        $statusesSelect = collect($statuses)
-            ->prepend(trans('global.pleaseSelect'), '');
-
         return view('admin.documents.edit', compact(
             'document',
-            'accessTypes',
-            'statuses',
-            'statusesSelect',
             'categoryIds',
             'subCategoryIds',
             'relatedDocumentIds',

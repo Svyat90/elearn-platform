@@ -123,16 +123,27 @@
                         <select class="form-control select2 {{ $errors->has('access') ? 'is-invalid' : '' }}"
                                 name="access" id="access" required>
                             @foreach($accessTypes as $access)
-                                <option
-                                    value="{{ $access }}" {{ $access }}
-                                " {{ old('access', $course->access) === $access ? 'selected' : '' }}
-                                >{{ $access }}</option>
+                                <option value="{{ $access }}" {{ $access }}" {{ old('access', $course->access) === $access ? 'selected' : '' }}>{{ $access }}</option>
                             @endforeach
                         </select>
                         @if($errors->has('access'))
                             <span class="text-danger">{{ $errors->first('access') }}</span>
                         @endif
                         <span class="help-block">{{ trans('cruds.course.fields.access_helper') }}</span>
+                    </div>
+
+                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                        <label class="required" for="status">{{ trans('cruds.document.fields.status') }}</label>
+                        <select class="form-control select2 {{ $errors->has('status') ? 'is-invalid' : '' }}"
+                                name="status" id="status" required>
+                            @foreach($statusesSelect as $status)
+                                <option value="{{ $status }}" {{ old('access', $course->status) === $status ? 'selected' : '' }}>{{ $status }}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('status'))
+                            <span class="text-danger">{{ $errors->first('status') }}</span>
+                        @endif
+                        <span class="help-block">{{ implode(", ", $statuses) }}</span>
                     </div>
                 </div>
 
@@ -220,11 +231,29 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="description">{{ trans('cruds.course.fields.description') }}</label>
-                    <textarea class="form-control ckeditor {{ $errors->has('description') ? 'is-invalid' : '' }}"
-                              name="description" id="description">{!! old('description', $course->description) !!}</textarea>
-                    @if($errors->has('description'))
-                        <span class="text-danger">{{ $errors->first('description') }}</span>
+                    <label for="description_ru">{{ trans('cruds.course.fields.description') }} (ru)</label>
+                    <textarea class="form-control ckeditor {{ $errors->has('description_ru') ? 'is-invalid' : '' }}"
+                              name="description_ru" id="description_ru">{!! old('description_ru', $course->description_ru) !!}</textarea>
+                    @if($errors->has('description_ru'))
+                        <span class="text-danger">{{ $errors->first('description_ru') }}</span>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.course.fields.description_helper') }}</span>
+                </div>
+                <div class="form-group">
+                    <label for="description_ro">{{ trans('cruds.course.fields.description') }} (ro)</label>
+                    <textarea class="form-control ckeditor {{ $errors->has('description_ro') ? 'is-invalid' : '' }}"
+                              name="description_ro" id="description_ro">{!! old('description_ro', $course->description_ro) !!}</textarea>
+                    @if($errors->has('description_ro'))
+                        <span class="text-danger">{{ $errors->first('description_ro') }}</span>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.course.fields.description_helper') }}</span>
+                </div>
+                <div class="form-group">
+                    <label for="description_en">{{ trans('cruds.course.fields.description') }} (en)</label>
+                    <textarea class="form-control ckeditor {{ $errors->has('description_en') ? 'is-invalid' : '' }}"
+                              name="description_en" id="description_en">{!! old('description_en', $course->description_en) !!}</textarea>
+                    @if($errors->has('description_en'))
+                        <span class="text-danger">{{ $errors->first('description_en') }}</span>
                     @endif
                     <span class="help-block">{{ trans('cruds.course.fields.description_helper') }}</span>
                 </div>

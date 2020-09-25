@@ -24,7 +24,8 @@ class Course extends Model
         'name_ru', 'name_ro', 'name_en',
         'name_issuer_ru', 'name_issuer_ro', 'name_issuer_en',
         'topic_ru', 'topic_ro', 'topic_en',
-        'access', 'description', 'image_path',
+        'description_ru', 'description_ro', 'description_en',
+        'access', 'status', 'image_path',
         'created_at', 'updated_at', 'deleted_at', 'published_at'
     ];
 

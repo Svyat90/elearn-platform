@@ -205,7 +205,7 @@
                     <select class="form-control select2 {{ $errors->has('roles') ? 'is-invalid' : '' }}"
                             name="sub_category_ids[]"
                             id="sub_category_ids" multiple >
-                        @foreach($subCaterories as $id => $subCategory)
+                        @foreach($subCategories as $id => $subCategory)
                             <option value="{{ $id }}" {{ in_array($id, old('sub_category_ids', [])) ? 'selected' : '' }}>{{ $subCategory }}</option>
                         @endforeach
                     </select>

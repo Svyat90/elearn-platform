@@ -35,6 +35,16 @@
                             <th>{{ trans("cruds.document.fields.{$field}") }}</th>
                             <td>{!! labelAccess($course->{$field}) !!}</td>
                         </tr>
+                    @elseif($field === 'status')
+                        <tr>
+                            <th>{{ trans("cruds.document.fields.{$field}") }}</th>
+                            <td>{!! labelStatus($course->{$field}) !!}</td>
+                        </tr>
+                    @elseif(strpos($field, "description") !== false)
+                        <tr>
+                            <th>{{ trans("cruds.document.fields.{$field}") }}</th>
+                            <td>{!! $course->{$field} !!}</td>
+                        </tr>
                     @else
                         <tr>
                             <th>{{ trans("cruds.course.fields.{$field}") }}</th>

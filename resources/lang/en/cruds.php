@@ -253,6 +253,9 @@ return [
             'file_helper'       => '',
             'related_documents'              => 'Related Documents',
             'related_documents_helper'       => '',
+            'description_ru'         => 'Description (ru)',
+            'description_ro'         => 'Description (ro)',
+            'description_en'         => 'Description (en)',
         ],
     ],
     'course'                     => [
@@ -301,6 +304,9 @@ return [
             'status_helper'     => '',
             'description'       => 'Description',
             'description_helper'=> '',
+            'description_ru'         => 'Description (ru)',
+            'description_ro'         => 'Description (ro)',
+            'description_en'         => 'Description (en)',
         ],
     ]
 ];

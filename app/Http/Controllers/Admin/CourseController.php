@@ -6,6 +6,8 @@ use App\Category;
 use App\Course;
 use App\Document;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\AccessStatuses;
+use App\Http\Controllers\Traits\AccessTypes;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\Course\MassDestroyCourseRequest;
 use App\Http\Requests\Course\StoreCourseRequest;
@@ -24,7 +26,16 @@ use Illuminate\View\View;
 
 class CourseController extends Controller
 {
-    use MediaUploadingTrait;
+    use MediaUploadingTrait, AccessTypes, AccessStatuses;
+
+    /**
+     * CourseController constructor.
+     */
+    public function __construct()
+    {
+        $this->shareAccessTypes();
+        $this->shareAccessStatuses();
+    }
 
     /**
      * @param Request $request
@@ -50,6 +61,7 @@ class CourseController extends Controller
             $table->editColumn($nameIssuerLocaleColumn, fn ($row) => $row->$nameIssuerLocaleColumn ?? '');
             $table->editColumn($topicLocaleColumn, fn ($row) => $row->$topicLocaleColumn ?? '');
             $table->editColumn('access', fn ($row) => labelAccess($row->access));
+            $table->editColumn('status', fn ($row) => labelStatus($row->status));
             $table->addColumn('published_at', fn ($row) => $row->published_at ?? '');
             $table->addColumn('image', fn ($row) => $row->image_path ? sprintf('<img src="%s" width="50px" height="50px" />', storageUrl($row->image_path)) : '');
             $table->addColumn('actions', function ($row) {
@@ -67,7 +79,7 @@ class CourseController extends Controller
                 ));
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'image', 'access']);
+            $table->rawColumns(['actions', 'placeholder', 'image', 'access', 'status']);
 
             return $table->make(true);
         }
@@ -108,11 +120,8 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request, CourseService $courseService) : RedirectResponse
     {
-        $insertData = $request->validated();
-        $insertData['description'] = strip_tags($insertData['description']);
-
         /** @var Course $course */
-        $course = Course::query()->create($insertData);
+        $course = Course::query()->create($request->validated());
 
         $courseService->handleRelationships($course, $request);
 
@@ -171,9 +180,7 @@ class CourseController extends Controller
         $courseService->handleImage($course, $request->image_path);
         $courseService->handleRelationships($course, $request);
 
-        $updateData = $request->validated();
-        $updateData['description'] = strip_tags($updateData['description']);
-        $course->update($updateData);
+        $course->update($request->validated());
 
         return redirect()->route('admin.courses.index');
     }

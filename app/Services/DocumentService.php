@@ -17,17 +17,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class DocumentService extends AbstractAccessService
 {
-    public const DOCUMENT_STATUS_INITIAL = 'initial';
-    public const DOCUMENT_STATUS_UPDATED = 'updated';
-    public const DOCUMENT_STATUS_CANCELED = 'canceled';
-
-    /**
-     * @return array
-     */
-    public static function getStatuses() : array
-    {
-        return self::filterConstants("DOCUMENT_STATUS");
-    }
 
     /**
      * @param Document $document

@@ -5,7 +5,7 @@
             <a href="{{ route('courses.show', $course->id) }}">{{ $course->{localeAppColumn('name')} }}</a>
             <div class="date">{{ $course->published_at }}</div>
         </div>
-        <p>{{ $course->description }}</p>
+        <p>{{ strip_tags($course->{localeAppColumn('description')}) }}</p>
         <div class="course-but">
             <a href="{{ route('courses.show', $course->id) }}" class="more">{{ __('main.read_more') }}
                 <img src="{{ asset('front/images/down.svg') }}" alt="">

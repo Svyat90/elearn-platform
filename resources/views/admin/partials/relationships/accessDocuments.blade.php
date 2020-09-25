@@ -93,7 +93,7 @@
                                 {!! labelAccess($document->access) !!}
                             </td>
                             <td>
-                                {!! labelDocumentStatus($document->status) !!}
+                                {!! labelStatus($document->status) !!}
                             </td>
                             <td>
                                 {{ $document->approved_at }}

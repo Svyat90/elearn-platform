@@ -40,6 +40,9 @@
                         {{ trans('cruds.course.fields.access') }}
                     </th>
                     <th>
+                        {{ trans('cruds.document.fields.status') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.course.fields.published_at') }}
                     </th>
                     <th>
@@ -73,6 +76,9 @@
                         </td>
                         <td>
                             {!! labelAccess($course->access) !!}
+                        </td>
+                        <td>
+                            {!! labelStatus($document->status) !!}
                         </td>
                         <td>
                             {{ $course->published_at }}

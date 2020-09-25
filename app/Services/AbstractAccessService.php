@@ -13,6 +13,10 @@ abstract class AbstractAccessService
     public const ACCESS_TYPE_PROTECTED = 'protected';
     public const ACCESS_TYPE_PRIVATE = 'private';
 
+    public const STATUS_INITIAL = 'initial';
+    public const STATUS_UPDATED = 'updated';
+    public const STATUS_CANCELED = 'canceled';
+
     /**
      * @var User|null
      */
@@ -34,6 +38,14 @@ abstract class AbstractAccessService
     public static function getAccessTypes() : array
     {
         return static::filterConstants("ACCESS_TYPE");
+    }
+
+    /**
+     * @return array
+     */
+    public static function getStatuses() : array
+    {
+        return self::filterConstants("STATUS");
     }
 
     /**

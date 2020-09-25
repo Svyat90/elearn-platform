@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\AccessTypes;
 use App\Http\Requests\Category\MassDestroyCategoryRequest;
 use App\Http\Requests\Category\StoreCategoryRequest;
 use App\Http\Requests\Category\UpdateCategoryRequest;
@@ -21,6 +22,16 @@ use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
+    use AccessTypes;
+
+    /**
+     * CategoryController constructor.
+     */
+    public function __construct()
+    {
+        $this->shareAccessTypes();
+    }
+
     /**
      * @param Request $request
      * @return Application|Factory|View
@@ -65,20 +76,16 @@ class CategoryController extends Controller
     }
 
     /**
-     * @param CategoryService $categoryService
      * @return View
      */
-    public function create(CategoryService $categoryService) : View
+    public function create() : View
     {
         abort_if(Gate::denies('category_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $accessTypes = collect($categoryService->getAccessTypes())
-            ->prepend(trans('global.pleaseSelect'), '');
 
         $roles = Role::all()->pluck('title', 'id');
         $users = User::all()->pluck('email', 'id');
 
-        return view('admin.categories.create', compact('accessTypes', 'roles', 'users'));
+        return view('admin.categories.create', compact('roles', 'users'));
     }
 
     /**
@@ -98,15 +105,11 @@ class CategoryController extends Controller
 
     /**
      * @param Category $category
-     * @param CategoryService $categoryService
      * @return View
      */
-    public function edit(Category $category, CategoryService $categoryService) : View
+    public function edit(Category $category) : View
     {
         abort_if(Gate::denies('category_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $accessTypes = collect($categoryService->getAccessTypes())
-            ->prepend(trans('global.pleaseSelect'), '');
 
         $allUsers = User::all()->pluck('email', 'id');
         $allRoles = Role::all()->pluck('title', 'id');
@@ -116,7 +119,6 @@ class CategoryController extends Controller
 
         return view('admin.categories.edit', compact(
             'category',
-            'accessTypes',
             'allRoles',
             'allUsers',
             'roleIds',

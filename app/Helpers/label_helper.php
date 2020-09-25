@@ -21,13 +21,13 @@ if (!function_exists('labelAccess')) {
     }
 }
 
-if (!function_exists('labelDocumentStatus')) {
+if (!function_exists('labelStatus')) {
 
     /**
      * @param string $status
      * @return string
      */
-    function labelDocumentStatus(string $status) : string
+    function labelStatus(string $status) : string
     {
         switch ($status) {
             case 'initial':

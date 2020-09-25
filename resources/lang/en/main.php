@@ -21,5 +21,6 @@ return [
     'status' => 'Status',
     'initial' => 'Initial',
     'updated' => 'Updated',
+    'canceled' => 'Canceled',
     'less_items' => 'Less items',
 ];

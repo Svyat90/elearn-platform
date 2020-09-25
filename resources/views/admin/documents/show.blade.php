@@ -38,7 +38,7 @@
                     @elseif($field === 'status')
                         <tr>
                             <th>{{ trans("cruds.document.fields.{$field}") }}</th>
-                            <td>{!! labelDocumentStatus($document->{$field}) !!}</td>
+                            <td>{!! labelStatus($document->{$field}) !!}</td>
                         </tr>
                     @else
                         <tr>

@@ -34,7 +34,7 @@ class CreateDocumentsTable extends Migration
             $table->text('description')->nullable();
 
             $table->enum('status', DocumentService::getStatuses())
-                ->default(DocumentService::DOCUMENT_STATUS_INITIAL);
+                ->default(DocumentService::STATUS_INITIAL);
 
             $table->enum('access', DocumentService::getAccessTypes())
                 ->default(DocumentService::ACCESS_TYPE_PUBLIC);

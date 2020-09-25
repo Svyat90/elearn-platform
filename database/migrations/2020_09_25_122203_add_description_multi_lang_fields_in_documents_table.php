@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Services\CourseService;
 
-class AddDescriptionMultiLangFieldsAndStatusInCoursesTable extends Migration
+class AddDescriptionMultiLangFieldsInDocumentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,11 @@ class AddDescriptionMultiLangFieldsAndStatusInCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::table('courses', function (Blueprint $table) {
+        Schema::table('documents', function (Blueprint $table) {
             $table->dropColumn('description');
             $table->text('description_ru')->nullable();
             $table->text('description_ro')->nullable();
             $table->text('description_en')->nullable();
-
-            $table->enum('status', CourseService::getStatuses())
-                ->default(CourseService::STATUS_INITIAL);
         });
     }
 
@@ -32,10 +29,10 @@ class AddDescriptionMultiLangFieldsAndStatusInCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::table('courses', function (Blueprint $table) {
+        Schema::table('documents', function (Blueprint $table) {
             $table->text('description')->nullable();
             $table->dropColumn([
-                'description_ru', 'description_ro', 'description_en', 'status'
+                'description_ru', 'description_ro', 'description_en'
             ]);
         });
     }

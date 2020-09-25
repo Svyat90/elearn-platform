@@ -23,4 +23,6 @@ return [
     'updated' => 'Updated',
     'canceled' => 'Canceled',
     'less_items' => 'Less items',
+    'read_now' => 'Read now',
+    'download_pdf' => 'Download PDF',
 ];

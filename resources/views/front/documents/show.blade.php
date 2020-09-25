@@ -19,38 +19,46 @@
                             <div class="title-section">{{ $document->{localeAppColumn('name')} }}</div>
                             <table class="atribute">
                                 <tr>
-                                    <th>Data publicatii</th>
+                                    <th>{{ __('main.date_published') }}</th>
                                     <td>{{ $document->published_at }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Emitet</th>
+                                    <th>{{ __('main.issuer') }}</th>
                                     <td>{{ $document->{localeAppColumn('name_issuer')} }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Autor</th>
-                                    <td>Institutul national al justitiei</td>
+                                    <th>{{ __('main.author') }}</th>
+                                    <td>{{ $document->{localeAppColumn('name_issuer')} }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Category</th>
-{{--                                    <td><a href="">Justitie</a></td>--}}
-                                    <td><a href="">{{ $document->{localeAppColumn('topic')} }}</a></td>
+                                    <th>{{ __('main.category') }}</th>
+                                    <td>
+                                        @foreach($document->categories as $category)
+                                            <a href="{{ route('categories.show', $category->id) }}">{{ $category->{localeAppColumn('name')} }}</a>
+                                        @endforeach
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th>Status</th>
-                                    <td><a class="status" href="">{{ $document->status }}</a></td>
+                                    <th>{{ __('main.status') }}</th>
+                                    <td><a class="status" href="">{{ localeStatus($document->status) }}</a></td>
                                 </tr>
                             </table>
 
                             <div class="doc-btn">
-                                <a href="" class="button">Read now</a>
-                                <a href="" class="button-white">Descarca PDF</a>
-                                <a href="" class="button-grey"><img src="{{ asset('front/images/clock.svg') }}" alt=""> <span>Watch later</span></a>
-                                <a href="" class="button-grey"><img src="{{ asset('front/images/bookmark.svg') }}" alt=""> <span>Add to favourits</span></a>
+                                <a href="{{ storageUrl($document->file_path) }}" target="_blank" class="button">{{ __('main.read_now') }}</a>
+                                <a href="{{ storageUrl($document->file_path) }}" class="button-white" download>{{ __('main.download_pdf') }}</a>
+                                <a href="" class="button-grey"><img src="{{ asset('front/images/clock.svg') }}" alt="">
+                                    <span>{{ __('main.watch_later') }}</span>
+                                </a>
+                                <a href="" class="button-grey">
+                                    <img src="{{ asset('front/images/bookmark.svg') }}" alt="">
+                                    <span>{{ __('main.add_to_favourites') }}</span>
+                                </a>
                             </div>
                         </div>
                         <div class="doc-bottom">
-                            <div class="title">Descriere</div>
-                            <p>{{ $document->description }}</p>
+                            <div class="title">{{ __('main.description') }}</div>
+                            <p>{{ $document->{localeAppColumn('description')} }}</p>
                         </div>
 
                     </div>

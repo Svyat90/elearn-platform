@@ -23,4 +23,6 @@ return [
     'updated' => 'Actualizat',
     'canceled' => 'Actualizat',
     'less_items' => 'Mai puține articole',
+    'read_now' => 'Read now',
+    'download_pdf' => 'Descarca PDF',
 ];

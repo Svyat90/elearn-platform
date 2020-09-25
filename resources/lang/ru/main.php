@@ -23,4 +23,6 @@ return [
     'updated' => 'Обновлено',
     'canceled' => 'Отменен',
     'less_items' => 'Меньше элементов',
+    'read_now' => 'Читать сейчас',
+    'download_pdf' => 'Скачать PDF',
 ];

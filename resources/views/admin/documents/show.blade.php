@@ -40,6 +40,11 @@
                             <th>{{ trans("cruds.document.fields.{$field}") }}</th>
                             <td>{!! labelStatus($document->{$field}) !!}</td>
                         </tr>
+                    @elseif(strpos($field, "description") !== false)
+                        <tr>
+                            <th>{{ trans("cruds.document.fields.{$field}") }}</th>
+                            <td>{!! $document->{$field} !!}</td>
+                        </tr>
                     @else
                         <tr>
                             <th>{{ trans("cruds.document.fields.{$field}") }}</th>

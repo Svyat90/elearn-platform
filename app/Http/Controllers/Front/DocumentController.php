@@ -15,7 +15,7 @@ class DocumentController extends FrontController
      */
     public function show(Document $document) : View
     {
-        $document->load('relatedDocuments');
+        $document->load('categories', 'relatedDocuments');
 
         return view('front.documents.show', compact('document'));
     }

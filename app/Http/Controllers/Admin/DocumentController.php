@@ -120,11 +120,8 @@ class DocumentController extends Controller
      */
     public function store(StoreDocumentRequest $request, DocumentService $documentService) : RedirectResponse
     {
-        $insertData = $request->validated();
-        $insertData['description'] = strip_tags($insertData['description']);
-
         /** @var Document $document */
-        $document = Document::query()->create($insertData);
+        $document = Document::query()->create($request->validated());
 
         $documentService->handleRelationships($document, $request);
 
@@ -185,9 +182,7 @@ class DocumentController extends Controller
         $documentService->handleFile($document, $request->file_path);
         $documentService->handleRelationships($document, $request);
 
-        $updateData = $request->validated();
-        $updateData['description'] = strip_tags($updateData['description']);
-        $document->update($updateData);
+        $document->update($request->validated());
 
         return redirect()->route('admin.documents.index');
     }

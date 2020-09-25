@@ -157,6 +157,18 @@
                     @endcan
                 @endif
 
+                @can('setting_access')
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('settings') ? 'active' : '' }}" href="{{ route('admin.settings.index') }}">
+                            <i class="fa-fw nav-icon fas fa-cogs">
+                            </i>
+                            <p>
+                                {{ trans('global.settings') }}
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+
                 <li class="nav-item">
                     <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                         <p>

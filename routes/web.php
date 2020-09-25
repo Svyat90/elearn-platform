@@ -14,6 +14,7 @@ Route::group(['prefix' => LocaleMiddleware::getLocale(), 'namespace' => 'Front']
     Route::resource('sub-categories', 'SubCategoryController')->only('show');
     Route::resource('documents', 'DocumentController')->only('index', 'show');
     Route::resource('courses', 'CourseController')->only('index', 'show');
+    Route::resource('contacts', 'ContactController')->only('index');
 });
 
 Auth::routes();
@@ -55,6 +56,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Audit Logs
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
+
+    // Settings
+    Route::resource('settings', 'SettingController')->only('index', 'edit', 'update');
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth.admin']], function () {

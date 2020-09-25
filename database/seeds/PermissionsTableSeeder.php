@@ -48,6 +48,9 @@ class PermissionsTableSeeder extends Seeder
             'course_show',
             'course_delete',
             'course_access',
+            'setting_edit',
+            'setting_update',
+            'setting_access',
         ];
 
         $insertData = array_map(fn ($row) => ['title' => $row], $permissions);

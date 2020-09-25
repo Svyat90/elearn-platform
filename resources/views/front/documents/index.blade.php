@@ -8,11 +8,11 @@
         ]])
 
         @if(count($documents) > 0)
-            <section class="container">
+            <section class="container white">
                 <div class="grid">
                     <div class="row">
                         @foreach($documents as $document)
-                            <div class="col-xs-6 col-md-4">
+                            <div class="col-xs-6 col-sm-4 col-md-3">
                                 @include('front.documents._item', ['document' => $document])
                             </div>
                         @endforeach

@@ -54,7 +54,7 @@
             <li><a href="">{{ __('main.about_us') }}</a></li>
             <li><a href="{{ route('courses.index') }}">{{ __('main.electronic_courses') }}</a></li>
             <li><a href="{{ route('documents.index') }}">{{ __('main.info_materials') }}</a></li>
-            <li><a href="">{{ __('main.contacts') }}</a></li>
+            <li><a href="{{ route('contacts.index') }}">{{ __('main.contacts') }}</a></li>
         </ul>
     </div>
 </header>

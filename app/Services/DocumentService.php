@@ -7,10 +7,10 @@ use App\Document;
 use App\Http\Requests\Front\Category\IndexCategoryRequest;
 use App\Role;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class DocumentService extends AbstractAccessService
 {
@@ -64,21 +64,22 @@ class DocumentService extends AbstractAccessService
     }
 
     /**
-     * @param Category $category
+     * @param Model $category
      * @param IndexCategoryRequest $request
-     * @return Builder|BelongsToMany
+     * @param string $pivotColumnName
+     * @return mixed
      */
-    public function getAvailableDocuments(Category $category, IndexCategoryRequest $request)
+    public function getAvailableDocuments(Model $category, IndexCategoryRequest $request, string $pivotColumnName)
     {
         $queryBuilder = $category->documents()
             ->where('access', self::ACCESS_TYPE_PUBLIC);
 
         $this->setFilters($queryBuilder, $request);
 
-        return $queryBuilder->orWhere(function (Builder $query) use ($category, $request) {
+        return $queryBuilder->orWhere(function (Builder $query) use ($category, $request, $pivotColumnName) {
             $this->setFilters($query, $request);
 
-            $query->where('document_category.category_id', $category->id)
+            $query->where($pivotColumnName, $category->id)
                 ->where('access', self::ACCESS_TYPE_PROTECTED)
                 ->whereIn('id', $this->getProtectedDocumentIds());
         });

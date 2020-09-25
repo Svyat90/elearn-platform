@@ -73,97 +73,29 @@
         <section class="home-two white container">
             <div class="row">
 
-                <div class="col-md-6">
-                    <div class="educ row">
-                        <div class="images  col-xs-4">
-                            <div class="top-book">
-                                <a href=""><img src="{{ asset('front/images/clock-white.svg') }}" alt=""></a>
-                                <a href=""><img src="{{ asset('front/images/bookmark-white.svg') }}" alt=""></a>
+                @foreach($documentsEducation as $document)
+                    <div class="col-md-6">
+                        <div class="educ row">
+                            <div class="images col-xs-4">
+                                <div class="top-book">
+                                    <a href=""><img src="{{ asset('front/images/clock-white.svg') }}" alt=""></a>
+                                    <a href=""><img src="{{ asset('front/images/bookmark-white.svg') }}" alt=""></a>
+                                </div>
+                                <a href="{{ route('documents.show', $document->id) }}"><img src="{{ storageUrl($document->image_path) }}" alt=""></a>
                             </div>
-                            <a href=""><img src="{{ asset('front/images/book.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="caption col-xs-8">
-                            <div class="text">
-                                <a href="" class="title">Education</a>
-                                <p>Specificul psihologic şi particularităţile audierii victimelor traficului de fiinţe
-                                    umane</p>
-                            </div>
-                            <div class="meta">
-                                <div class="date">11.03.2020</div>
-                                <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="educ row">
-                        <div class="images col-xs-4">
-                            <div class="top-book">
-                                <a href=""><img src="{{ asset('front/images/clock-white.svg') }}" alt=""></a>
-                                <a href=""><img src="{{ asset('front/images/bookmark-white.svg') }}" alt=""></a>
-                            </div>
-                            <a href=""><img src="{{ asset('front/images/book.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="caption col-xs-8">
-                            <div class="text">
-                                <a href="" class="title">Education</a>
-                                <p>Specificul psihologic şi particularităţile audierii victimelor traficului de fiinţe
-                                    umane</p>
-                            </div>
-                            <div class="meta">
-                                <div class="date">11.03.2020</div>
-                                <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
+                            <div class="caption col-xs-8">
+                                <div class="text">
+                                    <a href="" class="title">{{ __('home.education') }}</a>
+                                    <p>{{ $document->{localeAppColumn('name')} }}</p>
+                                </div>
+                                <div class="meta">
+                                    <div class="date">{{ $document->published_at }}</div>
+                                    <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="educ row">
-                        <div class="images col-xs-4">
-                            <div class="top-book">
-                                <a href=""><img src="{{ asset('front/images/clock-white.svg') }}" alt=""></a>
-                                <a href=""><img src="{{ asset('front/images/bookmark-white.svg') }}" alt=""></a>
-                            </div>
-                            <a href=""><img src="{{ asset('front/images/book.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="caption col-xs-8">
-                            <div class="text">
-                                <a href="" class="title">Education</a>
-                                <p>Specificul psihologic şi particularităţile audierii victimelor traficului de fiinţe
-                                    umane</p>
-                            </div>
-                            <div class="meta">
-                                <div class="date">11.03.2020</div>
-                                <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="educ row">
-                        <div class="images col-xs-4">
-                            <div class="top-book">
-                                <a href=""><img src="{{ asset('front/images/clock-white.svg') }}" alt=""></a>
-                                <a href=""><img src="{{ asset('front/images/bookmark-white.svg') }}" alt=""></a>
-                            </div>
-                            <a href=""><img src="{{ asset('front/images/book.jpg') }}" alt=""></a>
-                        </div>
-                        <div class="caption col-xs-8">
-                            <div class="text">
-                                <a href="" class="title">Education</a>
-                                <p>Specificul psihologic şi particularităţile audierii victimelor traficului de fiinţe
-                                    umane</p>
-                            </div>
-                            <div class="meta">
-                                <div class="date">11.03.2020</div>
-                                <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
         </section>
@@ -213,63 +145,11 @@
 
         <section class="home-for white container">
             <div id="popular" class="owl-carousel">
-
-                <div class="item">
-                    <div class="book">
-                        <div class="top-book">
-                            <a href=""><img src="{{ asset('front/images/clock-white.svg') }}" alt=""></a>
-                            <a href=""><img src="{{ asset('front/images/bookmark-white.svg') }}" alt=""></a>
-                        </div>
-                        <a href=""><img src="{{ asset('front/images/book.jpg') }}" alt="">
-                            <p>Hotarari explicative in materiale civila ale plenului curtii de justitie</p>
-                        </a>
+                @foreach($documentsMostPopular as $document)
+                    <div class="item">
+                        @include('front.documents._item', ['document' => $document])
                     </div>
-                </div>
-                <div class="item">
-                    <div class="book">
-                        <div class="top-book">
-                            <a href=""><img src="{{ asset('front/images/clock-white.svg') }}" alt=""></a>
-                            <a href=""><img src="{{ asset('front/images/bookmark-white.svg') }}" alt=""></a>
-                        </div>
-                        <a href=""><img src="{{ asset('front/images/book.jpg') }}" alt="">
-                            <p>Hotarari explicative in materiale civila ale plenului curtii de justitie</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="book">
-                        <div class="top-book">
-                            <a href=""><img src="{{ asset('front/images/clock-white.svg') }}" alt=""></a>
-                            <a href=""><img src="{{ asset('front/images/bookmark-white.svg') }}" alt=""></a>
-                        </div>
-                        <a href=""><img src="{{ asset('front/images/book.jpg') }}" alt="">
-                            <p>Hotarari explicative in materiale civila ale plenului curtii de justitie</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="book">
-                        <div class="top-book">
-                            <a href=""><img src="{{ asset('front/images/clock-white.svg') }}" alt=""></a>
-                            <a href=""><img src="{{ asset('front/images/bookmark-white.svg') }}" alt=""></a>
-                        </div>
-                        <a href=""><img src="{{ asset('front/images/book.jpg') }}" alt="">
-                            <p>Hotarari explicative in materiale civila ale plenului curtii de justitie</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="book">
-                        <div class="top-book">
-                            <a href=""><img src="{{ asset('front/images/clock-white.svg') }}" alt=""></a>
-                            <a href=""><img src="{{ asset('front/images/bookmark-white.svg') }}" alt=""></a>
-                        </div>
-                        <a href=""><img src="{{ asset('front/images/book.jpg') }}" alt="">
-                            <p>Hotarari explicative in materiale civila ale plenului curtii de justitie</p>
-                        </a>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </section>
 

@@ -35,7 +35,7 @@ class SubCategoryController extends FrontController
     public function show(IndexCategoryRequest $request, DocumentService $documentService, SubCategory $subCategory) : View
     {
         $documents = $documentService
-            ->getAvailableDocuments($subCategory, $request, 'sub_category_id')
+            ->getAvailableCategoryDocuments($subCategory, $request, 'sub_category_id')
             ->paginate($this->pageLimit);
 
         $allTypes = $this->documentRepository->getDocumentTypes();

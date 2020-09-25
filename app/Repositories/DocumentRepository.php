@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Document;
+use App\Services\DocumentService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
@@ -44,6 +45,19 @@ class DocumentRepository extends Model
             ->select($localeColumn)
             ->distinct()
             ->pluck($localeColumn);
+    }
+
+    /**
+     * @param int $limit
+     * @return Collection
+     */
+    public function getRandomPublicDocuments(int $limit) : Collection
+    {
+        return Document::query()
+            ->where('access', DocumentService::ACCESS_TYPE_PUBLIC)
+            ->inRandomOrder()
+            ->limit($limit)
+            ->get();
     }
 
 }

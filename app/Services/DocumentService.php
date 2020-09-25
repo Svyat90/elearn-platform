@@ -6,6 +6,7 @@ use App\Category;
 use App\Document;
 use App\Http\Requests\Front\Category\IndexCategoryRequest;
 use App\Role;
+use App\SubCategory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -64,12 +65,12 @@ class DocumentService extends AbstractAccessService
     }
 
     /**
-     * @param Model $category
+     * @param Model|Category|SubCategory $category
      * @param IndexCategoryRequest $request
      * @param string $pivotColumnName
      * @return mixed
      */
-    public function getAvailableDocuments(Model $category, IndexCategoryRequest $request, string $pivotColumnName)
+    public function getAvailableCategoryDocuments(Model $category, IndexCategoryRequest $request, string $pivotColumnName)
     {
         $queryBuilder = $category->documents()
             ->where('access', self::ACCESS_TYPE_PUBLIC);

@@ -35,7 +35,7 @@ class CategoryController extends FrontController
     public function show(IndexCategoryRequest $request, DocumentService $documentService, Category $category) : View
     {
         $documents = $documentService
-            ->getAvailableDocuments($category, $request, 'category_id')
+            ->getAvailableCategoryDocuments($category, $request, 'category_id')
             ->paginate($this->pageLimit);
 
         $allTypes = $this->documentRepository->getDocumentTypes();

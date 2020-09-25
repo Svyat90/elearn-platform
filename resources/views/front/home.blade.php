@@ -104,40 +104,16 @@
 
         <section class="home-three container">
             <div class="row">
-
-                <div class="col-xs-6 col-md-3">
-                    <div class="cat">
-                        <a href="">
-                            <div class="ico"><img src="{{ asset('front/images/cat-img-1.png') }}" alt=""></div>
-                            <span class="title">Actele normative</span>
-                        </a>
+                @foreach($categoriesForWidget as $category)
+                    <div class="col-xs-6 col-md-3">
+                        <div class="cat">
+                            <a href="{{ route('categories.show', $category->id) }}">
+                                <div class="ico"><img src="{{ categoryImagePath($category->id) }}" alt=""></div>
+                                <span class="title">{{ $category->{localeAppColumn('name')} }}</span>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <div class="cat">
-                        <a href="">
-                            <div class="ico"><img src="{{ asset('front/images/cat-img-2.png') }}" alt=""></div>
-                            <span class="title">Actele legate de evaluările (continue/finale)</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <div class="cat">
-                        <a href="">
-                            <div class="ico"><img src="{{ asset('front/images/cat-img-3.png') }}" alt=""></div>
-                            <span class="title">Materialele metodico-didactice elaborate în cadrul instruirilorinițiale și continue</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-md-3">
-                    <div class="cat">
-                        <a href="">
-                            <div class="ico"><img src="{{ asset('front/images/cat-img-4.png') }}" alt=""></div>
-                            <span class="title">Materialele de cercetare</span>
-                        </a>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </section>
 

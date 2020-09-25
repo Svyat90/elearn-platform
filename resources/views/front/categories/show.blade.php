@@ -9,7 +9,7 @@
 
         <section class="container white">
             <div class="category-top">
-                <img src="{{ asset('front/images/cat-img-3.png') }}" alt="">
+                <img src="{{ categoryImagePath($category->id) }}" alt="">
                 <div class="title-section">{{ $category->{localeAppColumn('name')} }}</div>
             </div>
         </section>

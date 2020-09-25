@@ -7,64 +7,11 @@
 
         <section class="home-one container">
             <div class="row">
-                <div class="col-xs-6 col-md-4">
-                    <div class="cours">
-                        <a class="course-img" href=""><img src="{{ asset('front/images/cours.jpg') }}" alt=""></a>
-                        <div class="caption">
-                            <div class="meta">
-                                <a href="">Psihologie</a>
-                                <div class="date">11.03.2020</div>
-                            </div>
-                            <p>Specificul psihologic şi particularităţile audierii victimelor traficului de fiinţe
-                                umane</p>
-                            <div class="course-but">
-                                <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
-                                <a href="" class="button-grey"><img src="{{ asset('front/images/clock.svg') }}" alt="">
-                                    <span>{{ __('main.watch_later') }}</span></a>
-                                <a href="" class="button-grey"><img src="{{ asset('front/images/bookmark.svg') }}" alt=""> <span>{{ __('main.add_to_favourites') }}</span></a>
-                            </div>
-                        </div>
+                @foreach($courses as $course)
+                    <div class="col-xs-6 col-md-4">
+                        @include('front.courses._item', ['course' => $course])
                     </div>
-                </div>
-                <div class="col-xs-6 col-md-4">
-                    <div class="cours">
-                        <a class="course-img" href=""><img src="{{ asset('front/images/cours.jpg') }}" alt=""></a>
-                        <div class="caption">
-                            <div class="meta">
-                                <a href="">Psihologie</a>
-                                <div class="date">11.03.2020</div>
-                            </div>
-                            <p>Specificul psihologic şi particularităţile audierii victimelor traficului de fiinţe
-                                umane</p>
-                            <div class="course-but">
-                                <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
-                                <a href="" class="button-grey"><img src="{{ asset('front/images/clock.svg') }}" alt="">
-                                    <span>{{ __('main.watch_later') }}</span></a>
-                                <a href="" class="button-grey"><img src="{{ asset('front/images/bookmark.svg') }}" alt=""> <span>{{ __('main.add_to_favourites') }}</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-md-4">
-                    <div class="cours">
-                        <a class="course-img" href=""><img src="{{ asset('front/images/cours.jpg') }}" alt=""></a>
-                        <div class="caption">
-                            <div class="meta">
-                                <a href="">Psihologie</a>
-                                <div class="date">11.03.2020</div>
-                            </div>
-                            <p>Specificul psihologic şi particularităţile audierii victimelor traficului de fiinţe
-                                umane</p>
-                            <div class="course-but">
-                                <a href="" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
-                                <a href="" class="button-grey"><img src="{{ asset('front/images/clock.svg') }}" alt="">
-                                    <span>{{ __('main.watch_later') }}</span></a>
-                                <a href="" class="button-grey"><img src="{{ asset('front/images/bookmark.svg') }}" alt=""> <span>{{ __('main.add_to_favourites') }}</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </section>
 
@@ -72,7 +19,6 @@
 
         <section class="home-two white container">
             <div class="row">
-
                 @foreach($documentsEducation as $document)
                     <div class="col-md-6">
                         <div class="educ row">
@@ -96,7 +42,6 @@
                         </div>
                     </div>
                 @endforeach
-
             </div>
         </section>
 

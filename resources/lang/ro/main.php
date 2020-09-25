@@ -11,5 +11,15 @@ return [
     'read_more' => 'Citiți mai multe',
     'watch_later' => 'Urmăriți mai târziu',
     'add_to_favourites' => 'Adăugați la favorit',
-    'close' => 'Închidere'
+    'close' => 'Închidere',
+    'date_published' => 'Data publicării',
+    'documents' => 'Documente',
+    'description' => 'Descriere',
+    'issuer' => 'Emitent',
+    'author' => 'Author',
+    'category' => 'Categorie',
+    'status' => 'Status',
+    'initial' => 'Initial',
+    'updated' => 'Actualizat',
+    'less_items' => 'Mai puține articole',
 ];

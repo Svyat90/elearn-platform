@@ -71,7 +71,7 @@
             </section>
         @else
             <section class="container no-search">
-                <div class="title-section">{{ __('search.no_results') }}asd</div>
+                <div class="title-section">{{ __('search.no_results') }}</div>
             </section>
         @endif
 

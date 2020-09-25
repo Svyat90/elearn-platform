@@ -18,7 +18,7 @@ class FrontController extends Controller
     /**
      * @var int
      */
-    protected int $pageLimit = 20;
+    protected int $pageLimit = 24;
 
     /**
      * HomeController constructor.

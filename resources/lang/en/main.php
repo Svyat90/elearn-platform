@@ -11,5 +11,15 @@ return [
     'read_more' => 'Read more',
     'watch_later' => 'Watch later',
     'add_to_favourites' => 'Add to favourite',
-    'close' => 'Close'
+    'close' => 'Close',
+    'date_published' => 'Date published',
+    'documents' => 'Documents',
+    'description' => 'Description',
+    'issuer' => 'Issuer',
+    'author' => 'Author',
+    'category' => 'Category',
+    'status' => 'Status',
+    'initial' => 'Initial',
+    'updated' => 'Updated',
+    'less_items' => 'Less items',
 ];

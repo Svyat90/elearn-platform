@@ -11,5 +11,15 @@ return [
     'read_more' => 'Читать дальше',
     'watch_later' => 'Смотреть позже',
     'add_to_favourites' => 'Добавить в избранное',
-    'close' => 'Закрыть'
+    'close' => 'Закрыть',
+    'date_published' => 'Дата публикации',
+    'documents' => 'Документы',
+    'description' => 'Описание',
+    'issuer' => 'Эмитент',
+    'author' => 'Автор',
+    'category' => 'Категория',
+    'status' => 'Статус',
+    'initial' => 'Начальный',
+    'updated' => 'Обновлено',
+    'less_items' => 'Меньше элементов',
 ];

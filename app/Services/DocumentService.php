@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Category;
+use App\Course;
 use App\Document;
 use App\Http\Requests\Front\Category\IndexCategoryRequest;
 use App\Role;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class DocumentService extends AbstractAccessService
 {
@@ -62,6 +64,23 @@ class DocumentService extends AbstractAccessService
         $document->categories()->sync($request->category_ids);
         $document->subCategories()->sync($request->sub_category_ids);
         $document->relatedDocuments()->sync($request->related_document_ids);
+    }
+
+    /**
+     * @param Course $course
+     * @return Builder|BelongsToMany
+     */
+    public function getAvailableCourseDocuments(Course $course)
+    {
+        $queryBuilder = $course->documents()
+            ->where('access', self::ACCESS_TYPE_PUBLIC);
+
+        return $queryBuilder->orWhere(function (Builder $query) use ($course) {
+            $query
+                ->where('course_id', $course->id)
+                ->where('access', self::ACCESS_TYPE_PROTECTED)
+                ->whereIn('id', $this->getProtectedDocumentIds());
+        });
     }
 
     /**

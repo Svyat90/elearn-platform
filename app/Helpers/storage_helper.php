@@ -17,10 +17,10 @@ if (!function_exists('storageUrl')) {
 if (!function_exists('categoryImagePath')) {
 
     /**
-     * @param int|null $categoryId
+     * @param int $categoryId
      * @return string
      */
-    function categoryImagePath( ? int $categoryId = null) : string
+    function categoryImagePath(int $categoryId) : string
     {
         switch ($categoryId) {
             case 1: $str = 'front/images/cat-img-1.png'; break;

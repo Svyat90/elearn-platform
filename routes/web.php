@@ -13,6 +13,7 @@ Route::group(['prefix' => LocaleMiddleware::getLocale(), 'namespace' => 'Front']
     Route::resource('categories', 'CategoryController')->only('show');
     Route::resource('sub-categories', 'SubCategoryController')->only('show');
     Route::resource('documents', 'DocumentController')->only('show');
+    Route::resource('courses', 'CourseController')->only('index', 'show');
 });
 
 Auth::routes();

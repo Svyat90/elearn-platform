@@ -34,3 +34,35 @@ if (!function_exists('categoryImagePath')) {
     }
 }
 
+if (!function_exists('favoriteImagePath')) {
+
+    /**
+     * @param bool $isFavourite
+     * @return string
+     */
+    function favoriteImagePath(bool $isFavourite) : string
+    {
+        if ($isFavourite) {
+            return asset('front/images/bookmark.svg');
+        }
+
+        return asset('front/images/bookmark-white.svg');
+    }
+}
+
+if (!function_exists('watchLaterImagePath')) {
+
+    /**
+     * @param bool $isFavourite
+     * @return string
+     */
+    function watchLaterImagePath(bool $isFavourite) : string
+    {
+        if ($isFavourite) {
+            return asset('front/images/clock.svg');
+        }
+
+        return asset('front/images/clock-white.svg');
+    }
+}
+

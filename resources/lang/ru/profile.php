@@ -4,7 +4,7 @@ return [
     'my_account' => 'Моя учетная запись',
     'personal_data' => 'Личные данные',
     'favourites' => 'Избранное',
-    'watch_later' => 'Посмотреть позже',
+    'watch_later' => 'Смотреть позже',
     'my_courses' => 'Мои курсы',
     'my_documents' => 'Мои документы',
     'main_information' => 'Main information',

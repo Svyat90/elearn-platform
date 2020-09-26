@@ -39,5 +39,86 @@
 
 @yield('scripts')
 
+<script>
+    $(function () {
+        enableFavouriteDocument();
+        enableWatchLaterDocument();
+
+        /**
+         * Global toggle favourite documents
+         */
+        function enableFavouriteDocument()
+        {
+            $(".document-favourite").click(function (e) {
+                e.preventDefault();
+
+                let documentId = $(this).data('document-id');
+                let image = $(this).find('img');
+
+                let formData = new FormData();
+                formData.append('documentId', documentId);
+
+                $.ajax({
+                    type: "POST",
+                    url: '{{ route('documents.favourite') }}',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response.data.isFavorite === true) {
+                            image.attr('src', '{{ favoriteImagePath(true) }}');
+                        } else {
+                            image.attr('src', '{{ favoriteImagePath(false) }}');
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        let errors = response.responseJSON.errors;
+                        alert(errors);
+                    }
+                });
+            });
+        }
+
+        /**
+         * Global toggle watch later documents
+         */
+        function enableWatchLaterDocument()
+        {
+            $(".document-watch-later").click(function (e) {
+                e.preventDefault();
+
+                let documentId = $(this).data('document-id');
+                let image = $(this).find('img');
+
+                let formData = new FormData();
+                formData.append('documentId', documentId);
+
+                $.ajax({
+                    type: "POST",
+                    url: '{{ route('documents.watch_later') }}',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response.data.isWatchLater === true) {
+                            image.attr('src', '{{ watchLaterImagePath(true) }}');
+                        } else {
+                            image.attr('src', '{{ watchLaterImagePath(false) }}');
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        let errors = response.responseJSON.errors;
+                        alert(errors);
+                    }
+                });
+            });
+        }
+    });
+</script>
+
 </body>
 </html>

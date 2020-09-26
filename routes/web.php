@@ -10,14 +10,30 @@ Route::get('set-locale/{lang}', 'Front\LocaleController@setLocale')->name('setLo
 // Front
 Route::group(['prefix' => LocaleMiddleware::getLocale(), 'namespace' => 'Front'], function () {
     Route::get('home', 'HomeController@index')->name('front.home');
+    // Categories
     Route::resource('categories', 'CategoryController')->only('show');
     Route::resource('sub-categories', 'SubCategoryController')->only('show');
+
+    // Documents
     Route::resource('documents', 'DocumentController')->only('index', 'show');
+    Route::post('documents/favorite', 'DocumentController@favorite')->name('documents.favourite');
+    Route::post('documents/watch-later', 'DocumentController@watchLater')->name('documents.watch_later');
+
+    // Courses
     Route::resource('courses', 'CourseController')->only('index', 'show');
+
+    // Contacts
     Route::resource('contacts', 'ContactController')->only('index');
     Route::post('contacts/send', 'ContactController@send')->name('contacts.send');
-    Route::get('profile/my_courses', 'ProfileController@myCourses')->name('profile.my_courses');
-    Route::get('profile/my_documents', 'ProfileController@myDocuments')->name('profile.my_documents');
+
+    // User Profile
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('profile/my-account', 'ProfileController@myAccount')->name('profile.my_account');
+        Route::get('profile/favourites', 'ProfileController@favourites')->name('profile.favourites');
+        Route::get('profile/watch-later', 'ProfileController@watchLater')->name('profile.watch_later');
+        Route::get('profile/my-courses', 'ProfileController@myCourses')->name('profile.my_courses');
+        Route::get('profile/my-documents', 'ProfileController@myDocuments')->name('profile.my_documents');
+    });
 });
 
 Auth::routes();

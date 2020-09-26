@@ -1,9 +1,9 @@
 <header>
     <div class="head-top container-fluid">
         <div class="contact">
-            <span>{{ __('main.phone') }}: <a href="tel:+373859495">+373 85 94 95</a></span>
-            <span>{{ __('main.email') }}: <a href="mailto:e-learning@gmail.com">e-learning@gmail.com</a></span>
-            <span>{{ __('main.address') }}: <a href="https://maps.google.com?saddr=Current+Location&daddr=47.025007,28.818153">MD 2004, Republica Moldova, Chișinău, str. S.Lazo, 1</a></span>
+            <span>{{ __('main.phone') }}: <a href="tel:{{ $settings['phone_fax'] }}">{{ $settings['phone_fax'] }}</a></span>
+            <span>{{ __('main.email') }}: <a href="mailto:{{ $settings['email'] }}">{{ $settings['email'] }}</a></span>
+            <span>{{ __('main.address') }}: <a target="_blank" href="https://maps.google.com?saddr=Current+Location&daddr={{ $settings['geo_coordinates'] }}">{{ $settings[localeAppColumn('address')] }}</a></span>
         </div>
         <ul class="lang">
             <li class="{{ app()->getLocale() === 'ro' ? 'active' : '' }}"><a href="{{ route('setLocate', 'ro') }}">RO</a></li>
@@ -19,7 +19,7 @@
                         <div class="toggle"><span></span><span></span><span></span></div>
                         <span class="links">{{ __('header.categories') }}</span>
                     </div>
-                    <div class="logo"><a href="/"><img src="{{ asset('front/images/logo.svg') }}" alt=""></a></div>
+                    <div class="logo"><a href="{{ route('front.home') }}"><img src="{{ asset('front/images/logo.svg') }}" alt=""></a></div>
 
                     <form class="search" action="">
                         <input type="search" placeholder="{{ __('header.searching_docs') }}">
@@ -27,8 +27,9 @@
                     </form>
 
                     <ul class="lang md-hidden">
-                        <li><a href="">RO</a></li>
-                        <li class="active"><a href="">EN</a></li>
+                        <li class="{{ app()->getLocale() === 'ro' ? 'active' : '' }}"><a href="{{ route('setLocate', 'ro') }}">RO</a></li>
+                        <li class="{{ app()->getLocale() === 'en' ? 'active' : '' }}"><a href="{{ route('setLocate', 'en') }}">EN</a></li>
+                        <li class="{{ app()->getLocale() === 'ru' ? 'active' : '' }}"><a href="{{ route('setLocate', 'ru') }}">RU</a></li>
                     </ul>
 
                 </div>

@@ -22,7 +22,7 @@ class PermissionService
         }
 
         $adminPermissions = [
-            'user_management_access', 'content_management_access'
+            'user_management_access', 'content_management_access', 'setting_access'
         ];
 
         /** @var Role $role */

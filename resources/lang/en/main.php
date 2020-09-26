@@ -26,4 +26,8 @@ return [
     'read_now' => 'Read now',
     'download_pdf' => 'Download PDF',
     'not_found_available_document' => 'Not found available documents',
+    'tel' => 'Tel',
+    'mob' => 'Mob',
+    'fist_and_last_name' => 'Name and surname',
+    'message' => 'Message'
 ];

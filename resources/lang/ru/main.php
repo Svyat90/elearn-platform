@@ -26,4 +26,8 @@ return [
     'read_now' => 'Читать сейчас',
     'download_pdf' => 'Скачать PDF',
     'not_found_available_document' => 'Не найдено доступных документов',
+    'tel' => 'Тел',
+    'mob' => 'Моб',
+    'fist_and_last_name' => 'Имя и фамилия',
+    'message' => 'Сообщение'
 ];

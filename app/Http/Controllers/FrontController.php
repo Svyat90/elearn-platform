@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\AccessCategories;
+use App\Http\Controllers\Traits\SettingTrait;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class FrontController extends Controller
 {
-    use AccessCategories;
+    use AccessCategories, SettingTrait;
 
     /**
      * @var User|null
@@ -30,6 +31,7 @@ class FrontController extends Controller
             $user = Auth::user();
             $this->user = $user;
             $this->shareCategories($this->user);
+            $this->shareSettings();
             return $next($request);
         });
     }

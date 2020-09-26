@@ -26,4 +26,8 @@ return [
     'read_now' => 'Read now',
     'download_pdf' => 'Descarca PDF',
     'not_found_available_document' => 'Nu s-au găsit documente disponibile',
+    'tel' => 'Tel',
+    'mob' => 'Mob',
+    'fist_and_last_name' => 'Nume si prenume',
+    'message' => 'Mesaj'
 ];

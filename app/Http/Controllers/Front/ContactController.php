@@ -26,11 +26,18 @@ class ContactController extends FrontController
      */
     public function send(ContactService $contactService, SendContactRequest $request) : RedirectResponse
     {
-        $contactService->sendEmailToAdmin($request);
+        try {
+            $contactService->sendEmailToAdmin($request);
 
-        return redirect()
-            ->back()
-            ->with('message', __('contact.success_sent'));
+            return redirect()
+                ->back()
+                ->with('message', __('contact.success_sent'));
+
+        } catch (\Throwable $e) {
+            return redirect()
+                ->back()
+                ->withErrors(['error' => 'Something went wrong. Try again later.']);
+        }
     }
 
 }

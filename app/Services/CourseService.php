@@ -45,9 +45,10 @@ class CourseService extends AbstractAccessService
     public function getAvailableCourses()
     {
         if ( ! $this->getUser()) {
-            return Course::query()->where('access', self::ACCESS_TYPE_PUBLIC);
+            return $this->getPublicCourses();
         }
 
+        // Get public and protected courses
         return $this->getUser()->courses()
             ->where('access', self::ACCESS_TYPE_PUBLIC)
             ->orWhere(function (Builder $query) {
@@ -56,6 +57,25 @@ class CourseService extends AbstractAccessService
                     ->where('access', self::ACCESS_TYPE_PROTECTED)
                     ->whereIn('id', $this->getProtectedCourseIds());
             });
+    }
+
+    /**
+     * @return Builder
+     */
+    public function getPublicCourses() : Builder
+    {
+        return Course::query()->where('access', self::ACCESS_TYPE_PUBLIC);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getProtectedCourses() : Collection
+    {
+        return $this->getUser()->courses()
+            ->where('access', self::ACCESS_TYPE_PROTECTED)
+            ->whereIn('id', $this->getProtectedCourseIds())
+            ->get();
     }
 
     /**

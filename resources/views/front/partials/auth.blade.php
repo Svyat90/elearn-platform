@@ -4,11 +4,29 @@
     <a class="login" href="#login">{{ __('auth.login') }}</a>
     <a href="#reg" class="button">{{ __('auth.register') }}</a>
 @else
-    <span class="login" href="#login">{{ auth()->user()->email }}</span>
-    <a class="login" id="logout-btn" href="#" >Logout</a>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         {{ csrf_field() }}
     </form>
+    <div class="my-account"><span>{{ __('profile.my_account') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></span>
+        <ul>
+            <li class="{{ request()->is('profile/personal_data') ? 'active' : '' }}">
+                <a href=""><img src="{{ asset('front/images/user.svg') }}" alt="">{{ __('profile.personal_data') }}</a>
+            </li>
+            <li class="{{ request()->is('profile/favourites') ? 'active' : '' }}">
+                <a href=""><img src="{{ asset('front/images/bookmark.svg') }}" alt="">{{ __('profile.favourites') }}</a>
+            </li>
+            <li class="{{ request()->is('profile/watch_later') ? 'active' : '' }}">
+                <a href=""><img src="{{ asset('front/images/clock.svg') }}" alt="">{{ __('profile.watch_later') }}</a>
+            </li>
+            <li class="{{ request()->is('profile/my_courses') ? 'active' : '' }}">
+                <a href="{{ route('profile.my_courses') }}"><img src="{{ asset('front/images/book.svg') }}" alt="">{{ __('profile.my_courses') }}</a>
+            </li>
+            <li class="{{ request()->is('profile/my_documents') ? 'active' : '' }}">
+                <a href="{{ route('profile.my_documents') }}"><img src="{{ asset('front/images/doc.svg') }}" alt="">{{ __('profile.my_documents') }}</a>
+            </li>
+            <li><a id="logout-btn" href="#"><img src="{{ asset('front/images/log.svg') }}" alt="">{{ __('auth.logout') }}</a></li>
+        </ul>
+    </div>
 @endif
 
 @section('scripts')

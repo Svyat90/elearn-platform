@@ -61,9 +61,10 @@ class DocumentService extends AbstractAccessService
     public function getAvailableDocuments()
     {
         if ( ! $this->getUser()) {
-            return Document::query()->where('access', self::ACCESS_TYPE_PUBLIC);
+            return $this->getPublicDocuments();
         }
 
+        // Get public and protected documents
         return $this->getUser()->documents()
             ->where('access', self::ACCESS_TYPE_PUBLIC)
             ->orWhere(function (Builder $query) {
@@ -72,6 +73,25 @@ class DocumentService extends AbstractAccessService
                     ->where('access', self::ACCESS_TYPE_PROTECTED)
                     ->whereIn('id', $this->getProtectedDocumentIds());
             });
+    }
+
+    /**
+     * @return Builder
+     */
+    public function getPublicDocuments() : Builder
+    {
+        return Document::query()->where('access', self::ACCESS_TYPE_PUBLIC);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getProtectedDocuments() : Collection
+    {
+        return $this->getUser()->documents()
+            ->where('access', self::ACCESS_TYPE_PROTECTED)
+            ->whereIn('id', $this->getProtectedDocumentIds())
+            ->get();
     }
 
     /**

@@ -16,6 +16,8 @@ Route::group(['prefix' => LocaleMiddleware::getLocale(), 'namespace' => 'Front']
     Route::resource('courses', 'CourseController')->only('index', 'show');
     Route::resource('contacts', 'ContactController')->only('index');
     Route::post('contacts/send', 'ContactController@send')->name('contacts.send');
+    Route::get('profile/my_courses', 'ProfileController@myCourses')->name('profile.my_courses');
+    Route::get('profile/my_documents', 'ProfileController@myDocuments')->name('profile.my_documents');
 });
 
 Auth::routes();

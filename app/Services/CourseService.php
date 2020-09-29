@@ -77,7 +77,7 @@ class CourseService extends AbstractAccessService
             return collect();
         }
 
-        return $this->getAvailableCourses()
+        return $this->getAvailableUserCourses()
             ->join('course_favorite', function ($join) {
                 $join->on('course_favorite.course_id', 'courses.id');
                 $join->on('course_favorite.user_id', DB::raw($this->getUser()->id));
@@ -121,7 +121,7 @@ class CourseService extends AbstractAccessService
             return collect();
         }
 
-        return $this->getAvailableCourses()
+        return $this->getAvailableUserCourses()
             ->join('course_watch_later', function ($join) {
                 $join->on('course_watch_later.course_id', 'courses.id');
                 $join->on('course_watch_later.user_id', DB::raw($this->getUser()->id));
@@ -132,6 +132,24 @@ class CourseService extends AbstractAccessService
      * @return Builder|BelongsToMany
      */
     public function getAvailableCourses()
+    {
+        if ( ! $this->getUser()) {
+            return $this->getPublicCourses();
+        }
+
+        return Course::query()
+            ->where('access', self::ACCESS_TYPE_PUBLIC)
+            ->orWhere(function (Builder $query) {
+                $query
+                    ->where('access', self::ACCESS_TYPE_PROTECTED)
+                    ->whereIn('id', $this->getProtectedCourseIds());
+            });
+    }
+
+    /**
+     * @return Builder|BelongsToMany
+     */
+    public function getAvailableUserCourses()
     {
         if ( ! $this->getUser()) {
             return $this->getPublicCourses();

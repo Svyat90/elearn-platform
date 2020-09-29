@@ -58,7 +58,7 @@
                         </div>
                         <div class="doc-bottom">
                             <div class="title">{{ __('main.description') }}</div>
-                            <p>{{ $document->{localeAppColumn('description')} }}</p>
+                            <p>{!! $document->{localeAppColumn('description')} !!}</p>
                         </div>
 
                     </div>

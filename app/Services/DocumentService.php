@@ -93,7 +93,7 @@ class DocumentService extends AbstractAccessService
             return collect();
         }
 
-        return $this->getAvailableDocuments()
+        return $this->getAvailableUserDocuments()
             ->join('document_favorite', function ($join) {
                 $join->on('document_favorite.document_id', 'documents.id');
                 $join->on('document_favorite.user_id', DB::raw($this->getUser()->id));
@@ -137,7 +137,7 @@ class DocumentService extends AbstractAccessService
             return collect();
         }
 
-        return $this->getAvailableDocuments()
+        return $this->getAvailableUserDocuments()
             ->join('document_watch_later', function ($join) {
                 $join->on('document_watch_later.document_id', 'documents.id');
                 $join->on('document_watch_later.user_id', DB::raw($this->getUser()->id));
@@ -148,6 +148,24 @@ class DocumentService extends AbstractAccessService
      * @return Builder|BelongsToMany
      */
     public function getAvailableDocuments()
+    {
+        if ( ! $this->getUser()) {
+            return $this->getPublicDocuments();
+        }
+
+        return Document::query()
+            ->where('access', self::ACCESS_TYPE_PUBLIC)
+            ->orWhere(function (Builder $query) {
+                $query
+                    ->where('documents.access', self::ACCESS_TYPE_PROTECTED)
+                    ->whereIn('documents.id', $this->getProtectedDocumentIds());
+            });
+    }
+
+    /**
+     * @return Builder|BelongsToMany
+     */
+    public function getAvailableUserDocuments()
     {
         if ( ! $this->getUser()) {
             return $this->getPublicDocuments();

@@ -23,5 +23,6 @@ return [
     'remember_me' => 'Reține-mă',
     'forgot_password' => 'Ți-ai uitat parola?',
     'dont_have_account' => 'Nu aveți un cont?',
-    'do_you_have_account' => 'Aveți un cont?'
+    'do_you_have_account' => 'Aveți un cont?',
+    'invalid_old_password' => 'Parola veche nevalidă',
 ];

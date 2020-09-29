@@ -11,4 +11,5 @@ return [
     'remember_me' => 'Remember me',
     'forgot_password' => 'Forgot password?',
     'dont_have_account' => 'Don\'t have an account?',
+    'invalid_old_password' => 'Invalid old password',
 ];

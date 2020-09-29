@@ -10,13 +10,13 @@
     <div class="my-account"><span>{{ __('profile.my_account') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></span>
         <ul>
             <li class="{{ request()->is('profile/personal_data') ? 'active' : '' }}">
-                <a href=""><img src="{{ asset('front/images/user.svg') }}" alt="">{{ __('profile.personal_data') }}</a>
+                <a href="{{ route('profile.my_account') }}"><img src="{{ asset('front/images/user.svg') }}" alt="">{{ __('profile.personal_data') }}</a>
             </li>
             <li class="{{ request()->is('profile/favourites') ? 'active' : '' }}">
-                <a href=""><img src="{{ asset('front/images/bookmark.svg') }}" alt="">{{ __('profile.favourites') }}</a>
+                <a href="{{ route('profile.favourites') }}"><img src="{{ asset('front/images/bookmark.svg') }}" alt="">{{ __('profile.favourites') }}</a>
             </li>
             <li class="{{ request()->is('profile/watch_later') ? 'active' : '' }}">
-                <a href=""><img src="{{ asset('front/images/clock.svg') }}" alt="">{{ __('profile.watch_later') }}</a>
+                <a href="{{ route('profile.watch_later') }}"><img src="{{ asset('front/images/clock.svg') }}" alt="">{{ __('profile.watch_later') }}</a>
             </li>
             <li class="{{ request()->is('profile/my_courses') ? 'active' : '' }}">
                 <a href="{{ route('profile.my_courses') }}"><img src="{{ asset('front/images/book.svg') }}" alt="">{{ __('profile.my_courses') }}</a>

@@ -29,6 +29,8 @@ Route::group(['prefix' => LocaleMiddleware::getLocale(), 'namespace' => 'Front']
     // User Profile
     Route::group(['middleware' => 'auth'], function () {
         Route::get('profile/my-account', 'ProfileController@myAccount')->name('profile.my_account');
+        Route::post('profile/update-data', 'ProfileController@updateData')->name('profile.update_data');
+        Route::post('profile/update-password', 'ProfileController@updatePassword')->name('profile.update_password');
         Route::get('profile/favourites', 'ProfileController@favourites')->name('profile.favourites');
         Route::get('profile/watch-later', 'ProfileController@watchLater')->name('profile.watch_later');
         Route::get('profile/my-courses', 'ProfileController@myCourses')->name('profile.my_courses');

@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\AuditLog;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 trait Auditable
@@ -24,6 +25,16 @@ trait Auditable
 
     protected static function audit($description, $model)
     {
+        if ($model instanceof User) {
+            unset(
+                $model->roles,
+                $model->subCategories,
+                $model->categories,
+                $model->documents,
+                $model->courses,
+            );
+        }
+
         AuditLog::query()
             ->create([
                 'description'  => $description,

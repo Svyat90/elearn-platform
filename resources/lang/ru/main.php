@@ -10,7 +10,7 @@ return [
     'contacts' => 'Контакты',
     'read_more' => 'Читать дальше',
     'watch_later' => 'Смотреть позже',
-    'add_to_favourites' => 'Добавить в избранное',
+    'add_to_favourites' => 'В избранное',
     'close' => 'Закрыть',
     'date_published' => 'Дата публикации',
     'documents' => 'Документы',
@@ -29,5 +29,6 @@ return [
     'tel' => 'Тел',
     'mob' => 'Моб',
     'fist_and_last_name' => 'Имя и фамилия',
-    'message' => 'Сообщение'
+    'message' => 'Сообщение',
+    'сourses' => 'Курсы',
 ];

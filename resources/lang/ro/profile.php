@@ -17,8 +17,12 @@ return [
     'password' => 'Parolă',
     'old_password' => 'Parolă veche',
     'new_password' => 'Parolă nouă',
-    'save_changes' => 'Salvați modificările',
+    'save_changes' => 'Salvați',
     'add_courses' => 'Adăugați cursuri',
     'you_dont_have_any_courses' => 'Nu aveți cursuri',
     'you_dont_have_any_documents' => 'Nu aveți documente',
+    'you_dont_have_any_favorite_courses' => 'Nu aveți cursuri preferate',
+    'you_dont_have_any_favorite_documents' => 'Nu aveți documente preferate',
+    'you_dont_have_any_watch_later_courses' => 'Nu aveți cursuri de urmărit mai târziu',
+    'you_dont_have_any_watch_later_documents' => 'Nu aveți documente de urmărit mai târziu',
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Traits;
 
+use App\Services\CourseService;
 use App\Services\DocumentService;
 use App\User;
 use Illuminate\Support\Facades\View;
@@ -23,7 +24,14 @@ trait FavouritesTrait
             ->pluck('id')
             ->toArray();
 
-        View::share(compact('favouriteDocumentIds'));
+        $courseService = new CourseService();
+        $courseService->setUser($user);
+
+        $favouriteCourseIds = $courseService->getFavouriteCourses()
+            ->pluck('id')
+            ->toArray();
+
+        View::share(compact('favouriteDocumentIds', 'favouriteCourseIds'));
     }
 
 }

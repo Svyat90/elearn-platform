@@ -29,5 +29,6 @@ return [
     'tel' => 'Tel',
     'mob' => 'Mob',
     'fist_and_last_name' => 'Nume si prenume',
-    'message' => 'Mesaj'
+    'message' => 'Mesaj',
+    'сourses' => 'Cursuri',
 ];

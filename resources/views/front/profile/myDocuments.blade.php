@@ -11,7 +11,7 @@
                 <div class="account-content white col-xs-9">
                     @if(count($documents) > 0)
                         <div class="grid">
-                            <div class="title">{{ $title }}</div>
+                            <div class="title">{{ __('profile.my_documents') }}</div>
                             <div class="row">
                                 @foreach($documents as $document)
                                     <div class="col-xs-6 col-md-4">

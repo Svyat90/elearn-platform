@@ -71,28 +71,28 @@ class ProfileController extends FrontController
 
     /**
      * @param DocumentService $documentService
+     * @param CourseService $courseService
      * @return View
      */
-    public function favourites(DocumentService $documentService) : View
+    public function favourites(DocumentService $documentService, CourseService $courseService) : View
     {
-        $title = __('profile.favourites');
-
         $documents = $documentService->getFavouriteDocuments();
+        $courses = $courseService->getFavouriteCourses();
 
-        return view('front.profile.myDocuments', compact('documents', 'title'));
+        return view('front.profile.favourites', compact('documents', 'courses'));
     }
 
     /**
      * @param DocumentService $documentService
+     * @param CourseService $courseService
      * @return View
      */
-    public function watchLater(DocumentService $documentService) : View
+    public function watchLater(DocumentService $documentService, CourseService $courseService) : View
     {
-        $title = __('profile.watch_later');
-
         $documents = $documentService->getWatchLaterDocuments();
+        $courses = $courseService->getWatchLaterCourses();
 
-        return view('front.profile.myDocuments', compact('documents', 'title'));
+        return view('front.profile.watchLater', compact('documents', 'documents', 'courses'));
     }
 
     /**
@@ -112,11 +112,9 @@ class ProfileController extends FrontController
      */
     public function myDocuments(DocumentService $documentService) : View
     {
-        $title = __('profile.my_documents');
-
         $documents = $documentService->getProtectedDocuments();
 
-        return view('front.profile.myDocuments', compact('documents', 'title'));
+        return view('front.profile.myDocuments', compact('documents'));
     }
 
 }

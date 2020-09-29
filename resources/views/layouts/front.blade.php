@@ -44,6 +44,9 @@
         enableFavouriteDocument();
         enableWatchLaterDocument();
 
+        enableFavouriteCourse();
+        enableWatchLaterCourse();
+
         /**
          * Global toggle favourite documents
          */
@@ -107,6 +110,80 @@
                             image.attr('src', '{{ watchLaterImagePath(true) }}');
                         } else {
                             image.attr('src', '{{ watchLaterImagePath(false) }}');
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        let errors = response.responseJSON.errors;
+                        alert(errors);
+                    }
+                });
+            });
+        }
+
+        /**
+         * Global toggle favourite courses
+         */
+        function enableFavouriteCourse()
+        {
+            $(".course-favourite").click(function (e) {
+                e.preventDefault();
+
+                let courseId = $(this).data('course-id');
+                let image = $(this).find('img');
+
+                let formData = new FormData();
+                formData.append('courseId', courseId);
+
+                $.ajax({
+                    type: "POST",
+                    url: '{{ route('courses.favourite') }}',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response.data.isFavorite === true) {
+                            image.parent().attr('style', 'color: #970C13 !important; opacity: 1.0 !important;');
+                        } else {
+                            image.parent().attr('style', '');
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        let errors = response.responseJSON.errors;
+                        alert(errors);
+                    }
+                });
+            });
+        }
+
+        /**
+         * Global toggle watch later courses
+         */
+        function enableWatchLaterCourse()
+        {
+            $(".course-watch-later").click(function (e) {
+                e.preventDefault();
+
+                let courseId = $(this).data('course-id');
+                let image = $(this).find('img');
+
+                let formData = new FormData();
+                formData.append('courseId', courseId);
+
+                $.ajax({
+                    type: "POST",
+                    url: '{{ route('courses.watch_later') }}',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response.data.isWatchLater === true) {
+                            image.parent().attr('style', 'color: #970C13 !important; opacity: 1.0 !important;');
+                        } else {
+                            image.parent().attr('style', '');
                         }
                     },
                     error: function (response) {

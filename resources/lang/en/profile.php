@@ -21,4 +21,8 @@ return [
     'add_courses' => 'Add courses',
     'you_dont_have_any_courses' => 'You don\'t have any courses',
     'you_dont_have_any_documents' => 'You don\'t have any documents',
+    'you_dont_have_any_favorite_courses' => 'You don\'t have any favourite courses',
+    'you_dont_have_any_favorite_documents' => 'You don\'t have any favourite documents',
+    'you_dont_have_any_watch_later_courses' => 'You don\'t have any courses for watch later',
+    'you_dont_have_any_watch_later_documents' => 'You don\'t have any documents for watch later',
 ];

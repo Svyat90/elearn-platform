@@ -56,6 +56,21 @@ $(document).ready(function () {
 
 // ***
 
+    let locale = window.location.href;
+    let readMore = '';
+    let lessItems = '';
+
+    if (locale.indexOf('/ru/') !== -1) {
+        readMore = 'Подробнее';
+        lessItems = 'Меньше предметов';
+    } else if (locale.indexOf('/en/') !== -1) {
+        readMore = 'Read more';
+        lessItems = 'Less items';
+    } else {
+        readMore = 'Citeste mai mult';
+        lessItems = 'Mai puține articole';
+    }
+
     let itemsBig = $('.list_all');
     hideBig(itemsBig);
 
@@ -65,11 +80,11 @@ $(document).ready(function () {
 
         if ($(this).hasClass('active')) {
             $(this).removeClass('active');
-            $(this).html('Read more');
+            $(this).html(readMore);
             closeBig(list);
         } else {
             $(this).addClass('active');
-            $(this).html('Less items');
+            $(this).html(lessItems);
             openBig(list);
         }
     });
@@ -79,7 +94,7 @@ $(document).ready(function () {
             let $liArray = $(list).find("span");
             let liQnt = $liArray.length;
             if (liQnt > 3) {
-                $(list).append("<div class='itemMore'>Read more </div>");
+                $(list).append("<div class='itemMore'>" + readMore + " </div>");
                 closeBig(list);
             }
         });

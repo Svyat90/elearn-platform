@@ -21,6 +21,8 @@ Route::group(['prefix' => LocaleMiddleware::getLocale(), 'namespace' => 'Front']
 
     // Courses
     Route::resource('courses', 'CourseController')->only('index', 'show');
+    Route::post('courses/favorite', 'CourseController@favorite')->name('courses.favourite');
+    Route::post('courses/watch-later', 'CourseController@watchLater')->name('courses.watch_later');
 
     // Contacts
     Route::resource('contacts', 'ContactController')->only('index');

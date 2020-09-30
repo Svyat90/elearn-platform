@@ -13,11 +13,11 @@ class SubCategoryPolicy
     use HandlesAuthorization;
 
     /**
-     * @param User $user
+     * @param User|null $user
      * @param SubCategory $category
      * @return Response
      */
-    public function show(User $user, SubCategory $category) : Response
+    public function show( ? User $user, SubCategory $category) : Response
     {
         $availableSubCategoryIds = (new SubCategoryService())
             ->getAvailableSubCategories($category->parent)

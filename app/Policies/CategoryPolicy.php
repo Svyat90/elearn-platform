@@ -31,11 +31,11 @@ class CategoryPolicy
     }
 
     /**
-     * @param User $user
+     * @param User|null $user
      * @param Category $category
      * @return Response
      */
-    public function show(User $user, Category $category) : Response
+    public function show( ? User $user, Category $category) : Response
     {
         return in_array($category->id, $this->availableCategoryIds)
             ? Response::allow()

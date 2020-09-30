@@ -31,11 +31,11 @@ class CoursePolicy
     }
 
     /**
-     * @param User $user
+     * @param User|null $user
      * @param Course $course
      * @return Response
      */
-    public function show(User $user, Course $course) : Response
+    public function show( ? User $user, Course $course) : Response
     {
         return in_array($course->id, $this->availableCourseIds)
             ? Response::allow()

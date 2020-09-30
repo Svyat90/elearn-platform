@@ -119,7 +119,7 @@ class UsersController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user) : RedirectResponse
     {
-        $user->update($request->all());
+        $user->update($request->validated());
         $user->roles()->sync($request->input('roles', []));
         $user->save();
 

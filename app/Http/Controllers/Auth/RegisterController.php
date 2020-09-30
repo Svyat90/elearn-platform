@@ -71,7 +71,7 @@ class RegisterController extends Controller
         ])->setAttributeNames([
             'email' => trans('auth.email'),
             'password' => trans('auth.password')
-        ])->validate();
+        ]);
     }
 
     /**

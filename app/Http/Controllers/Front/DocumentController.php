@@ -10,6 +10,7 @@ use App\Services\DocumentService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\View\View;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class DocumentController extends FrontController
 {
@@ -30,9 +31,12 @@ class DocumentController extends FrontController
     /**
      * @param Document $document
      * @return View
+     * @throws AuthorizationException
      */
     public function show(Document $document) : View
     {
+        $this->authorize('show', $document);
+
         $document->load('categories', 'relatedDocuments');
 
         return view('front.documents.show', compact('document'));
@@ -42,9 +46,12 @@ class DocumentController extends FrontController
      * @param DocumentFavouriteRequest $request
      * @param DocumentService $documentService
      * @return JsonResponse
+     * @throws AuthorizationException
      */
     public function favorite(DocumentFavouriteRequest $request, DocumentService $documentService) : JsonResponse
     {
+        $this->authorize('favorite', $request->documentId);
+
         $result = $documentService->toggleFavorite($request->documentId);
 
         return $this->getSuccessResponse(new JsonResource([
@@ -56,9 +63,12 @@ class DocumentController extends FrontController
      * @param DocumentWatchLaterRequest $request
      * @param DocumentService $documentService
      * @return JsonResponse
+     * @throws AuthorizationException
      */
     public function watchLater(DocumentWatchLaterRequest $request, DocumentService $documentService) : JsonResponse
     {
+        $this->authorize('watchLater', $request->documentId);
+
         $result = $documentService->toggleWatchLater($request->documentId);
 
         return $this->getSuccessResponse(new JsonResource([

@@ -31,4 +31,5 @@ return [
     'fist_and_last_name' => 'Имя и фамилия',
     'message' => 'Сообщение',
     'сourses' => 'Курсы',
+    'access_denied' => 'Доступ закрыт',
 ];

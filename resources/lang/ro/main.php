@@ -31,4 +31,5 @@ return [
     'fist_and_last_name' => 'Nume si prenume',
     'message' => 'Mesaj',
     'сourses' => 'Cursuri',
+    'access_denied' => 'Acces interzis',
 ];

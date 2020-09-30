@@ -28,7 +28,7 @@ class SubCategoryService extends AbstractAccessService
      * @param Category $parentCategory
      * @return Collection
      */
-    public function getAvailableCategories(Category $parentCategory) : Collection
+    public function getAvailableSubCategories(Category $parentCategory) : Collection
     {
         return SubCategory::query()
             ->where('parent_id', $parentCategory->id)

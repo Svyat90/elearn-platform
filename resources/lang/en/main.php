@@ -31,4 +31,5 @@ return [
     'fist_and_last_name' => 'Name and surname',
     'message' => 'Message',
     'сourses' => 'Courses',
+    'access_denied' => 'Access denied'
 ];

@@ -8,6 +8,7 @@ use App\Http\Requests\Front\Category\IndexCategoryRequest;
 use App\Repositories\DocumentRepository;
 use App\Services\DocumentService;
 use Illuminate\View\View;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class CategoryController extends FrontController
 {
@@ -31,9 +32,12 @@ class CategoryController extends FrontController
      * @param DocumentService $documentService
      * @param Category $category
      * @return View
+     * @throws AuthorizationException
      */
     public function show(IndexCategoryRequest $request, DocumentService $documentService, Category $category) : View
     {
+        $this->authorize('show', $category);
+
         $documents = $documentService
             ->getAvailableCategoryDocuments($category, $request, 'category_id')
             ->paginate($this->pageLimit);

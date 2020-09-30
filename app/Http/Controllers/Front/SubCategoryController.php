@@ -8,6 +8,7 @@ use App\Repositories\DocumentRepository;
 use App\Services\DocumentService;
 use App\SubCategory;
 use Illuminate\View\View;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class SubCategoryController extends FrontController
 {
@@ -31,9 +32,12 @@ class SubCategoryController extends FrontController
      * @param DocumentService $documentService
      * @param SubCategory $subCategory
      * @return View
+     * @throws AuthorizationException
      */
     public function show(IndexCategoryRequest $request, DocumentService $documentService, SubCategory $subCategory) : View
     {
+        $this->authorize('show', $subCategory);
+
         $documents = $documentService
             ->getAvailableCategoryDocuments($subCategory, $request, 'sub_category_id')
             ->paginate($this->pageLimit);

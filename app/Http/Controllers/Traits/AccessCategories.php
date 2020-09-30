@@ -25,7 +25,7 @@ trait AccessCategories
 
         $categories = $categoryService->getAvailableCategories();
         foreach ($categories as $category) {
-            $category->availableSubCategories = $subCategoryService->getAvailableCategories($category);
+            $category->availableSubCategories = $subCategoryService->getAvailableSubCategories($category);
         }
 
         View::share(compact('categories'));

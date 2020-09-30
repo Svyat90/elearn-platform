@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'failed'   => 'These credentials do not match our records.',
+    'failed'   => 'These credentials do not match our records. Or the account is blocked by the administration.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'login' => 'Login',
     'logout' => 'Logout',

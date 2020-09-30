@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'failed'   => 'Datele de identificare nu pot fi confirmate.',
+    'failed'   => 'Datele de identificare nu pot fi confirmate. Sau contul este blocat de administrație.',
     'throttle' => 'Prea multe încercări de intrare în cont. Puteți încerca din nou peste :seconds secunde.',
     'login' => 'Autentificare',
     'logout' => 'Deconectați-vă',

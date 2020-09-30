@@ -23,11 +23,13 @@ class User extends Authenticatable
     ];
 
     const USER_STATUS_SELECT = [
-        '1' => 'Active',
+        self::USER_STATUS_ACTIVE => 'Active',
         '2' => 'Not Active',
         '3' => 'Banned',
         '4' => 'Deleted',
     ];
+
+    const USER_STATUS_ACTIVE = '1';
 
     protected $dates = [
         'created_at',

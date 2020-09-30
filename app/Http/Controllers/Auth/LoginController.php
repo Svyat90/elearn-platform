@@ -61,4 +61,15 @@ class LoginController extends Controller
         return $response;
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        $data = $request->only($this->username(), 'password');
+        $data['user_status'] = '1';
+        return $data;
+    }
+
 }

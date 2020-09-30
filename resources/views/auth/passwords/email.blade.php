@@ -11,7 +11,7 @@
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">
-                {{ trans('global.reset_password') }}
+                {{ trans('auth.reset_password') }}
             </p>
 
             @if(session('status'))
@@ -25,7 +25,8 @@
 
                 <div>
                     <div class="form-group">
-                        <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" required autocomplete="email" autofocus placeholder="{{ trans('global.login_email') }}" value="{{ old('email') }}">
+                        <input type="hidden" name="locale" value="{{ app()->getLocale() }}">
+                        <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" required autocomplete="email" autofocus placeholder="{{ trans('main.email') }}" value="{{ old('email') }}">
 
                         @if($errors->has('email'))
                             <span class="text-danger">
@@ -36,8 +37,8 @@
                 </div>
                 <div class="row">
                     <div class="col-12 text-right">
-                        <button type="submit" class="btn btn-primary btn-flat btn-block">
-                            {{ trans('global.send_password') }}
+                        <button type="submit" class="btn btn-primary btn-flat btn-block" style="background-color: #970C13; border-color: #970C13;">
+                            {{ trans('auth.send_password') }}
                         </button>
                     </div>
                 </div>

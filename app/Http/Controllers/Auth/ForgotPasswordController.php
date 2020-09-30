@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Http\Response;
 
 class ForgotPasswordController extends Controller
 {
@@ -18,5 +21,32 @@ class ForgotPasswordController extends Controller
     |
     */
 
-    use SendsPasswordResetEmails;
+    use SendsPasswordResetEmails {
+        showLinkRequestForm as showLinkRequestFormTrait;
+        sendResetLinkEmail as sendResetLinkEmailTrait;
+    }
+
+    /**
+     * @return Response
+     */
+    public function showLinkRequestForm()
+    {
+        $locale = request()->input('locale');
+        App::setLocale($locale);
+
+        return $this->showLinkRequestFormTrait();
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function sendResetLinkEmail(Request $request)
+    {
+        $locale = $request->input('locale');
+        App::setLocale($locale);
+
+        return $this->sendResetLinkEmailTrait($request);
+    }
+
 }

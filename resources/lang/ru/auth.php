@@ -26,4 +26,6 @@ return [
     'dont_have_account' => 'Нет акаунта?',
     'do_you_have_account' => 'Есть аккаунт?',
     'invalid_old_password' => 'Неверный старый пароль',
+    'reset_password' => 'Скинуть пароль',
+    'send_password' => 'Отправить пароль',
 ];

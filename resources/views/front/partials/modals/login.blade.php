@@ -23,7 +23,7 @@
             </span>
 
             <span class="row-input right">
-                <a href="">{{ __('auth.forgot_password') }}</a>
+                <a href="{{ route('password.request') . '?locale=' . app()->getLocale() }}">{{ __('auth.forgot_password') }}</a>
             </span>
 
             <span class="full-input">

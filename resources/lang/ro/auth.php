@@ -25,4 +25,6 @@ return [
     'dont_have_account' => 'Nu aveți un cont?',
     'do_you_have_account' => 'Aveți un cont?',
     'invalid_old_password' => 'Parola veche nevalidă',
+    'reset_password' => 'Resetați parola',
+    'send_password' => 'Trimite parola',
 ];

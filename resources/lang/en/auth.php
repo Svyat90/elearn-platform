@@ -12,4 +12,6 @@ return [
     'forgot_password' => 'Forgot password?',
     'dont_have_account' => 'Don\'t have an account?',
     'invalid_old_password' => 'Invalid old password',
+    'reset_password' => 'Reset password',
+    'send_password' => 'Send password',
 ];

@@ -78,7 +78,6 @@
                     error: function (response) {
                         console.log(response);
                         let errors = response.responseJSON.errors;
-                        alert(errors);
                     }
                 });
             });
@@ -115,7 +114,6 @@
                     error: function (response) {
                         console.log(response);
                         let errors = response.responseJSON.errors;
-                        alert(errors);
                     }
                 });
             });
@@ -152,7 +150,6 @@
                     error: function (response) {
                         console.log(response);
                         let errors = response.responseJSON.errors;
-                        alert(errors);
                     }
                 });
             });
@@ -189,7 +186,6 @@
                     error: function (response) {
                         console.log(response);
                         let errors = response.responseJSON.errors;
-                        alert(errors);
                     }
                 });
             });

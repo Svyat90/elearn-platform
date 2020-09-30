@@ -6,6 +6,7 @@ use App\Document;
 use App\Http\Controllers\FrontController;
 use App\Http\Requests\Front\Document\DocumentFavouriteRequest;
 use App\Http\Requests\Front\Document\DocumentWatchLaterRequest;
+use App\Http\Requests\Front\Search\SearchRequest;
 use App\Services\DocumentService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -16,13 +17,14 @@ class DocumentController extends FrontController
 {
 
     /**
+     * @param SearchRequest $request
      * @param DocumentService $documentService
      * @return View
      */
-    public function index(DocumentService $documentService) : View
+    public function index(SearchRequest $request, DocumentService $documentService) : View
     {
         $documents = $documentService
-            ->getAvailableDocuments()
+            ->getSearchAvailableDocuments($request)
             ->paginate($this->pageLimit);
 
         return view('front.documents.index', compact('documents'));

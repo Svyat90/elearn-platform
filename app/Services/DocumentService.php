@@ -6,6 +6,7 @@ use App\Category;
 use App\Course;
 use App\Document;
 use App\Http\Requests\Front\Category\IndexCategoryRequest;
+use App\Http\Requests\Front\Search\SearchRequest;
 use App\Role;
 use App\SubCategory;
 use Illuminate\Database\Eloquent\Builder;
@@ -145,6 +146,19 @@ class DocumentService extends AbstractAccessService
     }
 
     /**
+     * @param SearchRequest $request
+     * @return Builder|BelongsToMany
+     */
+    public function getSearchAvailableDocuments(SearchRequest $request)
+    {
+        $queryBuilder = $this->getAvailableDocuments();
+
+        $this->setSearchFilters($queryBuilder, $request);
+
+        return $queryBuilder;
+    }
+
+    /**
      * @return Builder|BelongsToMany
      */
     public function getAvailableDocuments()
@@ -237,6 +251,38 @@ class DocumentService extends AbstractAccessService
 
         if ($request->has('filter_topic') && !empty($request->filter_topic)) {
             $queryBuilder->where(localeAppColumn('topic'), $request->filter_topic);
+        }
+    }
+
+    /**
+     * @param $queryBuilder
+     * @param SearchRequest $request
+     */
+    private function setSearchFilters(&$queryBuilder, SearchRequest $request) : void
+    {
+        if (empty($query = $request->input('query'))) {
+            return;
+        }
+
+        if ($request->has('filter_all')) {
+            /** @var $queryBuilder Builder */
+            $queryBuilder
+                ->where(localeAppColumn('name_issuer'), 'LIKE', '%' . $query . '%')
+                ->orWhere(localeAppColumn('name'), 'LIKE', '%' . $query . '%')
+                ->orWhere(localeAppColumn('description'), 'LIKE', '%' . $query . '%');
+
+        } else {
+            if ($request->has('filter_issuer')) {
+                $queryBuilder->where(localeAppColumn('name_issuer'), 'LIKE', '%' . $query . '%');
+            }
+
+            if ($request->has('filter_name')) {
+                $queryBuilder->where(localeAppColumn('name'), 'LIKE', '%' . $query . '%');
+            }
+
+            if ($request->has('filter_description')) {
+                $queryBuilder->where(localeAppColumn('description'), 'LIKE', '%' . $query . '%');
+            }
         }
     }
 

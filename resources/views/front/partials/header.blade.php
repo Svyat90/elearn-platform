@@ -22,7 +22,7 @@
                     <div class="logo"><a href="{{ route('front.home') }}"><img src="{{ asset('front/images/logo.svg') }}" alt=""></a></div>
 
                     <form class="search" action="">
-                        <input type="search" placeholder="{{ __('header.searching_docs') }}">
+                        <input type="search" id="query_global_small" placeholder="{{ __('header.searching_docs') }}">
                         <button type="submit"></button>
                     </form>
 

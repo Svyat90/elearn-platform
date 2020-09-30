@@ -10,8 +10,6 @@ class IndexCategoryRequest extends FormRequest
 {
     public function authorize()
     {
-        // ToDo check user access
-
         return true;
     }
 

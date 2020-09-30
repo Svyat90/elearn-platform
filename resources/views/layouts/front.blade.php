@@ -47,6 +47,8 @@
         enableFavouriteCourse();
         enableWatchLaterCourse();
 
+        enableGlobalSearch();
+
         /**
          * Global toggle favourite documents
          */
@@ -189,6 +191,63 @@
                     }
                 });
             });
+        }
+
+        /**
+         * Global enable smart search
+         */
+        function enableGlobalSearch()
+        {
+            let searchContainer = $(".search-box"),
+                formFiltersGlobal = $("#search_filters"),
+                formSearchGlobal = $("#search_form"),
+                filterAllGlobal = $("#filter_all"),
+                filterIssuerGlobal = $("#filter_issuer"),
+                filterNameGlobal = $("#filter_name"),
+                filterDescriptionGlobal = $("#filter_description"),
+                filterContentGlobal = $("#filter_content"),
+                inputQueryGlobalSmall = $("#query_global_small"),
+                inputQueryGlobalBig = $("#query_global_big");
+
+            filterAllGlobal.change(function (e) {
+                handleFormFilterGlobal($(this));
+            })
+
+            filterIssuerGlobal.change(function (e) {
+                handleFormFilterGlobal($(this));
+            })
+
+            filterNameGlobal.change(function (e) {
+                handleFormFilterGlobal($(this));
+            })
+
+            filterDescriptionGlobal.change(function (e) {
+                handleFormFilterGlobal($(this));
+            })
+
+            filterContentGlobal.change(function (e) {
+                handleFormFilterGlobal($(this));
+            })
+
+            inputQueryGlobalSmall.on("input", function(){
+                inputQueryGlobalBig.val($(this).val());
+                searchContainer.show();
+            });
+
+            formSearchGlobal.submit(function (e) {
+                e.preventDefault();
+                formFiltersGlobal.submit();
+            })
+
+            /**
+             * @param object
+             */
+            function handleFormFilterGlobal(object)
+            {
+                let checked = object.prop('checked') ? 1 : 0;
+                object.val(checked);
+            }
+
         }
     });
 </script>

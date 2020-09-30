@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Services\PermissionService;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -68,7 +69,7 @@ class LoginController extends Controller
     protected function credentials(Request $request)
     {
         $data = $request->only($this->username(), 'password');
-        $data['user_status'] = '1';
+        $data['user_status'] = User::USER_STATUS_ACTIVE;
         return $data;
     }
 

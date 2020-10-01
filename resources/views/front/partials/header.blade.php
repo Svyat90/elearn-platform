@@ -21,7 +21,7 @@
                     </div>
                     <div class="logo"><a href="{{ route('front.home') }}"><img src="{{ asset('front/images/logo.svg') }}" alt=""></a></div>
 
-                    <form class="search" action="">
+                    <form class="search" id="submit_search_form" action="{{ route('documents.index') }}" method="get">
                         <input type="search" id="query_global_small" placeholder="{{ __('header.searching_docs') }}">
                         <button type="submit"></button>
                     </form>

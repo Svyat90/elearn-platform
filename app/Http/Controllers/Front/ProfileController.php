@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\FrontController;
 use App\Http\Requests\Front\Profile\UpdateUserDataRequest;
 use App\Http\Requests\Front\Profile\UpdateUserPasswordRequest;
-use App\Services\CourseService;
-use App\Services\DocumentService;
+use App\Services\Course\CourseFavouriteService;
+use App\Services\Course\CourseService;
+use App\Services\Course\CourseWatchLaterService;
+use App\Services\Document\DocumentFavouriteService;
+use App\Services\Document\DocumentService;
+use App\Services\Document\DocumentWatchLaterService;
 use App\Services\UserService;
 use App\User;
 use Illuminate\Http\RedirectResponse;
@@ -70,27 +74,33 @@ class ProfileController extends FrontController
     }
 
     /**
-     * @param DocumentService $documentService
-     * @param CourseService $courseService
+     * @param DocumentFavouriteService $documentFavouriteService
+     * @param CourseFavouriteService $courseFavouriteService
      * @return View
      */
-    public function favourites(DocumentService $documentService, CourseService $courseService) : View
+    public function favourites(
+        DocumentFavouriteService $documentFavouriteService,
+        CourseFavouriteService $courseFavouriteService
+    ) : View
     {
-        $documents = $documentService->getFavouriteDocuments();
-        $courses = $courseService->getFavouriteCourses();
+        $documents = $documentFavouriteService->getFavouriteDocuments();
+        $courses = $courseFavouriteService->getFavouriteCourses();
 
         return view('front.profile.favourites', compact('documents', 'courses'));
     }
 
     /**
-     * @param DocumentService $documentService
-     * @param CourseService $courseService
+     * @param DocumentWatchLaterService $documentWatchLaterService
+     * @param CourseWatchLaterService $courseWatchLaterService
      * @return View
      */
-    public function watchLater(DocumentService $documentService, CourseService $courseService) : View
+    public function watchLater(
+        DocumentWatchLaterService $documentWatchLaterService,
+        CourseWatchLaterService $courseWatchLaterService
+    ) : View
     {
-        $documents = $documentService->getWatchLaterDocuments();
-        $courses = $courseService->getWatchLaterCourses();
+        $documents = $documentWatchLaterService->getWatchLaterDocuments();
+        $courses = $courseWatchLaterService->getWatchLaterCourses();
 
         return view('front.profile.watchLater', compact('documents', 'documents', 'courses'));
     }

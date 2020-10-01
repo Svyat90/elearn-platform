@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Document;
 
-use App\Services\DocumentService;
+use App\Services\Document\DocumentService;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Document;
 
 use App\Category;
 use App\Course;
 use App\Document;
 use App\Http\Requests\Front\Category\IndexCategoryRequest;
-use App\Http\Requests\Front\Search\SearchRequest;
 use App\Role;
+use App\Services\AbstractAccessService;
 use App\SubCategory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -55,107 +54,6 @@ class DocumentService extends AbstractAccessService
         $document->categories()->sync($request->category_ids);
         $document->subCategories()->sync($request->sub_category_ids);
         $document->relatedDocuments()->sync($request->related_document_ids);
-    }
-
-    /**
-     * @param int $documentId
-     * @return bool
-     */
-    public function toggleFavorite(int $documentId) : bool
-    {
-        if ( ! $this->getUser()) {
-            return false;
-        }
-
-        $queryBuilder = DB::table('document_favorite')
-            ->where('document_id', $documentId)
-            ->where('user_id', $this->getUser()->id);
-
-        if ((clone $queryBuilder)->first()) {
-            $queryBuilder->delete();
-
-            return false;
-        }
-
-        DB::table('document_favorite')->insert([
-            'document_id' => $documentId,
-            'user_id' => $this->getUser()->id
-        ]);
-
-        return true;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getFavouriteDocuments() : Collection
-    {
-        if ( ! $this->getUser()) {
-            return collect();
-        }
-
-        return $this->getAvailableDocuments()
-            ->join('document_favorite', function ($join) {
-                $join->on('document_favorite.document_id', 'documents.id');
-                $join->on('document_favorite.user_id', DB::raw($this->getUser()->id));
-            })->get();
-    }
-
-    /**
-     * @param int $documentId
-     * @return bool
-     */
-    public function toggleWatchLater(int $documentId) : bool
-    {
-        if ( ! $this->getUser()) {
-            return false;
-        }
-
-        $queryBuilder = DB::table('document_watch_later')
-            ->where('document_id', $documentId)
-            ->where('user_id', $this->getUser()->id);
-
-        if ((clone $queryBuilder)->first()) {
-            $queryBuilder->delete();
-
-            return false;
-        }
-
-        DB::table('document_watch_later')->insert([
-            'document_id' => $documentId,
-            'user_id' => $this->getUser()->id
-        ]);
-
-        return true;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getWatchLaterDocuments() : Collection
-    {
-        if ( ! $this->getUser()) {
-            return collect();
-        }
-
-        return $this->getAvailableDocuments()
-            ->join('document_watch_later', function ($join) {
-                $join->on('document_watch_later.document_id', 'documents.id');
-                $join->on('document_watch_later.user_id', DB::raw($this->getUser()->id));
-            })->get();
-    }
-
-    /**
-     * @param SearchRequest $request
-     * @return Builder|BelongsToMany
-     */
-    public function getSearchAvailableDocuments(SearchRequest $request)
-    {
-        $queryBuilder = $this->getAvailableDocuments();
-
-        $this->setSearchFilters($queryBuilder, $request);
-
-        return $queryBuilder;
     }
 
     /**
@@ -255,41 +153,9 @@ class DocumentService extends AbstractAccessService
     }
 
     /**
-     * @param $queryBuilder
-     * @param SearchRequest $request
-     */
-    private function setSearchFilters(&$queryBuilder, SearchRequest $request) : void
-    {
-        if (empty($query = $request->input('query'))) {
-            return;
-        }
-
-        if ($request->has('filter_all')) {
-            /** @var $queryBuilder Builder */
-            $queryBuilder
-                ->where(localeAppColumn('name_issuer'), 'LIKE', '%' . $query . '%')
-                ->orWhere(localeAppColumn('name'), 'LIKE', '%' . $query . '%')
-                ->orWhere(localeAppColumn('description'), 'LIKE', '%' . $query . '%');
-
-        } else {
-            if ($request->has('filter_issuer')) {
-                $queryBuilder->where(localeAppColumn('name_issuer'), 'LIKE', '%' . $query . '%');
-            }
-
-            if ($request->has('filter_name')) {
-                $queryBuilder->where(localeAppColumn('name'), 'LIKE', '%' . $query . '%');
-            }
-
-            if ($request->has('filter_description')) {
-                $queryBuilder->where(localeAppColumn('description'), 'LIKE', '%' . $query . '%');
-            }
-        }
-    }
-
-    /**
      * @return array
      */
-    private function getProtectedDocumentIds() : array
+    protected function getProtectedDocumentIds() : array
     {
         if ( ! $this->getUser())
             return [];

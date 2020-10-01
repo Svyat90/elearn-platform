@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\FrontController;
 use App\Http\Requests\Front\Category\IndexCategoryRequest;
 use App\Repositories\DocumentRepository;
-use App\Services\DocumentService;
+use App\Services\Document\DocumentService;
 use App\SubCategory;
 use Illuminate\View\View;
 use Illuminate\Auth\Access\AuthorizationException;

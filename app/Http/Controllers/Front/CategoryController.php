@@ -6,7 +6,7 @@ use App\Category;
 use App\Http\Controllers\FrontController;
 use App\Http\Requests\Front\Category\IndexCategoryRequest;
 use App\Repositories\DocumentRepository;
-use App\Services\DocumentService;
+use App\Services\Document\DocumentService;
 use Illuminate\View\View;
 use Illuminate\Auth\Access\AuthorizationException;
 

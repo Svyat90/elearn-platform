@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Traits;
 
-use App\Services\CourseService;
-use App\Services\DocumentService;
+use App\Services\Course\CourseFavouriteService;
+use App\Services\Document\DocumentFavouriteService;
 use App\User;
 use Illuminate\Support\Facades\View;
 
@@ -17,17 +17,17 @@ trait FavouritesTrait
      */
     public function shareFavourites(?User $user): void
     {
-        $documentService = new DocumentService();
-        $documentService->setUser($user);
+        $documentFavouriteService = new DocumentFavouriteService();
+        $documentFavouriteService->setUser($user);
 
-        $favouriteDocumentIds = $documentService->getFavouriteDocuments()
+        $favouriteDocumentIds = $documentFavouriteService->getFavouriteDocuments()
             ->pluck('id')
             ->toArray();
 
-        $courseService = new CourseService();
-        $courseService->setUser($user);
+        $courseFavouriteService = new CourseFavouriteService();
+        $courseFavouriteService->setUser($user);
 
-        $favouriteCourseIds = $courseService->getFavouriteCourses()
+        $favouriteCourseIds = $courseFavouriteService->getFavouriteCourses()
             ->pluck('id')
             ->toArray();
 

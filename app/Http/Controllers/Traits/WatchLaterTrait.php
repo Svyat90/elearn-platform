@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Traits;
 
-use App\Services\CourseService;
-use App\Services\DocumentService;
+use App\Services\Course\CourseWatchLaterService;
+use App\Services\Document\DocumentWatchLaterService;
 use App\User;
 use Illuminate\Support\Facades\View;
 
@@ -17,17 +17,17 @@ trait WatchLaterTrait
      */
     public function shareWatchLater( ? User $user): void
     {
-        $documentService = new DocumentService();
-        $documentService->setUser($user);
+        $documentWatchLaterService = new DocumentWatchLaterService();
+        $documentWatchLaterService->setUser($user);
 
-        $watchLaterDocumentIds = $documentService->getWatchLaterDocuments()
+        $watchLaterDocumentIds = $documentWatchLaterService->getWatchLaterDocuments()
             ->pluck('id')
             ->toArray();
 
-        $courseService = new CourseService();
-        $courseService->setUser($user);
+        $courseWatchLaterService = new CourseWatchLaterService();
+        $courseWatchLaterService->setUser($user);
 
-        $watchLaterCourseIds = $courseService->getWatchLaterCourses()
+        $watchLaterCourseIds = $courseWatchLaterService->getWatchLaterCourses()
             ->pluck('id')
             ->toArray();
 

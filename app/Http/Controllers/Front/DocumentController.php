@@ -7,7 +7,9 @@ use App\Http\Controllers\FrontController;
 use App\Http\Requests\Front\Document\DocumentFavouriteRequest;
 use App\Http\Requests\Front\Document\DocumentWatchLaterRequest;
 use App\Http\Requests\Front\Search\SearchRequest;
-use App\Services\DocumentService;
+use App\Services\Document\DocumentFavouriteService;
+use App\Services\Document\DocumentSearchService;
+use App\Services\Document\DocumentWatchLaterService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\View\View;
@@ -18,12 +20,12 @@ class DocumentController extends FrontController
 
     /**
      * @param SearchRequest $request
-     * @param DocumentService $documentService
+     * @param DocumentSearchService $searchService
      * @return View
      */
-    public function index(SearchRequest $request, DocumentService $documentService) : View
+    public function index(SearchRequest $request, DocumentSearchService $searchService) : View
     {
-        $documents = $documentService
+        $documents = $searchService
             ->getSearchAvailableDocuments($request)
             ->paginate($this->pageLimit);
 
@@ -46,15 +48,15 @@ class DocumentController extends FrontController
 
     /**
      * @param DocumentFavouriteRequest $request
-     * @param DocumentService $documentService
+     * @param DocumentFavouriteService $favouriteService
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function favorite(DocumentFavouriteRequest $request, DocumentService $documentService) : JsonResponse
+    public function favorite(DocumentFavouriteRequest $request, DocumentFavouriteService $favouriteService) : JsonResponse
     {
         $this->authorize('favorite', $request->documentId);
 
-        $result = $documentService->toggleFavorite($request->documentId);
+        $result = $favouriteService->toggleFavorite($request->documentId);
 
         return $this->getSuccessResponse(new JsonResource([
             'isFavorite' => $result
@@ -63,15 +65,15 @@ class DocumentController extends FrontController
 
     /**
      * @param DocumentWatchLaterRequest $request
-     * @param DocumentService $documentService
+     * @param DocumentWatchLaterService $watchLaterService
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function watchLater(DocumentWatchLaterRequest $request, DocumentService $documentService) : JsonResponse
+    public function watchLater(DocumentWatchLaterRequest $request, DocumentWatchLaterService $watchLaterService) : JsonResponse
     {
         $this->authorize('watchLater', $request->documentId);
 
-        $result = $documentService->toggleWatchLater($request->documentId);
+        $result = $watchLaterService->toggleWatchLater($request->documentId);
 
         return $this->getSuccessResponse(new JsonResource([
             'isWatchLater' => $result

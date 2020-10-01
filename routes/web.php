@@ -38,6 +38,9 @@ Route::group(['prefix' => LocaleMiddleware::getLocale(), 'namespace' => 'Front']
         Route::get('profile/my-courses', 'ProfileController@myCourses')->name('profile.my_courses');
         Route::get('profile/my-documents', 'ProfileController@myDocuments')->name('profile.my_documents');
     });
+
+    // Search
+    Route::post('search', 'SearchController@search')->name('search');
 });
 
 Auth::routes();

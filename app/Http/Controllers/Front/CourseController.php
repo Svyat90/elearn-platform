@@ -6,8 +6,10 @@ use App\Course;
 use App\Http\Controllers\FrontController;
 use App\Http\Requests\Front\Course\CourseFavouriteRequest;
 use App\Http\Requests\Front\Course\CourseWatchLaterRequest;
-use App\Services\CourseService;
-use App\Services\DocumentService;
+use App\Services\Course\CourseFavouriteService;
+use App\Services\Course\CourseService;
+use App\Services\Course\CourseWatchLaterService;
+use App\Services\Document\DocumentService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\View\View;
@@ -50,15 +52,15 @@ class CourseController extends FrontController
 
     /**
      * @param CourseFavouriteRequest $request
-     * @param CourseService $courseService
+     * @param CourseFavouriteService $favouriteService
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function favorite(CourseFavouriteRequest $request, CourseService $courseService) : JsonResponse
+    public function favorite(CourseFavouriteRequest $request, CourseFavouriteService $favouriteService) : JsonResponse
     {
         $this->authorize('favorite', $request->courseId);
 
-        $result = $courseService->toggleFavorite($request->courseId);
+        $result = $favouriteService->toggleFavorite($request->courseId);
 
         return $this->getSuccessResponse(new JsonResource([
             'isFavorite' => $result
@@ -67,18 +69,19 @@ class CourseController extends FrontController
 
     /**
      * @param CourseWatchLaterRequest $request
-     * @param CourseService $courseService
+     * @param CourseWatchLaterService $watchLaterService
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function watchLater(CourseWatchLaterRequest $request, CourseService $courseService) : JsonResponse
+    public function watchLater(CourseWatchLaterRequest $request, CourseWatchLaterService $watchLaterService) : JsonResponse
     {
         $this->authorize('watchLater', $request->courseId);
 
-        $result = $courseService->toggleWatchLater($request->courseId);
+        $result = $watchLaterService->toggleWatchLater($request->courseId);
 
         return $this->getSuccessResponse(new JsonResource([
             'isWatchLater' => $result
         ]));
     }
+
 }

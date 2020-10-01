@@ -199,54 +199,138 @@
         function enableGlobalSearch()
         {
             let searchContainer = $(".search-box"),
-                formFiltersGlobal = $("#search_filters"),
+                formFiltersGlobal = $("#search_filters_global"),
                 formSearchGlobal = $("#search_form"),
-                filterAllGlobal = $("#filter_all"),
-                filterIssuerGlobal = $("#filter_issuer"),
-                filterNameGlobal = $("#filter_name"),
-                filterDescriptionGlobal = $("#filter_description"),
-                filterContentGlobal = $("#filter_content"),
+                formSubmitSearchGlobal = $("#submit_search_form"),
+                filterAllGlobal = $("#filter_all_global"),
+                filterIssuerGlobal = $("#filter_issuer_global"),
+                filterNameGlobal = $("#filter_name_global"),
+                filterDescriptionGlobal = $("#filter_description_global"),
+                filterContentGlobal = $("#filter_content_global"),
                 inputQueryGlobalSmall = $("#query_global_small"),
-                inputQueryGlobalBig = $("#query_global_big");
+                inputQueryGlobalBig = $("#query_global_big"),
+                inputQueryGlobalHidden = $("#query_global_hidden"),
+                searchResultsContainer = $(".search-view").first();
+
+            let filters = {};
+
+            filters.filter_all = 0;
+            filters.filter_issuer = 0;
+            filters.filter_name = 0;
+            filters.filter_description = 0;
+            filters.filter_content = 0;
 
             filterAllGlobal.change(function (e) {
-                handleFormFilterGlobal($(this));
+                handleFormFilterGlobal($(this), 'filter_all');
             })
 
             filterIssuerGlobal.change(function (e) {
-                handleFormFilterGlobal($(this));
+                handleFormFilterGlobal($(this), 'filter_issuer');
             })
 
             filterNameGlobal.change(function (e) {
-                handleFormFilterGlobal($(this));
+                handleFormFilterGlobal($(this), 'filter_name');
             })
 
             filterDescriptionGlobal.change(function (e) {
-                handleFormFilterGlobal($(this));
+                handleFormFilterGlobal($(this), 'filter_description');
             })
 
             filterContentGlobal.change(function (e) {
-                handleFormFilterGlobal($(this));
+                handleFormFilterGlobal($(this), 'filter_content');
             })
+
+            inputQueryGlobalBig.on("input", function(){
+                let query = $(this).val();
+                if (query.length === 0) {
+                    searchContainer.hide();
+                    inputQueryGlobalSmall.val("");
+
+                } else {
+                    sendAjaxSearchRequest();
+                }
+            });
 
             inputQueryGlobalSmall.on("input", function(){
                 inputQueryGlobalBig.val($(this).val());
                 searchContainer.show();
+                sendAjaxSearchRequest();
             });
 
             formSearchGlobal.submit(function (e) {
                 e.preventDefault();
                 formFiltersGlobal.submit();
-            })
+            });
+
+            formSubmitSearchGlobal.submit(function (e) {
+                e.preventDefault();
+                let query = inputQueryGlobalSmall.val();
+                inputQueryGlobalHidden.val(query);
+                formFiltersGlobal.submit();
+            });
 
             /**
+             *
              * @param object
+             * @param name
              */
-            function handleFormFilterGlobal(object)
+            function handleFormFilterGlobal(object, name)
             {
                 let checked = object.prop('checked') ? 1 : 0;
                 object.val(checked);
+                filters[name] = checked;
+                sendAjaxSearchRequest();
             }
+
+            function sendAjaxSearchRequest()
+            {
+                let route = '{{ route('documents.index') }}';
+                let imageDoc = '{{ asset('front/images/doc.svg') }}';
+                let searchNoResults = '{{ __('search.no_results') }}';
+
+                let query = inputQueryGlobalBig.val();
+                inputQueryGlobalHidden.val(query);
+                if (query.length === 0) {
+                    searchResultsContainer.empty();
+                    return;
+                }
+
+                let formData = new FormData();
+                formData.append('query', query);
+                formData.append('filter_all', filters.filter_all);
+                formData.append('filter_issuer', filters.filter_issuer);
+                formData.append('filter_name', filters.filter_name);
+                formData.append('filter_description', filters.filter_description);
+                formData.append('filter_content', filters.filter_content);
+
+                $.ajax({
+                    type: "POST",
+                    url: '{{ route('search') }}',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        searchResultsContainer.empty();
+                        if (response.data.length > 0) {
+                            response.data.forEach(function (item) {
+                                let insertItem = '<a href="' + route + '/' + item.id + '"><img src="' + imageDoc + '" alt="">' + item.name + '</a>';
+                                searchResultsContainer.append(insertItem);
+                            });
+
+                        } else {
+                            searchResultsContainer.append('<span>' + searchNoResults + '</span>');
+                        }
+                    },
+                    error: function (response) {
+                        console.log('error', response);
+                    }
+                });
+            }
+
+            $('.close').on('click', function () {
+                $(this).parents('.search-box').hide();
+            });
 
         }
     });

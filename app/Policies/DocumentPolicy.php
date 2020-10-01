@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Document;
-use App\Services\documentservice;
+use App\Services\Document\DocumentService;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
@@ -43,11 +43,11 @@ class DocumentPolicy
     }
 
     /**
-     * @param User $user
+     * @param User|null $user
      * @param int $documentId
      * @return Response
      */
-    public function favorite(User $user, int $documentId) : Response
+    public function favorite( ? User $user, int $documentId) : Response
     {
         return in_array($documentId, $this->availableDocumentIds)
             ? Response::allow()
@@ -55,11 +55,11 @@ class DocumentPolicy
     }
 
     /**
-     * @param User $user
+     * @param User|null $user
      * @param int $documentId
      * @return Response
      */
-    public function watchLater(User $user, int $documentId) : Response
+    public function watchLater( ? User $user, int $documentId) : Response
     {
         return in_array($documentId, $this->availableDocumentIds)
             ? Response::allow()

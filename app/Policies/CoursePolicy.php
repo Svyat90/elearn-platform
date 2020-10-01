@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Course;
-use App\Services\CourseService;
+use App\Services\Course\CourseService;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
@@ -43,11 +43,11 @@ class CoursePolicy
     }
 
     /**
-     * @param User $user
+     * @param User|null $user
      * @param int $courseId
      * @return Response
      */
-    public function favorite(User $user, int $courseId) : Response
+    public function favorite( ? User $user, int $courseId) : Response
     {
         return in_array($courseId, $this->availableCourseIds)
             ? Response::allow()
@@ -55,11 +55,11 @@ class CoursePolicy
     }
 
     /**
-     * @param User $user
+     * @param User|null $user
      * @param int $courseId
      * @return Response
      */
-    public function watchLater(User $user, int $courseId) : Response
+    public function watchLater( ? User $user, int $courseId) : Response
     {
         return in_array($courseId, $this->availableCourseIds)
             ? Response::allow()

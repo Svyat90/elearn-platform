@@ -13,7 +13,7 @@ use App\Http\Requests\Course\MassDestroyCourseRequest;
 use App\Http\Requests\Course\StoreCourseRequest;
 use App\Http\Requests\Course\UpdateCourseRequest;
 use App\Role;
-use App\Services\CourseService;
+use App\Services\Course\CourseService;
 use App\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;

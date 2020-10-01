@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Course;
 
-use App\Services\CourseService;
+use App\Services\Course\CourseService;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

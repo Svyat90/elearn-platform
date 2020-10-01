@@ -9,9 +9,9 @@
 
         @if(request()->get('query'))
             <section class="container category-filter white">
-                <form name="search_filters" action="{{ route('documents.index') }}" method="get">
+                <form name="search_filters" id="search_filters" action="{{ route('documents.index') }}" method="get">
+                    <input name="query" id="query" type="hidden" value="{{ request()->get('query') }}" />
                     <div class="filter">
-                        <input name="query" id="query" type="hidden" value="{{ request()->get('query') ?? '' }}" />
                         <div class="title-section">{{ __('search.search') }} : “{{ request()->get('query') }}”</div>
                         <label class="check-l" for="filter_all">
                             @php $filterAll = request()->get('filter_all') ?? null; @endphp
@@ -71,7 +71,7 @@
     @parent
     <script>
         $(function () {
-            let formFilters = $("#search_filters"),
+            let formFiltersDocument = $("#search_filters"),
                 filterAll = $("#filter_all"),
                 filterIssuer = $("#filter_issuer"),
                 filterName = $("#filter_name"),
@@ -79,7 +79,7 @@
                 filterContent = $("#filter_content");
 
             filterAll.change(function (e) {
-                handleFormFilter($(this));x
+                handleFormFilter($(this));
             })
 
             filterIssuer.change(function (e) {
@@ -105,7 +105,7 @@
             {
                 let checked = object.prop('checked') ? 1 : 0;
                 object.val(checked);
-                formFilters.submit();
+                formFiltersDocument.submit();
             }
 
         });

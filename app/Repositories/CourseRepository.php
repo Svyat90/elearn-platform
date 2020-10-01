@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Course;
-use App\Services\DocumentService;
+use App\Services\Document\DocumentService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 

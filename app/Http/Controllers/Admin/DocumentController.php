@@ -12,7 +12,7 @@ use App\Http\Requests\Document\MassDestroyDocumentRequest;
 use App\Http\Requests\Document\StoreDocumentRequest;
 use App\Http\Requests\Document\UpdateDocumentRequest;
 use App\Role;
-use App\Services\DocumentService;
+use App\Services\Document\DocumentService;
 use App\SubCategory;
 use App\User;
 use Illuminate\Http\RedirectResponse;

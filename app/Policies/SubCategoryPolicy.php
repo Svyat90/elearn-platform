@@ -25,8 +25,8 @@ class SubCategoryPolicy
             ->toArray();
 
         return in_array($category->id, $availableSubCategoryIds)
-            ? Response::allow()
-            : Response::deny(__('main.access_denied'));
+            ? $this->allow()
+            : $this->deny(__('main.access_denied'), 403);
     }
 
 }

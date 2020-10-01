@@ -10,6 +10,8 @@ use App\Services\Course\CourseFavouriteService;
 use App\Services\Course\CourseService;
 use App\Services\Course\CourseWatchLaterService;
 use App\Services\Document\DocumentService;
+use App\User;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\View\View;
@@ -53,12 +55,15 @@ class CourseController extends FrontController
     /**
      * @param CourseFavouriteRequest $request
      * @param CourseFavouriteService $favouriteService
-     * @return JsonResponse
-     * @throws AuthorizationException
+     * @return Response|JsonResponse
      */
-    public function favorite(CourseFavouriteRequest $request, CourseFavouriteService $favouriteService) : JsonResponse
+    public function favorite(CourseFavouriteRequest $request, CourseFavouriteService $favouriteService)
     {
-        $this->authorize('favorite', $request->courseId);
+        /** @var User $user */
+        $user = auth()->user();
+        if ($user->cant('favorite', Course::query()->find($request->courseId))) {
+            return Response::deny(__('main.access_denied'));
+        }
 
         $result = $favouriteService->toggleFavorite($request->courseId);
 
@@ -70,12 +75,15 @@ class CourseController extends FrontController
     /**
      * @param CourseWatchLaterRequest $request
      * @param CourseWatchLaterService $watchLaterService
-     * @return JsonResponse
-     * @throws AuthorizationException
+     * @return Response|JsonResponse
      */
-    public function watchLater(CourseWatchLaterRequest $request, CourseWatchLaterService $watchLaterService) : JsonResponse
+    public function watchLater(CourseWatchLaterRequest $request, CourseWatchLaterService $watchLaterService)
     {
-        $this->authorize('watchLater', $request->courseId);
+        /** @var User $user */
+        $user = auth()->user();
+        if ($user->cant('watchLater', Course::query()->find($request->courseId))) {
+            return Response::deny(__('main.access_denied'));
+        }
 
         $result = $watchLaterService->toggleWatchLater($request->courseId);
 

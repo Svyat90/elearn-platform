@@ -38,32 +38,32 @@ class DocumentPolicy
     public function show( ? User $user, Document $document) : Response
     {
         return in_array($document->id, $this->availableDocumentIds)
-            ? Response::allow()
-            : Response::deny(__('main.access_denied'));
+            ? $this->allow()
+            : $this->deny(__('main.access_denied'), 403);
     }
 
     /**
-     * @param User|null $user
-     * @param int $documentId
+     * @param User $user
+     * @param Document $document
      * @return Response
      */
-    public function favorite( ? User $user, int $documentId) : Response
+    public function favorite(User $user, Document $document) : Response
     {
-        return in_array($documentId, $this->availableDocumentIds)
-            ? Response::allow()
-            : Response::deny(__('main.access_denied'));
+        return in_array($document->id, $this->availableDocumentIds)
+            ? $this->allow()
+            : $this->deny(__('main.access_denied'), 403);
     }
 
     /**
-     * @param User|null $user
-     * @param int $documentId
+     * @param User $user
+     * @param Document $document
      * @return Response
      */
-    public function watchLater( ? User $user, int $documentId) : Response
+    public function watchLater(User $user, Document $document) : Response
     {
-        return in_array($documentId, $this->availableDocumentIds)
-            ? Response::allow()
-            : Response::deny(__('main.access_denied'));
+        return in_array($document->id, $this->availableDocumentIds)
+            ? $this->allow()
+            : $this->deny(__('main.access_denied'), 403);
     }
 
 }

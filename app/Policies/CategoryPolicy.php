@@ -38,8 +38,8 @@ class CategoryPolicy
     public function show( ? User $user, Category $category) : Response
     {
         return in_array($category->id, $this->availableCategoryIds)
-            ? Response::allow()
-            : Response::deny(__('main.access_denied'));
+            ? $this->allow()
+            : $this->deny(__('main.access_denied'), 403);
     }
 
 }

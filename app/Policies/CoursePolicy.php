@@ -38,32 +38,32 @@ class CoursePolicy
     public function show( ? User $user, Course $course) : Response
     {
         return in_array($course->id, $this->availableCourseIds)
-            ? Response::allow()
-            : Response::deny(__('main.access_denied'));
+            ? $this->allow()
+            : $this->deny(__('main.access_denied'), 403);
     }
 
     /**
-     * @param User|null $user
-     * @param int $courseId
+     * @param User $user
+     * @param Course $course
      * @return Response
      */
-    public function favorite( ? User $user, int $courseId) : Response
+    public function favorite(User $user, Course $course) : Response
     {
-        return in_array($courseId, $this->availableCourseIds)
-            ? Response::allow()
-            : Response::deny(__('main.access_denied'));
+        return in_array($course->id, $this->availableCourseIds)
+            ? $this->allow()
+            : $this->deny(__('main.access_denied'), 403);
     }
 
     /**
-     * @param User|null $user
-     * @param int $courseId
+     * @param User $user
+     * @param Course $course
      * @return Response
      */
-    public function watchLater( ? User $user, int $courseId) : Response
+    public function watchLater(User $user, Course $course) : Response
     {
-        return in_array($courseId, $this->availableCourseIds)
-            ? Response::allow()
-            : Response::deny(__('main.access_denied'));
+        return in_array($course->id, $this->availableCourseIds)
+            ? $this->allow()
+            : $this->deny(__('main.access_denied'), 403);
     }
 
 }

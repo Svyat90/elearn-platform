@@ -10,7 +10,6 @@ use App\Http\Requests\Front\Search\SearchRequest;
 use App\Services\Document\DocumentFavouriteService;
 use App\Services\Document\DocumentSearchService;
 use App\Services\Document\DocumentWatchLaterService;
-use App\User;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -55,10 +54,8 @@ class DocumentController extends FrontController
      */
     public function favorite(DocumentFavouriteRequest $request, DocumentFavouriteService $favouriteService)
     {
-        /** @var User $user */
-        $user = auth()->user();
-        if ($user->cant('favorite', Document::query()->find($request->documentId))) {
-            return Response::deny(__('main.access_denied'));
+        if ( ! $this->user || $this->user->cant('favorite', Document::query()->find($request->documentId))) {
+            return Response::deny(__('main.access_denied'), 403);
         }
 
         $result = $favouriteService->toggleFavorite($request->documentId);
@@ -75,10 +72,8 @@ class DocumentController extends FrontController
      */
     public function watchLater(DocumentWatchLaterRequest $request, DocumentWatchLaterService $watchLaterService)
     {
-        /** @var User $user */
-        $user = auth()->user();
-        if ($user->cant('watchLater', Document::query()->find($request->documentId))) {
-            return Response::deny(__('main.access_denied'));
+        if ( ! $this->user || $this->user->cant('watchLater', Document::query()->find($request->documentId))) {
+            return Response::deny(__('main.access_denied'), 403);
         }
 
         $result = $watchLaterService->toggleWatchLater($request->documentId);

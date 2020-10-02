@@ -47,10 +47,11 @@
                             <div class="doc-btn">
                                 <a href="{{ storageUrl($document->file_path) }}" target="_blank" class="button">{{ __('main.read_now') }}</a>
                                 <a href="{{ storageUrl($document->file_path) }}" class="button-white" download>{{ __('main.download_pdf') }}</a>
-                                <a href="" class="button-grey"><img src="{{ asset('front/images/clock.svg') }}" alt="">
+                                <a href="" class="button-grey document-watch-later" data-document-id="{{ $document->id }}">
+                                    <img src="{{ asset('front/images/clock.svg') }}" alt="">
                                     <span>{{ __('main.watch_later') }}</span>
                                 </a>
-                                <a href="" class="button-grey">
+                                <a href="" class="button-grey document-favourite" data-document-id="{{ $document->id }}">
                                     <img src="{{ asset('front/images/bookmark.svg') }}" alt="">
                                     <span>{{ __('main.add_to_favourites') }}</span>
                                 </a>

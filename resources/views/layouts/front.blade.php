@@ -49,6 +49,12 @@
 
         enableGlobalSearch();
 
+        function showLogin()
+        {
+            let btnLogin = $(".login");
+            btnLogin[0].click();
+        }
+
         /**
          * Global toggle favourite documents
          */
@@ -71,6 +77,11 @@
                     contentType: false,
                     processData: false,
                     success: function (response) {
+                        if (response.code === 403) {
+                            showLogin();
+                            return;
+                        }
+
                         if (response.data.isFavorite === true) {
                             image.attr('src', '{{ favoriteImagePath(true) }}');
                         } else {
@@ -107,6 +118,11 @@
                     contentType: false,
                     processData: false,
                     success: function (response) {
+                        if (response.code === 403) {
+                            showLogin();
+                            return;
+                        }
+
                         if (response.data.isWatchLater === true) {
                             image.attr('src', '{{ watchLaterImagePath(true) }}');
                         } else {
@@ -143,6 +159,11 @@
                     contentType: false,
                     processData: false,
                     success: function (response) {
+                        if (response.code === 403) {
+                            showLogin();
+                            return;
+                        }
+
                         if (response.data.isFavorite === true) {
                             image.parent().attr('style', 'color: #970C13 !important; opacity: 1.0 !important;');
                         } else {
@@ -179,6 +200,11 @@
                     contentType: false,
                     processData: false,
                     success: function (response) {
+                        if (response.code === 403) {
+                            showLogin();
+                            return;
+                        }
+
                         if (response.data.isWatchLater === true) {
                             image.parent().attr('style', 'color: #970C13 !important; opacity: 1.0 !important;');
                         } else {

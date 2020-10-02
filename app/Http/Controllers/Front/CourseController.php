@@ -10,7 +10,6 @@ use App\Services\Course\CourseFavouriteService;
 use App\Services\Course\CourseService;
 use App\Services\Course\CourseWatchLaterService;
 use App\Services\Document\DocumentService;
-use App\User;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -59,10 +58,8 @@ class CourseController extends FrontController
      */
     public function favorite(CourseFavouriteRequest $request, CourseFavouriteService $favouriteService)
     {
-        /** @var User $user */
-        $user = auth()->user();
-        if ($user->cant('favorite', Course::query()->find($request->courseId))) {
-            return Response::deny(__('main.access_denied'));
+        if ( ! $this->user || $this->user->cant('favorite', Course::query()->find($request->courseId)) ?? null) {
+            return Response::deny(__('main.access_denied'), 403);
         }
 
         $result = $favouriteService->toggleFavorite($request->courseId);
@@ -79,10 +76,8 @@ class CourseController extends FrontController
      */
     public function watchLater(CourseWatchLaterRequest $request, CourseWatchLaterService $watchLaterService)
     {
-        /** @var User $user */
-        $user = auth()->user();
-        if ($user->cant('watchLater', Course::query()->find($request->courseId))) {
-            return Response::deny(__('main.access_denied'));
+        if ( ! $this->user || $this->user->cant('watchLater', Course::query()->find($request->courseId)) ?? null) {
+            return Response::deny(__('main.access_denied'), 403);
         }
 
         $result = $watchLaterService->toggleWatchLater($request->courseId);

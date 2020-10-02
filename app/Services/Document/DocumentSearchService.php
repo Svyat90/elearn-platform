@@ -7,7 +7,6 @@ use App\Http\Requests\Front\Search\SearchRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class DocumentSearchService extends DocumentService
 {
@@ -16,7 +15,8 @@ class DocumentSearchService extends DocumentService
      */
     private array $allowFilters = [
         'filter_all', 'filter_name',
-        'filter_issuer', 'filter_description'
+        'filter_issuer', 'filter_description',
+        'filter_content'
     ];
 
     /**

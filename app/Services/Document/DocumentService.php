@@ -6,6 +6,7 @@ use App\Category;
 use App\Course;
 use App\Document;
 use App\Http\Requests\Front\Category\IndexCategoryRequest;
+use App\Http\Requests\Front\Search\SearchRequest;
 use App\Role;
 use App\Services\AbstractAccessService;
 use App\SubCategory;
@@ -26,7 +27,7 @@ class DocumentService extends AbstractAccessService
     public function handleImage(Document $document, string $imagePath) : void
     {
         if ($document->image_path && $document->image_path !== $imagePath) {
-            $imagePath = storage_path('app/public/' . $document->image_path);
+            $imagePath = fileStoragePath($document->image_path);
             File::delete($imagePath);
         }
     }
@@ -38,7 +39,7 @@ class DocumentService extends AbstractAccessService
     public function handleFile(Document $document, string $filePath) : void
     {
         if ($document->file_path && $document->file_path !== $filePath) {
-            $filePath = storage_path('app/public/' . $document->file_path);
+            $filePath = fileStoragePath($document->file_path);
             File::delete($filePath);
         }
     }
@@ -54,6 +55,53 @@ class DocumentService extends AbstractAccessService
         $document->categories()->sync($request->category_ids);
         $document->subCategories()->sync($request->sub_category_ids);
         $document->relatedDocuments()->sync($request->related_document_ids);
+    }
+
+    /**
+     * @param Collection $documents
+     * @return Collection
+     */
+    public function filterAccess(Collection &$documents) : Collection
+    {
+        $availableDocIds = $this->getAvailableDocuments()->pluck('id')->toArray();
+
+        return $documents->filter(function ($item) use ($availableDocIds) {
+            return in_array($item->id, $availableDocIds);
+        });
+    }
+
+    /**
+     * @param SearchRequest $request
+     * @return array
+     */
+    public function fillSearchFields(SearchRequest $request) : array
+    {
+        $fields = [];
+        $allFields = [
+            localeAppColumn('name'), localeAppColumn('name_issuer'),
+            localeAppColumn('description'), 'content'
+        ];
+
+        foreach ($request->validated() as $field => $val) {
+            switch (true) {
+                case $field === 'filter_all' && $val === "1":
+                    return $allFields;
+                case $field === 'filter_name' && $val === "1":
+                    $fields[] = localeAppColumn('name');
+                    break;
+                case $field === 'filter_issuer' && $val === "1":
+                    $fields[] = localeAppColumn('name_issuer');
+                    break;
+                case $field === 'filter_description' && $val === "1":
+                    $fields[] = localeAppColumn('description');
+                    break;
+                case $field === 'filter_content' && $val === "1":
+                    $fields[] = 'content';
+                    break;
+            }
+        }
+
+        return $fields;
     }
 
     /**

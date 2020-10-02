@@ -32,6 +32,7 @@ trait Auditable
                 $model->categories,
                 $model->documents,
                 $model->courses,
+                $model->content
             );
         }
 

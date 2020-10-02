@@ -14,6 +14,20 @@ if (!function_exists('storageUrl')) {
     }
 }
 
+if (!function_exists('fileStoragePath')) {
+
+    /**
+     * @param string|null $path
+     * @return string
+     */
+    function fileStoragePath( ? string $path = null) : string
+    {
+        if ( ! $path) return '';
+
+        return storage_path("app/public/" . $path);
+    }
+}
+
 if (!function_exists('categoryImagePath')) {
 
     /**

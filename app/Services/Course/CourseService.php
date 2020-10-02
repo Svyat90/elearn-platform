@@ -21,7 +21,7 @@ class CourseService extends AbstractAccessService
     public function handleImage(Course $course, string $imagePath) : void
     {
         if ($course->image_path && $course->image_path !== $imagePath) {
-            $imagePath = storage_path('app/public/' . $course->image_path);
+            $imagePath = fileStoragePath($course->image_path);
             File::delete($imagePath);
         }
     }

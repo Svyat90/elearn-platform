@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\Search\Searchable;
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,7 +10,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Document extends Model
 {
-    use SoftDeletes, Auditable;
+    use SoftDeletes,
+//        Auditable,
+        Searchable;
 
     public $table = 'documents';
 
@@ -29,6 +32,23 @@ class Document extends Model
         'type', 'status', 'number', 'access', 'image_path', 'file_path',
         'created_at', 'updated_at', 'deleted_at', 'approved_at', 'published_at'
     ];
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'name_ru' => $this->name_ru ?? "",
+            'name_ro' => $this->name_ro ?? "",
+            'name_en' => $this->name_en ?? "",
+            'name_issuer_ru' => $this->name_issuer_ru ?? "",
+            'name_issuer_ro' => $this->name_issuer_ro ?? "",
+            'name_issuer_en' => $this->name_issuer_en ?? "",
+            'description_ru' => $this->description_ru ?? "",
+            'description_ro' => $this->description_ro ?? "",
+            'description_en' => $this->description_en ?? "",
+            'content' => getContentPdf(fileStoragePath($this->file_path))
+        ];
+    }
 
     /**
      * @return BelongsToMany

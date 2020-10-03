@@ -33,7 +33,7 @@ class Document extends Model
         'created_at', 'updated_at', 'deleted_at', 'approved_at', 'published_at'
     ];
 
-    public function toArray()
+    public function toArrayWithContent()
     {
         return [
             'id' => $this->id,

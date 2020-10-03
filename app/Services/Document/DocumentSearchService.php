@@ -7,6 +7,7 @@ use App\Http\Requests\Front\Search\SearchRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\DB;
+use Mockery\Exception;
 
 class DocumentSearchService extends DocumentService
 {
@@ -63,7 +64,7 @@ class DocumentSearchService extends DocumentService
     private function setSearchFilters(&$queryBuilder, SearchRequest $request) : void
     {
         if (empty($query = $request->input('query'))) {
-            return;
+            throw new Exception('Empty query');
         }
 
         if ($request->has('filter_all') && $request->input('filter_all')) {

@@ -28,14 +28,13 @@ class SearchController extends FrontController
             $documents = new Collection();
 
         } else {
-            $searchFields = $documentSearchService->fillSearchFields($request);
-            $documents = $documentRepository->search($request->input('query'), $searchFields);
-            $documentSearchService->filterAccess($documents);
+            $query = $request->input('query');
 
-            $documents
+            $documents = $documentRepository
+                ->search($request)
                 ->take($this->pageLimit)
-                ->map(function ($document) use ($request) {
-                    $document->wrapName = wrapQueryString($request->input('query'), $document->{localeAppColumn('name')});
+                ->map(function ($document) use ($query) {
+                    $document->wrapName = wrapQueryString($query, $document->{localeAppColumn('name')});
                     return $document;
                 });
         }

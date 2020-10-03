@@ -36,7 +36,7 @@ trait Searchable
      */
     public function toSearchArray()
     {
-        return $this->toArray();
+        return $this->toArrayWithContent();
     }
 
 }

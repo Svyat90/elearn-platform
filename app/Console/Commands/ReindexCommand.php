@@ -47,6 +47,8 @@ class ReindexCommand extends Command
     {
         $this->info('Indexing all articles. This might take a while...');
 
+        // ToDo clear old data
+
         foreach (Document::cursor() as $article) {
             $this->elasticSearch->index([
                 'index' => $article->getSearchIndex(),

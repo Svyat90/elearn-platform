@@ -17,7 +17,7 @@ class SearchRequest extends FormRequest
     public function rules()
     {
         return [
-            'query' => 'sometimes|nullable|string',
+            'query' => 'sometimes|string',
             'filter_all'  => 'sometimes|int',
             'filter_issuer'  => 'sometimes|int',
             'filter_name'  => 'sometimes|int',

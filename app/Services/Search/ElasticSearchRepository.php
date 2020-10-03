@@ -3,7 +3,10 @@
 namespace App\Services\Search;
 
 use App\Document;
+use App\Http\Requests\Front\Search\SearchRequest;
+use App\Services\Document\DocumentService;
 use Elasticsearch\Client;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class ElasticSearchRepository implements SearchService
@@ -23,26 +26,24 @@ class ElasticSearchRepository implements SearchService
     }
 
     /**
-     * @param string $query
-     * @param array $fields
+     * @param SearchRequest $request
      * @return Collection
      */
-    public function search(string $query = '', array $fields = []) : Collection
+    public function search(SearchRequest $request) : Collection
     {
-        $items = $this->searchOnElasticSearch($query, $fields);
+        $fields = $this->fillSearchFields($request);
 
-        return collect($items['hits']['hits'] ?? [])
-            ->map(function ($item) {
-                return (object) $item['_source'];
-            });
+        $items = $this->searchOnElasticSearch($request->input('query'), $fields);
+
+        return $this->buildCollection($items);
     }
 
     /**
-     * @param string $query
+     * @param string|null $query
      * @param array $fields
      * @return array
      */
-    private function searchOnElasticSearch(string $query = '', array $fields = []) : array
+    private function searchOnElasticSearch( ? string $query, array $fields = []) : array
     {
         $model = new Document;
 
@@ -53,11 +54,66 @@ class ElasticSearchRepository implements SearchService
                 'query' => [
                     'multi_match' => [
                         'fields' => $fields,
-                        'query' => $query,
+                        'query' => $query ?? "",
                     ],
                 ],
             ],
         ]);
+    }
+
+    /**
+     * @param SearchRequest $request
+     * @return array
+     */
+    private function fillSearchFields(SearchRequest $request) : array
+    {
+        $fields = [];
+        $allFields = [
+            localeAppColumn('name'), localeAppColumn('name_issuer'),
+            localeAppColumn('description'), 'content'
+        ];
+
+        foreach ($request->validated() as $field => $val) {
+            switch (true) {
+                case $field === 'filter_all' && $val === "1":
+                    return $allFields;
+                case $field === 'filter_name' && $val === "1":
+                    $fields[] = localeAppColumn('name');
+                    break;
+                case $field === 'filter_issuer' && $val === "1":
+                    $fields[] = localeAppColumn('name_issuer');
+                    break;
+                case $field === 'filter_description' && $val === "1":
+                    $fields[] = localeAppColumn('description');
+                    break;
+                case $field === 'filter_content' && $val === "1":
+                    $fields[] = 'content';
+                    break;
+            }
+        }
+
+        return $fields;
+    }
+
+    /**
+     * @param array $items
+     * @return Collection
+     */
+    private function buildCollection(array $items) : Collection
+    {
+        $availableDocIds = (new DocumentService())
+            ->getAvailableDocuments()
+            ->pluck('id')
+            ->toArray();
+
+        $foundIds = Arr::pluck($items['hits']['hits'], '_id');
+
+        return Document::query()
+            ->whereIn('id', $foundIds)
+            ->get()
+            ->filter(function (Document $document) use ($availableDocIds) {
+                return in_array($document->id, $availableDocIds);
+            });
     }
 
 }

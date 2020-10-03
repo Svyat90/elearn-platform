@@ -2,14 +2,16 @@
 
 namespace App\Services\Search;
 
+use App\Http\Requests\Front\Search\SearchRequest;
 use Illuminate\Support\Collection;
 
 interface SearchService
 {
+
     /**
-     * @param string $query
-     * @param array $fields
+     * @param SearchRequest $request
      * @return Collection
      */
-    public function search(string $query = '', array $fields = []) : Collection;
+    public function search(SearchRequest $request) : Collection;
+
 }

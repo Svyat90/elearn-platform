@@ -13,6 +13,16 @@ class DocumentFakeSeeder extends Seeder
      */
     public function run()
     {
+        factory(Document::class)
+            ->times(500)
+            ->create();
+    }
+
+    /**
+     * @deprecated
+     */
+    private function oldSeeder()
+    {
         $types = ['type1', 'type2', 'type3'];
         $topics = ['topic1', 'topic2', 'topic3'];
 
@@ -31,7 +41,9 @@ class DocumentFakeSeeder extends Seeder
                 'topic_en' => $topics[rand(0,2)],
                 'image_path' => 'document/2020-09-24/5f6c92957a04f.jpg',
                 'file_path' => 'document/2020-09-24/5f6c92998fb05.pdf',
-                'description' => Str::random(200),
+                'description_ru' => Str::random(200),
+                'description_ro' => Str::random(200),
+                'description_en' => Str::random(200),
                 'status' => 'initial',
                 'access' => 'public'
             ]);

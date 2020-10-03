@@ -58,53 +58,6 @@ class DocumentService extends AbstractAccessService
     }
 
     /**
-     * @param Collection $documents
-     * @return Collection
-     */
-    public function filterAccess(Collection &$documents) : Collection
-    {
-        $availableDocIds = $this->getAvailableDocuments()->pluck('id')->toArray();
-
-        return $documents->filter(function ($item) use ($availableDocIds) {
-            return in_array($item->id, $availableDocIds);
-        });
-    }
-
-    /**
-     * @param SearchRequest $request
-     * @return array
-     */
-    public function fillSearchFields(SearchRequest $request) : array
-    {
-        $fields = [];
-        $allFields = [
-            localeAppColumn('name'), localeAppColumn('name_issuer'),
-            localeAppColumn('description'), 'content'
-        ];
-
-        foreach ($request->validated() as $field => $val) {
-            switch (true) {
-                case $field === 'filter_all' && $val === "1":
-                    return $allFields;
-                case $field === 'filter_name' && $val === "1":
-                    $fields[] = localeAppColumn('name');
-                    break;
-                case $field === 'filter_issuer' && $val === "1":
-                    $fields[] = localeAppColumn('name_issuer');
-                    break;
-                case $field === 'filter_description' && $val === "1":
-                    $fields[] = localeAppColumn('description');
-                    break;
-                case $field === 'filter_content' && $val === "1":
-                    $fields[] = 'content';
-                    break;
-            }
-        }
-
-        return $fields;
-    }
-
-    /**
      * @return Builder|BelongsToMany
      */
     public function getAvailableDocuments()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Role\StoreRoleRequest;
 use App\Http\Requests\Role\UpdateRoleRequest;
 use App\Permission;
 use App\Role;
@@ -23,6 +24,30 @@ class RolesController extends Controller
         $roles = Role::all();
 
         return view('admin.roles.index', compact('roles'));
+    }
+
+    /**
+     * @return View
+     */
+    public function create() : View
+    {
+        abort_if(Gate::denies('role_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $permissions = Permission::all()->pluck('title', 'id');
+
+        return view('admin.roles.create', compact('permissions'));
+    }
+
+    /**
+     * @param StoreRoleRequest $request
+     * @return RedirectResponse
+     */
+    public function store(StoreRoleRequest $request) : RedirectResponse
+    {
+        $role = Role::query()->create($request->all());
+        $role->permissions()->sync($request->input('permissions', []));
+
+        return redirect()->route('admin.roles.index');
     }
 
     /**

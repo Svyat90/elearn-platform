@@ -44,6 +44,8 @@ class SearchServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Document::observe(ElasticSearchObserver::class);
+        if (config('services.search.enabled')) {
+            Document::observe(ElasticSearchObserver::class);
+        }
     }
 }

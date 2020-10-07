@@ -37,8 +37,8 @@
             <div class="col-md-6">
                 <div class="head-right">
                     <a class="md-hidden" href=""><img src="{{ asset('front/images/search.svg') }}" alt=""></a>
-                    <a href="{{ route('profile.watch_later') }}"><span>{{ __('header.watch_later') }}</span><img src="{{ asset('front/images/clock.svg') }}" alt=""></a>
-                    <a href="{{ route('profile.favourites') }}"><span>{{ __('header.favourites') }}</span><img src="{{ asset('front/images/bookmark.svg') }}" alt=""></a>
+                    <a href="{{ route('profile.watch_later') }}" id="profile_watch_later_header"><span>{{ __('header.watch_later') }}</span><img src="{{ asset('front/images/clock.svg') }}" alt=""></a>
+                    <a href="{{ route('profile.favourites') }}" id="profile_favourites_header"><span>{{ __('header.favourites') }}</span><img src="{{ asset('front/images/bookmark.svg') }}" alt=""></a>
 
                     @include('front.partials.auth')
 

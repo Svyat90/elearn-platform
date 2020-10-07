@@ -41,6 +41,12 @@
 
 <script>
     $(function () {
+        let profileWatchLater = $("#profile_watch_later_header"),
+            profileFavourites = $("#profile_favourites_header");
+
+        checkAuthorizedGetRoute(profileWatchLater);
+        checkAuthorizedGetRoute(profileFavourites);
+
         enableFavouriteDocument();
         enableWatchLaterDocument();
 
@@ -49,10 +55,39 @@
 
         enableGlobalSearch();
 
+        /**
+         *  Show Login Modal
+         */
         function showLogin()
         {
             let btnLogin = $(".login");
             btnLogin[0].click();
+        }
+
+        /**
+         *  Check login user before redirect
+         */
+        function checkAuthorizedGetRoute(object)
+        {
+            object.click(function (e) {
+                e.preventDefault();
+                let href = $(this).attr('href');
+                $.ajax({
+                    type: "GET",
+                    url: href,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        window.location.href = href;
+                    },
+                    error: function (response) {
+                        if (response.status === 401) {
+                            showLogin();
+                        }
+                    }
+                });
+            });
         }
 
         /**

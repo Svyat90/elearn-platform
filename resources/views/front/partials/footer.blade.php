@@ -3,7 +3,7 @@
         <div class="logo"><a href=""><img src="{{ asset('front/images/logo.svg') }}" alt=""></a></div>
         <nav class="foot-nav">
             <ul>
-                <li><a href="">{{ __('main.about_us') }}</a></li>
+                <li><a href="{{ $settings['about_us_link'] }}">{{ __('main.about_us') }}</a></li>
                 <li><a href="{{ route('courses.index') }}">{{ __('main.electronic_courses') }}</a></li>
                 <li><a href="{{ route('documents.index') }}">{{ __('main.info_materials') }}</a></li>
                 <li><a href="{{ route('contacts.index') }}">{{ __('main.contacts') }}</a></li>

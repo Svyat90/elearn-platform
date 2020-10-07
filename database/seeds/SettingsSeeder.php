@@ -30,6 +30,7 @@ class SettingsSeeder extends Seeder
             ['key' => 'information_technology_department_phone_mob', 'val' => '(+373 68) 185 791'],
             ['key' => 'information_technology_department_phone', 'val' => '(+373 22) 930 124'],
             ['key' => 'international_relations_section_phone', 'val' => '(+373 22) 930 221'],
+            ['key' => 'about_us_link', 'val' => '#'],
         ];
 
         Setting::query()->insert($settings);

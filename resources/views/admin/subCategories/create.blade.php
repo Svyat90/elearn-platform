@@ -56,7 +56,7 @@
                             name="access" id="access" required>
                         @foreach($accessTypes as $access)
                             <option
-                                value="{{ $access }}" >{{ $access }}</option>
+                                value="{{ $access }}" {{ old('access', \App\Services\SubCategoryService::ACCESS_TYPE_PUBLIC) === $access ? 'selected' : '' }}>{{ $access }}</option>
                         @endforeach
                     </select>
                     @if($errors->has('access'))

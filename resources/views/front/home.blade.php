@@ -35,7 +35,7 @@
                                         <img src="{{ favoriteImagePath($isFavourite) }}" alt="">
                                     </a>
                                 </div>
-                                <a href="{{ route('documents.show', $document->id) }}"><img src="{{ storageUrl($document->image_path) }}" alt=""></a>
+                                <a href="{{ route('documents.show', $document->id) }}"><img src="{{ storageUrl($document->image_path, 'medium') }}" alt=""></a>
                             </div>
                             <div class="caption col-xs-8">
                                 <div class="text">

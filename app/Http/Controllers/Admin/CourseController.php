@@ -14,6 +14,7 @@ use App\Http\Requests\Course\StoreCourseRequest;
 use App\Http\Requests\Course\UpdateCourseRequest;
 use App\Role;
 use App\Services\Course\CourseService;
+use App\Services\ImageService;
 use App\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
@@ -63,7 +64,7 @@ class CourseController extends Controller
             $table->editColumn('access', fn ($row) => labelAccess($row->access));
             $table->editColumn('status', fn ($row) => labelStatus($row->status));
             $table->addColumn('published_at', fn ($row) => $row->published_at ?? '');
-            $table->addColumn('image', fn ($row) => $row->image_path ? sprintf('<img src="%s" width="50px" height="50px" />', storageUrl($row->image_path)) : '');
+            $table->addColumn('image', fn ($row) => $row->image_path ? sprintf('<img src="%s" width="50px" height="50px" />', storageUrl($row->image_path, 'small')) : '');
             $table->addColumn('actions', function ($row) {
                 $viewGate      = 'course_show';
                 $editGate      = 'course_edit';
@@ -116,14 +117,24 @@ class CourseController extends Controller
     /**
      * @param StoreCourseRequest $request
      * @param CourseService $courseService
+     * @param ImageService $imageService
      * @return RedirectResponse
      */
-    public function store(StoreCourseRequest $request, CourseService $courseService) : RedirectResponse
+    public function store(
+        StoreCourseRequest $request,
+        CourseService $courseService,
+        ImageService $imageService
+    ) : RedirectResponse
     {
         /** @var Course $course */
         $course = Course::query()->create($request->validated());
 
         $courseService->handleRelationships($course, $request);
+
+        $imageService->saveThumbs(
+            ImageService::IMAGE_TYPE_COURSE,
+            $request->input('image_path')
+        );
 
         return redirect()->route('admin.courses.index');
     }

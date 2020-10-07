@@ -4,11 +4,27 @@ if (!function_exists('storageUrl')) {
 
     /**
      * @param string|null $path
+     * @param string|null $type
      * @return string
      */
-    function storageUrl( ? string $path = null) : string
+    function storageUrl( ? string $path = null, ? string $type = null) : string
     {
         if ( ! $path) return '';
+
+        if ($type !== null) {
+            [$path, $exp] = explode(".", $path);
+            switch ($type) {
+                case 'small':
+                    $path = sprintf('%s-%s.%s', $path, 'small', $exp);
+                    break;
+                case 'medium':
+                    $path = sprintf('%s-%s.%s', $path, 'medium', $exp);
+                    break;
+                case 'large':
+                    $path = sprintf('%s-%s.%s', $path, 'large', $exp);
+                    break;
+            }
+        }
 
         return sprintf("%s/storage/%s", config('app.url'), $path);
     }

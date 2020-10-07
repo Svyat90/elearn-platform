@@ -116,33 +116,32 @@
                     </div>
 
                     <div class="form-group col-md-4 col-sm-6 col-xs-12">
-                        <label class="required" for="access">{{ trans('cruds.subCategory.fields.access') }}</label>
-                        <select class="form-control select2 {{ $errors->has('access') ? 'is-invalid' : '' }}"
-                                name="access" id="access" required>
-                            @foreach($accessTypes as $access)
-                                <option
-                                    value="{{ $access }}" {{ old('access') ? 'selected' : '' }}>{{ $access }}</option>
-                            @endforeach
-                        </select>
-                        @if($errors->has('access'))
-                            <span class="text-danger">{{ $errors->first('access') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.course.fields.access_helper') }}</span>
-                    </div>
-
-                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
                         <label class="required" for="status">{{ trans('cruds.document.fields.status') }}</label>
                         <select class="form-control select2 {{ $errors->has('status') ? 'is-invalid' : '' }}"
                                 name="status" id="status" required>
                             @foreach($statusesSelect as $status)
                                 <option
-                                    value="{{ $status }}" {{ old('status') ? 'selected' : '' }}>{{ $status }}</option>
+                                    value="{{ $status }}" {{ old('status', \App\Services\Course\CourseService::STATUS_INITIAL) === $status ? 'selected' : '' }}>{{ $status }}</option>
                             @endforeach
                         </select>
                         @if($errors->has('status'))
                             <span class="text-danger">{{ $errors->first('status') }}</span>
                         @endif
                         <span class="help-block">{{ implode(", ", $statuses) }}</span>
+                    </div>
+
+                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                        <label class="required" for="access">{{ trans('cruds.subCategory.fields.access') }}</label>
+                        <select class="form-control select2 {{ $errors->has('access') ? 'is-invalid' : '' }}"
+                                name="access" id="access" required>
+                            @foreach($accessTypes as $access)
+                                <option value="{{ $access }}" {{ old('access', \App\Services\Course\CourseService::ACCESS_TYPE_PUBLIC) === $access ? 'selected' : '' }}>{{ $access }}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('access'))
+                            <span class="text-danger">{{ $errors->first('access') }}</span>
+                        @endif
+                        <span class="help-block">{{ trans('cruds.course.fields.access_helper') }}</span>
                     </div>
                 </div>
 

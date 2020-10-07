@@ -4,7 +4,7 @@
 @endphp
 
 <div class="cours">
-    <a class="course-img" href="{{ route('courses.show', $course->id) }}"><img src="{{ storageUrl($course->image_path) }}" alt=""></a>
+    <a class="course-img" href="{{ route('courses.show', $course->id) }}"><img src="{{ storageUrl($course->image_path, 'medium') }}" alt=""></a>
     <div class="caption">
         <div class="meta">
             <a href="{{ route('courses.show', $course->id) }}">{{ $course->{localeAppColumn('name')} }}</a>
@@ -19,7 +19,7 @@
                 <img src="{{ asset('front/images/clock.svg') }}" alt="">
                 <span>{{ __('main.watch_later') }}</span>
             </a>
-            <a href="" class="button-grey course-favourite" data-course-id="{{ $course->id }}" style="{{ $isFavourite ? 'color: #970C13; opacity: 1.0 !important;' : '' }}">
+            <a href="" class="button-grey course-favourite" data-course-id="{{ $course->id }}" style="{{ $isFavourite ? 'color: #970C13 !important; opacity: 1.0 !important;' : '' }}">
                 <img src="{{ asset('front/images/bookmark.svg') }}" alt="">
                 <span>{{ __('main.add_to_favourites') }}</span>
             </a>

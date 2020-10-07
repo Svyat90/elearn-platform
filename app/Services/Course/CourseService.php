@@ -5,6 +5,7 @@ namespace App\Services\Course;
 use App\Course;
 use App\Role;
 use App\Services\AbstractAccessService;
+use App\Services\ImageService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
@@ -16,13 +17,20 @@ class CourseService extends AbstractAccessService
 
     /**
      * @param Course $course
-     * @param string $imagePath
+     * @param string $newImagePath
      */
-    public function handleImage(Course $course, string $imagePath) : void
+    public function handleImage(Course $course, string $newImagePath) : void
     {
-        if ($course->image_path && $course->image_path !== $imagePath) {
-            $imagePath = fileStoragePath($course->image_path);
-            File::delete($imagePath);
+        if ($course->image_path && $course->image_path !== $newImagePath) {
+            $imagePathDelete = fileStoragePath($course->image_path);
+            File::delete($imagePathDelete);
+
+            $imageService = app(ImageService::class);
+            $imageService->deleteThumbs($course->image_path);
+            $imageService->saveThumbs(
+                ImageService::IMAGE_TYPE_COURSE,
+                $newImagePath
+            );
         }
     }
 

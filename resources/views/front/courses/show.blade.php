@@ -5,7 +5,7 @@
             <div class="document">
                 <div class="row">
                     <div class="document-img col-md-4">
-                        <img src="{{ storageUrl($course->image_path) }}" alt="">
+                        <img src="{{ storageUrl($course->image_path, 'large') }}" alt="">
 
                         <div class="contents">
                             <div class="contents-list">
@@ -50,8 +50,18 @@
                             </table>
 
                             <div class="doc-btn">
-                                <a href="" class="button-grey"><img src="{{ asset('front/images/clock.svg') }}" alt=""> <span>{{ __('main.watch_later') }}</span></a>
-                                <a href="" class="button-grey"><img src="{{ asset('front/images/bookmark.svg') }}" alt=""> <span>{{ __('main.add_to_favourites') }}</span></a>
+                                @php
+                                    $isFavourite = in_array($course->id, $favouriteCourseIds) ? true : false;
+                                    $isWatchLater = in_array($course->id, $watchLaterCourseIds) ? true : false;
+                                @endphp
+                                <a href="" class="button-grey course-watch-later" data-course-id="{{ $course->id }}" style="{{ $isWatchLater ? 'color: #970C13 !important; opacity: 1.0 !important;' : '' }}">
+                                    <img src="{{ asset('front/images/clock.svg') }}" alt="">
+                                    <span>{{ __('main.watch_later') }}</span>
+                                </a>
+                                <a href="" class="button-grey course-favourite" data-course-id="{{ $course->id }}" style="{{ $isFavourite ? 'color: #970C13 !important; opacity: 1.0 !important;' : '' }}">
+                                    <img src="{{ asset('front/images/bookmark.svg') }}" alt="">
+                                    <span>{{ __('main.add_to_favourites') }}</span>
+                                </a>
                             </div>
                         </div>
                         <div class="doc-bottom">

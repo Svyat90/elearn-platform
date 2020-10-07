@@ -44,6 +44,10 @@ class User extends Authenticatable
         'email_verified_at', 'updated_at', 'created_at', 'deleted_at',
     ];
 
+    protected $casts = [
+        'force_logout' => 'bool'
+    ];
+
     public function permissions()
     {
         return $this->hasMany(Permission::class);

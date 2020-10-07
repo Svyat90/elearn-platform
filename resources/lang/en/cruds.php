@@ -70,7 +70,7 @@ return [
             'password'                     => 'Password',
             'password_helper'              => '',
             'roles'                        => 'Roles',
-            'roles_helper'                 => '1 - Customer 2 - Celebrity 3 - Agent',
+            'roles_helper'                 => '',
             'remember_token'               => 'Remember Token',
             'remember_token_helper'        => '',
             'created_at'                   => 'Created at',

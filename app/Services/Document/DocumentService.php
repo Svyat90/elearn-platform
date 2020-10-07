@@ -6,9 +6,9 @@ use App\Category;
 use App\Course;
 use App\Document;
 use App\Http\Requests\Front\Category\IndexCategoryRequest;
-use App\Http\Requests\Front\Search\SearchRequest;
 use App\Role;
 use App\Services\AbstractAccessService;
+use App\Services\ImageService;
 use App\SubCategory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -22,13 +22,20 @@ class DocumentService extends AbstractAccessService
 
     /**
      * @param Document $document
-     * @param string $imagePath
+     * @param string $newImagePath
      */
-    public function handleImage(Document $document, string $imagePath) : void
+    public function handleImage(Document $document, string $newImagePath) : void
     {
-        if ($document->image_path && $document->image_path !== $imagePath) {
-            $imagePath = fileStoragePath($document->image_path);
-            File::delete($imagePath);
+        if ($document->image_path && $document->image_path !== $newImagePath) {
+            $imagePathDelete = fileStoragePath($document->image_path);
+            File::delete($imagePathDelete);
+
+            $imageService = app(ImageService::class);
+            $imageService->deleteThumbs($document->image_path);
+            $imageService->saveThumbs(
+                ImageService::IMAGE_TYPE_DOCUMENT,
+                $newImagePath
+            );
         }
     }
 

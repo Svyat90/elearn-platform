@@ -7,6 +7,7 @@ use App\Http\Requests\User\MassDestroyUserRequest;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Role;
+use App\Services\UserService;
 use App\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
@@ -86,14 +87,15 @@ class UsersController extends Controller
 
     /**
      * @param StoreUserRequest $request
+     * @param UserService $userService
      * @return RedirectResponse
      */
-    public function store(StoreUserRequest $request) : RedirectResponse
+    public function store(StoreUserRequest $request, UserService $userService) : RedirectResponse
     {
         /** @var User $user */
         $user = User::query()->create($request->all());
-        $user->roles()->sync($request->input('roles', []));
-        $user->save();
+
+        $userService->handleRelationships($user, $request);
 
         return redirect()->route('admin.users.index');
     }
@@ -115,13 +117,14 @@ class UsersController extends Controller
     /**
      * @param UpdateUserRequest $request
      * @param User $user
+     * @param UserService $userService
      * @return RedirectResponse
      */
-    public function update(UpdateUserRequest $request, User $user) : RedirectResponse
+    public function update(UpdateUserRequest $request, User $user, UserService $userService) : RedirectResponse
     {
-        $user->update($request->validated());
-        $user->roles()->sync($request->input('roles', []));
-        $user->save();
+        $userService->updateData($request, $user);
+
+        $userService->handleRelationships($user, $request);
 
         return redirect()->route('admin.users.index');
 

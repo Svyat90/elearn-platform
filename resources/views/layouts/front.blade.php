@@ -47,8 +47,10 @@
         checkAuthorizedGetRoute(profileWatchLater);
         checkAuthorizedGetRoute(profileFavourites);
 
-        enableFavouriteDocument();
-        enableWatchLaterDocument();
+        @if(Route::current()->getName() !== "documents.show")
+            enableFavouriteDocument();
+            enableWatchLaterDocument();
+        @endif
 
         enableFavouriteCourse();
         enableWatchLaterCourse();

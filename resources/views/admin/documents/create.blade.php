@@ -150,7 +150,7 @@
                                 name="status" id="status" required>
                             @foreach($statusesSelect as $status)
                                 <option
-                                    value="{{ $status }}" {{ old('status') ? 'selected' : '' }}>{{ $status }}</option>
+                                    value="{{ $status }}" {{ old('status', \App\Services\Document\DocumentService::STATUS_INITIAL) === $status ? 'selected' : '' }}>{{ $status }}</option>
                             @endforeach
                         </select>
                         @if($errors->has('status'))
@@ -165,7 +165,7 @@
                                 name="access" id="access" required>
                             @foreach($accessTypes as $access)
                                 <option
-                                    value="{{ $access }}" {{ old('access') ? 'selected' : '' }}>{{ $access }}</option>
+                                    value="{{ $access }}" {{ old('access', \App\Services\Document\DocumentService::ACCESS_TYPE_PUBLIC) === $access ? 'selected' : '' }}>{{ $access }}</option>
                             @endforeach
                         </select>
                         @if($errors->has('access'))

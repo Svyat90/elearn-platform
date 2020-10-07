@@ -332,7 +332,7 @@
 
                 <div class="form-group">
                     <label class="required" for="file">{{ trans('cruds.document.fields.image') }}</label>
-                    <div>{!! sprintf('<img src="%s" style="max-width: 200px;" />', storageUrl($document->image_path)) !!}</div>
+                    <div>{!! sprintf('<img src="%s" style="max-width: 200px;" />', storageUrl($document->image_path, 'medium')) !!}</div>
                     <p><a href="#" id="show-image-dropzone">Add New Image</a></p>
                     <input type="hidden" name="image_path" value="{{ $document->image_path ?? '' }}">
                     <span id="image-dropzone" style="{{ $document->image_path ? 'display: none;' : '' }};">

@@ -72,7 +72,7 @@
                                 {{ $document->id ?? '' }}
                             </td>
                             <td>
-                                {!! sprintf('<img src="%s" width="100px" />', storageUrl($document->image_path)) !!}
+                                {!! sprintf('<img src="%s" width="100px" />', storageUrl($document->image_path, 'small')) !!}
                             </td>
                             <td>
                                 {{ $document->type ?? '' }}

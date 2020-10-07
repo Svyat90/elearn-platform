@@ -63,7 +63,7 @@
                             {{ $course->id ?? '' }}
                         </td>
                         <td>
-                            {!! sprintf('<img src="%s" width="100px" />', storageUrl($course->image_path)) !!}
+                            {!! sprintf('<img src="%s" width="100px" />', storageUrl($course->image_path, 'small')) !!}
                         </td>
                         <td>
                             {{ $course->{localeColumn('name')} }}

@@ -19,7 +19,7 @@
                     @if($field === 'image_path')
                         <tr>
                             <th>Image</th>
-                            <td>{!! sprintf('<img src="%s" width="100px" />', storageUrl($course->{$field})) !!}</td>
+                            <td>{!! sprintf('<img src="%s" width="100px" />', storageUrl($course->{$field}, 'medium')) !!}</td>
                         </tr>
                     @elseif($field === 'file_path')
                         @php

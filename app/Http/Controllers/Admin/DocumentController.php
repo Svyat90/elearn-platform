@@ -13,6 +13,7 @@ use App\Http\Requests\Document\StoreDocumentRequest;
 use App\Http\Requests\Document\UpdateDocumentRequest;
 use App\Role;
 use App\Services\Document\DocumentService;
+use App\Services\ImageService;
 use App\SubCategory;
 use App\User;
 use Illuminate\Http\RedirectResponse;
@@ -66,7 +67,7 @@ class DocumentController extends Controller
             $table->editColumn('status', fn ($row) => labelStatus($row->status));
             $table->addColumn('approved_at', fn ($row) => $row->approved_at ?? '');
             $table->addColumn('published_at', fn ($row) => $row->published_at ?? '');
-            $table->addColumn('image', fn ($row) => $row->image_path ? sprintf('<img src="%s" width="50px" height="50px" />', storageUrl($row->image_path)) : '');
+            $table->addColumn('image', fn ($row) => $row->image_path ? sprintf('<img src="%s" width="50px" height="50px" />', storageUrl($row->image_path, 'small')) : '');
             $table->addColumn('actions', function ($row) {
                 $viewGate      = 'document_show';
                 $editGate      = 'document_edit';
@@ -116,14 +117,24 @@ class DocumentController extends Controller
     /**
      * @param StoreDocumentRequest $request
      * @param DocumentService $documentService
+     * @param ImageService $imageService
      * @return RedirectResponse
      */
-    public function store(StoreDocumentRequest $request, DocumentService $documentService) : RedirectResponse
+    public function store(
+        StoreDocumentRequest $request,
+        DocumentService $documentService,
+        ImageService $imageService
+    ) : RedirectResponse
     {
         /** @var Document $document */
         $document = Document::query()->create($request->validated());
 
         $documentService->handleRelationships($document, $request);
+
+        $imageService->saveThumbs(
+            ImageService::IMAGE_TYPE_DOCUMENT,
+            $request->input('image_path')
+        );
 
         return redirect()->route('admin.documents.index');
     }

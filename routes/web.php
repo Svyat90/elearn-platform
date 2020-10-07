@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\LocaleMiddleware;
 
+Auth::routes();
+
 Route::get('/', 'Front\HomeController@redirectToHome');
 Route::get('set-locale/{lang}', 'Front\LocaleController@setLocale')->name('setLocate');
 
@@ -43,54 +45,54 @@ Route::group(['prefix' => LocaleMiddleware::getLocale(), 'namespace' => 'Front']
     Route::post('search', 'SearchController@search')->name('search');
 });
 
-Auth::routes();
-
 // Admin
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth.admin']], function () {
-    Route::redirect('/admin', '/login');
-    Route::get('/', 'HomeController@index')->name('home');
+Route::group(['prefix' => LocaleMiddleware::getLocale()], function () {
+    Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth.admin']], function () {
+        Route::redirect('/admin', '/login');
+        Route::get('/', 'HomeController@index')->name('home');
 
-    // Permissions
-    Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
-    Route::resource('permissions', 'PermissionsController');
+        // Permissions
+        Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
+        Route::resource('permissions', 'PermissionsController');
 
-    // Roles
-    Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
-    Route::resource('roles', 'RolesController');
+        // Roles
+        Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
+        Route::resource('roles', 'RolesController');
 
-    // Users
-    Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
-    Route::resource('users', 'UsersController');
+        // Users
+        Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
+        Route::resource('users', 'UsersController');
 
-    // Categories
-    Route::delete('categories/destroy', 'CategoryController@massDestroy')->name('categories.massDestroy');
-    Route::resource('categories', 'CategoryController');
+        // Categories
+        Route::delete('categories/destroy', 'CategoryController@massDestroy')->name('categories.massDestroy');
+        Route::resource('categories', 'CategoryController');
 
-    // Sub Categories
-    Route::delete('sub-categories/destroy', 'SubCategoryController@massDestroy')->name('sub-categories.massDestroy');
-    Route::resource('sub-categories', 'SubCategoryController');
+        // Sub Categories
+        Route::delete('sub-categories/destroy', 'SubCategoryController@massDestroy')->name('sub-categories.massDestroy');
+        Route::resource('sub-categories', 'SubCategoryController');
 
-    // Documents
-    Route::delete('documents/destroy', 'DocumentController@massDestroy')->name('documents.massDestroy');
-    Route::post('documents/media', 'DocumentController@storeMedia')->name('documents.storeMedia');
-    Route::resource('documents', 'DocumentController');
+        // Documents
+        Route::delete('documents/destroy', 'DocumentController@massDestroy')->name('documents.massDestroy');
+        Route::post('documents/media', 'DocumentController@storeMedia')->name('documents.storeMedia');
+        Route::resource('documents', 'DocumentController');
 
-    // Courses
-    Route::delete('courses/destroy', 'CourseController@massDestroy')->name('courses.massDestroy');
-    Route::post('courses/media', 'CourseController@storeMedia')->name('courses.storeMedia');
-    Route::resource('courses', 'CourseController');
+        // Courses
+        Route::delete('courses/destroy', 'CourseController@massDestroy')->name('courses.massDestroy');
+        Route::post('courses/media', 'CourseController@storeMedia')->name('courses.storeMedia');
+        Route::resource('courses', 'CourseController');
 
-    // Audit Logs
-    Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
+        // Audit Logs
+        Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
-    // Settings
-    Route::resource('settings', 'SettingController')->only('index', 'edit', 'update');
-});
+        // Settings
+        Route::resource('settings', 'SettingController')->only('index', 'edit', 'update');
+    });
 
-Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth.admin']], function () {
-    // Change password
-    if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php'))) {
-        Route::get('password', 'ChangePasswordController@edit')->name('password.edit');
-        Route::post('password', 'ChangePasswordController@update')->name('password.update');
-    }
+    Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth.admin']], function () {
+        // Change password
+        if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php'))) {
+            Route::get('password', 'ChangePasswordController@edit')->name('password.edit');
+            Route::post('password', 'ChangePasswordController@update')->name('password.update');
+        }
+    });
 });

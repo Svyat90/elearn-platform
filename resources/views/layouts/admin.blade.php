@@ -41,9 +41,9 @@
                             {{ strtoupper(app()->getLocale()) }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            @foreach(config('panel.available_languages') as $langLocale => $langName)
-                                <a class="dropdown-item" href="{{ url()->current() }}?change_language={{ $langLocale }}">{{ strtoupper($langLocale) }} ({{ $langName }})</a>
-                            @endforeach
+                            <a class="dropdown-item" href="{{ route('setLocate', 'ro') }}">RO</a>
+                            <a class="dropdown-item" href="{{ route('setLocate', 'en') }}">EN</a>
+                            <a class="dropdown-item" href="{{ route('setLocate', 'ru') }}">RU</a>
                         </div>
                     </li>
                 </ul>

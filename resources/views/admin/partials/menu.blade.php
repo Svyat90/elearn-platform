@@ -159,7 +159,7 @@
 
                 @can('setting_access')
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('settings') ? 'active' : '' }}" href="{{ route('admin.settings.index') }}">
+                        <a class="nav-link {{ strpos(request()->path(), 'settings') !== false ? 'active' : '' }}" href="{{ route('admin.settings.index') }}">
                             <i class="fa-fw nav-icon fas fa-cogs">
                             </i>
                             <p>

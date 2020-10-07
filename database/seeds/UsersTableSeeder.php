@@ -13,6 +13,7 @@ class UsersTableSeeder extends Seeder
                 'id'             => PermissionService::ROLE_ADMIN_ID,
                 'email'          => 'admin@admin.com',
                 'password'       => '$2y$10$RyVYCGWVxLArEjs3qekLneR926J/KuXRe3YX1VW2Sre8YTSEGAGMG', // password
+                'user_status'    => User::USER_STATUS_ACTIVE
             ],
         ];
 

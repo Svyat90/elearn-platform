@@ -13,7 +13,7 @@ if (!function_exists('getContentPdf')) {
         try {
             return (new Extract())
                 ->pdf($path)
-                ->text();
+                ->text() ?? "";
 
         } catch (\Throwable $e) {
             return "";

@@ -36,7 +36,11 @@ trait Searchable
      */
     public function toSearchArray()
     {
-        return $this->toArrayWithContent();
+        if (method_exists(static::class, 'toArrayWithContent')) {
+            return $this->toArrayWithContent();
+        }
+
+        return $this->toArray();
     }
 
 }

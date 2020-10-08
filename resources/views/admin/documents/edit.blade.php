@@ -391,7 +391,7 @@
             params: {
                 size: 2000
             },
-            acceptedFiles: "application/pdf",
+            acceptedFiles: "application/pdf,.docx",
             success: function (file, response) {
                 $('form').find('input[name="file"]').remove()
                 $('form').append('<input type="hidden" name="file_path" value="' + response.file_path + '">')

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\Document\DocumentService;
 use App\Services\Search\Searchable;
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Document extends Model
 {
     use SoftDeletes,
-//        Auditable,
+        Auditable,
         Searchable;
 
     public $table = 'documents';
@@ -35,6 +36,8 @@ class Document extends Model
 
     public function toArrayWithContent()
     {
+        $content = DocumentService::getDocumentContent($this->file_path);
+
         return [
             'id' => $this->id,
             'name_ru' => $this->name_ru ?? "",
@@ -46,7 +49,7 @@ class Document extends Model
             'description_ru' => $this->description_ru ?? "",
             'description_ro' => $this->description_ro ?? "",
             'description_en' => $this->description_en ?? "",
-            'content' => getContentPdf(fileStoragePath($this->file_path))
+            'content' => $content
         ];
     }
 

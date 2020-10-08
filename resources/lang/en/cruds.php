@@ -265,7 +265,7 @@ return [
             'number_helper'     => '',
             'description'       => 'Description',
             'description_helper'=> '',
-            'file'              => 'File (PDF)',
+            'file'              => 'File (PDF/DOCX)',
             'file_helper'       => '',
             'related_documents'              => 'Related Documents',
             'related_documents_helper'       => '',

@@ -21,15 +21,6 @@
                             <th>Image</th>
                             <td>{!! sprintf('<img src="%s" width="100px" />', storageUrl($course->{$field}, 'medium')) !!}</td>
                         </tr>
-                    @elseif($field === 'file_path')
-                        @php
-                        $link = storageUrl($course->{$field});
-                        $segments = explode("/", $link);
-                        @endphp
-                        <tr>
-                            <th>File (PDF)</th>
-                            <td>{!! $link ? sprintf('<a href="%s" target="_blank" />%s</a>', $link, $segments[count($segments)-1]) : '' !!}</td>
-                        </tr>
                     @elseif($field === 'access')
                         <tr>
                             <th>{{ trans("cruds.document.fields.{$field}") }}</th>

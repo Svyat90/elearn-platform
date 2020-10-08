@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\AuditLog;
+use App\Document;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,10 @@ trait Auditable
         });
     }
 
+    /**
+     * @param $description
+     * @param $model
+     */
     protected static function audit($description, $model)
     {
         if ($model instanceof User) {
@@ -31,7 +36,11 @@ trait Auditable
                 $model->subCategories,
                 $model->categories,
                 $model->documents,
-                $model->courses,
+                $model->courses
+            );
+
+        } elseif ($model instanceof Document) {
+            unset(
                 $model->content
             );
         }

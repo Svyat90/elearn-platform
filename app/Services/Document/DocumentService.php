@@ -5,6 +5,7 @@ namespace App\Services\Document;
 use App\Category;
 use App\Course;
 use App\Document;
+use App\Helpers\DocxConversion;
 use App\Http\Requests\Front\Category\IndexCategoryRequest;
 use App\Role;
 use App\Services\AbstractAccessService;
@@ -19,6 +20,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class DocumentService extends AbstractAccessService
 {
+    public const DOCUMENT_TYPE_DOCX = 'docx';
+    public const DOCUMENT_TYPE_PDF = 'pdf';
 
     /**
      * @param Document $document
@@ -62,6 +65,29 @@ class DocumentService extends AbstractAccessService
         $document->categories()->sync($request->category_ids);
         $document->subCategories()->sync($request->sub_category_ids);
         $document->relatedDocuments()->sync($request->related_document_ids);
+    }
+
+    /**
+     * @param string $filePath
+     * @return string
+     */
+    public static function getDocumentContent(string $filePath) : string
+    {
+        [, $exp] = explode(".", $filePath);
+
+        $fullPath = fileStoragePath($filePath);
+
+        switch (true) {
+            case $exp === self::DOCUMENT_TYPE_DOCX:
+                $converter = new DocxConversion($fullPath);
+                return $converter->convertToText();
+
+            case $exp === self::DOCUMENT_TYPE_PDF:
+                return getContentPdf($fullPath);
+
+            default:
+                return "";
+        }
     }
 
     /**

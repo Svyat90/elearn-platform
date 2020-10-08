@@ -27,7 +27,7 @@
                         $segments = explode("/", $link);
                         @endphp
                         <tr>
-                            <th>File (PDF)</th>
+                            <th>{{ trans("cruds.document.fields.file") }}</th>
                             <td>{!! $link ? sprintf('<a href="%s" target="_blank" />%s</a>', $link, $segments[count($segments)-1]) : '' !!}</td>
                         </tr>
                     @elseif($field === 'access')

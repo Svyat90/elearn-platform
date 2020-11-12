@@ -11,6 +11,7 @@ use App\Policies\DocumentPolicy;
 use App\Policies\SubCategoryPolicy;
 use App\SubCategory;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\URL;
 use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
@@ -34,6 +35,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        URL::forceScheme('https');
+
         $this->registerPolicies();
 
         if (!app()->runningInConsole()) {

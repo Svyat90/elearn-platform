@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    @can('category_create')
+    @can('document_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
                 <a class="btn btn-success" href="{{ route("admin.documents.create") }}">
@@ -72,7 +72,7 @@
     <script>
         $(function () {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-            @can('category_delete')
+            @can('document_delete')
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
             let deleteButton = {
                 text: deleteButtonTrans,

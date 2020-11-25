@@ -32,10 +32,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="required" for="first_name">{{ trans('cruds.user.fields.first_name') }}</label>
+                    <label class="" for="first_name">{{ trans('cruds.user.fields.first_name') }}</label>
                     <input class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}" type="text"
-                           name="first_name" id="first_name" value="{{ old('first_name', $user->first_name) }}"
-                           required>
+                           name="first_name" id="first_name" value="{{ old('first_name', $user->first_name) }}">
                     @if($errors->has('first_name'))
                         <span class="text-danger">{{ $errors->first('first_name') }}</span>
                     @endif

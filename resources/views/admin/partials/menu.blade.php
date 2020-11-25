@@ -80,7 +80,7 @@
                 @endcan
 
                 @can('content_management_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/categories*') ? 'menu-open' : '' }} {{ request()->is('admin/sub-categories*') ? 'menu-open' : '' }} {{ request()->is('admin/courses*') ? 'menu-open' : '' }} {{ request()->is('admin/documents*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/categories*') ? 'menu-open' : '' }} {{ request()->is('admin/sub_categories*') ? 'menu-open' : '' }} {{ request()->is('admin/courses*') ? 'menu-open' : '' }} {{ request()->is('admin/documents*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
                             <i class="fa-fw nav-icon fas fa-book">
 
@@ -105,7 +105,7 @@
                             @endcan
                             @can('sub_category_access')
                                 <li class="nav-item">
-                                    <a href="{{ route("admin.sub_categories.index") }}" class="nav-link {{ request()->is('admin/sub-categories') || request()->is('admin/sub-categories/*') ? 'active' : '' }}">
+                                    <a href="{{ route("admin.sub_categories.index") }}" class="nav-link {{ request()->is('admin/sub_categories') || request()->is('admin/sub_categories/*') ? 'active' : '' }}">
                                         <i class="fa-fw nav-icon fas fa-file-alt">
 
                                         </i>

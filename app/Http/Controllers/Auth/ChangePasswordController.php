@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AdminController;
 use App\Http\Requests\User\UpdatePasswordRequest;
 use App\User;
 use Illuminate\Support\Facades\Gate;
@@ -11,7 +11,7 @@ use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\RedirectResponse;
 
-class ChangePasswordController extends Controller
+class ChangePasswordController extends AdminController
 {
     /**
      * @return View

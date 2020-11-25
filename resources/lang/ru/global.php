@@ -51,4 +51,6 @@ return [
 	"login_email" => "Email",
 	"login_password" => "Password",
 	"logout" => "Logout",
+    "welcome" => "Добро пожаловать в Панель Администраторов",
+    "admin_have_to_confirm" => "Администратор должен подтвердить вашу учетную запись."
 ];

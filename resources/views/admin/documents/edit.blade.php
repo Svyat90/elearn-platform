@@ -337,8 +337,8 @@
 
                 <div class="form-group">
                     <label class="required" for="file">{{ trans('cruds.document.fields.file') }}</label>
-                    <div>{!! sprintf('<a href="%s" target="_blank">Show File (PNG)</a>', storageUrl($document->file_path)) !!}</div>
-                    <p><a href="#" id="show-file-dropzone">Add New File (PNG)</a></p>
+                    <div>{!! sprintf('<a href="%s" target="_blank">' . __('cruds.document.fields.show_file') . ')</a>', storageUrl($document->file_path)) !!}</div>
+                    <p><a href="#" id="show-file-dropzone">{{ __('cruds.document.fields.add_new_file') }}</a></p>
                     <input type="hidden" name="file_path" value="{{ $document->file_path ?? '' }}">
                     <span id="file-dropzone" style="{{ $document->image_path ? 'display: none;' : '' }};">
                         <div class="needsclick dropzone {{ $errors->has('file') ? 'is-invalid' : '' }}"

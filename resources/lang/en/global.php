@@ -51,4 +51,6 @@ return [
 	"login_email" => "Email",
 	"login_password" => "Password",
 	"logout" => "Logout",
+    "welcome" => "Welcome to Admin Panel",
+    "admin_have_to_confirm" => "Administrator have to confirm your account."
 ];

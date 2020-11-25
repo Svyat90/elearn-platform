@@ -4,14 +4,19 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
+    use RedirectsUsers;
+
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -23,9 +28,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers {
-        register as registerTrait;
-    }
+    use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -45,16 +48,26 @@ class RegisterController extends Controller
     }
 
     /**
-     * Handle a registration request for the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application
+     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Routing\Redirector
+     * @return mixed
      */
     public function register(Request $request)
     {
         App::setLocale($request->input('locale'));
 
-        $this->registerTrait($request);
+        Session::forget('adminHaveToConfirm');
+
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        Session::put('adminHaveToConfirm');
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
     }
 
     /**
@@ -85,7 +98,7 @@ class RegisterController extends Controller
         return User::create([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'user_status' => User::USER_STATUS_ACTIVE
+            'user_status' => User::USER_STATUS_NOT_ACTIVE
         ]);
     }
 }

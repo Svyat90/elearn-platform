@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -51,6 +52,8 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         App::setLocale($request->input('locale'));
+
+        Session::forget('adminHaveToConfirm');
 
         $response = $this->loginTrait($request);
 

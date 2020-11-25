@@ -17,41 +17,43 @@
 
         <div class="title-section container">{{ __('home.education') }}</div>
 
-        <section class="home-two white container">
-            <div class="row">
-                @foreach($documentsEducation as $document)
-                    @php
-                        $isFavourite = in_array($document->id, $favouriteDocumentIds) ? true : false;
-                        $isWatchLater = in_array($document->id, $watchLaterDocumentIds) ? true : false;
-                    @endphp
-                    <div class="col-md-6">
-                        <div class="educ row">
-                            <div class="images col-xs-4">
-                                <div class="top-book">
-                                    <a href="" class="document-watch-later" data-document-id="{{ $document->id }}">
-                                        <img src="{{ watchLaterImagePath($isWatchLater) }}" alt="">
-                                    </a>
-                                    <a href="" class="document-favourite" data-document-id="{{ $document->id }}">
-                                        <img src="{{ favoriteImagePath($isFavourite) }}" alt="">
-                                    </a>
+        @if($category = \App\Services\SettingService::getHomeCategory())
+            <section class="home-two white container">
+                <div class="row">
+                    @foreach($documentsEducation as $document)
+                        @php
+                            $isFavourite = in_array($document->id, $favouriteDocumentIds) ? true : false;
+                            $isWatchLater = in_array($document->id, $watchLaterDocumentIds) ? true : false;
+                        @endphp
+                        <div class="col-md-6">
+                            <div class="educ row">
+                                <div class="images col-xs-4">
+                                    <div class="top-book">
+                                        <a href="" class="document-watch-later" data-document-id="{{ $document->id }}">
+                                            <img src="{{ watchLaterImagePath($isWatchLater) }}" alt="">
+                                        </a>
+                                        <a href="" class="document-favourite" data-document-id="{{ $document->id }}">
+                                            <img src="{{ favoriteImagePath($isFavourite) }}" alt="">
+                                        </a>
+                                    </div>
+                                    <a href="{{ route('documents.show', $document->id) }}"><img src="{{ storageUrl($document->image_path, 'medium') }}" alt=""></a>
                                 </div>
-                                <a href="{{ route('documents.show', $document->id) }}"><img src="{{ storageUrl($document->image_path, 'medium') }}" alt=""></a>
-                            </div>
-                            <div class="caption col-xs-8">
-                                <div class="text">
-                                    <a href="{{ route('documents.show', $document->id) }}" class="title">{{ __('home.education') }}</a>
-                                    <p>{{ $document->{localeAppColumn('name')} }}</p>
-                                </div>
-                                <div class="meta">
-                                    <div class="date">{{ $document->published_at ? $document->published_at->format('d.m.Y') : '' }}</div>
-                                    <a href="{{ route('documents.show', $document->id) }}" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
+                                <div class="caption col-xs-8">
+                                    <div class="text">
+                                        <a href="{{ route('documents.show', $document->id) }}" class="title">{{ __('home.education') }}</a>
+                                        <p>{{ $document->{localeAppColumn('name')} }}</p>
+                                    </div>
+                                    <div class="meta">
+                                        <div class="date">{{ $document->published_at ? $document->published_at->format('d.m.Y') : '' }}</div>
+                                        <a href="{{ route('documents.show', $document->id) }}" class="more">{{ __('main.read_more') }} <img src="{{ asset('front/images/down.svg') }}" alt=""></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
-        </section>
+                    @endforeach
+                </div>
+            </section>
+        @endif
 
         <div class="title-section container">{{ __('home.category') }}</div>
 

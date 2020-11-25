@@ -20,7 +20,11 @@
                 <input class="password" name="confirm-password-register" type="password">
             </span>
 
-            <div id="register-errors" class="full-input no-search" style="display: none;"></div>
+            <div id="register-errors" class="full-input no-search" style="@if(Session::has('adminHaveToConfirm'))  @else display: none @endif">
+                @if(session('adminHaveToConfirm'))
+                    <strong>{{ __('global.admin_have_to_confirm') }}</strong>
+                @endif
+            </div>
 
             <span class="full-input">
                 <input class="button" type="submit" value="{{ __('auth.register') }}">

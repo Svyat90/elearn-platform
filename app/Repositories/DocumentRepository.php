@@ -20,7 +20,8 @@ class DocumentRepository extends Model
         return Document::query()
             ->select($localeColumn)
             ->distinct()
-            ->pluck($localeColumn);
+            ->pluck($localeColumn)
+            ->filter();
     }
 
     /**
@@ -33,7 +34,8 @@ class DocumentRepository extends Model
         return Document::query()
             ->select($localeColumn)
             ->distinct()
-            ->pluck($localeColumn);
+            ->pluck($localeColumn)
+            ->filter();
     }
 
     /**
@@ -46,7 +48,8 @@ class DocumentRepository extends Model
         return Document::query()
             ->select($localeColumn)
             ->distinct()
-            ->pluck($localeColumn);
+            ->pluck($localeColumn)
+            ->filter();
     }
 
     /**

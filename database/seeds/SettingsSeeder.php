@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Setting;
+use App\Services\SettingService;
 
 class SettingsSeeder extends Seeder
 {
@@ -31,6 +32,7 @@ class SettingsSeeder extends Seeder
             ['key' => 'information_technology_department_phone', 'val' => '(+373 22) 930 124'],
             ['key' => 'international_relations_section_phone', 'val' => '(+373 22) 930 221'],
             ['key' => 'about_us_link', 'val' => '#'],
+            ['key' => SettingService::HOME_CATEGORY_DOCUMENTS_KEY, 'val' => ''],
         ];
 
         Setting::query()->insert($settings);

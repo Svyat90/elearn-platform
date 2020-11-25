@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\AdminController;
+use App\Services\SettingService;
 use App\Setting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,13 +15,27 @@ use Symfony\Component\HttpFoundation\Response;
 class SettingController extends AdminController
 {
     /**
+     * @var SettingService
+     */
+    private SettingService $service;
+
+    /**
+     * SettingController constructor.
+     */
+    public function __construct(SettingService $service)
+    {
+        parent::__construct();
+        $this->service = $service;
+    }
+
+    /**
      * @return View
      */
     public function index() : View
     {
         abort_if(Gate::denies('setting_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $settings = Setting::all();
+        $settings = $this->service->getSettingsWithHomeCategory();
 
         return view('admin.settings.index', compact('settings'));
     }
@@ -33,7 +49,9 @@ class SettingController extends AdminController
     {
         abort_if(Gate::denies('setting_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.settings.edit', compact('setting'));
+        $allCategories = Category::all()->pluck(localeColumn('name'), 'id');
+
+        return view('admin.settings.edit', compact('setting', 'allCategories'));
     }
 
     /**

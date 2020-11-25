@@ -86,13 +86,15 @@ Route::group(['prefix' => LocaleMiddleware::getLocale()], function () {
 
         // Settings
         Route::resource('settings', 'SettingController')->only('index', 'edit', 'update');
+
+        // Translations
+        Route::get('translations', 'TranslationController@edit')->name('translations.edit');
+        Route::put('translations', 'TranslationController@update')->name('translations.update');
     });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth.admin']], function () {
         // Change password
-        if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php'))) {
-            Route::get('password', 'ChangePasswordController@edit')->name('password.edit');
-            Route::post('password', 'ChangePasswordController@update')->name('password.update');
-        }
+        Route::get('password', 'ChangePasswordController@edit')->name('password.edit');
+        Route::post('password', 'ChangePasswordController@update')->name('password.update');
     });
 });

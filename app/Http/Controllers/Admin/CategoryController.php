@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Traits\AccessTypes;
 use App\Http\Requests\Category\MassDestroyCategoryRequest;
 use App\Http\Requests\Category\StoreCategoryRequest;
@@ -20,7 +20,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 
-class CategoryController extends Controller
+class CategoryController extends AdminController
 {
     use AccessTypes;
 
@@ -29,6 +29,7 @@ class CategoryController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
         $this->shareAccessTypes();
     }
 

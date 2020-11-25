@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\AuditLog;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +13,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 
-class AuditLogsController extends Controller
+class AuditLogsController extends AdminController
 {
     /**
      * @param Request $request

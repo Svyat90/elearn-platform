@@ -2,7 +2,8 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
-use \App\Services\PermissionService;
+use App\Services\PermissionService;
+use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,7 +13,7 @@ class UsersTableSeeder extends Seeder
             [
                 'id'             => PermissionService::ROLE_ADMIN_ID,
                 'email'          => 'admin@admin.com',
-                'password'       => '$2y$10$RyVYCGWVxLArEjs3qekLneR926J/KuXRe3YX1VW2Sre8YTSEGAGMG', // password
+                'password'       => Hash::make('password'),
                 'user_status'    => User::USER_STATUS_ACTIVE
             ],
         ];

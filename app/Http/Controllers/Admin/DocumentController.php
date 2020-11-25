@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Document;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Traits\AccessStatuses;
 use App\Http\Controllers\Traits\AccessTypes;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
@@ -25,7 +25,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 
-class DocumentController extends Controller
+class DocumentController extends AdminController
 {
     use MediaUploadingTrait, AccessTypes, AccessStatuses;
 
@@ -34,6 +34,7 @@ class DocumentController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
         $this->shareAccessTypes();
         $this->shareAccessStatuses();
     }

@@ -122,7 +122,7 @@ $(document).ready(function () {
     $('#popular').owlCarousel({
         loop: false,
         nav: true,
-        navText: ['<img src="//front/images/down.svg" alt="">', '<img src="//front/images/down.svg" alt="">'],
+        navText: ['<img src="/front/images/down.svg" alt="">', '<img src="/front/images/down.svg" alt="">'],
         dots: false,
         items: 3,
         autoplay: false,

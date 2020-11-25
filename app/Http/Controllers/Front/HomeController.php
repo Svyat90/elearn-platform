@@ -29,14 +29,14 @@ class HomeController extends FrontController
         DocumentService $documentService
     ) : View
     {
-        $documentsEducation = $documentService
-            ->getAvailableCategoryDocuments(
-                SettingService::getHomeCategory(),
-                new IndexCategoryRequest(),
-                'category_id'
-            )
-            ->take(4)
-            ->get();
+        $homeCategory = SettingService::getHomeCategory();
+
+        $documentsEducation = $homeCategory
+            ? $documentService
+                ->getAvailableCategoryDocuments($homeCategory, new IndexCategoryRequest,'category_id')
+                ->take(4)
+                ->get()
+            : [];
 
         $documentsMostPopular = $documentRepository->getRandomPublicDocuments(10);
         $courses = $courseRepository->getRandomPublicCourses();

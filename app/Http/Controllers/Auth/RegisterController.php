@@ -64,7 +64,7 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        Session::put('adminHaveToConfirm');
+        Session::put('adminHaveToConfirm', true);
 
         return $this->registered($request, $user)
             ?: redirect($this->redirectPath());

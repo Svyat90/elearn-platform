@@ -68,8 +68,8 @@ Route::group(['prefix' => LocaleMiddleware::getLocale()], function () {
         Route::resource('categories', 'CategoryController');
 
         // Sub Categories
-        Route::delete('sub-categories/destroy', 'SubCategoryController@massDestroy')->name('sub-categories.massDestroy');
-        Route::resource('sub-categories', 'SubCategoryController');
+        Route::delete('sub-categories/destroy', 'SubCategoryController@massDestroy')->name('sub_categories.massDestroy');
+        Route::resource('sub_categories', 'SubCategoryController');
 
         // Documents
         Route::delete('documents/destroy', 'DocumentController@massDestroy')->name('documents.massDestroy');
@@ -82,7 +82,7 @@ Route::group(['prefix' => LocaleMiddleware::getLocale()], function () {
         Route::resource('courses', 'CourseController');
 
         // Audit Logs
-        Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
+        Route::resource('audit_logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
         // Settings
         Route::resource('settings', 'SettingController')->only('index', 'edit', 'update');

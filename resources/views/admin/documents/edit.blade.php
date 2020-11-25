@@ -78,7 +78,7 @@
                     </div>
 
                     <div class="form-group col-md-4 col-sm-6 col-xs-12">
-                        <label class="" for="topic_ru">{{ trans('cruds.document.fields.topic') }}(ru)</label>
+                        <label class="" for="topic_ru">{{ trans('cruds.document.fields.topic') }} (ru)</label>
                         <input class="form-control {{ $errors->has('topic_ru') ? 'is-invalid' : '' }}" type="text"
                                name="topic_ru"
                                id="topic_ru" value="{{ old('topic_ru', $document->topic_ru) }}">
@@ -88,7 +88,7 @@
                         <span class="help-block">{{ trans('cruds.document.fields.topic_helper') }}</span>
                     </div>
                     <div class="form-group col-md-4 col-sm-6 col-xs-12">
-                        <label class="" for="topic_ro">{{ trans('cruds.document.fields.topic') }}(ro)</label>
+                        <label class="" for="topic_ro">{{ trans('cruds.document.fields.topic') }} (ro)</label>
                         <input class="form-control {{ $errors->has('topic_ro') ? 'is-invalid' : '' }}" type="text"
                                name="topic_ro"
                                id="topic_ro" value="{{ old('topic_ro', $document->topic_ro) }}">
@@ -98,7 +98,7 @@
                         <span class="help-block">{{ trans('cruds.document.fields.topic_helper') }}</span>
                     </div>
                     <div class="form-group col-md-4 col-sm-6 col-xs-12">
-                        <label class="" for="topic_en">{{ trans('cruds.document.fields.topic') }}(en)</label>
+                        <label class="" for="topic_en">{{ trans('cruds.document.fields.topic') }} (en)</label>
                         <input class="form-control {{ $errors->has('topic_en') ? 'is-invalid' : '' }}" type="text"
                                name="topic_en"
                                id="topic_en" value="{{ old('topic_en', $document->topic_en) }}">
@@ -109,22 +109,43 @@
                     </div>
 
                     <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                        <label class="" for="type_ru">{{ trans('cruds.document.fields.type') }} (ru)</label>
+                        <input class="form-control {{ $errors->has('type_ru') ? 'is-invalid' : '' }}" type="text"
+                               name="type_ru"
+                               id="type_ru" value="{{ old('type_ru', $document->type_ru) }}">
+                        @if($errors->has('type_ru'))
+                            <span class="text-danger">{{ $errors->first('type_ru') }}</span>
+                        @endif
+                        <span class="help-block">{{ trans('cruds.document.fields.type_helper') }}</span>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                        <label class="" for="type_ro">{{ trans('cruds.document.fields.type') }} (ro)</label>
+                        <input class="form-control {{ $errors->has('type_ro') ? 'is-invalid' : '' }}" type="text"
+                               name="type_ro"
+                               id="type_ro" value="{{ old('type_ro', $document->type_ro) }}">
+                        @if($errors->has('type_ro'))
+                            <span class="text-danger">{{ $errors->first('type_ro') }}</span>
+                        @endif
+                        <span class="help-block">{{ trans('cruds.document.fields.type_helper') }}</span>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                        <label class="" for="type_en">{{ trans('cruds.document.fields.type') }} (en)</label>
+                        <input class="form-control {{ $errors->has('type_en') ? 'is-invalid' : '' }}" type="text"
+                               name="type_en"
+                               id="type_en" value="{{ old('type_en', $document->type_en) }}">
+                        @if($errors->has('type_en'))
+                            <span class="text-danger">{{ $errors->first('type_en') }}</span>
+                        @endif
+                        <span class="help-block">{{ trans('cruds.document.fields.type_helper') }}</span>
+                    </div>
+
+                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
                         <label class="" for="number">{{ trans('cruds.document.fields.number') }}</label>
                         <input class="form-control {{ $errors->has('number') ? 'is-invalid' : '' }}" type="text"
                                name="number"
                                id="number" value="{{ old('number', $document->number) }}">
                         @if($errors->has('number'))
                             <span class="text-danger">{{ $errors->first('number') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.document.fields.name_helper') }}</span>
-                    </div>
-                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
-                        <label class="" for="type">{{ trans('cruds.document.fields.type') }}</label>
-                        <input class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}" type="text"
-                               name="type"
-                               id="type" value="{{ old('type', $document->type) }}">
-                        @if($errors->has('type'))
-                            <span class="text-danger">{{ $errors->first('type') }}</span>
                         @endif
                         <span class="help-block">{{ trans('cruds.document.fields.name_helper') }}</span>
                     </div>

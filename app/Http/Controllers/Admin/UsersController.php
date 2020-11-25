@@ -31,43 +31,28 @@ class UsersController extends AdminController
 
         if ($request->ajax()) {
             $query = User::with(['roles'])->select(sprintf('%s.*', (new User)->table));
-            $table = Datatables::of($query);
 
-            $table->addColumn('placeholder', '&nbsp;');
-            $table->addColumn('actions', '&nbsp;');
-            $table->editColumn('id', fn ($row) => $row->id ? $row->id : "");
-            $table->editColumn('roles', function ($row) {
-                $labels = [];
-                foreach ($row->roles as $role) {
-                    $labels[] = sprintf('<span class="badge badge-info">%s</span>', $role->title);
-                }
-                return implode(' ', $labels);
-            });
-            $table->editColumn('first_name', fn ($row) => $row->first_name ?? "");
-            $table->editColumn('last_name', fn ($row) => $row->last_name ?? "");
-            $table->editColumn('email', fn ($row) => $row->email ?? "");
-            $table->addColumn('position', fn ($row) => $row->position ?? '');
-            $table->addColumn('institution', fn ($row) => $row->institution ?? '');
-            $table->editColumn('phone', fn ($row) => $row->phone ?? '');
-            $table->editColumn('user_status', fn ($row) => $row->user_status ? User::USER_STATUS_SELECT[$row->user_status] : '');
-            $table->editColumn('actions', function ($row) {
-                $viewGate      = 'user_show';
-                $editGate      = 'user_edit';
-                $deleteGate    = 'user_delete';
-                $crudRoutePart = 'users';
-
-                return view('admin.partials.datatablesActions', compact(
-                    'viewGate',
-                    'editGate',
-                    'deleteGate',
-                    'crudRoutePart',
-                    'row'
-                ));
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'roles']);
-
-            return $table->make(true);
+            return Datatables::of($query)
+                ->addColumn('placeholder', '&nbsp;')
+                ->addColumn('actions', '&nbsp;')
+                ->editColumn('id', fn ($row) => $row->id ? $row->id : "")
+                ->editColumn('roles', function ($row) {
+                    $labels = [];
+                    foreach ($row->roles as $role) {
+                        $labels[] = sprintf('<span class="badge badge-info">%s</span>', $role->title);
+                    }
+                    return implode(' ', $labels);
+                })
+                ->editColumn('first_name', fn ($row) => $row->first_name ?? "")
+                ->editColumn('last_name', fn ($row) => $row->last_name ?? "")
+                ->editColumn('email', fn ($row) => $row->email ?? "")
+                ->addColumn('position', fn ($row) => $row->position ?? '')
+                ->addColumn('institution', fn ($row) => $row->institution ?? '')
+                ->editColumn('phone', fn ($row) => $row->phone ?? '')
+                ->editColumn('user_status', fn ($row) => $row->user_status ? User::USER_STATUS_SELECT[$row->user_status] : '')
+                ->addColumn('actions', fn ($row) => $this->renderActionsRow($row, 'user'))
+                ->rawColumns(['actions', 'placeholder', 'roles'])
+                ->make(true);
         }
 
         return view('admin.users.index');

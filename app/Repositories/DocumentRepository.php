@@ -15,10 +15,12 @@ class DocumentRepository extends Model
      */
     public function getDocumentTypes() : Collection
     {
+        $localeColumn = localeAppColumn('type');
+
         return Document::query()
-            ->select('type')
+            ->select($localeColumn)
             ->distinct()
-            ->pluck('type');
+            ->pluck($localeColumn);
     }
 
     /**

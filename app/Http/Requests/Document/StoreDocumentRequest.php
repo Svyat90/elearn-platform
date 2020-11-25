@@ -24,7 +24,6 @@ class StoreDocumentRequest extends FormRequest
     public function rules(DocumentService $documentService)
     {
         return [
-            'type' => 'sometimes|nullable|max:255',
             'number' => 'sometimes|nullable|max:255',
             'name_ru' => 'sometimes|nullable|max:255',
             'name_ro' => 'sometimes|nullable|max:255',
@@ -35,6 +34,9 @@ class StoreDocumentRequest extends FormRequest
             'topic_ru' => 'sometimes|nullable|max:255',
             'topic_ro' => 'sometimes|nullable|max:255',
             'topic_en' => 'sometimes|nullable|max:255',
+            'type_ru' => 'sometimes|nullable|max:255',
+            'type_ro' => 'sometimes|nullable|max:255',
+            'type_en' => 'sometimes|nullable|max:255',
             'description_ru' => 'sometimes|nullable',
             'description_ro' => 'sometimes|nullable',
             'description_en' => 'sometimes|nullable',

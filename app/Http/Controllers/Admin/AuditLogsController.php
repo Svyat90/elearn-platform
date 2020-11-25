@@ -26,36 +26,19 @@ class AuditLogsController extends AdminController
 
         if ($request->ajax()) {
             $query = AuditLog::query()->select(sprintf('%s.*', (new AuditLog)->table));
-            $table = Datatables::of($query);
 
-            $table->addColumn('placeholder', '&nbsp;');
-            $table->addColumn('actions', '&nbsp;');
-
-            $table->editColumn('actions', function ($row) {
-                $viewGate      = 'audit_log_show';
-                $editGate      = 'audit_log_edit';
-                $deleteGate    = 'audit_log_delete';
-                $crudRoutePart = 'audit-logs';
-
-                return view('admin.partials.datatablesActions', compact(
-                    'viewGate',
-                    'editGate',
-                    'deleteGate',
-                    'crudRoutePart',
-                    'row'
-                ));
-            });
-
-            $table->editColumn('id', fn ($row) => $row->id ?? '');
-            $table->editColumn('description', fn ($row) => $row->description ?? '');
-            $table->editColumn('subject_id', fn ($row) => $row->subject_id ?? '');
-            $table->editColumn('subject_type', fn ($row) => $row->subject_type ?? '');
-            $table->editColumn('user_id', fn ($row) => $row->user_id ?? '');
-            $table->editColumn('host', fn ($row) => $row->host ?? '');
-
-            $table->rawColumns(['actions', 'placeholder']);
-
-            return $table->make(true);
+            return Datatables::of($query)
+                ->addColumn('placeholder', '&nbsp;')
+                ->addColumn('actions', '&nbsp;')
+                ->editColumn('id', fn ($row) => $row->id ?? '')
+                ->editColumn('description', fn ($row) => $row->description ?? '')
+                ->editColumn('subject_id', fn ($row) => $row->subject_id ?? '')
+                ->editColumn('subject_type', fn ($row) => $row->subject_type ?? '')
+                ->editColumn('user_id', fn ($row) => $row->user_id ?? '')
+                ->editColumn('host', fn ($row) => $row->host ?? '')
+                ->addColumn('actions', fn ($row) => $this->renderActionsRow($row, 'audit_log'))
+                ->rawColumns(['actions', 'placeholder'])
+                ->make(true);
         }
 
         return view('admin.auditLogs.index');

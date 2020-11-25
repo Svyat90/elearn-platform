@@ -44,33 +44,18 @@ class CategoryController extends AdminController
 
         if ($request->ajax()) {
             $query = Category::query()->select(sprintf('%s.*', (new Category)->table));
-            $table = Datatables::of($query);
 
             $nameLocaleColumn = localeColumn('name');
 
-            $table->addColumn('placeholder', '&nbsp;');
-            $table->addColumn('actions', '&nbsp;');
-            $table->editColumn('id', fn ($row) => $row->id ?? '');
-            $table->editColumn($nameLocaleColumn, fn ($row) => $row->$nameLocaleColumn ?? '');
-            $table->editColumn('access', fn ($row) => labelAccess($row->access));
-            $table->addColumn('actions', function ($row) {
-                $viewGate      = 'category_show';
-                $editGate      = 'category_edit';
-                $deleteGate    = 'category_delete';
-                $crudRoutePart = 'categories';
-
-                return view('admin.partials.datatablesActions', compact(
-                    'viewGate',
-                    'editGate',
-                    'deleteGate',
-                    'crudRoutePart',
-                    'row'
-                ));
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'access']);
-
-            return $table->make(true);
+            return Datatables::of($query)
+                ->addColumn('placeholder', '&nbsp;')
+                ->addColumn('actions', '&nbsp;')
+                ->editColumn('id', fn ($row) => $row->id ?? '')
+                ->editColumn($nameLocaleColumn, fn ($row) => $row->$nameLocaleColumn ?? '')
+                ->editColumn('access', fn ($row) => labelAccess($row->access))
+                ->addColumn('actions', fn ($row) => $this->renderActionsRow($row, 'category'))
+                ->rawColumns(['actions', 'placeholder', 'access'])
+                ->make(true);
         }
 
         return view('admin.categories.index');

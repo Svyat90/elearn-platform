@@ -65,7 +65,7 @@
                             @endcan
                             @can('audit_log_access')
                                 <li class="nav-item">
-                                    <a href="{{ route("admin.audit-logs.index") }}" class="nav-link {{ request()->is('admin/audit-logs') || request()->is('admin/audit-logs/*') ? 'active' : '' }}">
+                                    <a href="{{ route("admin.audit_logs.index") }}" class="nav-link {{ request()->is('admin/audit-logs') || request()->is('admin/audit-logs/*') ? 'active' : '' }}">
                                         <i class="fa-fw nav-icon fas fa-file-alt">
 
                                         </i>
@@ -105,7 +105,7 @@
                             @endcan
                             @can('sub_category_access')
                                 <li class="nav-item">
-                                    <a href="{{ route("admin.sub-categories.index") }}" class="nav-link {{ request()->is('admin/sub-categories') || request()->is('admin/sub-categories/*') ? 'active' : '' }}">
+                                    <a href="{{ route("admin.sub_categories.index") }}" class="nav-link {{ request()->is('admin/sub-categories') || request()->is('admin/sub-categories/*') ? 'active' : '' }}">
                                         <i class="fa-fw nav-icon fas fa-file-alt">
 
                                         </i>

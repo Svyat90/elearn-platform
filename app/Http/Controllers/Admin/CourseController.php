@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Course;
 use App\Document;
+use App\Helpers\ImageHelper;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Traits\AccessStatuses;
 use App\Http\Controllers\Traits\AccessTypes;
@@ -50,40 +51,25 @@ class CourseController extends AdminController
 
         if ($request->ajax()) {
             $query = Course::query()->select(sprintf('%s.*', (new Course)->table));
-            $table = Datatables::of($query);
 
-            $nameLocaleColumn = localeColumn('name');
-            $nameIssuerLocaleColumn = localeColumn('name_issuer');
-            $topicLocaleColumn = localeColumn('topic');
+            $nameLocale = localeColumn('name');
+            $nameIssuerLocale = localeColumn('name_issuer');
+            $topicLocale = localeColumn('topic');
 
-            $table->addColumn('placeholder', '&nbsp;');
-            $table->addColumn('actions', '&nbsp;');
-            $table->editColumn('id', fn ($row) => $row->id ?? '');
-            $table->editColumn($nameLocaleColumn, fn ($row) => $row->$nameLocaleColumn ?? '');
-            $table->editColumn($nameIssuerLocaleColumn, fn ($row) => $row->$nameIssuerLocaleColumn ?? '');
-            $table->editColumn($topicLocaleColumn, fn ($row) => $row->$topicLocaleColumn ?? '');
-            $table->editColumn('access', fn ($row) => labelAccess($row->access));
-            $table->editColumn('status', fn ($row) => labelStatus($row->status));
-            $table->addColumn('published_at', fn ($row) => $row->published_at ?? '');
-            $table->addColumn('image', fn ($row) => $row->image_path ? sprintf('<img src="%s" width="50px" height="50px" />', storageUrl($row->image_path, 'small')) : '');
-            $table->addColumn('actions', function ($row) {
-                $viewGate      = 'course_show';
-                $editGate      = 'course_edit';
-                $deleteGate    = 'course_delete';
-                $crudRoutePart = 'courses';
-
-                return view('admin.partials.datatablesActions', compact(
-                    'viewGate',
-                    'editGate',
-                    'deleteGate',
-                    'crudRoutePart',
-                    'row'
-                ));
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'image', 'access', 'status']);
-
-            return $table->make(true);
+            return Datatables::of($query)
+                ->addColumn('placeholder', '&nbsp;')
+                ->addColumn('actions', '&nbsp;')
+                ->editColumn('id', fn ($row) => $row->id ?? '')
+                ->editColumn($nameLocale, fn ($row) => $row->$nameLocale ?? '')
+                ->editColumn($nameIssuerLocale, fn ($row) => $row->$nameIssuerLocale ?? '')
+                ->editColumn($topicLocale, fn ($row) => $row->$topicLocale ?? '')
+                ->editColumn('access', fn ($row) => labelAccess($row->access))
+                ->editColumn('status', fn ($row) => labelStatus($row->status))
+                ->addColumn('published_at', fn ($row) => $row->published_at ?? '')
+                ->addColumn('image', fn ($row) => ImageHelper::smallImage($row->image_path))
+                ->addColumn('actions', fn ($row) => $this->renderActionsRow($row, 'course'))
+                ->rawColumns(['actions', 'placeholder', 'image', 'access', 'status'])
+                ->make(true);
         }
 
         return view('admin.courses.index');

@@ -45,35 +45,20 @@ class SubCategoryController extends AdminController
 
         if ($request->ajax()) {
             $query = SubCategory::with(['parent'])->select(sprintf('%s.*', (new SubCategory)->table));
-            $table = Datatables::of($query);
 
             $nameLocaleColumn = localeColumn('name');
 
-            $table->addColumn('placeholder', '&nbsp;');
-            $table->addColumn('actions', '&nbsp;');
-            $table->addColumn('id', fn ($row) => $row->id ?? '');
-            $table->editColumn($nameLocaleColumn, fn ($row) => $row->$nameLocaleColumn ?? '');
-            $table->editColumn('parent_name', fn ($row) => $row->parent->$nameLocaleColumn ?? '');
-            $table->editColumn('access', fn ($row) => labelAccess($row->access));
-            $table->addColumn('created_at', fn ($row) => $row->created_at ?? '');
-            $table->addColumn('actions', function ($row) {
-                $viewGate      = 'sub_category_show';
-                $editGate      = 'sub_category_edit';
-                $deleteGate    = 'sub_category_delete';
-                $crudRoutePart = 'sub-categories';
-
-                return view('admin.partials.datatablesActions', compact(
-                    'viewGate',
-                    'editGate',
-                    'deleteGate',
-                    'crudRoutePart',
-                    'row'
-                ));
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'parent', 'access']);
-
-            return $table->make(true);
+            return Datatables::of($query)
+                ->addColumn('placeholder', '&nbsp;')
+                ->addColumn('actions', '&nbsp;')
+                ->addColumn('id', fn ($row) => $row->id ?? '')
+                ->editColumn($nameLocaleColumn, fn ($row) => $row->$nameLocaleColumn ?? '')
+                ->editColumn('parent_name', fn ($row) => $row->parent->$nameLocaleColumn ?? '')
+                ->editColumn('access', fn ($row) => labelAccess($row->access))
+                ->addColumn('created_at', fn ($row) => $row->created_at ?? '')
+                ->addColumn('actions', fn ($row) => $this->renderActionsRow($row, 'sub_category'))
+                ->rawColumns(['actions', 'placeholder', 'parent', 'access'])
+                ->make(true);
         }
 
         return view('admin.subCategories.index');
@@ -112,7 +97,7 @@ class SubCategoryController extends AdminController
 
         $subCategoryService->handleRelationships($subCategory, $request);
 
-        return redirect()->route('admin.sub-categories.index');
+        return redirect()->route('admin.sub_categories.index');
     }
 
     /**
@@ -157,7 +142,7 @@ class SubCategoryController extends AdminController
 
         $subCategoryService->handleRelationships($subCategory, $request);
 
-        return redirect()->route('admin.sub-categories.index');
+        return redirect()->route('admin.sub_categories.index');
     }
 
     /**

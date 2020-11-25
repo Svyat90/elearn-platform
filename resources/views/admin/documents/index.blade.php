@@ -28,9 +28,6 @@
                         {{ trans('cruds.document.fields.image') }}
                     </th>
                     <th>
-                        {{ trans('cruds.document.fields.type') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.document.fields.number') }}
                     </th>
                     <th>
@@ -41,6 +38,9 @@
                     </th>
                     <th>
                         {{ trans('cruds.document.fields.topic') }} ({{ config('app.locale_default_column') }})
+                    </th>
+                    <th>
+                        {{ trans('cruds.document.fields.type') }} ({{ config('app.locale_default_column') }})
                     </th>
                     <th>
                         {{ trans('cruds.document.fields.access') }}
@@ -108,6 +108,7 @@
             let nameLocaleColumn = '{{ localeColumn('name') }}';
             let nameIssuerLocaleColumn = '{{ localeColumn('name_issuer') }}';
             let topicLocaleColumn = '{{ localeColumn('topic') }}';
+            let typeLocaleColumn = '{{ localeColumn('type') }}';
 
             let dtOverrideGlobals = {
                 buttons: dtButtons,
@@ -120,11 +121,11 @@
                     {data: 'placeholder', name: 'placeholder'},
                     {data: 'id', name: 'id'},
                     {data: 'image', name: 'image'},
-                    {data: 'type', name: 'type'},
                     {data: 'number', name: 'number'},
                     {data: nameLocaleColumn, name: nameLocaleColumn},
                     {data: nameIssuerLocaleColumn, name: nameIssuerLocaleColumn},
                     {data: topicLocaleColumn, name: topicLocaleColumn},
+                    {data: typeLocaleColumn, name: typeLocaleColumn},
                     {data: 'access', name: 'access'},
                     {data: 'status', name: 'status'},
                     {data: 'approved_at', name: 'approved_at'},

@@ -7,7 +7,7 @@
         </div>
 
         <div class="card-body">
-            <form method="POST" action="{{ route("admin.sub-categories.update", [$subCategory->id]) }}"
+            <form method="POST" action="{{ route("admin.sub_categories.update", [$subCategory->id]) }}"
                   enctype="multipart/form-data">
                 @method('PUT')
                 @csrf

@@ -3,7 +3,7 @@
     @can('sub_category_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route("admin.sub-categories.create") }}">
+                <a class="btn btn-success" href="{{ route("admin.sub_categories.create") }}">
                     {{ trans('global.add') }} {{ trans('cruds.subCategory.title_singular') }}
                 </a>
             </div>
@@ -56,7 +56,7 @@
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
             let deleteButton = {
                 text: deleteButtonTrans,
-                url: "{{ route('admin.sub-categories.massDestroy') }}",
+                url: "{{ route('admin.sub_categories.massDestroy') }}",
                 className: 'btn-danger',
                 action: function (e, dt, node, config) {
                     var ids = $.map(dt.rows({selected: true}).data(), function (entry) {
@@ -93,7 +93,7 @@
                 serverSide: true,
                 retrieve: true,
                 aaSorting: [],
-                ajax: "{{ route('admin.sub-categories.index') }}",
+                ajax: "{{ route('admin.sub_categories.index') }}",
                 columns: [
                     {data: 'placeholder', name: 'placeholder'},
                     {data: 'id', name: 'id'},

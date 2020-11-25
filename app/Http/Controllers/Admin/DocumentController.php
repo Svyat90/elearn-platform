@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Document;
+use App\Helpers\ImageHelper;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Traits\AccessStatuses;
 use App\Http\Controllers\Traits\AccessTypes;
@@ -27,7 +28,9 @@ use Illuminate\View\View;
 
 class DocumentController extends AdminController
 {
-    use MediaUploadingTrait, AccessTypes, AccessStatuses;
+    use MediaUploadingTrait,
+        AccessTypes,
+        AccessStatuses;
 
     /**
      * CourseController constructor.
@@ -50,43 +53,30 @@ class DocumentController extends AdminController
 
         if ($request->ajax()) {
             $query = Document::query()->select(sprintf('%s.*', (new Document)->table));
-            $table = Datatables::of($query);
 
-            $nameLocaleColumn = localeColumn('name');
-            $nameIssuerLocaleColumn = localeColumn('name_issuer');
-            $topicLocaleColumn = localeColumn('topic');
+            $nameLocale = localeColumn('name');
+            $nameIssuerLocale = localeColumn('name_issuer');
+            $topicLocale = localeColumn('topic');
+            $typeLocale = localeColumn('type');
 
-            $table->addColumn('placeholder', '&nbsp;');
-            $table->addColumn('actions', '&nbsp;');
-            $table->editColumn('id', fn ($row) => $row->id ?? '');
-            $table->editColumn('type', fn ($row) => $row->type ?? '');
-            $table->editColumn('number', fn ($row) => $row->number ?? '');
-            $table->editColumn($nameLocaleColumn, fn ($row) => $row->$nameLocaleColumn ?? '');
-            $table->editColumn($nameIssuerLocaleColumn, fn ($row) => $row->$nameIssuerLocaleColumn ?? '');
-            $table->editColumn($topicLocaleColumn, fn ($row) => $row->$topicLocaleColumn ?? '');
-            $table->editColumn('access', fn ($row) => labelAccess($row->access));
-            $table->editColumn('status', fn ($row) => labelStatus($row->status));
-            $table->addColumn('approved_at', fn ($row) => $row->approved_at ?? '');
-            $table->addColumn('published_at', fn ($row) => $row->published_at ?? '');
-            $table->addColumn('image', fn ($row) => $row->image_path ? sprintf('<img src="%s" width="50px" height="50px" />', storageUrl($row->image_path, 'small')) : '');
-            $table->addColumn('actions', function ($row) {
-                $viewGate      = 'document_show';
-                $editGate      = 'document_edit';
-                $deleteGate    = 'document_delete';
-                $crudRoutePart = 'documents';
-
-                return view('admin.partials.datatablesActions', compact(
-                    'viewGate',
-                    'editGate',
-                    'deleteGate',
-                    'crudRoutePart',
-                    'row'
-                ));
-            });
-
-            $table->rawColumns(['actions', 'placeholder', 'image', 'access', 'status']);
-
-            return $table->make(true);
+            return Datatables::of($query)
+                ->addColumn('placeholder', '&nbsp;')
+                ->addColumn('actions', '&nbsp;')
+                ->editColumn('id', fn ($row) => $row->id ?? '')
+                ->editColumn('type', fn ($row) => $row->type ?? '')
+                ->editColumn('number', fn ($row) => $row->number ?? '')
+                ->editColumn($nameLocale, fn ($row) => $row->$nameLocale ?? '')
+                ->editColumn($nameIssuerLocale, fn ($row) => $row->$nameIssuerLocale ?? '')
+                ->editColumn($topicLocale, fn ($row) => $row->$topicLocale ?? '')
+                ->editColumn($typeLocale, fn ($row) => $row->$typeLocale ?? '')
+                ->editColumn('access', fn ($row) => labelAccess($row->access))
+                ->editColumn('status', fn ($row) => labelStatus($row->status))
+                ->addColumn('approved_at', fn ($row) => $row->approved_at ?? '')
+                ->addColumn('published_at', fn ($row) => $row->published_at ?? '')
+                ->addColumn('image', fn ($row) => ImageHelper::smallImage($row->image_path))
+                ->addColumn('actions', fn ($row) => $this->renderActionsRow($row, 'document'))
+                ->rawColumns(['actions', 'placeholder', 'image', 'access', 'status'])
+                ->make(true);
         }
 
         return view('admin.documents.index');

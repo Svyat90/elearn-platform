@@ -17,6 +17,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends AdminController
 {
@@ -77,8 +78,11 @@ class UsersController extends AdminController
      */
     public function store(StoreUserRequest $request, UserService $userService) : RedirectResponse
     {
+        $insertData = $request->all();
+        $insertData['password'] = Hash::make($insertData['password']);
+
         /** @var User $user */
-        $user = User::query()->create($request->all());
+        $user = User::query()->create($insertData);
 
         $userService->handleRelationships($user, $request);
 

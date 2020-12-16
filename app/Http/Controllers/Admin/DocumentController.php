@@ -90,7 +90,7 @@ class DocumentController extends AdminController
         abort_if(Gate::denies('document_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $categories = Category::all()->pluck(localeColumn('name'), 'id');
-        $subCategories = Category::all()->pluck(localeColumn('name'), 'id');
+        $subCategories = SubCategory::all()->pluck(localeColumn('name'), 'id');
         $users = User::all()->pluck('email', 'id');
         $roles = Role::all()->pluck('title', 'id');
         $documents = Document::query()->pluck(localeColumn('name'), 'id');
@@ -119,6 +119,9 @@ class DocumentController extends AdminController
     {
         /** @var Document $document */
         $document = Document::query()->create($request->validated());
+
+        $document->content_file = DocumentService::getDocumentContent($document->file_path);
+        $document->save();
 
         $documentService->handleRelationships($document, $request);
 
@@ -185,6 +188,9 @@ class DocumentController extends AdminController
         $documentService->handleRelationships($document, $request);
 
         $document->update($request->validated());
+
+        $document->content_file = DocumentService::getDocumentContent($document->refresh()->file_path);
+        $document->save();
 
         return redirect()->route('admin.documents.index');
     }

@@ -71,7 +71,8 @@ class DocumentSearchService extends DocumentService
             $queryBuilder
                 ->where(localeAppColumn('name_issuer'), 'LIKE', '%' . DB::raw($query) . '%')
                 ->orWhere(localeAppColumn('name'), 'LIKE', '%' . DB::raw($query) . '%')
-                ->orWhere(localeAppColumn('description'), 'LIKE', '%' . DB::raw($query) . '%');
+                ->orWhere(localeAppColumn('description'), 'LIKE', '%' . DB::raw($query) . '%')
+                ->orWhere('content_file', 'LIKE', '%' . DB::raw($query) . '%');
 
         } else {
             $orWhere = false;
@@ -94,6 +95,14 @@ class DocumentSearchService extends DocumentService
                     $queryBuilder->orWhere(localeAppColumn('description'), 'LIKE', '%' . DB::raw($query) . '%');
                 } else {
                     $queryBuilder->where(localeAppColumn('description'), 'LIKE', '%' . DB::raw($query) . '%');
+                }
+            }
+
+            if ($request->has('filter_content') && $request->input('filter_content')) {
+                if ($orWhere) {
+                    $queryBuilder->orWhere('content_file', 'LIKE', '%' . DB::raw($query) . '%');
+                } else {
+                    $queryBuilder->where('content_file', 'LIKE', '%' . DB::raw($query) . '%');
                 }
             }
         }

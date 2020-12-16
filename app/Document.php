@@ -29,11 +29,13 @@ class Document extends Model
         'name_ru', 'name_ro', 'name_en',
         'name_issuer_ru', 'name_issuer_ro', 'name_issuer_en',
         'topic_ru', 'topic_ro', 'topic_en',
-        'type_ru', 'type_ro', 'type_en',
+        'type_ru', 'type_ro', 'type_en', 'content_file',
         'description_ru', 'description_ro', 'description_en',
         'status', 'number', 'access', 'image_path', 'file_path',
-        'created_at', 'updated_at', 'deleted_at', 'approved_at', 'published_at'
+        'created_at', 'updated_at', 'deleted_at', 'approved_at', 'published_at',
     ];
+
+    protected $hidden = ['content_file'];
 
     public function toArrayWithContent()
     {

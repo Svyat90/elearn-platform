@@ -204,7 +204,7 @@
                         <span class="btn btn-info btn-xs deselect-all"
                               style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
                     </div>
-                    <select class="form-control select2 {{ $errors->has('roles') ? 'is-invalid' : '' }}"
+                    <select class="form-control select2 {{ $errors->has('category_ids') ? 'is-invalid' : '' }}"
                             name="category_ids[]"
                             id="category_ids" multiple >
                         @foreach($categories as $id => $category)
@@ -223,7 +223,7 @@
                         <span class="btn btn-info btn-xs deselect-all"
                               style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
                     </div>
-                    <select class="form-control select2 {{ $errors->has('roles') ? 'is-invalid' : '' }}"
+                    <select class="form-control select2 {{ $errors->has('sub_category_ids') ? 'is-invalid' : '' }}"
                             name="sub_category_ids[]"
                             id="sub_category_ids" multiple >
                         @foreach($subCategories as $id => $subCategory)
@@ -243,7 +243,7 @@
                         <span class="btn btn-info btn-xs deselect-all"
                               style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
                     </div>
-                    <select class="form-control select2 {{ $errors->has('roles') ? 'is-invalid' : '' }}"
+                    <select class="form-control select2 {{ $errors->has('role_ids') ? 'is-invalid' : '' }}"
                             name="role_ids[]"
                             id="role_ids" multiple >
                         @foreach($roles as $id => $role)

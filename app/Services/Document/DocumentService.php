@@ -174,7 +174,7 @@ class DocumentService extends AbstractAccessService
     {
         /** @var $queryBuilder Builder */
         if ($request->has('filter_type') && !empty($request->filter_type)) {
-            $queryBuilder->where('type', $request->filter_type);
+            $queryBuilder->where(localeAppColumn('type'), $request->filter_type);
         }
 
         if ($request->has('filter_issuer') && !empty($request->filter_issuer)) {
